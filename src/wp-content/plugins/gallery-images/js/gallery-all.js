@@ -1,116 +1,125 @@
-// SET THIS VARIABLE FOR DELAY, 1000 = 1 SECOND
-var delayLength = 4000;
+/**
+ * Gallery Plugin - Image Slider and Pagination Handler
+ * Manages carousel animations and scroll position preservation
+ */
 
-function doMove(panelWidth, tooFar) {
-	var leftValue = jQuery("#mover").css("left");
+(function($) {
+  'use strict';
 
-	// Fix for IE
-	if (leftValue == "auto") { leftValue = 0; };
+  // Configuration
+  const config = {
+    sliderDelay: 4000, // milliseconds between slides
+    imageAnimationTop: -200,
+    imageRestingTop: 20,
+  };
 
-	var movement = parseFloat(leftValue, 10) - panelWidth;
+  let sliderIntervalId;
 
-	if (movement == tooFar) {
-		jQuery(".slide img").animate({
-			"top": -200
-		}, function() {
-			jQuery("#mover").animate({
-				"left": 0
-			}, function() {
-				jQuery(".slide img").animate({
-					"top": 20
-				});
-			});
-		});
-	}
-	else {
-		jQuery(".slide img").animate({
-			"top": -200
-		}, function() {
-			jQuery("#mover").animate({
-				"left": movement
-			}, function() {
-				jQuery(".slide img").animate({
-					"top": 20
-				});
-			});
-		});
-	}
-}
+  /**
+   * Animate slide carousel movement
+   * Moves slides left with image animation effects
+   *
+   * @param {number} panelWidth - Width of each slide panel
+   * @param {number} maxLeftPosition - Maximum left position before reset
+   */
+  function animateSlide(panelWidth, maxLeftPosition) {
+    let leftValue = jQuery('#mover').css('left');
 
-jQuery(function(){
-
-    var $slide1 = jQuery("#slide-1");
-
-	var panelWidth = $slide1.css("width");
-	var panelPaddingLeft = $slide1.css("paddingLeft");
-	var panelPaddingRight = $slide1.css("paddingRight");
-
-	panelWidth = parseFloat(panelWidth, 10);
-	panelPaddingLeft = parseFloat(panelPaddingLeft, 10);
-	panelPaddingRight = parseFloat(panelPaddingRight, 10);
-
-	panelWidth = panelWidth + panelPaddingLeft + panelPaddingRight;
-
-	var numPanels = jQuery(".slide").length;
-	var tooFar = -(panelWidth * numPanels);
-	var totalMoverwidth = numPanels * panelWidth;
-	jQuery("#mover").css("width", totalMoverwidth);
-
-	//jQuery("#slider").append('<a href="#" id="slider-stopper">Stop</a>');
-
-	sliderIntervalID = setInterval(function(){
-		doMove(panelWidth, tooFar);
-	}, delayLength);
-
-	jQuery("#slider-stopper").click(function(){
-		if (jQuery(this).text() == "Stop") {
-			clearInterval(sliderIntervalID);
-		 	jQuery(this).text("Start");
-		}
-		else {
-			sliderIntervalID = setInterval(function(){
-				doMove(panelWidth, tooFar);
-			}, delayLength);
-		 	jQuery(this).text("Stop");
-		}
-
-	});
-
-});
-////////
-;(function($){
-
-    /**
-     * Store scroll position for and set it after reload
-     *
-     * @return {boolean} [loacalStorage is available]
-     */
-    $.fn.scrollPosReaload = function(){
-        if (localStorage) {
-            var posReader = localStorage["posStorage"];
-            if (posReader) {
-                $(window).scrollTop(posReader);
-                localStorage.removeItem("posStorage");
-            }
-            $(this).click(function(e) {
-                localStorage["posStorage"] = $(window).scrollTop();
-            });
-
-            return true;
-        }
-
-        return false;
+    // Handle IE edge case
+    if (leftValue === 'auto') {
+      leftValue = 0;
     }
 
-    /* ================================================== */
+    const movement = parseFloat(leftValue, 10) - panelWidth;
+    const isAtEnd = movement === maxLeftPosition;
+    const targetLeft = isAtEnd ? 0 : movement;
 
-    jQuery(document).ready(function($) {
-        // Feel free to set it for any element who trigger the reload
-        $('.paginate5').scrollPosReaload();
-        $('.paginate4').scrollPosReaload();
-        $('.paginate3').scrollPosReaload();
-        $('.paginate2').scrollPosReaload();
-        $('.video_view9_cont_wrapper').scrollPosReaload();
+    // Animate: image up → slide left → image down
+    jQuery('.slide img').animate({ top: config.imageAnimationTop }, () => {
+      jQuery('#mover').animate({ left: targetLeft }, () => {
+        jQuery('.slide img').animate({ top: config.imageRestingTop });
+      });
+    });
+  }
+
+  /**
+   * Initialize automatic slide carousel
+   */
+  function initializeSlideshow() {
+    const $slide = jQuery('#slide-1');
+    if ($slide.length === 0) return;
+
+    // Calculate total panel width including padding
+    const panelWidth = parseFloat($slide.css('width'), 10) +
+                       parseFloat($slide.css('paddingLeft'), 10) +
+                       parseFloat($slide.css('paddingRight'), 10);
+
+    const slideCount = jQuery('.slide').length;
+    const maxLeftPosition = -(panelWidth * slideCount);
+    const totalWidth = slideCount * panelWidth;
+
+    // Set mover container width
+    jQuery('#mover').css('width', totalWidth);
+
+    // Start automatic slide animation
+    sliderIntervalId = setInterval(() => {
+      animateSlide(panelWidth, maxLeftPosition);
+    }, config.sliderDelay);
+
+    // Toggle play/pause on stop button
+    jQuery('#slider-stopper').on('click', function() {
+      const $button = jQuery(this);
+      const isRunning = $button.text() === 'Stop';
+
+      if (isRunning) {
+        clearInterval(sliderIntervalId);
+        $button.text('Start');
+      } else {
+        sliderIntervalId = setInterval(() => {
+          animateSlide(panelWidth, maxLeftPosition);
+        }, config.sliderDelay);
+        $button.text('Stop');
+      }
+    });
+  }
+
+  /**
+   * jQuery plugin: Preserve scroll position across pagination
+   * Stores current scroll position in localStorage, restores after page reload
+   *
+   * @returns {boolean} true if localStorage available, false otherwise
+   */
+  $.fn.preserveScrollPosition = function() {
+    if (!localStorage) {
+      return false;
+    }
+
+    // Restore previous scroll position if available
+    const savedPosition = localStorage.getItem('scrollPosition');
+    if (savedPosition) {
+      $(window).scrollTop(parseInt(savedPosition, 10));
+      localStorage.removeItem('scrollPosition');
+    }
+
+    // Save scroll position when this element is clicked
+    this.on('click', () => {
+      localStorage.setItem('scrollPosition', $(window).scrollTop());
     });
 
+    return true;
+  };
+
+  /**
+   * Initialize gallery on document ready
+   */
+  jQuery(document).ready(function() {
+    // Initialize slideshow
+    initializeSlideshow();
+
+    // Enable scroll position preservation for pagination links
+    $('.paginate2, .paginate3, .paginate4, .paginate5, .video_view9_cont_wrapper')
+      .preserveScrollPosition();
+  });
+
 }(jQuery));
+

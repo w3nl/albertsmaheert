@@ -1,80 +1,134 @@
-// Set Variables
-var mobile_toggle = 'closed';
+/**
+ * Albertsmaheert Theme - Main Interactions
+ * Handles menus, accordions, tabs, maps, and other UI interactions
+ */
 
-jQuery(document).ready(function() { 
-	
-	"use strict";
-	
-	// Main Menu Drop Down
-	jQuery('ul#navigation').superfish({ 
-        delay:       600,
-        animation:   {opacity:'show',height:'show'},
-        speed:       'fast',
-        autoArrows:  true,
-        dropShadows: false
+(function($) {
+  'use strict';
+
+  // ========================================
+  // Initialize UI Components on DOM Ready
+  // ========================================
+  $(document).ready(function() {
+    initializeNavMenus();
+    initializeAccordions();
+    initializeToggles();
+    initializeTabs();
+    initializeLightbox();
+    initializeSearch();
+    initializeMobileMenu();
+    initializeHeaderMap();
+  });
+
+  // ========================================
+  // Navigation Menus
+  // ========================================
+  function initializeNavMenus() {
+    const menuConfig = {
+      delay: 600,
+      animation: { opacity: 'show', height: 'show' },
+      speed: 'fast',
+      autoArrows: true,
+      dropShadows: false
+    };
+
+    // Main navigation menu
+    $('#navigation').superfish(menuConfig);
+
+    // Language selection menu
+    $('#language-selection').superfish(menuConfig);
+  }
+
+  // ========================================
+  // Accordions
+  // ========================================
+  function initializeAccordions() {
+    $('.accordion').accordion({
+      heightStyle: 'content'
     });
+  }
 
-	// Language Drop Down
-	jQuery('ul#language-selection').superfish({ 
-        delay:       600,
-        animation:   {opacity:'show',height:'show'},
-        speed:       'fast',
-        autoArrows:  true,
-        dropShadows: false
+  // ========================================
+  // Toggle Content Sections
+  // ========================================
+  function initializeToggles() {
+    const $toggleInner = $('.toggle > .inner');
+    $toggleInner.hide();
+
+    $('.toggle .title').on('click', function() {
+      const $toggle = $(this).closest('.toggle');
+      const $inner = $toggle.find('.inner');
+      const isActive = $(this).toggleClass('active').hasClass('active');
+
+      if (isActive) {
+        $inner.slideDown(200, 'easeOutCirc');
+      } else {
+        $inner.slideUp(200, 'easeOutCirc');
+      }
     });
-	
-	// Accordion
-	jQuery( ".accordion" ).accordion( { heightStyle: "content" } );
+  }
 
-	// Toggle	
-	jQuery( ".toggle > .inner" ).hide();
-	jQuery(".toggle .title").bind('click',function() {
-		jQuery(this).toggleClass('active');
-		if (jQuery(this).hasClass('active')) {
-			jQuery(this).closest('.toggle').find('.inner').slideDown(200, 'easeOutCirc');
-		} else {
-			jQuery(this).closest('.toggle').find('.inner').slideUp(200, 'easeOutCirc');
-		}
-	});
-	
-	// Tabs
-	jQuery(function() {
-		jQuery( ".tabs" ).tabs({
-			activate: function (event, ui) {
-				if ( ui.newPanel.data("map") ){
-					var mapContent = ui.newPanel.data("map") ;
-					google.maps.event.trigger(mapContent, 'resize');
-					mapContent.setCenter(mapContent.Center);
-				}
-			}
-		});
-		 
-	});
-	
-	// PrettyPhoto
-	jQuery("a[rel^='prettyPhoto']").prettyPhoto({social_tools:false});
-	
-	// Search Button Toggle
-	jQuery(".menu-search-button").click(function() {
-		jQuery(".menu-search-field").toggleClass("menu-search-focus", 200);
-	});
-	
-	// Mobile Menu
-	jQuery(".mobile-menu-button, .mobile-menu-title").click(function(){
-		jQuery(".mobile-menu-inner").stop().slideToggle(350);
-		return false;
-	});
-	
-	// Header Google Map
-	jQuery(".gmap-button").click(function(){
-		jQuery('#header-gmap').slideToggle(900);
-		if (!map) {
-			initialize(headerLat,headerLong);
-		}
-		jQuery('.gmap-button').toggleClass('gmap-button-hover');
-	});
-	
-});
+  // ========================================
+  // Tabs with Map Support
+  // ========================================
+  function initializeTabs() {
+    $('.tabs').tabs({
+      activate: function(event, ui) {
+        // Refresh map if tab contains embedded map
+        if (ui.newPanel.data('map')) {
+          const mapInstance = ui.newPanel.data('map');
+          google.maps.event.trigger(mapInstance, 'resize');
+          mapInstance.setCenter(mapInstance.Center);
+        }
+      }
+    });
+  }
+
+  // ========================================
+  // Lightbox / Pretty Photo
+  // ========================================
+  function initializeLightbox() {
+    $('a[rel^="prettyPhoto"]').prettyPhoto({
+      social_tools: false
+    });
+  }
+
+  // ========================================
+  // Search Field Toggle
+  // ========================================
+  function initializeSearch() {
+    $('.menu-search-button').on('click', function() {
+      $('.menu-search-field').toggleClass('menu-search-focus', 200);
+    });
+  }
+
+  // ========================================
+  // Mobile Menu
+  // ========================================
+  function initializeMobileMenu() {
+    $('.mobile-menu-button, .mobile-menu-title').on('click', function() {
+      $('.mobile-menu-inner').stop().slideToggle(350);
+      return false;
+    });
+  }
+
+  // ========================================
+  // Header Map Toggle
+  // ========================================
+  function initializeHeaderMap() {
+    $('.gmap-button').on('click', function() {
+      $('#header-gmap').slideToggle(900);
+
+      // Initialize map on first click (lazy load)
+      if (typeof map !== 'undefined' && !map) {
+        initialize(headerLat, headerLong);
+      }
+
+      $('.gmap-button').toggleClass('gmap-button-hover');
+    });
+  }
+
+})(jQuery);
 
 jQuery(window).load(function(){
 	
