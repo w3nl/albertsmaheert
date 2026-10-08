@@ -2088,7 +2088,7 @@ div.wpcf7-response-output {
 }
 
 .comments li li:last-child .comment-right {
-	background: url(https://albertsmaheert.nl/wp-content/themes/sohohotel/images/dot_border_h.png) repeat-x bottom left;
+	background: url(images/dot_border_h.png) repeat-x bottom left;
 }
 
 .comments li li {
@@ -3412,7 +3412,7 @@ h4.room-title {
 }
 
 .dotted-pagination {
-	background: url(https://albertsmaheert.nl/wp-content/themes/sohohotel/images/dot_border_h.png) top left repeat-x;
+	background: url(images/dot_border_h.png) top left repeat-x;
 	width: 100%;
 	text-align: right;
 	padding: 40px 0 30px 0;
