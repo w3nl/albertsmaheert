@@ -2,9 +2,13 @@
   "name": "albertsmaheert-static",
   "private": true,
   "scripts": {
-    "build": "eleventy"
+    "build": "eleventy",
+    "validate": "npm run build"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2"
+  },
+  "engines": {
+    "node": ">=24 <25"
   }
 }
