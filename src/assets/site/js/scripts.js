@@ -72,16 +72,7 @@
   // Tabs with Map Support
   // ========================================
   function initializeTabs() {
-    $('.tabs').tabs({
-      activate: function(event, ui) {
-        // Refresh map if tab contains embedded map
-        if (ui.newPanel.data('map')) {
-          const mapInstance = ui.newPanel.data('map');
-          google.maps.event.trigger(mapInstance, 'resize');
-          mapInstance.setCenter(mapInstance.Center);
-        }
-      }
-    });
+    $('.tabs').tabs();
   }
 
   // ========================================
@@ -117,14 +108,9 @@
   // ========================================
   function initializeHeaderMap() {
     $('.gmap-button').on('click', function() {
+      $(this).toggleClass('gmap-button-hover');
       $('#header-gmap').slideToggle(900);
-
-      // Initialize map on first click (lazy load)
-      if (typeof map !== 'undefined' && !map) {
-        initialize(headerLat, headerLong);
-      }
-
-      $('.gmap-button').toggleClass('gmap-button-hover');
+      return false;
     });
   }
 
