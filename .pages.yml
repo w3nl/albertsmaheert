@@ -1,0 +1,22 @@
+media:
+	input: src/assets/images
+	output: /assets/images
+	rename: safe
+content:
+	- name: homepage
+		label: Homepage
+		type: file
+		path: src/_data/homepage.json
+		fields:
+			- name: intro
+				label: Introduction
+				type: text
+			- name: history
+				label: About the farm
+				type: text
+			- name: apartments
+				label: Apartments and facilities
+				type: text
+			- name: surroundings
+				label: Local area
+				type: text
