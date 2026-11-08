@@ -19,3 +19,13 @@
 #tn-reehead{transform-box:fill-box;transform-origin:10% 90%;animation:efGraze 8s ease-in-out infinite}
 @keyframes tnEgel{0%{transform:translateX(0)}50%{transform:translateX(120px)}50.01%{transform:translateX(120px) scaleX(-1)}100%{transform:translateX(0) scaleX(-1)}}
 .tn-egelwalk{transform-box:fill-box;transform-origin:50% 50%;animation:tnEgel 30s linear infinite}
+/* de kachel in de zaal brandt: vlammen (.flame in css/animations.css), gloeiende kolen, vonkjes en een flakkerende gloed */
+.flame.c{animation-duration:.6s;animation-delay:-.35s}
+@keyframes zaGlowFlick{0%,100%{opacity:.85}20%{opacity:1}45%{opacity:.7}70%{opacity:.95}}
+.za-stoveglow{animation:zaGlowFlick 1.8s ease-in-out infinite}
+.za-stoveglow.b{animation-duration:2.3s}
+@keyframes zaEmbers{0%,100%{fill:#ff5a1e}50%{fill:#ff8a3c}}
+.za-embers{animation:zaEmbers 2.6s ease-in-out infinite}
+@keyframes zaSparks{0%{transform:translateY(0);opacity:0}20%{opacity:1}100%{transform:translateY(-30px);opacity:0}}
+.za-sparks circle{animation:zaSparks 1.6s ease-out infinite}
+.za-sparks circle:nth-child(2){animation-delay:-.8s}
