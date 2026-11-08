@@ -238,3 +238,9 @@ label.opt{display:flex;flex-direction:column;gap:2px;cursor:default}
 /* Een haas huppelt: kleine sprongetjes terwijl hij heen en weer gaat (.ree-walk eromheen) */
 @keyframes haasHop{0%,100%{transform:translateY(0) scaleY(1)}35%{transform:translateY(-14px) scaleY(1.05)}65%{transform:translateY(-4px)}80%{transform:translateY(0) scaleY(.92)}}
 .haas-hop{transform-box:fill-box;transform-origin:50% 100%;animation:haasHop .55s ease-in-out infinite}
+
+/* Mensen leven een beetje: af en toe knipperen met de ogen, heel licht ademen (tools/escaperoom/personages.py). */
+@keyframes eyeBlink{0%,95%,100%{transform:scaleY(1)}97%{transform:scaleY(.12)}}
+.eyes{transform-box:fill-box;transform-origin:50% 50%;animation:eyeBlink 7s infinite}
+@keyframes idleBreath{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5px)}}
+.idle{animation:idleBreath 4.5s ease-in-out infinite}

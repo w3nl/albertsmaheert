@@ -41,6 +41,9 @@ def face(p, cx, cy, r, skin='licht', mouth='smile', brows=INK, ears=True, cheeks
             g.append(f'<ellipse cx="{cx + sx * r * .95:.1f}" cy="{cy + r * .08:.1f}" rx="{r * .2:.1f}" ry="{r * .26:.1f}" fill="{s}" stroke="{sd}" stroke-width="{r * .05:.2f}"/>')
     g.append(f'<ellipse cx="{cx}" cy="{cy}" rx="{r}" ry="{r * 1.06:.1f}" fill="url(#{p}Sk)" stroke="{sd}" stroke-width="{r * .05:.2f}"/>')
     ex, ey = r * .36, cy - r * .02
+    # de ogen knipperen af en toe (css: .eyes in css/base.css); elk figuur op een eigen moment
+    delay = (sum(map(ord, p)) * 37) % 70 / 10
+    g.append(f'<g class="eyes" style="animation-delay:-{delay:.1f}s">')
     for sx in (-1, 1):
         x = cx + sx * ex
         if eyes == 'closed':
@@ -50,6 +53,7 @@ def face(p, cx, cy, r, skin='licht', mouth='smile', brows=INK, ears=True, cheeks
                      f'<circle cx="{x + r * .04:.1f}" cy="{ey - r * .05:.1f}" r="{r * .045:.2f}" fill="#fff"/>')
         if brows:
             g.append(f'<path d="M{x - r * .16:.1f} {ey - r * .27:.1f} q{r * .16:.1f} {-r * .1:.1f} {r * .32:.1f} {r * .02:.1f}" stroke="{brows}" stroke-width="{r * .08:.2f}" fill="none" stroke-linecap="round"/>')
+    g.append('</g>')
     if cheeks:
         for sx in (-1, 1):
             g.append(f'<ellipse cx="{cx + sx * r * .55:.1f}" cy="{cy + r * .3:.1f}" rx="{r * .17:.1f}" ry="{r * .11:.1f}" fill="{ck}" opacity=".55"/>')
@@ -312,6 +316,11 @@ PORTRAITS = {
 }
 
 
+def alive(body, k=0):
+    """Een mens die heel licht ademt (css: .idle in css/base.css), elk op een eigen moment."""
+    return f'<g class="idle" style="animation-delay:-{(k * 1.7) % 5:.1f}s">{body}</g>'
+
+
 def place(body, tx, ty, sc=1, flip=False):
     sx = -sc if flip else sc
     return f'<g transform="translate({tx} {ty}) scale({sx} {sc})">{body}</g>'
@@ -319,20 +328,20 @@ def place(body, tx, ty, sc=1, flip=False):
 
 SCENES = {
     'erf': {
-        'roelof': lambda: place(roelof('efR', tool='hamer', arm_id='ef-arm'), 0, 0, 1.0),
+        'roelof': lambda: alive(place(roelof('efR', tool='hamer', arm_id='ef-arm'), 0, 0, 1.0), 12),
         'ree': lambda: place(ree('efE', head_id='ef-reehead'), 0, 0, .55),
         'haas': lambda: place(haas('efH'), 0, 0, .7),
     },
     'stal': {},
     'zolder': {
-        'roelof': lambda: place(roelof('zlR', tool='sleutel'), 0, 0, 1.25),
+        'roelof': lambda: alive(place(roelof('zlR', tool='sleutel'), 0, 0, 1.25), 12),
     },
     'kamer': {
-        'ditty': lambda: place(ditty('kmD', hold='koffie'), 0, 0, 1.3),
+        'ditty': lambda: alive(place(ditty('kmD', hold='koffie'), 0, 0, 1.3), 11),
         'ree': lambda: place(ree('kmE'), 0, 0, .3),
     },
     'museum': {
-        'roelof': lambda: place(roelof('muR', tool=None), 0, 0, 1.35),
+        'roelof': lambda: alive(place(roelof('muR', tool=None), 0, 0, 1.35), 12),
     },
     'dak': {
         'ree': lambda: place(ree('dkE', grazing=True), 0, 0, .22),
@@ -340,12 +349,12 @@ SCENES = {
         'haas': lambda: place(haas('dkH'), 0, 0, .3),
     },
     'zaal': {
-        'ditty': lambda: place(ditty('zaD', hold=None), 0, 0, 1.35),
-        'roelof': lambda: place(roelof('zaR', tool='glas'), 0, 0, 1.4),
-        'gasten': lambda: (place(guest('zaG1', 'licht', '#7a4a26', 'long', '#2f6fb1', '#334', dress=True), 0, 0, 1.25)
-                           + place(guest('zaG2', 'bruin', '#1f1f1f', 'curly', '#d9822b', '#3b3f4a'), 70, 4, 1.3)
-                           + place(guest('zaG3', 'roze', '#cfcac2', 'bald', '#5a8a4a', '#4a4036', glass=False), 140, 0, 1.28)
-                           + place(guest('zaG4', 'licht', '#e0b860', 'short', '#c73f6d', '#2b3f66'), 214, 6, 1.2)),
+        'ditty': lambda: alive(place(ditty('zaD', hold=None), 0, 0, 1.35), 11),
+        'roelof': lambda: alive(place(roelof('zaR', tool='glas'), 0, 0, 1.4), 12),
+        'gasten': lambda: (alive(place(guest('zaG1', 'licht', '#7a4a26', 'long', '#2f6fb1', '#334', dress=True), 0, 0, 1.25), 3)
+                           + alive(place(guest('zaG2', 'bruin', '#1f1f1f', 'curly', '#d9822b', '#3b3f4a'), 70, 4, 1.3), 6)
+                           + alive(place(guest('zaG3', 'roze', '#cfcac2', 'bald', '#5a8a4a', '#4a4036', glass=False), 140, 0, 1.28), 9)
+                           + alive(place(guest('zaG4', 'licht', '#e0b860', 'short', '#c73f6d', '#2b3f66'), 214, 6, 1.2), 12)),
     },
     'tuin': {
         'ree': lambda: place(ree('tnE', head_id='tn-reehead'), 0, 0, .9),
