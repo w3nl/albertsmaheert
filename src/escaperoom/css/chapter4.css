@@ -1,0 +1,21 @@
+/* Hoofdstuk 4: de zaal en de tuin. */
+@keyframes zaTwinkle{0%,100%{opacity:.4}50%{opacity:1}}
+.za-twinkle,.za-star{animation:zaTwinkle 2.4s ease-in-out infinite}
+.za-twinkle.b,.za-star.b{animation-delay:-1.2s}
+@keyframes zaBulb{0%,100%{opacity:.75}50%{opacity:1}}
+.za-on .za-bulb ellipse{animation:zaBulb 1.6s ease-in-out infinite;filter:drop-shadow(0 0 6px currentColor)}
+.za-bulb{animation-delay:inherit}
+@keyframes tnTwinkle{0%,100%{opacity:.3}50%{opacity:1}}
+.tn-star,.tn-city,.tn-bulb{animation:tnTwinkle 3s ease-in-out infinite}
+.tn-star.b,.tn-city.b,.tn-bulb.b{animation-delay:-1s}.tn-star.c{animation-delay:-2s}
+@keyframes tnSwing{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.tn-swing{transform-box:fill-box;transform-origin:50% 0%;animation:tnSwing 4s ease-in-out infinite}
+.tn-swing.b{animation-duration:3.4s;animation-delay:-1s}
+#tn-schommel.swing .tn-swing{animation-duration:1.4s}
+@keyframes tnBoing{0%,100%{transform:scaleY(1)}30%{transform:scaleY(.8)}60%{transform:scaleY(1.06)}}
+#tn-tramp.boing ellipse{transform-box:fill-box;transform-origin:50% 50%;animation:tnBoing .4s ease-in-out 3}
+@keyframes tnLook{0%,100%{transform:translateY(0)}30%,70%{transform:translateY(-6px)}}
+#tn-ree.look{animation:tnLook 2.4s ease-in-out}
+#tn-reehead{transform-box:fill-box;transform-origin:10% 90%;animation:efGraze 8s ease-in-out infinite}
+@keyframes tnEgel{0%{transform:translateX(0)}50%{transform:translateX(120px)}50.01%{transform:translateX(120px) scaleX(-1)}100%{transform:translateX(0) scaleX(-1)}}
+.tn-egelwalk{transform-box:fill-box;transform-origin:50% 50%;animation:tnEgel 30s linear infinite}

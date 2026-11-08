@@ -142,3 +142,7 @@ _site/
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Playwright (escape room tests)
+test-results/
+playwright-report/

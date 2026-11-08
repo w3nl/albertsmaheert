@@ -1,0 +1,257 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="scene" id="sc-zaal" viewBox="0 0 1600 900"
+  preserveAspectRatio="xMidYMid slice" aria-label="De zaal in de oude koestal: houten wanden, donkere balken, een bar en lange tafels">
+  <defs>
+    <pattern id="zaPine" width="46" height="400" patternUnits="userSpaceOnUse">
+      <rect width="46" height="400" fill="#d0904c" />
+      <rect x="0" width="22" height="400" fill="#c9884a" /><rect x="23" width="22" height="400" fill="#d89a58" />
+      <path d="M22.5 0 V400 M45.5 0 V400" stroke="#9a5e2a" stroke-width="1.6" />
+      <ellipse cx="11" cy="140" rx="3" ry="7" fill="#a86a34" opacity=".7" /><ellipse cx="34" cy="300" rx="3" ry="6" fill="#a86a34" opacity=".6" />
+      <path d="M6 20 q4 60 0 120 M38 180 q-3 70 0 140" stroke="#b47840" stroke-width="1" fill="none" opacity=".7" />
+    </pattern>
+    <pattern id="zaPineH" width="400" height="30" patternUnits="userSpaceOnUse">
+      <rect width="400" height="30" fill="#e0a868" /><path d="M0 29.5 H400" stroke="#a86a34" stroke-width="1.6" />
+    </pattern>
+    <pattern id="zaPlinth" width="30" height="14" patternUnits="userSpaceOnUse">
+      <rect width="30" height="14" fill="#9a4a32" /><rect x="1" y="1" width="28" height="5.5" fill="#a8553a" /><rect x="-14" y="8" width="28" height="5.5" fill="#924430" /><rect x="16" y="8" width="28" height="5.5" fill="#a0503a" />
+    </pattern>
+    <linearGradient id="zaFloor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8e8e8a" />
+      <stop offset="1" stop-color="#6a6a68" />
+    </linearGradient>
+    <linearGradient id="zaBeam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4e3424" />
+      <stop offset="1" stop-color="#2e1e14" />
+    </linearGradient>
+    <linearGradient id="zaPost" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2e1e14" />
+      <stop offset=".5" stop-color="#4e3424" />
+      <stop offset="1" stop-color="#24170e" />
+    </linearGradient>
+    <linearGradient id="zaNight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1e2a50" />
+      <stop offset="1" stop-color="#5a5a7a" />
+    </linearGradient>
+    <linearGradient id="zaFelt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f8a4a" />
+      <stop offset="1" stop-color="#1e6a36" />
+    </linearGradient>
+    <linearGradient id="zaLeatherR" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d8333a" />
+      <stop offset="1" stop-color="#8e161c" />
+    </linearGradient>
+    <linearGradient id="zaLeatherB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a3a40" />
+      <stop offset="1" stop-color="#141418" />
+    </linearGradient>
+    <radialGradient id="zaGlow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#ffd27a" stop-opacity=".55" />
+      <stop offset="1" stop-color="#ffd27a" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="zaVign" cx=".5" cy=".45" r=".78">
+      <stop offset=".55" stop-color="#000" stop-opacity="0" />
+      <stop offset="1" stop-color="#140c06" stop-opacity=".6" />
+    </radialGradient>
+  </defs>
+
+  <!-- de houten wanden (vuren), met bovenin de schuine kant van het dak met dakramen -->
+  <rect width="1600" height="900" fill="url(#zaPine)" />
+  <path d="M0 130 H1600 V240 H0Z" fill="url(#zaPineH)" />
+  <path d="M0 240 H1600" stroke="#8a5428" stroke-width="5" />
+  <g id="za-dakramen">
+    <path d="M300 140 h120 l14 90 h-148z" fill="url(#zaNight)" stroke="#f4efe4" stroke-width="6" />
+    <path d="M740 140 h120 l14 90 h-148z" fill="url(#zaNight)" stroke="#f4efe4" stroke-width="6" />
+    <path d="M1180 140 h120 l14 90 h-148z" fill="url(#zaNight)" stroke="#f4efe4" stroke-width="6" />
+    <circle class="za-star" cx="350" cy="170" r="1.8" fill="#fff" /><circle class="za-star b" cx="810" cy="180" r="1.6" fill="#fff" /><circle class="za-star" cx="1260" cy="166" r="1.8" fill="#fff" />
+    <circle cx="1270" cy="196" r="12" fill="#fff4d0" opacity=".9" />
+  </g>
+  <!-- een wit stuk muur achter de bar, met een quilt -->
+  <rect x="0" y="240" width="520" height="420" fill="#efe9dc" />
+  <g id="za-quilt">
+    <rect x="380" y="270" width="120" height="150" fill="#f4e6d0" stroke="#c9b48a" stroke-width="3" />
+    <g fill="#c4302b" opacity=".75"><rect x="392" y="282" width="22" height="22" /><rect x="438" y="282" width="22" height="22" /><rect x="415" y="320" width="22" height="22" /><rect x="461" y="320" width="22" height="22" /><rect x="392" y="358" width="22" height="22" /><rect x="438" y="358" width="22" height="22" /><rect x="415" y="392" width="22" height="20" /></g>
+    <g fill="#6a8a4a" opacity=".7"><circle cx="472" cy="293" r="8" /><circle cx="403" cy="331" r="8" /><circle cx="472" cy="369" r="8" /></g>
+    <path d="M374 266 h132" stroke="#5a3e24" stroke-width="5" />
+  </g>
+
+  <!-- het plafond: donkere balken boven je hoofd -->
+  <rect width="1600" height="130" fill="#e0a868" />
+  <g fill="url(#zaBeam)">
+    <rect x="0" y="0" width="1600" height="26" /><rect x="0" y="56" width="1600" height="22" /><rect x="0" y="104" width="1600" height="30" />
+    <path d="M140 0 h26 l-6 134 h-26z M560 0 h26 v134 h-26z M1000 0 h26 v134 h-26z M1420 0 h26 l6 134 h-26z" />
+  </g>
+  <!-- bordjes met koeiennamen op de balk: hier stonden ze -->
+  <g id="za-koeien" font-family="Fredoka, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#f8f0e0">
+    <g><rect x="200" y="108" width="80" height="24" rx="4" fill="#3a5a3a" /><text x="240" y="125">Klaske</text></g>
+    <g><rect x="320" y="108" width="80" height="24" rx="4" fill="#3a5a3a" /><text x="360" y="125">Bertha</text></g>
+    <g><rect x="440" y="108" width="80" height="24" rx="4" fill="#3a5a3a" /><text x="480" y="125">Trijntje</text></g>
+    <g><rect x="640" y="108" width="80" height="24" rx="4" fill="#3a5a3a" /><text x="680" y="125">Grietje</text></g>
+    <g><rect x="760" y="108" width="80" height="24" rx="4" fill="#3a5a3a" /><text x="800" y="125">Dina</text></g>
+  </g>
+
+  <!-- een klein stalraampje met een plantje, en zwarte wandlampen -->
+  <g>
+    <rect x="560" y="290" width="100" height="74" fill="url(#zaNight)" stroke="#f4efe4" stroke-width="6" />
+    <path d="M610 290 v74 M560 327 h100" stroke="#f4efe4" stroke-width="4" />
+    <rect x="548" y="364" width="124" height="10" fill="#f4efe4" />
+    <path d="M590 364 l4 -16 h18 l4 16z" fill="#c46a4a" /><circle cx="603" cy="342" r="11" fill="#4f8a3a" />
+  </g>
+  <g id="za-lanterns">
+    <g><path d="M535 300 h14 v10" stroke="#1a1a1a" stroke-width="4" fill="none" /><path d="M540 310 h18 l-3 22 h-12z" fill="#ffe08a" stroke="#1a1a1a" stroke-width="3" /><circle class="za-lamp" cx="549" cy="322" r="60" fill="url(#zaGlow)" /></g>
+    <g><path d="M845 300 h14 v10" stroke="#1a1a1a" stroke-width="4" fill="none" /><path d="M850 310 h18 l-3 22 h-12z" fill="#ffe08a" stroke="#1a1a1a" stroke-width="3" /><circle class="za-lamp b" cx="859" cy="322" r="60" fill="url(#zaGlow)" /></g>
+    <g><path d="M1110 300 h14 v10" stroke="#1a1a1a" stroke-width="4" fill="none" /><path d="M1115 310 h18 l-3 22 h-12z" fill="#ffe08a" stroke="#1a1a1a" stroke-width="3" /><circle class="za-lamp" cx="1124" cy="322" r="60" fill="url(#zaGlow)" /></g>
+  </g>
+  <!-- de witte buffetkast met servies -->
+  <g id="za-kast">
+    <rect x="690" y="330" width="140" height="330" fill="#f2efe6" stroke="#bdb6a6" stroke-width="3" />
+    <path d="M684 330 h152 l-10 -20 h-132z" fill="#e9e4d8" stroke="#bdb6a6" stroke-width="2" />
+    <rect x="702" y="344" width="116" height="140" fill="#cfe0e6" stroke="#bdb6a6" stroke-width="3" />
+    <path d="M760 344 v140 M702 414 h116" stroke="#bdb6a6" stroke-width="3" />
+    <g fill="#f8f8f8" stroke="#9aa8b8" stroke-width="1.5"><circle cx="722" cy="386" r="12" /><circle cx="742" cy="390" r="9" /><circle cx="790" cy="386" r="12" /><path d="M714 470 h22 v-24 h-22z M780 470 h26 l-4 -22 h-18z" /></g>
+    <g fill="#3a6aa8"><circle cx="722" cy="386" r="5" /><circle cx="790" cy="386" r="5" /></g>
+    <rect x="696" y="500" width="128" height="22" fill="#e9e4d8" stroke="#bdb6a6" stroke-width="2" />
+    <rect x="702" y="530" width="56" height="122" fill="#ece8dc" stroke="#bdb6a6" stroke-width="2" /><rect x="762" y="530" width="56" height="122" fill="#ece8dc" stroke="#bdb6a6" stroke-width="2" />
+    <circle cx="752" cy="592" r="4" fill="#8a8070" /><circle cx="768" cy="592" r="4" fill="#8a8070" />
+  </g>
+  <!-- de glazen deuren naar de tuin op het zuiden, met het groene nooduitgangbordje -->
+  <g id="za-tuindeur">
+    <rect x="1170" y="290" width="220" height="370" fill="#6a4a2e" />
+    <rect x="1182" y="302" width="94" height="358" fill="url(#zaNight)" stroke="#4a321e" stroke-width="5" />
+    <rect x="1284" y="302" width="94" height="358" fill="url(#zaNight)" stroke="#4a321e" stroke-width="5" />
+    <g fill="#2e3a2e"><path d="M1182 560 q40 -30 94 -10 v110 h-94z" /><path d="M1284 552 q50 -20 94 0 v108 h-94z" /></g>
+    <g fill="#ffe08a"><circle class="za-twinkle" cx="1210" cy="520" r="3" /><circle class="za-twinkle b" cx="1240" cy="508" r="3" /><circle class="za-twinkle" cx="1320" cy="512" r="3" /><circle class="za-twinkle b" cx="1356" cy="524" r="3" /></g>
+    <path d="M1276 470 h8 M1270 490 v30 M1290 490 v30" stroke="#c9a24a" stroke-width="4" />
+    <rect x="1250" y="262" width="60" height="22" rx="2" fill="#1f9a4a" /><path d="M1262 273 h20 m-6 -6 l6 6 l-6 6" stroke="#fff" stroke-width="3" fill="none" />
+  </g>
+  <!-- de zithoek: een zwarte bank, een rieten stoel en de pelletkachel -->
+  <g id="za-hoek">
+    <rect x="1420" y="480" width="70" height="140" rx="8" fill="#2a2a2e" />
+    <rect x="1434" y="500" width="42" height="40" rx="4" fill="#ff9a3c" opacity=".85" /><path class="za-fire" d="M1446 536 q9 -26 18 0z" fill="#ffd27a" />
+    <path d="M1450 480 v-180" stroke="#2a2a2e" stroke-width="12" />
+    <path d="M1500 560 h100 v80 h-100z" fill="#1e1e22" /><rect x="1500" y="520" width="100" height="50" rx="10" fill="#2a2a30" />
+    <rect x="1520" y="530" width="40" height="30" rx="6" fill="#c97a4a" />
+  </g>
+
+  <!-- zware donkere palen op gemetselde voeten -->
+  <g id="za-palen">
+    <rect x="518" y="0" width="40" height="680" fill="url(#zaPost)" /><rect x="510" y="660" width="56" height="60" fill="url(#zaPlinth)" stroke="#6a2a1a" stroke-width="2" />
+    <rect x="1050" y="0" width="40" height="680" fill="url(#zaPost)" /><rect x="1042" y="660" width="56" height="60" fill="url(#zaPlinth)" stroke="#6a2a1a" stroke-width="2" />
+  </g>
+
+  <!-- de bar met krukken, hanglampen, het koffieapparaat en het gastenboek -->
+  <g id="za-bar">
+    <g fill="#1a1a1a"><path d="M100 0 V250 M200 0 V250 M300 0 V250" stroke="#1a1a1a" stroke-width="2" /><path d="M86 250 h28 l8 26 h-44z M186 250 h28 l8 26 h-44z M286 250 h28 l8 26 h-44z" /></g>
+    <g fill="#ffe08a"><ellipse cx="100" cy="278" rx="12" ry="4" /><ellipse cx="200" cy="278" rx="12" ry="4" /><ellipse cx="300" cy="278" rx="12" ry="4" /></g>
+    <path d="M20 340 h330 M20 400 h330" stroke="#c9b48a" stroke-width="6" />
+    <g fill="#3a6a9a"><rect x="40" y="316" width="12" height="24" /><rect x="58" y="320" width="12" height="20" /><rect x="260" y="314" width="14" height="26" fill="#6a8a4a" /><rect x="280" y="318" width="12" height="22" fill="#c4302b" /></g>
+    <rect x="30" y="500" width="320" height="200" fill="#5a3a24" stroke="#2e1e14" stroke-width="3" />
+    <rect x="20" y="490" width="340" height="20" fill="#7a4e2e" />
+    <g stroke="#3e2818" stroke-width="2"><path d="M40 560 h300 M40 630 h300" /></g>
+    <rect x="30" y="680" width="320" height="20" fill="url(#zaPlinth)" />
+    <g id="za-koffie"><rect x="50" y="420" width="70" height="70" rx="6" fill="#2a2a2e" /><rect x="60" y="430" width="50" height="20" rx="3" fill="#4a7a9a" /><circle cx="85" cy="470" r="6" fill="#c4302b" /><rect x="72" y="478" width="26" height="12" fill="#f2efe8" /></g>
+    <g fill="#d8eef6" opacity=".8"><path d="M170 490 l4 -30 h14 l4 30z" /><path d="M200 490 l4 -30 h14 l4 30z" /></g>
+    <g id="za-boek"><path d="M240 490 l6 -24 h70 l-6 24z" fill="#7a2a24" stroke="#3a1210" stroke-width="2" /><path d="M250 486 l4 -16 h50 l-4 16z" fill="#f6efe2" /><path d="M260 478 h34" stroke="#5a6aa8" stroke-width="2" /></g>
+    <g stroke="#1a1a1a" stroke-width="5" fill="none"><path d="M80 600 v120 M60 600 h40 M180 600 v120 M160 600 h40 M280 600 v120 M260 600 h40" /></g>
+    <g fill="#2a1a12"><ellipse cx="80" cy="598" rx="22" ry="7" /><ellipse cx="180" cy="598" rx="22" ry="7" /><ellipse cx="280" cy="598" rx="22" ry="7" /></g>
+  </g>
+  <g id="za-paardje" transform="translate(140 490) scale(0.28)" fill="#d9ad6e" stroke="#7a4a20" stroke-width="6">
+    <path d="M-56 -6 Q0 16 56 -6" fill="none" stroke-width="9" />
+    <path d="M-30 -44 L-38 0 M-16 -44 L-20 4 M16 -44 L20 4 M30 -44 L38 0" stroke-width="9" />
+    <path d="M-40 -60 C-40 -74 30 -76 34 -60 C36 -48 28 -40 0 -40 C-30 -40 -40 -46 -40 -60Z" />
+    <path d="M24 -64 C30 -86 38 -100 50 -104 C62 -106 70 -98 68 -90 C66 -84 58 -84 52 -84 C48 -76 44 -66 38 -58Z" />
+    <circle cx="56" cy="-96" r="3" fill="#2a1a0c" stroke="none" /><path d="M-10 -66 h22 v6 h-22z" fill="#c4302b" stroke="none" />
+  </g>
+
+  <!-- de feestverlichting: een lange slinger in serie onder de balken (gaat aan als het lampje gerepareerd is) -->
+  <g id="za-lights">
+    <path d="M0 190 Q200 250 400 190 Q600 250 800 190 Q1000 250 1200 190 Q1400 250 1600 190" stroke="#2a2a2a" stroke-width="3" fill="none" />
+    <g id="za-bulbs"></g>
+  </g>
+
+  <!-- de grijze, gepolijste betonvloer met een glazen plaat over een stukje van de oude grup -->
+  <path d="M0 660 H1600 V900 H0Z" fill="url(#zaFloor)" />
+  <g fill="#b8b8b2" opacity=".18"><ellipse cx="300" cy="720" rx="160" ry="16" /><ellipse cx="900" cy="740" rx="200" ry="18" /><ellipse cx="1300" cy="700" rx="120" ry="12" /></g>
+  <g stroke="#5e5e5c" stroke-width="2" opacity=".5"><path d="M0 760 H1600 M640 660 L560 900 M1200 660 L1300 900" /></g>
+  <g id="za-grup">
+    <path d="M560 790 H1040 L1060 870 H540Z" fill="#2a2018" />
+    <path d="M580 806 H1020 L1032 852 H568Z" fill="#4a3a28" />
+    <path d="M590 820 H1010" stroke="#3a2a18" stroke-width="10" />
+    <path id="za-plaat" d="M560 790 H1040 L1060 870 H540Z" fill="#bfe0ee" opacity=".35" stroke="#e9f4f8" stroke-width="4" />
+    <g id="za-bouten" fill="#9aa0a6" stroke="#4a4e54" stroke-width="2"><circle cx="572" cy="800" r="7" /><circle cx="1028" cy="800" r="7" /><circle cx="556" cy="860" r="7" /><circle cx="1044" cy="860" r="7" /></g>
+    <g id="za-grupblik"><rect x="760" y="814" width="80" height="34" rx="4" fill="#7a8a70" stroke="#3a4434" stroke-width="2" /><path d="M764 822 h72" stroke="#c9a24a" stroke-width="2" /></g>
+  </g>
+
+  <!-- de gasten, achter de tafel -->
+  <g id="za-gasten"><g transform="translate(410 690)">
+    <!-- @personage gasten --><g transform="translate(0 0) scale(1.25 1.25)"><g transform="scale(1.0)"><path d="M-20 -164 C-26 -140 -26 -122 -18 -112 L18 -112 C26 -122 26 -140 20 -164Z" fill="#7a4a26"/><path d="M-14 -50 L-13 -4 L-5 -4 L-6 -50Z M14 -50 L13 -4 L5 -4 L6 -50Z" fill="#f6cfae" stroke="#00000030" stroke-width="1"/><path d="M-17 -1 C-17 -9 -6 -10 -4 -6 L-4 0 Z M17 -1 C17 -9 6 -10 4 -6 L4 0 Z" fill="#3a2a24"/><path d="M-30 -48 L-20 -126 C-10 -132 10 -132 20 -126 L30 -48Z" fill="#2f6fb1" stroke="#00000026" stroke-width="1.2"/><path d="M-24 -124 C-34 -106 -34 -92 -28 -80" stroke="#2f6fb1" stroke-width="11" fill="none" stroke-linecap="round"/><ellipse cx="-28" cy="-76" rx="6" ry="6.6" fill="#f6cfae" stroke="#dca383" stroke-width="0.84"/><path d="M-29.2 -81.4 q5.4 -0.6 5.4 4.2" stroke="#dca383" stroke-width="0.84" fill="none" opacity=".6"/><path d="M24 -124 C34 -110 32 -100 24 -94" stroke="#2f6fb1" stroke-width="11" fill="none" stroke-linecap="round"/><path d="M18 -116 l2 18 h8 l2 -18z" fill="#f4d58a" opacity=".9" stroke="#fff" stroke-width="1"/><path d="M18 -116 h12" stroke="#fffbe8" stroke-width="3"/><ellipse cx="24" cy="-96" rx="6" ry="6.6" fill="#f6cfae" stroke="#dca383" stroke-width="0.84"/><path d="M22.8 -101.4 q5.4 -0.6 5.4 4.2" stroke="#dca383" stroke-width="0.84" fill="none" opacity=".6"/><rect x="-5" y="-142" width="10" height="12" fill="#dca383"/><defs><radialGradient id="zaG1Sk" cx="0.42" cy="0.35" r="0.8"><stop offset="0" stop-color="#f6cfae"/><stop offset="1" stop-color="#dca383"/></radialGradient></defs><ellipse cx="-16.1" cy="-154.6" rx="3.4" ry="4.4" fill="#f6cfae" stroke="#dca383" stroke-width="0.85"/><ellipse cx="16.1" cy="-154.6" rx="3.4" ry="4.4" fill="#f6cfae" stroke="#dca383" stroke-width="0.85"/><ellipse cx="0" cy="-156" rx="17" ry="18.0" fill="url(#zaG1Sk)" stroke="#dca383" stroke-width="0.85"/><ellipse cx="-6.1" cy="-156.3" rx="1.87" ry="2.55" fill="#2a1b14"/><circle cx="-5.4" cy="-157.2" r="0.77" fill="#fff"/><path d="M-8.8 -160.9 q2.7 -1.7 5.4 0.3" stroke="#2a1b14" stroke-width="1.36" fill="none" stroke-linecap="round"/><ellipse cx="6.1" cy="-156.3" rx="1.87" ry="2.55" fill="#2a1b14"/><circle cx="6.8" cy="-157.2" r="0.77" fill="#fff"/><path d="M3.4 -160.9 q2.7 -1.7 5.4 0.3" stroke="#2a1b14" stroke-width="1.36" fill="none" stroke-linecap="round"/><ellipse cx="-9.4" cy="-150.9" rx="2.9" ry="1.9" fill="#f29b8f" opacity=".55"/><ellipse cx="9.4" cy="-150.9" rx="2.9" ry="1.9" fill="#f29b8f" opacity=".55"/><ellipse cx="0" cy="-152.6" rx="2.4" ry="1.9" fill="#dca383" opacity=".7"/><circle cx="-0.7" cy="-153.3" r="0.68" fill="#fff" opacity=".6"/><path d="M-5.1 -147.8 q5.1 4.4 10.2 0" stroke="#8a3a2a" stroke-width="1.19" fill="none" stroke-linecap="round"/><path d="M-18 -156 C-20 -178 -4 -180 2 -177 C12 -180 20 -172 18 -154 C12 -166 4 -168 -2 -170 C-8 -166 -14 -164 -18 -156Z" fill="#7a4a26"/></g></g><g transform="translate(70 4) scale(1.3 1.3)"><g transform="scale(1.0)"><path d="M-17 -74 L-16 -4 L-5 -4 L-6 -74Z M17 -74 L16 -4 L5 -4 L6 -74Z" fill="#3b3f4a" stroke="#00000030" stroke-width="1"/><path d="M-20 -1 C-20 -9 -6 -10 -4 -6 L-4 0 Z M20 -1 C20 -9 6 -10 4 -6 L4 0 Z" fill="#2a2420"/><path d="M-28 -72 C-31 -104 -28 -122 -16 -130 C-8 -134 8 -134 16 -130 C28 -122 31 -104 28 -72Z" fill="#d9822b" stroke="#00000026" stroke-width="1.2"/><path d="M-24 -124 C-34 -106 -34 -92 -28 -80" stroke="#d9822b" stroke-width="11" fill="none" stroke-linecap="round"/><ellipse cx="-28" cy="-76" rx="6" ry="6.6" fill="#a86b45" stroke="#84502f" stroke-width="0.84"/><path d="M-29.2 -81.4 q5.4 -0.6 5.4 4.2" stroke="#84502f" stroke-width="0.84" fill="none" opacity=".6"/><path d="M24 -124 C34 -110 32 -100 24 -94" stroke="#d9822b" stroke-width="11" fill="none" stroke-linecap="round"/><path d="M18 -116 l2 18 h8 l2 -18z" fill="#f4d58a" opacity=".9" stroke="#fff" stroke-width="1"/><path d="M18 -116 h12" stroke="#fffbe8" stroke-width="3"/><ellipse cx="24" cy="-96" rx="6" ry="6.6" fill="#a86b45" stroke="#84502f" stroke-width="0.84"/><path d="M22.8 -101.4 q5.4 -0.6 5.4 4.2" stroke="#84502f" stroke-width="0.84" fill="none" opacity=".6"/><rect x="-5" y="-142" width="10" height="12" fill="#84502f"/><defs><radialGradient id="zaG2Sk" cx="0.42" cy="0.35" r="0.8"><stop offset="0" stop-color="#a86b45"/><stop offset="1" stop-color="#84502f"/></radialGradient></defs><ellipse cx="-16.1" cy="-154.6" rx="3.4" ry="4.4" fill="#a86b45" stroke="#84502f" stroke-width="0.85"/><ellipse cx="16.1" cy="-154.6" rx="3.4" ry="4.4" fill="#a86b45" stroke="#84502f" stroke-width="0.85"/><ellipse cx="0" cy="-156" rx="17" ry="18.0" fill="url(#zaG2Sk)" stroke="#84502f" stroke-width="0.85"/><ellipse cx="-6.1" cy="-156.3" rx="1.87" ry="2.55" fill="#2a1b14"/><circle cx="-5.4" cy="-157.2" r="0.77" fill="#fff"/><path d="M-8.8 -160.9 q2.7 -1.7 5.4 0.3" stroke="#2a1b14" stroke-width="1.36" fill="none" stroke-linecap="round"/><ellipse cx="6.1" cy="-156.3" rx="1.87" ry="2.55" fill="#2a1b14"/><circle cx="6.8" cy="-157.2" r="0.77" fill="#fff"/><path d="M3.4 -160.9 q2.7 -1.7 5.4 0.3" stroke="#2a1b14" stroke-width="1.36" fill="none" stroke-linecap="round"/><ellipse cx="-9.4" cy="-150.9" rx="2.9" ry="1.9" fill="#c8705e" opacity=".55"/><ellipse cx="9.4" cy="-150.9" rx="2.9" ry="1.9" fill="#c8705e" opacity=".55"/><ellipse cx="0" cy="-152.6" rx="2.4" ry="1.9" fill="#84502f" opacity=".7"/><circle cx="-0.7" cy="-153.3" r="0.68" fill="#fff" opacity=".6"/><path d="M-5.1 -147.8 q5.1 4.4 10.2 0" stroke="#8a3a2a" stroke-width="1.19" fill="none" stroke-linecap="round"/><circle cx="-14" cy="-166" r="7" fill="#1f1f1f"/><circle cx="-7" cy="-173" r="7" fill="#1f1f1f"/><circle cx="2" cy="-175" r="7" fill="#1f1f1f"/><circle cx="11" cy="-171" r="7" fill="#1f1f1f"/><circle cx="16" cy="-162" r="7" fill="#1f1f1f"/><circle cx="-17" cy="-157" r="7" fill="#1f1f1f"/></g></g><g transform="translate(140 0) scale(1.28 1.28)"><g transform="scale(1.0)"><path d="M-17 -74 L-16 -4 L-5 -4 L-6 -74Z M17 -74 L16 -4 L5 -4 L6 -74Z" fill="#4a4036" stroke="#00000030" stroke-width="1"/><path d="M-20 -1 C-20 -9 -6 -10 -4 -6 L-4 0 Z M20 -1 C20 -9 6 -10 4 -6 L4 0 Z" fill="#2a2420"/><path d="M-28 -72 C-31 -104 -28 -122 -16 -130 C-8 -134 8 -134 16 -130 C28 -122 31 -104 28 -72Z" fill="#5a8a4a" stroke="#00000026" stroke-width="1.2"/><path d="M-24 -124 C-34 -106 -34 -92 -28 -80" stroke="#5a8a4a" stroke-width="11" fill="none" stroke-linecap="round"/><ellipse cx="-28" cy="-76" rx="6" ry="6.6" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.84"/><path d="M-29.2 -81.4 q5.4 -0.6 5.4 4.2" stroke="#d79c7c" stroke-width="0.84" fill="none" opacity=".6"/><path d="M24 -124 C34 -106 34 -92 28 -80" stroke="#5a8a4a" stroke-width="11" fill="none" stroke-linecap="round"/><ellipse cx="28" cy="-76" rx="6" ry="6.6" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.84"/><path d="M26.8 -81.4 q5.4 -0.6 5.4 4.2" stroke="#d79c7c" stroke-width="0.84" fill="none" opacity=".6"/><rect x="-5" y="-142" width="10" height="12" fill="#d79c7c"/><defs><radialGradient id="zaG3Sk" cx="0.42" cy="0.35" r="0.8"><stop offset="0" stop-color="#f3c2a4"/><stop offset="1" stop-color="#d79c7c"/></radialGradient></defs><ellipse cx="-16.1" cy="-154.6" rx="3.4" ry="4.4" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.85"/><ellipse cx="16.1" cy="-154.6" rx="3.4" ry="4.4" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.85"/><ellipse cx="0" cy="-156" rx="17" ry="18.0" fill="url(#zaG3Sk)" stroke="#d79c7c" stroke-width="0.85"/><ellipse cx="-6.1" cy="-156.3" rx="1.87" ry="2.55" fill="#2a1b14"/><circle cx="-5.4" cy="-157.2" r="0.77" fill="#fff"/><path d="M-8.8 -160.9 q2.7 -1.7 5.4 0.3" stroke="#2a1b14" stroke-width="1.36" fill="none" stroke-linecap="round"/><ellipse cx="6.1" cy="-156.3" rx="1.87" ry="2.55" fill="#2a1b14"/><circle cx="6.8" cy="-157.2" r="0.77" fill="#fff"/><path d="M3.4 -160.9 q2.7 -1.7 5.4 0.3" stroke="#2a1b14" stroke-width="1.36" fill="none" stroke-linecap="round"/><ellipse cx="-9.4" cy="-150.9" rx="2.9" ry="1.9" fill="#ee8f86" opacity=".55"/><ellipse cx="9.4" cy="-150.9" rx="2.9" ry="1.9" fill="#ee8f86" opacity=".55"/><ellipse cx="0" cy="-152.6" rx="2.4" ry="1.9" fill="#d79c7c" opacity=".7"/><circle cx="-0.7" cy="-153.3" r="0.68" fill="#fff" opacity=".6"/><path d="M-5.1 -147.8 q5.1 4.4 10.2 0" stroke="#8a3a2a" stroke-width="1.19" fill="none" stroke-linecap="round"/><path d="M-17 -152 C-19 -160 -16 -164 -14 -162 M17 -152 C19 -160 16 -164 14 -162" stroke="#cfcac2" stroke-width="5" fill="none" stroke-linecap="round"/></g></g><g transform="translate(214 6) scale(1.2 1.2)"><g transform="scale(1.0)"><path d="M-17 -74 L-16 -4 L-5 -4 L-6 -74Z M17 -74 L16 -4 L5 -4 L6 -74Z" fill="#2b3f66" stroke="#00000030" stroke-width="1"/><path d="M-20 -1 C-20 -9 -6 -10 -4 -6 L-4 0 Z M20 -1 C20 -9 6 -10 4 -6 L4 0 Z" fill="#2a2420"/><path d="M-28 -72 C-31 -104 -28 -122 -16 -130 C-8 -134 8 -134 16 -130 C28 -122 31 -104 28 -72Z" fill="#c73f6d" stroke="#00000026" stroke-width="1.2"/><path d="M-24 -124 C-34 -106 -34 -92 -28 -80" stroke="#c73f6d" stroke-width="11" fill="none" stroke-linecap="round"/><ellipse cx="-28" cy="-76" rx="6" ry="6.6" fill="#f6cfae" stroke="#dca383" stroke-width="0.84"/><path d="M-29.2 -81.4 q5.4 -0.6 5.4 4.2" stroke="#dca383" stroke-width="0.84" fill="none" opacity=".6"/><path d="M24 -124 C34 -110 32 -100 24 -94" stroke="#c73f6d" stroke-width="11" fill="none" stroke-linecap="round"/><path d="M18 -116 l2 18 h8 l2 -18z" fill="#f4d58a" opacity=".9" stroke="#fff" stroke-width="1"/><path d="M18 -116 h12" stroke="#fffbe8" stroke-width="3"/><ellipse cx="24" cy="-96" rx="6" ry="6.6" fill="#f6cfae" stroke="#dca383" stroke-width="0.84"/><path d="M22.8 -101.4 q5.4 -0.6 5.4 4.2" stroke="#dca383" stroke-width="0.84" fill="none" opacity=".6"/><rect x="-5" y="-142" width="10" height="12" fill="#dca383"/><defs><radialGradient id="zaG4Sk" cx="0.42" cy="0.35" r="0.8"><stop offset="0" stop-color="#f6cfae"/><stop offset="1" stop-color="#dca383"/></radialGradient></defs><ellipse cx="-16.1" cy="-154.6" rx="3.4" ry="4.4" fill="#f6cfae" stroke="#dca383" stroke-width="0.85"/><ellipse cx="16.1" cy="-154.6" rx="3.4" ry="4.4" fill="#f6cfae" stroke="#dca383" stroke-width="0.85"/><ellipse cx="0" cy="-156" rx="17" ry="18.0" fill="url(#zaG4Sk)" stroke="#dca383" stroke-width="0.85"/><ellipse cx="-6.1" cy="-156.3" rx="1.87" ry="2.55" fill="#2a1b14"/><circle cx="-5.4" cy="-157.2" r="0.77" fill="#fff"/><path d="M-8.8 -160.9 q2.7 -1.7 5.4 0.3" stroke="#2a1b14" stroke-width="1.36" fill="none" stroke-linecap="round"/><ellipse cx="6.1" cy="-156.3" rx="1.87" ry="2.55" fill="#2a1b14"/><circle cx="6.8" cy="-157.2" r="0.77" fill="#fff"/><path d="M3.4 -160.9 q2.7 -1.7 5.4 0.3" stroke="#2a1b14" stroke-width="1.36" fill="none" stroke-linecap="round"/><ellipse cx="-9.4" cy="-150.9" rx="2.9" ry="1.9" fill="#f29b8f" opacity=".55"/><ellipse cx="9.4" cy="-150.9" rx="2.9" ry="1.9" fill="#f29b8f" opacity=".55"/><ellipse cx="0" cy="-152.6" rx="2.4" ry="1.9" fill="#dca383" opacity=".7"/><circle cx="-0.7" cy="-153.3" r="0.68" fill="#fff" opacity=".6"/><path d="M-5.1 -147.8 q5.1 4.4 10.2 0" stroke="#8a3a2a" stroke-width="1.19" fill="none" stroke-linecap="round"/><path d="M-17 -158 C-19 -178 -4 -180 2 -177 C12 -180 19 -172 17 -156 C12 -166 6 -168 -2 -170 C-8 -166 -12 -164 -17 -158Z" fill="#e0b860"/></g></g><!-- @einde gasten -->
+  </g></g>
+  <!-- de lange feesttafel: donker hout, met rode en zwarte leren stoelen -->
+  <g id="za-tafel">
+    <g>
+      <path d="M380 590 h40 v60 h-40z" fill="url(#zaLeatherR)" /><path d="M470 590 h40 v60 h-40z" fill="url(#zaLeatherB)" /><path d="M560 590 h40 v60 h-40z" fill="url(#zaLeatherR)" />
+      <path d="M760 590 h40 v60 h-40z" fill="url(#zaLeatherB)" /><path d="M850 590 h40 v60 h-40z" fill="url(#zaLeatherR)" /><path d="M940 590 h40 v60 h-40z" fill="url(#zaLeatherB)" />
+    </g>
+    <path d="M350 640 h660 l18 26 h-696z" fill="#3e2418" stroke="#24140c" stroke-width="2" />
+    <path d="M332 666 h696 v14 h-696z" fill="#2e1a10" />
+    <path d="M350 680 V790 M1010 680 V790 M600 680 V770 M760 680 V770" stroke="#2e1a10" stroke-width="10" />
+    <g><path d="M450 640 l3 -24 h12 l3 24z" fill="#f4d58a" opacity=".9" /><path d="M600 640 l3 -24 h12 l3 24z" fill="#c4302b" opacity=".8" /><path d="M880 640 l3 -24 h12 l3 24z" fill="#f4d58a" opacity=".9" /></g>
+    <g><ellipse cx="700" cy="638" rx="40" ry="8" fill="#e9e2d2" /><circle cx="690" cy="630" r="8" fill="#e8a040" /><circle cx="708" cy="628" r="9" fill="#d6242f" /><circle cx="700" cy="620" r="7" fill="#f6d04d" /></g>
+    <g><rect x="520" y="626" width="60" height="14" rx="6" fill="#c9a24a" /><rect x="900" y="626" width="60" height="14" rx="6" fill="#c9a24a" /></g>
+    <g>
+      <path d="M370 700 h50 v-40 h-50z" fill="url(#zaLeatherB)" /><path d="M470 700 h50 v-40 h-50z" fill="url(#zaLeatherR)" />
+      <path d="M840 700 h50 v-40 h-50z" fill="url(#zaLeatherR)" /><path d="M940 700 h50 v-40 h-50z" fill="url(#zaLeatherB)" />
+      <path d="M374 700 v70 M416 700 v70 M474 700 v70 M516 700 v70 M844 700 v70 M886 700 v70 M944 700 v70 M986 700 v70" stroke="#1a1a1a" stroke-width="5" />
+    </g>
+  </g>
+  <!-- de pooltafel -->
+  <g id="za-pool">
+    <path d="M1100 660 h280 l36 64 h-352z" fill="#5a3a20" />
+    <path d="M1112 666 h256 l28 52 h-312z" fill="url(#zaFelt)" />
+    <path d="M1064 724 h352 v28 h-352z" fill="#4a2e18" />
+    <path d="M1074 752 v56 M1406 752 v56" stroke="#3a2412" stroke-width="16" />
+    <g><circle cx="1180" cy="694" r="7" fill="#f6f2ea" /><circle cx="1280" cy="688" r="7" fill="#1a1a1a" /><circle cx="1308" cy="702" r="7" fill="#d6242f" /><circle cx="1330" cy="684" r="7" fill="#f6d04d" /></g>
+    <g fill="#0a0a0a"><circle cx="1114" cy="668" r="6" /><circle cx="1366" cy="668" r="6" /><circle cx="1084" cy="718" r="7" /><circle cx="1396" cy="718" r="7" /></g>
+  </g>
+
+  <!-- Ditty en Roelof -->
+  <g id="za-ditty"><g transform="translate(330 800)">
+    <!-- @personage ditty --><g transform="translate(0 0) scale(1.35 1.35)"><defs><linearGradient id="zaDVest" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cbbeac"/><stop offset="1" stop-color="#8e8070"/></linearGradient></defs><path d="M-17 -64 L-16 -4 L-5 -4 L-6 -64Z M17 -64 L16 -4 L5 -4 L6 -64Z" fill="#e4dfd4" stroke="#bdb6a6" stroke-width="1"/><path d="M-20 -1 C-20 -9 -6 -10 -4 -6 L-4 0 Z M20 -1 C20 -9 6 -10 4 -6 L4 0 Z" fill="#8a6a4a"/><path d="M-30 -60 C-33 -100 -30 -126 -16 -134 C-8 -137 8 -137 16 -134 C30 -126 33 -100 30 -60Z" fill="url(#zaDVest)" stroke="#00000026" stroke-width="1.2"/><path d="M-8 -136 L0 -122 L8 -136" stroke="#8e8070" stroke-width="2" fill="#f3c2a4"/><path d="M-28 -76 Q0 -70 28 -76 L28 -70 Q0 -64 -28 -70Z" fill="#d9c9a4"/><circle cx="6" cy="-71" r="4" fill="#c9a26a"/><g fill="none" stroke="#f6f2ea" stroke-width="1.3" opacity=".9"><path d="M-16 -126 c-4 -4 -8 0 -4 4 c4 4 8 0 4 -4z"/><path d="M-16 -126 c4 4 2 8 -2 8"/><path d="M-18 -118 q-4 6 -2 12"/></g><g fill="none" stroke="#f6f2ea" stroke-width="1.3" opacity=".9"><path d="M16 -126 c4 -4 8 0 4 4 c-4 4 -8 0 -4 -4z"/><path d="M16 -126 c-4 4 -2 8 2 8"/><path d="M18 -118 q4 6 2 12"/></g><path d="M-9 -134 Q0 -118 9 -134" stroke="#d6a640" stroke-width="1.4" fill="none"/><path d="M-24 -126 C-36 -110 -36 -94 -28 -84" stroke="url(#zaDVest)" stroke-width="13" fill="none" stroke-linecap="round"/><ellipse cx="-27" cy="-80" rx="6" ry="6.6" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.84"/><path d="M-28.2 -85.4 q5.4 -0.6 5.4 4.2" stroke="#d79c7c" stroke-width="0.84" fill="none" opacity=".6"/><path d="M24 -126 C36 -110 36 -94 28 -84" stroke="url(#zaDVest)" stroke-width="13" fill="none" stroke-linecap="round"/><ellipse cx="27" cy="-80" rx="6" ry="6.6" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.84"/><path d="M25.8 -85.4 q5.4 -0.6 5.4 4.2" stroke="#d79c7c" stroke-width="0.84" fill="none" opacity=".6"/><rect x="-5" y="-146" width="10" height="12" fill="#d79c7c"/><defs><radialGradient id="zaDSk" cx="0.42" cy="0.35" r="0.8"><stop offset="0" stop-color="#f3c2a4"/><stop offset="1" stop-color="#d79c7c"/></radialGradient></defs><ellipse cx="-17.1" cy="-158.6" rx="3.6" ry="4.7" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.90"/><ellipse cx="17.1" cy="-158.6" rx="3.6" ry="4.7" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.90"/><ellipse cx="0" cy="-160" rx="18" ry="19.1" fill="url(#zaDSk)" stroke="#d79c7c" stroke-width="0.90"/><ellipse cx="-6.5" cy="-160.4" rx="1.98" ry="2.70" fill="#2a1b14"/><circle cx="-5.8" cy="-161.3" r="0.81" fill="#fff"/><path d="M-9.4 -165.2 q2.9 -1.8 5.8 0.4" stroke="#8a8680" stroke-width="1.44" fill="none" stroke-linecap="round"/><ellipse cx="6.5" cy="-160.4" rx="1.98" ry="2.70" fill="#2a1b14"/><circle cx="7.2" cy="-161.3" r="0.81" fill="#fff"/><path d="M3.6 -165.2 q2.9 -1.8 5.8 0.4" stroke="#8a8680" stroke-width="1.44" fill="none" stroke-linecap="round"/><ellipse cx="-9.9" cy="-154.6" rx="3.1" ry="2.0" fill="#ee8f86" opacity=".55"/><ellipse cx="9.9" cy="-154.6" rx="3.1" ry="2.0" fill="#ee8f86" opacity=".55"/><ellipse cx="0" cy="-156.4" rx="2.5" ry="2.0" fill="#d79c7c" opacity=".7"/><circle cx="-0.7" cy="-157.1" r="0.72" fill="#fff" opacity=".6"/><path d="M-5.4 -151.4 q5.4 4.7 10.8 0" stroke="#8a3a2a" stroke-width="1.26" fill="none" stroke-linecap="round"/><path d="M-19 -162 C-23 -182 -8 -188 2 -185 C14 -188 23 -180 19 -162 C17 -170 13 -174 6 -175 C2 -172 -4 -172 -8 -174 C-13 -172 -17 -168 -19 -162Z" fill="#cfccc6"/><path d="M-2 -184 q3 -5 8 -4 M6 -185 q4 -3 8 -1" stroke="#cfccc6" stroke-width="3.5" stroke-linecap="round" fill="none"/><path d="M-6 -182 C2 -185 10 -182 14 -176" stroke="#eeece8" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M-19 -164 C-20.5 -159 -20 -156 -18.5 -154 M19 -164 C20.5 -159 20 -156 18.5 -154" stroke="#cfccc6" stroke-width="3.5" fill="none" stroke-linecap="round"/><circle cx="-17" cy="-150" r="1.6" fill="#d6a640"/><circle cx="17" cy="-150" r="1.6" fill="#d6a640"/><g fill="#ffffff22" stroke="#9a1e2a" stroke-width="1.44"><rect x="-12.6" y="-165.8" width="12.2" height="10.8" rx="2.7"/><rect x="0.4" y="-165.8" width="12.2" height="10.8" rx="2.7"/></g><path d="M-0.4 -160.4 q0.4 -1.4 0.7 0 M-12.6 -160.4 l-9.0 -0.9 M12.6 -160.4 l9.0 -0.9" stroke="#9a1e2a" stroke-width="1.26" fill="none"/></g><!-- @einde ditty -->
+  </g></g>
+  <g id="za-roelof"><g transform="translate(1130 840)">
+    <!-- @personage roelof --><g transform="translate(0 0) scale(1.4 1.4)"><defs><linearGradient id="zaRKiel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8aa4dc"/><stop offset="1" stop-color="#34508a"/></linearGradient><pattern id="zaRPrint" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="url(#zaRKiel)"/><path d="M0 10 a5 5 0 0 1 10 0" fill="#c9a24a" opacity=".55"/><path d="M5 5 a5 5 0 0 1 10 0 M-5 5 a5 5 0 0 1 10 0" fill="#22305a" opacity=".55"/></pattern></defs><path d="M-18 -76 L-17 -4 L-5 -4 L-6 -76Z M18 -76 L17 -4 L5 -4 L6 -76Z" fill="#cfc4ac" stroke="#00000030" stroke-width="1"/><path d="M-21 -1 C-21 -9 -6 -10 -4 -6 L-4 0 Z M21 -1 C21 -9 6 -10 4 -6 L4 0 Z" fill="#6a4428"/><path d="M-24 0 C-26 -9 -8 -11 -3 -6 L-3 0Z M24 0 C26 -9 8 -11 3 -6 L3 0Z" fill="#6a4428"/><path d="M-32 -74 C-34 -110 -30 -132 -18 -140 C-8 -144 8 -144 18 -140 C30 -132 34 -110 32 -74Z" fill="url(#zaRPrint)" stroke="#00000030" stroke-width="1.2"/><path d="M-9 -142 L0 -130 L9 -142 L4 -146 L0 -138 L-4 -146Z" fill="url(#zaRPrint)" stroke="#22305a" stroke-width="1"/><path d="M0 -130 V-78" stroke="#34508a" stroke-width="1.4"/><path d="M-33 -78 Q0 -70 33 -78 L33 -72 Q0 -64 -33 -72Z" fill="#7a4a26"/><rect x="-5" y="-78" width="10" height="7" fill="none" stroke="#c9a24a" stroke-width="1.6"/><path d="M-28 -132 C-40 -112 -40 -92 -36 -76" stroke="url(#zaRPrint)" stroke-width="13" fill="none" stroke-linecap="round"/><path d="M-37 -104 C-40 -92 -38 -82 -36 -76" stroke="#e9b48c" stroke-width="9" fill="none" stroke-linecap="round"/><ellipse cx="-36" cy="-70" rx="6.5" ry="7.2" fill="#e9b48c" stroke="#c48a64" stroke-width="0.91"/><path d="M-37.3 -75.8 q5.9 -0.7 5.9 4.5" stroke="#c48a64" stroke-width="0.91" fill="none" opacity=".6"/><path d="M28 -132 C40 -112 42 -96 40 -80" stroke="url(#zaRPrint)" stroke-width="13" fill="none" stroke-linecap="round"/><path d="M40 -104 C42 -94 41 -86 40 -80" stroke="#e9b48c" stroke-width="9" fill="none" stroke-linecap="round"/><ellipse cx="40" cy="-74" rx="6.5" ry="7.2" fill="#e9b48c" stroke="#c48a64" stroke-width="0.91"/><path d="M38.7 -79.8 q5.9 -0.7 5.9 4.5" stroke="#c48a64" stroke-width="0.91" fill="none" opacity=".6"/><path d="M33 -92 l3 18 h10 l3 -18z" fill="#f4d58a" opacity=".85" stroke="#fff" stroke-width="1"/><path d="M33 -92 h16" stroke="#fffbe8" stroke-width="3"/><rect x="-6" y="-152" width="12" height="12" fill="#c48a64"/><defs><radialGradient id="zaRSk" cx="0.42" cy="0.35" r="0.8"><stop offset="0" stop-color="#e9b48c"/><stop offset="1" stop-color="#c48a64"/></radialGradient></defs><ellipse cx="-18.1" cy="-167.5" rx="3.8" ry="4.9" fill="#e9b48c" stroke="#c48a64" stroke-width="0.95"/><ellipse cx="18.1" cy="-167.5" rx="3.8" ry="4.9" fill="#e9b48c" stroke="#c48a64" stroke-width="0.95"/><ellipse cx="0" cy="-169" rx="19" ry="20.1" fill="url(#zaRSk)" stroke="#c48a64" stroke-width="0.95"/><ellipse cx="-6.8" cy="-169.4" rx="2.09" ry="2.85" fill="#2a1b14"/><circle cx="-6.1" cy="-170.3" r="0.85" fill="#fff"/><path d="M-9.9 -174.5 q3.0 -1.9 6.1 0.4" stroke="#9a968e" stroke-width="1.52" fill="none" stroke-linecap="round"/><ellipse cx="6.8" cy="-169.4" rx="2.09" ry="2.85" fill="#2a1b14"/><circle cx="7.6" cy="-170.3" r="0.85" fill="#fff"/><path d="M3.8 -174.5 q3.0 -1.9 6.1 0.4" stroke="#9a968e" stroke-width="1.52" fill="none" stroke-linecap="round"/><ellipse cx="-10.5" cy="-163.3" rx="3.2" ry="2.1" fill="#e48a76" opacity=".55"/><ellipse cx="10.5" cy="-163.3" rx="3.2" ry="2.1" fill="#e48a76" opacity=".55"/><ellipse cx="0" cy="-165.2" rx="2.7" ry="2.1" fill="#c48a64" opacity=".7"/><circle cx="-0.8" cy="-166.0" r="0.76" fill="#fff" opacity=".6"/><path d="M-5.7 -159.9 q5.7 4.9 11.4 0" stroke="#8a3a2a" stroke-width="1.33" fill="none" stroke-linecap="round"/><ellipse cx="-4" cy="-184" rx="8" ry="4" fill="#fff" opacity=".22"/><path d="M-17.5 -182 C-20 -176 -20.5 -170 -19.5 -164 M17.5 -182 C20 -176 20.5 -170 19.5 -164" stroke="#d4d2cc" stroke-width="4.5" fill="none" stroke-linecap="round"/><g fill="#ffffff22" stroke="#2a2420" stroke-width="1.52"><rect x="-13.3" y="-175.1" width="12.9" height="11.4" rx="5.7"/><rect x="0.4" y="-175.1" width="12.9" height="11.4" rx="5.7"/></g><path d="M-0.4 -169.4 q0.4 -1.5 0.8 0 M-13.3 -169.4 l-9.5 -1.0 M13.3 -169.4 l9.5 -1.0" stroke="#2a2420" stroke-width="1.33" fill="none"/></g><!-- @einde roelof -->
+  </g></g>
+
+  <!-- de foto van 1921, aan de houten wand (na het einde) -->
+  <g id="za-foto">
+    <rect x="890" y="300" width="200" height="140" fill="#3a2a1e" stroke="#c9a24a" stroke-width="5" />
+    <rect x="902" y="312" width="176" height="116" fill="#d9c8a0" />
+    <path d="M902 390 h176 v38 h-176z" fill="#b8a47a" /><path d="M930 390 v-40 l30 -20 l30 20 v40z" fill="#8a7a5a" />
+    <g fill="#5a4a36"><circle cx="1010" cy="372" r="5" /><rect x="1006" y="377" width="8" height="18" /><circle cx="1030" cy="372" r="5" /><rect x="1026" y="377" width="8" height="18" /><path d="M1040 395 c0 -16 26 -18 30 -6 l6 -8 l4 4 l-4 10 v12 h-4 v-6 h-24 v6 h-4z" /></g>
+  </g>
+
+  <!-- donker zolang de feestverlichting niet brandt -->
+  <rect id="za-dark" width="1600" height="900" fill="#0a0814" opacity=".5" pointer-events="none" />
+  <rect width="1600" height="900" fill="url(#zaVign)" pointer-events="none" />
+
+  <g class="hits">
+    <rect class="hit" data-hs="lampjes" data-label="De feestverlichting" x="0" y="176" width="1160" height="60" fill="transparent" />
+    <rect class="hit" data-hs="koeien" data-label="Bordjes met namen op de balk" x="196" y="104" width="650" height="32" fill="transparent" />
+    <rect class="hit" data-hs="stalraam" data-label="Een klein stalraam" x="556" y="286" width="108" height="90" fill="transparent" />
+    <rect class="hit" data-hs="dakraamza" data-label="De dakramen" x="280" y="138" width="1040" height="36" fill="transparent" />
+    <rect class="hit" data-hs="quilt" data-label="Een quilt aan de muur" x="376" y="266" width="128" height="158" fill="transparent" />
+    <rect class="hit" data-hs="buffetkast" data-label="De witte buffetkast" x="686" y="310" width="150" height="350" fill="transparent" />
+    <rect class="hit" data-hs="tuindeur" data-label="De glazen deuren naar de tuin" x="1176" y="300" width="210" height="360" fill="transparent" />
+    <rect class="hit" data-hs="kachel" data-label="De zithoek met de kachel" x="1416" y="470" width="184" height="180" fill="transparent" />
+    <rect class="hit" data-hs="palen" data-label="Een zware houten paal" x="510" y="380" width="56" height="340" fill="transparent" />
+    <rect class="hit" data-hs="koffie" data-label="Het koffieapparaat" x="46" y="416" width="80" height="80" fill="transparent" />
+    <rect class="hit" data-hs="gastenboek" data-label="Het gastenboek" x="236" y="460" width="84" height="34" fill="transparent" />
+    <rect class="hit" data-hs="bar" data-label="De bar" x="20" y="500" width="340" height="200" fill="transparent" />
+    <rect class="hit" data-hs="tafel" data-label="De feesttafel" x="340" y="610" width="680" height="100" fill="transparent" />
+    <rect class="hit" data-hs="pool" data-label="De pooltafel" x="1064" y="660" width="352" height="100" fill="transparent" />
+    <rect class="hit" data-hs="grup" data-label="Een glazen plaat in de vloer" x="540" y="786" width="520" height="90" fill="transparent" />
+    <rect class="hit" data-hs="gasten" data-label="De gasten" x="380" y="430" width="420" height="160" fill="transparent" />
+    <rect class="hit" data-hs="ditty" data-label="Ditty" x="270" y="560" width="120" height="240" fill="transparent" />
+    <rect class="hit" data-hs="roelof" data-label="Roelof" x="1070" y="590" width="120" height="250" fill="transparent" />
+    <rect class="hit" id="hit-zapaardje" data-hs="paardje" data-label="Een houten hobbelpaardje" x="121" y="456" width="40" height="36" fill="transparent" />
+    <rect class="hit" id="hit-foto" data-hs="foto" data-label="De foto uit 1921" x="886" y="296" width="208" height="148" fill="transparent" />
+  </g>
+</svg>

@@ -1,0 +1,263 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="scene" id="sc-stal" viewBox="0 0 1600 900"
+  preserveAspectRatio="xMidYMid slice" aria-label="Kamer Paardenstal: een B&amp;B-kamer in de oude paardenstal">
+  <defs>
+    <pattern id="psWall" width="48" height="20" patternUnits="userSpaceOnUse">
+      <rect width="48" height="20" fill="#8e8a78" />
+      <rect x="1" y="1" width="46" height="8.5" fill="#999483" />
+      <rect x="-23" y="11" width="46" height="8.5" fill="#928e7c" />
+      <rect x="25" y="11" width="46" height="8.5" fill="#9b9786" />
+    </pattern>
+    <linearGradient id="psFloor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a6a48" />
+      <stop offset="1" stop-color="#5e4128" />
+    </linearGradient>
+    <linearGradient id="psBeam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a4232" />
+      <stop offset="1" stop-color="#3a2a1e" />
+    </linearGradient>
+    <linearGradient id="psDusk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a3a6a" />
+      <stop offset=".7" stop-color="#6a7aa8" />
+      <stop offset="1" stop-color="#c9a8a0" />
+    </linearGradient>
+    <linearGradient id="psWood" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b08a5a" />
+      <stop offset="1" stop-color="#7a5a36" />
+    </linearGradient>
+    <linearGradient id="psSpread" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c9a24a" />
+      <stop offset="1" stop-color="#8a6a28" />
+    </linearGradient>
+    <radialGradient id="psLampG" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#ffd58a" stop-opacity=".45" />
+      <stop offset="1" stop-color="#ffd58a" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="psTorch" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#fff2b0" stop-opacity=".9" />
+      <stop offset="1" stop-color="#fff2b0" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="psVign" cx=".5" cy=".45" r=".78">
+      <stop offset=".55" stop-color="#000" stop-opacity="0" />
+      <stop offset="1" stop-color="#000" stop-opacity=".55" />
+    </radialGradient>
+    <clipPath id="psWin1"><path d="M700 470 v-170 a60 60 0 0 1 120 0 v170z" /></clipPath>
+    <clipPath id="psWin2"><path d="M1120 470 v-170 a60 60 0 0 1 120 0 v170z" /></clipPath>
+  </defs>
+
+  <!-- muur van oude, geverfde stalstenen -->
+  <rect width="1600" height="900" fill="url(#psWall)" />
+  <rect width="1600" height="640" fill="#3a2a10" opacity=".08" />
+  <!-- zoldering met zware balken -->
+  <rect width="1600" height="110" fill="#d8d0bc" />
+  <g fill="url(#psBeam)">
+    <rect x="0" y="86" width="1600" height="30" />
+    <rect x="80" y="0" width="34" height="100" /><rect x="460" y="0" width="34" height="100" /><rect x="840" y="0" width="34" height="100" /><rect x="1220" y="0" width="34" height="100" />
+  </g>
+  <path d="M0 116 H1600" stroke="#2a1e14" stroke-width="3" />
+
+  <!-- de hanglamp -->
+  <g id="ps-lamp" class="ps-lamp">
+    <path d="M1000 100 V170" stroke="#2a2a2a" stroke-width="3" />
+    <path d="M970 170 h60 l-12 34 h-36z" fill="#2a2a2a" />
+    <ellipse cx="1000" cy="206" rx="14" ry="6" fill="#ffe8a8" />
+  </g>
+  <circle id="ps-lampglow" cx="1000" cy="230" r="240" fill="url(#psLampG)" pointer-events="none" />
+
+  <!-- de deur naar het erf, met een plank en een haak erboven -->
+  <g id="ps-door">
+    <rect x="60" y="280" width="200" height="380" fill="#5e3a1e" />
+    <rect x="76" y="296" width="168" height="364" fill="#7a4a26" stroke="#4a2a12" stroke-width="3" />
+    <path d="M76 470 h168" stroke="#4a2a12" stroke-width="4" />
+    <path d="M100 310 v150 M130 310 v150 M160 310 v150 M190 310 v150 M220 310 v150 M100 482 v170 M130 482 v170 M160 482 v170 M190 482 v170 M220 482 v170" stroke="#5e3418" stroke-width="2" />
+    <!-- de ijzeren grendel (zoals op de foto van de boerderij) -->
+    <path d="M196 470 h40 v-14 h-40z" fill="#2a2a2a" /><rect x="200" y="452" width="14" height="22" fill="#3a3a3a" /><circle cx="207" cy="463" r="3" fill="#6a6a6a" />
+    <path d="M90 380 h36 l8 -6 l8 6 h0" stroke="#2a2a2a" stroke-width="7" fill="none" stroke-linecap="round" />
+  </g>
+  <rect id="ps-plank" x="80" y="226" width="160" height="26" fill="url(#psWood)" stroke="#5a3a1e" stroke-width="2" />
+  <g id="ps-carve" font-family="Caveat, cursive" font-size="19" font-weight="700" fill="#4a2a12" text-anchor="middle">
+    <text x="160" y="245" textLength="148" lengthAdjust="spacingAndGlyphs">Kiek bie de schoft · H.</text>
+  </g>
+  <rect id="ps-plankcover" x="80" y="226" width="160" height="26" fill="url(#psWood)" stroke="#5a3a1e" stroke-width="2" />
+  <circle cx="160" cy="268" r="5" fill="#2a2a2a" />
+  <path d="M160 268 v8" stroke="#2a2a2a" stroke-width="3" />
+  <g id="ps-shoe">
+    <path d="M144 266 a16 16 0 1 0 32 0" fill="none" stroke="#6f767e" stroke-width="7" stroke-linecap="round" />
+    <g fill="#2a2a2a"><circle cx="148" cy="282" r="1.6" /><circle cx="172" cy="282" r="1.6" /><circle cx="152" cy="292" r="1.6" /><circle cx="168" cy="292" r="1.6" /></g>
+  </g>
+
+  <!-- de oude ruif en voerbak, en de stalbordjes erboven -->
+  <g id="ps-ruif">
+    <rect x="300" y="300" width="350" height="16" fill="url(#psWood)" stroke="#5a3a1e" stroke-width="2" />
+    <rect x="300" y="408" width="350" height="12" fill="url(#psWood)" stroke="#5a3a1e" stroke-width="2" />
+    <g stroke="#6a4a2a" stroke-width="8">
+      <path d="M320 316 L340 408 M360 316 L380 408 M400 316 L420 408 M440 316 L460 408 M480 316 L500 408 M520 316 L540 408 M560 316 L580 408 M600 316 L620 408" />
+    </g>
+    <path id="ps-dark" d="M320 318 h310 v88 h-310z" fill="#1a120a" opacity=".55" />
+    <g stroke="#d6b860" stroke-width="3" opacity=".9" fill="none">
+      <path d="M330 404 q20 -30 40 -6 q10 -24 30 -4 q16 -26 36 -2 q14 -20 34 0 q20 -26 40 -4 q14 -22 32 0 q18 -28 40 -6" />
+    </g>
+    <path d="M290 430 h370 l-20 70 h-330z" fill="#6a5a48" stroke="#3e3226" stroke-width="3" />
+    <path d="M300 436 h350" stroke="#857360" stroke-width="4" />
+  </g>
+  <g id="ps-bordjes" font-family="Fredoka, sans-serif" font-size="17" font-weight="700" text-anchor="middle" fill="#f3efe6">
+    <g><rect x="300" y="200" width="78" height="34" rx="4" fill="#2f4a3a" stroke="#c9a24a" stroke-width="2" /><text x="339" y="223">BLES</text></g>
+    <g><rect x="390" y="200" width="78" height="34" rx="4" fill="#2f4a3a" stroke="#c9a24a" stroke-width="2" /><text x="429" y="223">MINA</text></g>
+    <g><rect x="480" y="200" width="78" height="34" rx="4" fill="#2f4a3a" stroke="#c9a24a" stroke-width="2" /><text x="519" y="223">DIRK</text></g>
+    <rect id="ps-hole" x="574" y="202" width="74" height="30" rx="3" fill="#120c06" />
+    <g id="ps-tin" class="ps-tin"><rect x="588" y="210" width="44" height="20" rx="3" fill="#7a8a70" stroke="#4a5444" stroke-width="2" /><path d="M590 216 h40" stroke="#c9a24a" stroke-width="2" /></g>
+    <g id="ps-prins"><rect x="570" y="200" width="78" height="34" rx="4" fill="#2f4a3a" stroke="#c9a24a" stroke-width="2" /><text x="609" y="223">PRINS</text></g>
+  </g>
+  <circle id="ps-torchglow" cx="610" cy="218" r="70" fill="url(#psTorch)" pointer-events="none" />
+
+  <!-- boograam 1, met het hobbelpaardje (de ramen liggen op het oosten) -->
+  <g>
+    <g clip-path="url(#psWin1)">
+      <rect x="690" y="230" width="140" height="250" fill="url(#psDusk)" />
+      <circle class="ps-star" cx="730" cy="270" r="1.8" fill="#fff" /><circle class="ps-star b" cx="790" cy="300" r="1.5" fill="#fff" />
+      <circle cx="790" cy="400" r="20" fill="#fff4d0" opacity=".9" />
+      <path d="M690 440 h140 v40 h-140z" fill="#3a5a3a" />
+      <path d="M690 446 h140" stroke="#2a4a2a" stroke-width="3" />
+    </g>
+    <path d="M700 470 v-170 a60 60 0 0 1 120 0 v170z" fill="none" stroke="#e9e2d2" stroke-width="10" />
+    <path d="M760 240 v230 M700 330 h120 M700 400 h120" stroke="#e9e2d2" stroke-width="5" />
+    <path d="M760 240 L712 296 M760 240 L808 296" stroke="#e9e2d2" stroke-width="4" />
+    <rect x="684" y="468" width="152" height="14" fill="#cfc6b2" />
+    <g id="ps-paardje" class="ps-rock" transform="translate(760 466) scale(.42)" fill="#d9ad6e" stroke="#7a4a20" stroke-width="5">
+      <path d="M-56 -6 Q0 16 56 -6" fill="none" stroke-width="8" />
+      <path d="M-30 -44 L-38 0 M-16 -44 L-20 4 M16 -44 L20 4 M30 -44 L38 0" stroke-width="8" />
+      <path d="M-40 -60 C-40 -74 30 -76 34 -60 C36 -48 28 -40 0 -40 C-30 -40 -40 -46 -40 -60Z" />
+      <path d="M24 -64 C30 -86 38 -100 50 -104 C62 -106 70 -98 68 -90 C66 -84 58 -84 52 -84 C48 -76 44 -66 38 -58Z" />
+      <path d="M40 -100 C34 -96 30 -86 26 -74" stroke="#4a2a14" stroke-width="7" fill="none" />
+      <circle cx="56" cy="-96" r="3" fill="#2a1a0c" stroke="none" /><path d="M-10 -66 h22 v6 h-22z" fill="#c4302b" stroke="none" />
+    </g>
+    <path class="ps-curtain" d="M672 230 C690 300 680 420 690 500 L660 500 C652 420 666 300 650 230Z" fill="#c9a24a" opacity=".9" />
+    <path class="ps-curtain b" d="M848 230 C830 300 840 420 830 500 L860 500 C868 420 854 300 870 230Z" fill="#c9a24a" opacity=".9" />
+    <path d="M640 226 H880" stroke="#3a2a1a" stroke-width="5" />
+  </g>
+
+  <!-- de oude paardenfoto's en de stokmaat -->
+  <g id="ps-fotos">
+    <rect x="890" y="200" width="190" height="236" rx="4" fill="#5a4232" opacity=".25" />
+    <g stroke="#3a2a1a" stroke-width="5" fill="#d9c8a0">
+      <rect x="902" y="212" width="74" height="96" /><rect x="994" y="212" width="74" height="96" />
+      <rect x="902" y="326" width="74" height="96" /><rect x="994" y="326" width="74" height="96" />
+    </g>
+    <g fill="#6a5440" opacity=".85">
+      <path d="M914 296 l6 -26 c10 -10 30 -10 38 -4 l4 -16 l8 4 l-4 22 l2 20 h-6 l-2 -14 h-30 l-4 14z" />
+      <path d="M1006 296 l6 -24 c10 -8 30 -8 36 -2 l10 -10 l6 6 l-8 14 l0 16 h-6 l-2 -14 h-30 l-4 14z" />
+      <path d="M914 410 l6 -26 c10 -10 30 -10 38 -4 l6 -20 l6 4 l-4 26 l2 20 h-6 l-2 -14 h-30 l-4 14z" />
+      <path d="M1006 410 l6 -26 c10 -10 30 -10 38 -4 l10 12 l-6 4 l-8 -2 l2 16 h-6 l-2 -14 h-30 l-4 14z" />
+    </g>
+    <g font-family="Caveat, cursive" font-size="15" fill="#3a2a1a" text-anchor="middle">
+      <text x="939" y="304">Bles</text><text x="1031" y="304">Mina</text><text x="939" y="418">Dirk</text><text x="1031" y="418">Prins</text>
+    </g>
+    <!-- de stokmaat -->
+    <rect x="1088" y="200" width="16" height="250" fill="#e9dcb8" stroke="#6a4a2a" stroke-width="2" />
+    <g stroke="#6a4a2a" stroke-width="2"><path d="M1088 220 h8 M1088 240 h5 M1088 260 h8 M1088 280 h5 M1088 300 h8 M1088 320 h5 M1088 340 h8 M1088 360 h5 M1088 380 h8 M1088 400 h5 M1088 420 h8 M1088 440 h5" /></g>
+    <path d="M1096 196 l-14 -10 h28z" fill="#6a4a2a" />
+  </g>
+
+  <!-- boograam 2 -->
+  <g>
+    <g clip-path="url(#psWin2)">
+      <rect x="1110" y="230" width="140" height="250" fill="url(#psDusk)" />
+      <circle class="ps-star" cx="1150" cy="290" r="1.6" fill="#fff" /><circle class="ps-star c" cx="1212" cy="262" r="1.8" fill="#fff" />
+      <path d="M1110 440 h140 v40 h-140z" fill="#3a5a3a" />
+      <g class="ps-ree" fill="#5a3a26"><ellipse cx="1190" cy="436" rx="16" ry="7" /><path d="M1202 434 l8 -14 l6 2 l-6 14z" /><path d="M1180 440 v10 M1200 440 v10" stroke="#5a3a26" stroke-width="3" /></g>
+    </g>
+    <path d="M1120 470 v-170 a60 60 0 0 1 120 0 v170z" fill="none" stroke="#e9e2d2" stroke-width="10" />
+    <path d="M1180 240 v230 M1120 330 h120 M1120 400 h120" stroke="#e9e2d2" stroke-width="5" />
+    <path d="M1180 240 L1132 296 M1180 240 L1228 296" stroke="#e9e2d2" stroke-width="4" />
+    <rect x="1104" y="468" width="152" height="14" fill="#cfc6b2" />
+    <g><path d="M1130 466 l4 -22 h18 l4 22z" fill="#c4302b" /><path d="M1144 444 c-6 -16 6 -26 10 -34 M1144 444 c6 -12 14 -14 18 -22" stroke="#3f7a2a" stroke-width="2" fill="none" /></g>
+    <path class="ps-curtain" d="M1092 230 C1110 300 1100 420 1110 500 L1080 500 C1072 420 1086 300 1070 230Z" fill="#c9a24a" opacity=".9" />
+    <path class="ps-curtain b" d="M1268 230 C1250 300 1260 420 1250 500 L1280 500 C1288 420 1274 300 1290 230Z" fill="#c9a24a" opacity=".9" />
+    <path d="M1060 226 H1300" stroke="#3a2a1a" stroke-width="5" />
+  </g>
+
+  <!-- het schilderij van een Schotse hooglander -->
+  <g id="ps-koe">
+    <rect x="1370" y="240" width="170" height="120" fill="#c9a24a" stroke="#6a4a2a" stroke-width="6" />
+    <rect x="1380" y="250" width="150" height="100" fill="#9ab6c4" />
+    <path d="M1380 320 q40 -16 80 -4 q40 10 70 -6 v40 h-150z" fill="#6a8a4a" />
+    <path d="M1420 330 c0 -30 50 -34 60 -10 l20 -6 c10 0 10 16 0 20 l-16 4 l0 18 h-8 v-10 h-40 v10 h-8 v-14 c-8 -2 -8 -8 -8 -12z" fill="#b8642a" />
+    <path d="M1484 312 q-14 -8 -10 -16 M1494 312 q14 -8 12 -16" stroke="#e9dcb8" stroke-width="4" fill="none" />
+    <path d="M1478 318 c4 6 18 6 22 0" stroke="#8a4a1a" stroke-width="4" fill="none" />
+  </g>
+
+  <!-- de vloer -->
+  <path d="M0 640 H1600 V900 H0Z" fill="url(#psFloor)" />
+  <g stroke="#4a321e" stroke-width="2" opacity=".6">
+    <path d="M0 680 H1600 M0 730 H1600 M0 790 H1600 M0 860 H1600" />
+    <path d="M300 640 L200 900 M700 640 L660 900 M1100 640 L1160 900 M500 680 L470 730 M900 730 L910 790 M1300 790 L1330 860" />
+  </g>
+
+  <!-- het bed (extra lang, met een okergele sprei) -->
+  <g id="ps-bed">
+    <rect x="1290" y="430" width="330" height="200" rx="10" fill="#4a3a30" />
+    <rect x="1300" y="440" width="310" height="70" rx="8" fill="#6a5444" />
+    <path d="M1290 600 L1180 900 H1600 V600Z" fill="#f2ead8" />
+    <path d="M1300 560 L1210 900 H1600 V560Z" fill="url(#psSpread)" />
+    <g stroke="#a8862e" stroke-width="2" opacity=".7"><path d="M1290 620 L1610 620 M1270 680 L1610 680 M1250 750 L1610 750 M1230 830 L1610 830" /></g>
+    <ellipse cx="1370" cy="540" rx="58" ry="26" fill="#f6f0e2" stroke="#d9cbb2" stroke-width="2" />
+    <ellipse cx="1520" cy="540" rx="58" ry="26" fill="#f6f0e2" stroke="#d9cbb2" stroke-width="2" />
+    <!-- welkomstkaart van Ditty op het bed -->
+    <g id="ps-kaart" transform="rotate(-8 1420 640)">
+      <rect x="1384" y="616" width="74" height="50" rx="3" fill="#fffaf0" stroke="#c9b88a" stroke-width="1.5" />
+      <path d="M1394 630 h40 M1394 640 h52 M1394 650 h30" stroke="#8a5a8e" stroke-width="2" />
+      <circle cx="1446" cy="628" r="5" fill="#e2687a" />
+    </g>
+  </g>
+  <!-- nachtkastje met de wekkerradio -->
+  <g id="ps-radio">
+    <rect x="1192" y="520" width="90" height="120" fill="#e9e2d2" stroke="#9a9078" stroke-width="2" />
+    <path d="M1196 580 h82" stroke="#9a9078" stroke-width="2" /><circle cx="1237" cy="560" r="3" fill="#9a9078" />
+    <rect x="1200" y="490" width="74" height="30" rx="6" fill="#2a2a2e" />
+    <rect x="1206" y="496" width="40" height="18" rx="2" fill="#0a1a10" />
+    <text id="ps-time" x="1226" y="510" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" fill="#6aff8a">21:12</text>
+    <circle cx="1260" cy="505" r="7" fill="#444" />
+    <g id="ps-notes" fill="#f3efe6" opacity="0"><text x="1270" y="480" font-size="20">♪</text></g>
+  </g>
+
+  <!-- tafeltje met twee stoelen, en een rieten stoel -->
+  <g id="ps-tafel">
+    <rect x="390" y="620" width="240" height="18" fill="url(#psWood)" stroke="#5a3a1e" stroke-width="2" />
+    <path d="M404 638 V800 M616 638 V800" stroke="#7a5a36" stroke-width="12" />
+    <g><path d="M496 620 c-4 -20 -2 -30 4 -40 h20 c6 10 8 20 4 40z" fill="#e9eef0" opacity=".85" stroke="#b8c4ca" /><circle cx="500" cy="568" r="10" fill="#e2687a" /><circle cx="518" cy="562" r="11" fill="#d6242f" /><circle cx="508" cy="552" r="9" fill="#e2687a" /></g>
+    <g fill="#3a2a22">
+      <path d="M330 560 h40 v80 h-40z M330 640 h60 v12 h-60z M334 652 v150 M384 652 v150" stroke="#3a2a22" stroke-width="8" />
+      <path d="M690 560 h-40 v80 h40z M690 640 h-60 v12 h60z M686 652 v150 M636 652 v150" stroke="#3a2a22" stroke-width="8" />
+    </g>
+  </g>
+  <g id="ps-rieten">
+    <path d="M880 560 C880 520 1030 520 1030 560 L1040 690 H870Z" fill="#b8915a" stroke="#7a5a30" stroke-width="3" />
+    <g stroke="#8a6a3a" stroke-width="2" opacity=".7"><path d="M890 580 h140 M886 610 h148 M882 640 h156 M878 670 h164" /><path d="M910 540 v150 M950 530 v160 M990 530 v160 M1020 540 v150" /></g>
+    <ellipse cx="955" cy="646" rx="70" ry="20" fill="#3a3a52" />
+    <rect x="910" y="566" width="90" height="70" rx="14" fill="#f2ead8" stroke="#d9cbb2" stroke-width="2" />
+    <path d="M876 690 L880 760 M1036 690 L1032 760" stroke="#7a5a30" stroke-width="8" />
+  </g>
+
+  <!-- de zaklamp schijnt in de ruif (zichtbaar zolang je hem gebruikt) -->
+  <rect width="1600" height="900" fill="url(#psVign)" pointer-events="none" />
+
+  <!-- klikvlakken -->
+  <g class="hits">
+    <rect class="hit" data-hs="uitstal" data-label="De staldeur: naar het erf" x="76" y="296" width="168" height="364" fill="transparent" />
+    <rect class="hit" data-hs="haak" data-label="Een haak boven de deur" x="130" y="256" width="60" height="44" fill="transparent" />
+    <rect class="hit" data-hs="plank" data-label="Een oude plank boven de deur" x="80" y="222" width="160" height="34" fill="transparent" />
+    <rect class="hit" data-hs="ruif" data-label="De oude ruif" x="300" y="300" width="350" height="200" fill="transparent" />
+    <rect class="hit" data-hs="bordjes" data-label="De stalbordjes" x="296" y="196" width="270" height="44" fill="transparent" />
+    <rect class="hit" data-hs="prins" data-label="Het stalbordje van Prins" x="566" y="196" width="86" height="44" fill="transparent" />
+    <rect class="hit" id="hit-paardje" data-hs="paardje" data-label="Het hobbelpaardje" x="726" y="410" width="70" height="62" fill="transparent" />
+    <rect class="hit" data-hs="raam1" data-label="Het boograam" x="700" y="240" width="120" height="166" fill="transparent" />
+    <rect class="hit" data-hs="fotos" data-label="Oude paardenfoto's en een stokmaat" x="896" y="196" width="212" height="250" fill="transparent" />
+    <rect class="hit" data-hs="raam2" data-label="Het andere boograam" x="1120" y="240" width="120" height="230" fill="transparent" />
+    <rect class="hit" data-hs="hooglander" data-label="Een schilderij van een koe" x="1366" y="236" width="178" height="128" fill="transparent" />
+    <rect class="hit" data-hs="bed" data-label="Het bed" x="1300" y="440" width="300" height="160" fill="transparent" />
+    <rect class="hit" data-hs="welkom" data-label="Een kaartje op het bed" x="1380" y="608" width="84" height="64" fill="transparent" />
+    <rect class="hit" data-hs="wekker" data-label="De wekkerradio" x="1196" y="486" width="84" height="38" fill="transparent" />
+    <rect class="hit" data-hs="lamp" data-label="De lamp" x="966" y="96" width="68" height="114" fill="transparent" />
+    <rect class="hit" data-hs="bloemen" data-label="Bloemen op tafel" x="490" y="540" width="44" height="80" fill="transparent" />
+    <rect class="hit" data-hs="rieten" data-label="De rieten stoel" x="870" y="520" width="170" height="170" fill="transparent" />
+  </g>
+</svg>

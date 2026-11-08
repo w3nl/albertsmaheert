@@ -1,0 +1,40 @@
+# Speelt de escaperoom (src/escaperoom) helemaal uit in een echte browser, bij elke wijziging aan het spel.
+name: Escaperoom
+
+on:
+  push:
+    branches: [main]
+    paths: ['src/escaperoom/**', 'tests/escaperoom/**', 'playwright.config.cjs', 'package*.json', '.github/workflows/escaperoom.yml']
+  pull_request:
+    paths: ['src/escaperoom/**', 'tests/escaperoom/**', 'playwright.config.cjs', 'package*.json', '.github/workflows/escaperoom.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  play:
+    name: Speel alle hoofdstukken
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Installeer de afhankelijkheden
+        run: npm ci
+      - name: Installeer de browser
+        run: npx playwright install --with-deps chromium
+      - name: Bouw de site (de escaperoom moet ongewijzigd in _site staan)
+        run: npm run validate && diff -r src/escaperoom _site/escaperoom
+      - name: Speel het spel
+        run: npm run test:escaperoom
+      - name: Bewaar het testrapport
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14
