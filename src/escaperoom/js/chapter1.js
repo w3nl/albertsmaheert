@@ -356,6 +356,11 @@ function win1(){
 
 /* ---------- grapjes: dingen die bewegen als je erop klikt (poke() in core.js) ---------- */
 Object.assign(H, {
+  haas(){
+    S.ach.haas = true; save(); poke('#' + { erf: 'ef', dak: 'dk', tuin: 'tn' }[S.scene] + '-haas', 'g-jump', 'Hop!', 700);
+    say(S.scene === 'dak' ? "Een haas op het land, in de verte. Hij zit even stil, zijn lange oren omhoog… en schiet dan zigzaggend weg over de akker."
+      : ["Een haas! Hij zit even stil, met zijn lange oren recht omhoog, en huppelt dan verder.", "Hazen zie je hier vaak, net als reeën en egels. Ze zijn sneller dan je denkt: tot wel 70 kilometer per uur."]);
+  },
   ramen(){ poke('#ef-luiken', 'g-shake', 'Klepper!', 300); say("Witte ramen met kleine ruitjes en groene luiken. De luiken klepperen even in de wind. In de vensterbank staan bloemen: Ditty houdt van bloemen, dat zie je overal."); },
   schoorsteen(){ poke('#ef-house .ef-smoke', 'g-pop', 'Puf!', 200); say("Er komt een dun rookpluimpje uit de schoorsteen. Er staat vast koffie, of een pan soep."); },
   voordeur(){

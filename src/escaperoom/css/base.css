@@ -212,8 +212,9 @@ label.opt{display:flex;flex-direction:column;gap:2px;cursor:default}
 @keyframes rlegStep{0%,100%{transform:rotate(14deg)}50%{transform:rotate(-14deg)}}
 .walking .rleg{transform-box:fill-box;transform-origin:50% 0%;animation:rlegStep .8s ease-in-out infinite}
 .walking .rleg.b{animation-delay:-.4s}
-/* Heen en weer lopen: naar rechts, omdraaien, terug, omdraaien. Op een groep zonder eigen transform-attribuut. */
-@keyframes reeWalk{0%{transform:translateX(0) scaleX(1)}46%{transform:translateX(var(--walk,160px)) scaleX(1)}50%{transform:translateX(var(--walk,160px)) scaleX(-1)}96%{transform:translateX(0) scaleX(-1)}100%{transform:translateX(0) scaleX(1)}}
+/* Heen en weer lopen: een dier kijkt altijd de kant op waar het heen loopt. De tekening kijkt naar rechts; --walk is de
+   afstand (negatief = eerst naar links) en --dir moet dan -1 zijn, zodat het dier eerst naar links kijkt. */
+@keyframes reeWalk{0%{transform:translateX(0) scaleX(var(--dir,1))}46%{transform:translateX(var(--walk,160px)) scaleX(var(--dir,1))}50%{transform:translateX(var(--walk,160px)) scaleX(calc(-1 * var(--dir,1)))}96%{transform:translateX(0) scaleX(calc(-1 * var(--dir,1)))}100%{transform:translateX(0) scaleX(var(--dir,1))}}
 .ree-walk{transform-box:fill-box;transform-origin:50% 50%;animation:reeWalk var(--walkt,22s) linear infinite}
 
 /* Grapjes: dingen die bewegen als je erop klikt (poke() in js/core.js). */
@@ -234,3 +235,6 @@ label.opt{display:flex;flex-direction:column;gap:2px;cursor:default}
 .g-shake{animation:gShake .5s linear 2}
 .g-tilt{transform-origin:0% 100%;animation:gTilt 1.4s ease-in-out}
 .g-glow{animation:gGlow 1.2s ease-in-out}
+/* Een haas huppelt: kleine sprongetjes terwijl hij heen en weer gaat (.ree-walk eromheen) */
+@keyframes haasHop{0%,100%{transform:translateY(0) scaleY(1)}35%{transform:translateY(-14px) scaleY(1.05)}65%{transform:translateY(-4px)}80%{transform:translateY(0) scaleY(.92)}}
+.haas-hop{transform-box:fill-box;transform-origin:50% 100%;animation:haasHop .55s ease-in-out infinite}

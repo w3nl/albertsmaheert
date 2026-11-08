@@ -110,7 +110,7 @@ const fmt = s => String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 
 setInterval(() => { if(S.started && !chapterDone() && $('#title').hidden && document.visibilityState === 'visible'){ S.t++; $('#timer').textContent = fmt(S.t); if(S.t % 5 === 0) save(); } }, 1000);
 
 /* ---------- prestaties (verborgen extraatjes) ---------- */
-const ACH = [['paardje', 'Raad gevraagd aan het hobbelpaardje'], ['ree', 'Een ree gezien'], ['moi', 'Moi gezegd'], ['koffie', 'Drie kopjes koffie van Ditty'],
+const ACH = [['paardje', 'Raad gevraagd aan het hobbelpaardje'], ['ree', 'Een ree gezien'], ['haas', 'Een haas zien huppelen'], ['moi', 'Moi gezegd'], ['koffie', 'Drie kopjes koffie van Ditty'],
   ['martini', 'De Martinitoren gespot'], ['bed', 'Op een extra lang bed gesprongen'], ['zwaluw', 'De zwaluwen geteld'],
   ['tractor', 'De oude trekker laten tuffen'], ['scheef', 'De scheve toren van Bedum gezien'],
   ['pool', 'Een bal in één keer gepot'], ['trampoline', 'Gesprongen op de trampoline'], ['gastenboek', 'Het gastenboek getekend']];
