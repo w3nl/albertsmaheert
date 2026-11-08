@@ -17,3 +17,5 @@
 @keyframes tnLook{0%,100%{transform:translateY(0)}30%,70%{transform:translateY(-6px)}}
 #tn-ree.look{animation:tnLook 2.4s ease-in-out}
 #tn-reehead{transform-box:fill-box;transform-origin:10% 90%;animation:efGraze 8s ease-in-out infinite}
+@keyframes tnEgel{0%{transform:translateX(0)}50%{transform:translateX(120px)}50.01%{transform:translateX(120px) scaleX(-1)}100%{transform:translateX(0) scaleX(-1)}}
+.tn-egelwalk{transform-box:fill-box;transform-origin:50% 50%;animation:tnEgel 30s linear infinite}

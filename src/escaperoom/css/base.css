@@ -207,3 +207,30 @@ a.btn{text-decoration:none;display:inline-block}
 .opt select{margin-top:6px;width:100%;font:inherit;font-size:14px;padding:5px 6px;border-radius:4px;border:1px solid var(--line);background:#120c08;color:var(--paper)}
 label.opt{display:flex;flex-direction:column;gap:2px;cursor:default}
 .dial small{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+
+/* De ree loopt: elke poot (.rleg uit tools/escaperoom/personages.py) zwaait vanuit de heup. Zet "walking" op een ouder. */
+@keyframes rlegStep{0%,100%{transform:rotate(14deg)}50%{transform:rotate(-14deg)}}
+.walking .rleg{transform-box:fill-box;transform-origin:50% 0%;animation:rlegStep .8s ease-in-out infinite}
+.walking .rleg.b{animation-delay:-.4s}
+/* Heen en weer lopen: naar rechts, omdraaien, terug, omdraaien. Op een groep zonder eigen transform-attribuut. */
+@keyframes reeWalk{0%{transform:translateX(0) scaleX(1)}46%{transform:translateX(var(--walk,160px)) scaleX(1)}50%{transform:translateX(var(--walk,160px)) scaleX(-1)}96%{transform:translateX(0) scaleX(-1)}100%{transform:translateX(0) scaleX(1)}}
+.ree-walk{transform-box:fill-box;transform-origin:50% 50%;animation:reeWalk var(--walkt,22s) linear infinite}
+
+/* Grapjes: dingen die bewegen als je erop klikt (poke() in js/core.js). */
+@keyframes gWiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-7deg)}40%{transform:rotate(6deg)}60%{transform:rotate(-4deg)}80%{transform:rotate(2deg)}}
+@keyframes gJump{0%,100%{transform:translateY(0)}35%{transform:translateY(-22px)}60%{transform:translateY(0)}78%{transform:translateY(-8px)}}
+@keyframes gSpin{to{transform:rotate(360deg)}}
+@keyframes gPop{0%,100%{transform:scale(1)}40%{transform:scale(1.18)}70%{transform:scale(.94)}}
+@keyframes gSwing{0%,100%{transform:rotate(0)}20%{transform:rotate(12deg)}45%{transform:rotate(-9deg)}70%{transform:rotate(5deg)}88%{transform:rotate(-2deg)}}
+@keyframes gShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+@keyframes gTilt{0%,100%{transform:rotate(0)}30%,70%{transform:rotate(9deg)}}
+@keyframes gGlow{0%,100%{opacity:1}30%{opacity:.25}60%{opacity:1}80%{opacity:.4}}
+.g-wiggle,.g-jump,.g-spin,.g-pop,.g-swing,.g-shake,.g-tilt{transform-box:fill-box;transform-origin:50% 50%}
+.g-wiggle{animation:gWiggle .8s ease-in-out}
+.g-jump{animation:gJump .7s ease-out}
+.g-spin{animation:gSpin 1s ease-in-out}
+.g-pop{animation:gPop .5s ease-out}
+.g-swing{transform-origin:50% 0%;animation:gSwing 1.6s ease-in-out}
+.g-shake{animation:gShake .5s linear 2}
+.g-tilt{transform-origin:0% 100%;animation:gTilt 1.4s ease-in-out}
+.g-glow{animation:gGlow 1.2s ease-in-out}

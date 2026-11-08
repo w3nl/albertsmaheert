@@ -296,3 +296,27 @@ function win2(){
   S.f.out2 = true; save(); applyVisuals(); chord([523,659,784,1046,1318], 120);
   showWin();
 }
+
+/* ---------- grapjes op de hooizolder en in de kamers ---------- */
+Object.assign(H, {
+  vork(){ poke('#zl-vork', 'g-swing', null, 400); say(["Een oude hooivork met drie tanden. Hij zwaait aan zijn spijker.", "Roelof heeft hem laten hangen, als herinnering. Of als kapstok. Dat weet je bij Roelof nooit."]); },
+  baal(){ poke('#zl-baal', 'g-jump', 'Prik!'); say("Je gaat op de baal stro zitten. Au, het prikt! Een echte hooizolder zonder stro zou ook raar zijn."); },
+  folders(){ poke('#zl-koelkast', 'g-shake', 'Brrr', 200); say(["Een koelkastje voor de gasten, met koude drankjes. Bovenop een rek vol folders: fietsroutes, musea, de borgen, de scheve toren van Bedum.", "Je pakt de folder van de B&B."], () => openFolder()); },
+  gordijnen(){ poke('#km-gordijnen', 'g-shake', 'Swoesj'); say("Paarse gordijnen voor het raam van de dakkapel. Als ze dicht zijn, slaap je heerlijk donker. Als ze open zijn, zie je de stad."); },
+  kmmartini(){ S.ach.martini = true; save(); poke('#km-martini', 'g-glow', "d'Olle Grieze"); say(["De Martinitoren, de hoogste toren van de stad Groningen. Hemelsbreed 7,5 kilometer hiervandaan.", "De eerste huizen van de stad liggen zelfs maar 4 kilometer weg. En toch zie je hier vooral weilanden."]); },
+  kmree(){ S.ach.ree = true; save(); poke('#km-ree', 'g-jump', null, 900); say("Een ree loopt rustig door de wei, vlak achter de tuin. Hij kijkt even op naar het raam… en loopt dan verder."); },
+  dakraam(){ S.ach.martini = true; save(); say(["Door het raam van de dakkapel kijk je naar het zuiden, naar de stad Groningen: de tuin, een kale boom, de weilanden, 4 kilometer verderop de eerste huizen van de stad, en 7,5 kilometer weg de Martinitoren.", "Alle kamers op de hooizolder liggen aan de zuidkant. Zon de hele dag!"]); },
+  kmrieten(){ poke('#km-rieten', 'g-jump', 'Kraak'); beep(180, .2, 'triangle', .03); say("Een rieten stoel bij het raam. Kraak. Hier zou je een boek kunnen lezen. Of de reeën tellen."); },
+  prent(){
+    poke('#km-print', 'g-tilt');
+    if(!S.f.prenten) return say("Hier hing een prent: je ziet een lichtere plek op het behang. Roelof heeft vanochtend alle prenten van de muur gehaald om de lijstjes te poetsen.");
+    const k = S.kamer || 'thedema';
+    say({ thedema: ["Borg Thedema, getekend in 1622: een steenhuis met een hoge, ronde toren. De prent hangt een beetje scheef; je zet hem recht.", "Deze boerderij hoorde vroeger bij borg Thedema. Een borg was het grote huis van een rijke familie in Groningen."],
+          alma: ["Borg Alma, te Noordwolde: een borg met een brug over de gracht.", "Bijna alle Groninger borgen zijn verdwenen. Hun namen leven voort, ook in deze kamers."],
+          folkerda: ["Borg Folkerda, te Dijkshorn bij Bedum: drie trapgevels naast elkaar, en een spitse toren."] }[k]);
+  }
+});
+const kmbed0 = H.kmbed;
+H.kmbed = () => { poke('#km-bed', 'g-jump'); kmbed0(); };
+const katrol0 = H.katrol;
+H.katrol = () => { if(S.f.katrol){ poke('#zl-katrol', 'g-spin', 'Piep!', 900); } katrol0(); };

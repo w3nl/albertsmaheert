@@ -99,6 +99,12 @@ Hoofdstuk 4, zaterdagavond (zaal en tuin):
 
 Prestaties (`ACH`): `paardje`, `ree`, `moi` (het welkomsbord 2×, of het spreukenbord), `koffie` (3× bij Ditty of het koffieapparaat), `martini`, `bed` (3× springen), `zwaluw` (3×), `tractor`, `scheef`, `pool`, `trampoline`, `gastenboek`.
 
+## Grapjes en beweging
+
+- **Elk klikvlak doet iets.** Naast de puzzels zijn er in elke kamer veel dingen die bewegen, geluid maken en vertellen wat ze zijn (de Martinitoren, de scheve toren van Bedum, de reeën, de geitjes, de trekker…). `poke(sel, klasse, woordje, toon)` in `core.js` laat iets kort bewegen met een klasse uit `css/base.css` (`g-wiggle`, `g-jump`, `g-spin`, `g-pop`, `g-swing`, `g-shake`, `g-tilt`, `g-glow`), met een woordje erboven (`gagText`). Gebruik het op een groep **zonder** eigen `transform`-attribuut, en niet op iets dat al een eigen animatieklasse heeft (die wint).
+- **De ree loopt** (`.ree-walk.walking`, met `--walk` en `--walkt` voor afstand en tijd): over het erf, door de wei achter het raam van de kamers, op het land vanaf het dak en door de tuin. De poten (`.rleg`) stappen. Verder lopen er een egel door de tuin en geitjes in het veld, en wapperen de Groninger vlag en de gordijnen.
+- Een klikvlak dat in twee hoofdstukken bestaat (`wolk`, `bomen`, `roelof`, `ditty`, `paardje`) bewaart de handler van het eerdere hoofdstuk en geeft door als de kamer niet de zijne is.
+
 ## Valkuilen
 
 Alles uit de blueprint en het Sinterklaas-spel geldt. Vooral:

@@ -94,15 +94,42 @@
   <!-- het schuine dak rechts -->
   <path d="M1120 0 L1600 0 L1600 420Z" fill="url(#kmSlope)" />
   <path d="M1120 0 L1600 420" stroke="#c9c0ae" stroke-width="4" />
-  <!-- een dakraam in de schuinte, met uitzicht naar het zuiden -->
-  <g id="km-dakraam">
-    <path d="M1330 70 L1470 70 L1560 250 L1420 250Z" fill="url(#kmSky)" stroke="#f4efe4" stroke-width="12" />
-    <path d="M1390 180 L1540 180 L1560 250 L1420 250Z" fill="#7fae5a" />
-    <path d="M1382 160 L1530 160 L1540 180 L1390 180Z" fill="#a7c47a" />
-    <g fill="#6a7a8a"><rect x="1462" y="138" width="5" height="24" /><path d="M1462 138 l2.5 -9 l2.5 9z" /></g>
-    <g fill="#5e8a46"><ellipse cx="1410" cy="162" rx="22" ry="8" /><ellipse cx="1520" cy="160" rx="18" ry="7" /></g>
-    <g class="km-cloud" fill="#fff" opacity=".85"><ellipse cx="1420" cy="104" rx="26" ry="7" /><ellipse cx="1434" cy="98" rx="14" ry="7" /></g>
-    <path d="M1400 70 L1490 250" stroke="#f4efe4" stroke-width="6" />
+  <!-- de dakkapel: een raam met witte ruitjes en paarse gordijnen, met uitzicht naar het zuiden, op de stad Groningen -->
+  <g id="km-dakkapel">
+    <!-- de nis in de schuinte -->
+    <path d="M1236 120 H1544 V420 H1236Z" fill="#efe9de" />
+    <path d="M1236 120 L1262 146 V402 L1236 420Z" fill="#ddd5c6" />
+    <path d="M1544 120 L1518 146 V402 L1544 420Z" fill="#e6dfd2" />
+    <path d="M1236 120 H1544 L1518 146 H1262Z" fill="#f6f2ea" />
+    <clipPath id="kmView"><rect x="1272" y="156" width="236" height="230" /></clipPath>
+    <g clip-path="url(#kmView)">
+      <rect x="1272" y="156" width="236" height="230" fill="url(#kmSky)" />
+      <g class="km-cloud" fill="#fff" opacity=".9"><ellipse cx="1320" cy="196" rx="30" ry="8" /><ellipse cx="1336" cy="190" rx="16" ry="8" /></g>
+      <!-- de rand van de stad (4 km) en de Martinitoren (7,5 km) -->
+      <g fill="#8a98a8"><rect x="1300" y="292" width="60" height="16" /><rect x="1372" y="296" width="44" height="12" /><rect x="1440" y="290" width="50" height="18" /></g>
+      <g id="km-martini" fill="#6a7a8a"><rect x="1462" y="252" width="7" height="56" /><rect x="1460" y="266" width="11" height="3" /><path d="M1462 252 l3.5 -12 l3.5 12z" /></g>
+      <path d="M1272 306 H1508 V386 H1272Z" fill="#8fb45a" />
+      <path d="M1272 306 H1508" stroke="#6a8a46" stroke-width="3" />
+      <g fill="#5e8a46"><ellipse cx="1296" cy="304" rx="22" ry="9" /><ellipse cx="1480" cy="304" rx="26" ry="9" /></g>
+      <g fill="#7fae5a"><path d="M1272 340 H1508 V386 H1272Z" /></g>
+      <!-- een kale boom vlak voor het raam, zoals op de foto -->
+      <path d="M1300 386 V330 M1300 350 L1284 330 M1300 342 L1318 322 M1290 336 L1280 318 M1312 328 L1322 310" stroke="#5a4a3a" stroke-width="4" fill="none" stroke-linecap="round" />
+      <!-- de ree loopt door de wei -->
+      <g id="km-ree" class="km-reewalk"><g class="ree-walk walking"><g transform="translate(1350 352)">
+        <!-- @personage ree --><g transform="translate(0 0) scale(0.3 0.3)"><path class="rleg a" d="M-32 -50 L-36 -18 L-34 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path class="rleg b" d="M-24 -48 L-22 -18 L-26 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path class="rleg b" d="M24 -50 L26 -20 L24 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path class="rleg a" d="M32 -50 L36 -20 L34 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-42 -62 C-44 -76 -24 -82 0 -80 C22 -80 36 -74 40 -62 C42 -50 32 -44 0 -44 C-28 -44 -42 -48 -42 -62Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.4"/><path d="M-30 -50 C-10 -46 14 -46 30 -50" stroke="#e8d2b4" stroke-width="5" fill="none" opacity=".7"/><ellipse cx="-42" cy="-64" rx="7" ry="9" fill="#f6efe4"/><g><path d="M30 -58 C34 -72 38 -84 46 -92 L58 -86 C52 -78 48 -66 44 -54Z" fill="#a8714a"/><path d="M44 -94 C50 -100 62 -100 70 -94 C76 -90 78 -84 74 -82 C66 -80 58 -82 52 -80 C46 -82 42 -88 44 -94Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.4"/><ellipse cx="75" cy="-84" rx="3" ry="2.4" fill="#2a1a10"/><circle cx="58" cy="-92" r="2.6" fill="#1a100a"/><circle cx="59" cy="-93" r=".8" fill="#fff"/><path d="M46 -96 C40 -110 44 -114 50 -106Z M52 -98 C52 -114 58 -114 58 -102Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.2"/><path d="M47 -104 C45 -108 46 -110 48 -106" stroke="#e8b8a0" stroke-width="2"/></g></g><!-- @einde ree -->
+      </g></g></g>
+    </g>
+    <!-- het kozijn: drie bij twee ruitjes -->
+    <rect x="1268" y="152" width="244" height="238" fill="none" stroke="#f8f6f0" stroke-width="10" />
+    <path d="M1349 152 V390 M1430 152 V390 M1268 268 H1512" stroke="#f8f6f0" stroke-width="7" />
+    <rect x="1256" y="388" width="268" height="16" fill="#f8f6f0" stroke="#d9d0bc" stroke-width="1.5" />
+    <!-- de paarse gordijnen -->
+    <g id="km-gordijnen">
+      <path class="km-curtain" d="M1244 130 C1262 220 1250 330 1262 420 L1230 420 C1224 330 1236 220 1222 130Z" fill="#5a2a5a" />
+      <path class="km-curtain b" d="M1536 130 C1518 220 1530 330 1518 420 L1550 420 C1556 330 1544 220 1558 130Z" fill="#5a2a5a" />
+      <path d="M1236 150 C1244 250 1240 330 1248 410 M1546 150 C1538 250 1542 330 1534 410" stroke="#7a3a7a" stroke-width="3" fill="none" />
+      <path d="M1214 128 H1566" stroke="#3a2a1a" stroke-width="5" stroke-linecap="round" />
+    </g>
   </g>
 
   <!-- de vloer -->
@@ -220,7 +247,11 @@
     <rect class="hit" data-hs="luchter" data-label="De kroonluchter" x="1120" y="150" width="80" height="120" fill="transparent" />
     <rect class="hit" data-hs="kmbed" data-label="Het bed" x="940" y="420" width="460" height="140" fill="transparent" />
     <rect class="hit" id="hit-printsbed" data-hs="prenten" data-label="Drie prenten op het bed" x="970" y="630" width="420" height="130" fill="transparent" />
-    <rect class="hit" data-hs="dakraam" data-label="Het dakraam" x="1330" y="70" width="230" height="180" fill="transparent" />
+    <rect class="hit" data-hs="dakraam" data-label="Het raam: uitzicht op de stad Groningen" x="1272" y="156" width="236" height="140" fill="transparent" />
+    <rect class="hit" data-hs="kmmartini" data-label="De Martinitoren, 7,5 km verderop" x="1450" y="234" width="28" height="78" fill="transparent" />
+    <rect class="hit" data-hs="kmree" data-label="Een ree in de wei" x="1272" y="310" width="236" height="76" fill="transparent" />
+    <rect class="hit" data-hs="gordijnen" data-label="De paarse gordijnen" x="1216" y="126" width="48" height="296" fill="transparent" />
+    <rect class="hit" data-hs="gordijnen" data-label="De paarse gordijnen" x="1516" y="126" width="48" height="296" fill="transparent" />
     <rect class="hit" data-hs="kmlamp" data-label="Een nachtlampje" x="840" y="430" width="80" height="90" fill="transparent" />
     <rect class="hit" id="hit-rieten" data-hs="kmrieten" data-label="Een rieten stoel" x="712" y="566" width="146" height="154" fill="transparent" />
     <rect class="hit" id="hit-ditty" data-hs="ditty" data-label="Ditty" x="640" y="610" width="120" height="250" fill="transparent" />

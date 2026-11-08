@@ -236,3 +236,24 @@ function win3(){
        ['roelof', "En de oude koestal… dat is nu de zaal. Waar vanavond het feest is! Ik heb een stukje van de oude grup bewaard, onder een plaat in de vloer."],
        ['sys', "Ditty roept vanuit de zaal: \"Het feest begint om zeven uur. En niet eerder binnenkomen!\""]], showWin);
 }
+
+/* ---------- grapjes in het museum en op het dak ---------- */
+const wolkErf = H.wolk;   // de wolken op het erf (hoofdstuk 1)
+Object.assign(H, {
+  wand(){ poke('#mu-wand', 'g-shake', 'Kling klang', 500); say(["Een hele wand oud gereedschap: spaden, rieken, een zeis, een hooivork, een schoffel. Het rammelt even als je tegen het gaas tikt.", "Elk ding heeft een kaartje met zijn naam. Roelof weet van elk stuk wie ermee werkte."]); },
+  plaat(){ poke('#mu-plaat', 'g-tilt'); say(["Een oude schoolplaat: koeien, schapen en een boerderij. Daar leerden kinderen vroeger van in de klas.", ['roelof', "Ditty was vroeger juf op een basisschool. Zulke platen hingen in haar klas ook nog. Vraag maar, ze kan er alles over vertellen."]]); },
+  bussen(){ poke('#mu-melk', 'g-shake', 'Klang!', 300); say(["Melkbussen, met nummers erop. Ze klinken hol als je ertegen tikt. Elke boer had zijn eigen nummer.", "De melkrijder haalde de bussen op en bracht ze naar de zuivelfabriek. Lege bussen kwamen terug."]); },
+  balen(){ poke('#mu-balen', 'g-jump', 'Pfff'); say("Balen stro, met touw eromheen. Een stofwolkje kriebelt in je neus."); },
+  scheef(){ S.ach.scheef = true; save(); poke('#dk-scheefw', 'g-wiggle', 'Oei!'); say(["De scheve toren van Bedum, net boven de bomen uit. Even leek het of hij omviel!", "Het is de toren van de Walfriduskerk, volgens de folder de scheefste toren van Europa. Toch staat hij er al eeuwen."]); },
+  kijker(){ S.ach.martini = true; save(); poke('#dk-kijker', 'g-tilt'); say(["Je kijkt door de verrekijker van Roelof. Zuid: de Martinitoren, 7,5 kilometer weg. Noord: de scheve toren van Bedum. Overal: weilanden, sloten en een paar reeën.", "Op het platte dak zie je kilometers ver. Daarom heet dit het Hogeland, al is het helemaal niet hoog."]); },
+  dkree(){ S.ach.ree = true; save(); poke('#dk-ree', 'g-jump', null, 900); say("Een ree in de wei, vlak bij de akkers. Hij springt even op, en graast dan gewoon verder."); },
+  dkree2(){ S.ach.ree = true; save(); say("Een tweede ree loopt over de rand van het land, langs de sloot. Rustig, alsof de hele wei van hem is."); },
+  wolk(){
+    if(S.scene !== 'dak') return wolkErf();
+    poke('#dk-wolken', 'g-pop'); say("De wolken drijven over het Hogeland. Hier op het dak lijkt de lucht nog groter.");
+  }
+});
+const spreuk0 = H.spreuk;
+H.spreuk = () => { poke('#mu-spreuk', 'g-tilt'); spreuk0(); };
+const stad0 = H.stad;
+H.stad = () => { gagText($('#dk-stad'), "d'Olle Grieze"); stad0(); };

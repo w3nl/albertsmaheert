@@ -197,6 +197,16 @@ function gag(el, cls, ms){
   el.classList.add(cls); setTimeout(() => el.classList.remove(cls), ms);
   return true;
 }
+/* Een grapje in één regel: laat iets in de kamer bewegen (een klasse uit css/base.css: g-wiggle, g-jump, g-spin, g-pop,
+   g-swing, g-shake, g-tilt, g-glow), met eventueel een woordje erboven en een geluidje. Geeft false als het al bezig is. */
+function poke(sel, cls = 'g-wiggle', word, freq){
+  const el = typeof sel === 'string' ? $(sel) : sel; if(!el) return false;
+  const ms = { 'g-swing': 1700, 'g-spin': 1100, 'g-tilt': 1500, 'g-glow': 1300, 'g-shake': 1100 }[cls] || 900;
+  if(!gag(el, cls, ms)) return false;
+  if(word) gagText(el, word);
+  if(freq) beep(freq, .08, 'triangle', .04);
+  return true;
+}
 /* Een woordje ("PANG!") dat even boven iets in de kamer opstijgt. */
 function gagText(el, text){
   const svg = el && el.ownerSVGElement; if(!svg) return;

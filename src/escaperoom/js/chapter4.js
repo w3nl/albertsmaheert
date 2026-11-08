@@ -292,3 +292,29 @@ function useItem4(item, hs){
   }
   return false;
 }
+
+/* ---------- grapjes in de zaal en de tuin ---------- */
+const bomenErf = H.bomen;   // de bomen op het erf (hoofdstuk 1)
+Object.assign(H, {
+  koeien(){ poke('#za-koeien', 'g-swing', 'Boe!', 160); say(["Bordjes met koeiennamen: Klaske, Bertha, Trijntje, Grietje, Dina. Ze schommelen aan de balk.", "Hier stond elke koe op haar eigen plek, met haar naam erboven. Net als de paarden in de Paardenstal.", ['roelof', "Koeien en schapen hadden we hier vroeger. Later werd het akkerbouw: kool, graan en suikerbieten."]]); },
+  buffetkast(){ poke('#za-kast', 'g-shake', 'Rinkel!', 1400); say("De witte buffetkast met het mooie servies. Alles rinkelt als je ertegen stoot. Oei, voorzichtig!"); },
+  quilt(){ poke('#za-quilt', 'g-swing'); say("Een quilt met rode en groene lapjes, met de hand gemaakt. Hij wappert even als je erlangs loopt."); },
+  kachel(){ poke('#za-hoek', 'g-glow', 'Warm!'); say(["De zithoek: een zwarte bank, een rieten stoel en een kachel die zacht brandt.", "Na het feest is dit de beste plek in de zaal. Met een kop koffie, natuurlijk."]); },
+  palen(){ gagText($('#sc-zaal [data-hs="palen"]'), 'Klop klop'); beep(160, .1, 'square', .03); say("Een zware, donkere houten paal op een gemetselde voet. Hij draagt de balken van de oude koestal. Klop klop: massief."); },
+  dakraamza(){ poke('#za-dakramen', 'g-glow'); say("Door de dakramen zie je de eerste sterren, en de maan boven de schuur."); },
+  bar(){ gagText($('#sc-zaal [data-hs="bar"]'), 'Proost!'); beep(1400, .08, 'sine', .04); setTimeout(() => beep(1700, .08, 'sine', .04), 90);
+    say("De bar, met krukken en drie zwarte hanglampen. Hier staat de koffie, de thee, en vanavond ook iets feestelijkers."); },
+  stalraam(){ say("Een klein stalraampje met een plantje in de vensterbank. Vroeger keken de koeien hierdoor naar buiten. Nu kijkt een geranium."); },
+  border(){ poke('#tn-border', 'g-wiggle'); say("Een border vol bloemen: lavendel, goudsbloemen, rozen. Ditty's trots. Ook in het donker ruik je ze."); },
+  bomen(h){
+    if(S.scene !== 'tuin') return bomenErf(h);
+    poke('#tn-lampjes', 'g-glow'); say("Oude fruitbomen met lampjes erin. Appels en peren. Morgen bij het ontbijt misschien appelmoes?");
+  },
+  terras(){ gagText($('#sc-tuin [data-hs="terras"]'), 'Aaah'); say(["Het terras op het zuiden, met een tafeltje en een stoel. Hier ontbijt je in de zomer met uitzicht over de weilanden.", "Overdag zie je vanaf hier de stad Groningen liggen, 4 kilometer verderop."]); },
+  sterren(){ [2400, 2800, 3200].forEach((f, i) => setTimeout(() => beep(f, .05, 'sine', .03), i * 120)); say("Zoveel sterren! Hier op het platteland is het 's nachts echt donker. Zie je de Grote Beer?"); },
+  maan(){ poke('#tn-maan', 'g-pop'); say("Een volle, ronde maan boven de weilanden. Als je goed kijkt, knipoogt hij. Of was dat een wolkje?"); },
+  egel(){ poke('#tn-egel', 'g-jump', 'Snuf snuf'); beep(900, .04); setTimeout(() => beep(1000, .04), 70);
+    say("Een egel scharrelt door het gras, op zoek naar slakken. Hij rolt zich even op tot een stekelbal… en scharrelt dan verder."); },
+  tnree(){ S.ach.ree = true; save(); poke('#tn-ree', 'g-jump', null, 900); say(["De ree loopt in het maanlicht door de tuin. Hij kijkt even op, en wandelt dan rustig verder.", "Ditty zei het al: in de tuin zie je ze bijna elke dag."]); },
+  koffie(){ S.f.koffie = (S.f.koffie || 0) + 1; save(); poke('#za-koffie', 'g-shake', 'Pruttel'); beep(300, .3, 'sawtooth', .02); if(S.f.koffie >= 3){ S.ach.koffie = true; save(); } say("Het koffieapparaat pruttelt. Een kop koffie, met een koekje erbij. In Groningen hoort dat zo."); }
+});

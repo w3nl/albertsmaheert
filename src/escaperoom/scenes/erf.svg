@@ -58,8 +58,8 @@
   <!-- lucht, zon en wolken -->
   <rect width="1600" height="900" fill="url(#efSky)" />
   <circle cx="1460" cy="300" r="160" fill="url(#efSun)" />
-  <circle cx="1460" cy="300" r="34" fill="#fff4c4" />
-  <g class="ef-clouds" fill="#ffffff" opacity=".85">
+  <circle id="ef-zon" cx="1460" cy="300" r="34" fill="#fff4c4" />
+  <g id="ef-wolken" class="ef-clouds" fill="#ffffff" opacity=".85">
     <g class="ef-cloud"><ellipse cx="220" cy="110" rx="90" ry="26" /><ellipse cx="270" cy="96" rx="60" ry="30" /><ellipse cx="180" cy="100" rx="50" ry="22" /></g>
     <g class="ef-cloud b"><ellipse cx="900" cy="70" rx="110" ry="24" /><ellipse cx="960" cy="56" rx="60" ry="26" /></g>
     <g class="ef-cloud c"><ellipse cx="1300" cy="150" rx="80" ry="18" /><ellipse cx="1340" cy="140" rx="46" ry="20" /></g>
@@ -84,7 +84,7 @@
   </g>
 
   <!-- grote bomen achter de boerderij -->
-  <g class="ef-trees">
+  <g id="ef-bomen" class="ef-trees">
     <rect x="96" y="250" width="22" height="260" fill="#5a4030" />
     <circle cx="108" cy="230" r="110" fill="url(#efTree)" />
     <circle cx="40" cy="300" r="80" fill="url(#efTree)" />
@@ -166,7 +166,7 @@
       <g stroke="#f3efe6" stroke-width="4">
         <path d="M224 340 v130 M176 383 h96 M176 426 h96 M566 340 v130 M518 383 h96 M518 426 h96" />
       </g>
-      <g fill="#2f5a3e" stroke="#1e3a28" stroke-width="2">
+      <g id="ef-luiken" fill="#2f5a3e" stroke="#1e3a28" stroke-width="2">
         <rect x="140" y="336" width="32" height="138" /><rect x="276" y="336" width="32" height="138" />
         <rect x="482" y="336" width="32" height="138" /><rect x="618" y="336" width="32" height="138" />
       </g>
@@ -251,9 +251,9 @@
   </g>
 
   <!-- de ree bij de bomen -->
-  <g id="ef-ree" class="ef-ree"><g transform="translate(985 640)">
-    <!-- @personage ree --><g transform="translate(0 0) scale(0.55 0.55)"><path d="M-32 -50 L-36 -18 L-34 0 M-24 -48 L-22 -18 L-26 0 M24 -50 L26 -20 L24 0 M32 -50 L36 -20 L34 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-42 -62 C-44 -76 -24 -82 0 -80 C22 -80 36 -74 40 -62 C42 -50 32 -44 0 -44 C-28 -44 -42 -48 -42 -62Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.4"/><path d="M-30 -50 C-10 -46 14 -46 30 -50" stroke="#e8d2b4" stroke-width="5" fill="none" opacity=".7"/><ellipse cx="-42" cy="-64" rx="7" ry="9" fill="#f6efe4"/><g id="ef-reehead"><g><path d="M30 -58 C34 -72 38 -84 46 -92 L58 -86 C52 -78 48 -66 44 -54Z" fill="#a8714a"/><path d="M44 -94 C50 -100 62 -100 70 -94 C76 -90 78 -84 74 -82 C66 -80 58 -82 52 -80 C46 -82 42 -88 44 -94Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.4"/><ellipse cx="75" cy="-84" rx="3" ry="2.4" fill="#2a1a10"/><circle cx="58" cy="-92" r="2.6" fill="#1a100a"/><circle cx="59" cy="-93" r=".8" fill="#fff"/><path d="M46 -96 C40 -110 44 -114 50 -106Z M52 -98 C52 -114 58 -114 58 -102Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.2"/><path d="M47 -104 C45 -108 46 -110 48 -106" stroke="#e8b8a0" stroke-width="2"/></g></g></g><!-- @einde ree -->
-  </g></g>
+  <g id="ef-ree" class="ef-ree"><g class="ree-walk walking" style="--walk:180px;--walkt:26s"><g transform="translate(940 640)">
+    <!-- @personage ree --><g transform="translate(0 0) scale(0.55 0.55)"><path class="rleg a" d="M-32 -50 L-36 -18 L-34 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path class="rleg b" d="M-24 -48 L-22 -18 L-26 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path class="rleg b" d="M24 -50 L26 -20 L24 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path class="rleg a" d="M32 -50 L36 -20 L34 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-42 -62 C-44 -76 -24 -82 0 -80 C22 -80 36 -74 40 -62 C42 -50 32 -44 0 -44 C-28 -44 -42 -48 -42 -62Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.4"/><path d="M-30 -50 C-10 -46 14 -46 30 -50" stroke="#e8d2b4" stroke-width="5" fill="none" opacity=".7"/><ellipse cx="-42" cy="-64" rx="7" ry="9" fill="#f6efe4"/><g id="ef-reehead"><g><path d="M30 -58 C34 -72 38 -84 46 -92 L58 -86 C52 -78 48 -66 44 -54Z" fill="#a8714a"/><path d="M44 -94 C50 -100 62 -100 70 -94 C76 -90 78 -84 74 -82 C66 -80 58 -82 52 -80 C46 -82 42 -88 44 -94Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.4"/><ellipse cx="75" cy="-84" rx="3" ry="2.4" fill="#2a1a10"/><circle cx="58" cy="-92" r="2.6" fill="#1a100a"/><circle cx="59" cy="-93" r=".8" fill="#fff"/><path d="M46 -96 C40 -110 44 -114 50 -106Z M52 -98 C52 -114 58 -114 58 -102Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.2"/><path d="M47 -104 C45 -108 46 -110 48 -106" stroke="#e8b8a0" stroke-width="2"/></g></g></g><!-- @einde ree -->
+  </g></g></g>
 
   <!-- de ladder en Roelof bij de dakgoot -->
   <g id="ef-ladder">
@@ -368,10 +368,15 @@
     <rect class="hit" data-hs="brievenbus" data-label="De brievenbus" x="1356" y="560" width="92" height="90" fill="transparent" />
     <rect class="hit" data-hs="fiets" data-label="Jouw fiets" x="1190" y="696" width="160" height="152" fill="transparent" />
     <rect class="hit" data-hs="knoop" data-label="Een fietsknooppunt" x="1466" y="536" width="92" height="64" fill="transparent" />
-    <rect class="hit" data-hs="martini" data-label="Een torentje in de verte" x="1440" y="376" width="32" height="96" fill="transparent" />
+    <rect class="hit" data-hs="martini" data-label="De Martinitoren in Groningen, 7,5 km verderop" x="1440" y="376" width="32" height="96" fill="transparent" />
     <rect class="hit" data-hs="bnbbord" data-label="Het bord van de B&amp;B, met de Groninger vlag" x="706" y="460" width="160" height="290" fill="transparent" />
     <rect class="hit" data-hs="geiten" data-label="Geitjes in het veld" x="1310" y="840" width="290" height="60" fill="transparent" />
-    <rect class="hit" id="hit-ree" data-hs="ree" data-label="Een ree!" x="955" y="580" width="90" height="62" fill="transparent" />
+    <rect class="hit" id="hit-ree" data-hs="ree" data-label="Een ree, die rustig over het erf loopt" x="900" y="576" width="250" height="66" fill="transparent" />
+    <rect class="hit" data-hs="bomen" data-label="De grote bomen achter de boerderij" x="0" y="130" width="140" height="300" fill="transparent" />
+    <rect class="hit" data-hs="bomen" data-label="De grote bomen achter de boerderij" x="1260" y="40" width="340" height="180" fill="transparent" />
+    <rect class="hit" data-hs="wolk" data-label="Een wolk" x="120" y="70" width="200" height="70" fill="transparent" />
+    <rect class="hit" data-hs="wolk" data-label="Een wolk" x="800" y="40" width="220" height="50" fill="transparent" />
+    <rect class="hit" data-hs="zon" data-label="De avondzon" x="1420" y="260" width="80" height="80" fill="transparent" />
     <rect class="hit" data-hs="zwaluw" data-label="Zwaluwen" x="600" y="20" width="560" height="80" fill="transparent" />
   </g>
 </svg>

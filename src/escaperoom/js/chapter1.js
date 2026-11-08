@@ -129,6 +129,7 @@ const H = {
     say("Een oude plank boven de deur, met een spijker erin. Hij zit een beetje los.");
   },
   ruif(){
+    poke('#ps-ruif', 'g-shake', null, 300);
     if(S.f.brief) return say("De oude ruif. Hier trokken de paarden vroeger hun hooi uit. Nu is het versiering, en een heel goede verstopplek.");
     say(["Een oude ruif, het rek waar de paarden hun hooi uit plukten. Eronder de voerbak.", "Roelof heeft hem laten zitten toen de stal een kamer werd. Er ligt nog wat stro in."]);
   },
@@ -352,3 +353,34 @@ function win1(){
        ['roelof', "\"Begin boven\". Dat is de hooizolder: daar zijn nu Thedema, Alma en Folkerda."],
        ['ditty', "Morgen na het ontbijt gaan we zoeken. Nu eerst slapen. Slaap lekker in de Paardenstal!"]], showWin);
 }
+
+/* ---------- grapjes: dingen die bewegen als je erop klikt (poke() in core.js) ---------- */
+Object.assign(H, {
+  ramen(){ poke('#ef-luiken', 'g-shake', 'Klepper!', 300); say("Witte ramen met kleine ruitjes en groene luiken. De luiken klepperen even in de wind. In de vensterbank staan bloemen: Ditty houdt van bloemen, dat zie je overal."); },
+  schoorsteen(){ poke('#ef-house .ef-smoke', 'g-pop', 'Puf!', 200); say("Er komt een dun rookpluimpje uit de schoorsteen. Er staat vast koffie, of een pan soep."); },
+  voordeur(){
+    beep(880, .15, 'sine', .05); setTimeout(() => beep(660, .25, 'sine', .05), 180);
+    if(!S.f.post){ gagText($('#ef-door'), 'Ding dong!'); return say(["Je drukt op de bel. Ding dong… Niemand.", "Op de deur hangt een briefje."]); }
+    say("De voordeur van het voorhuis. Daar wonen Ditty en Roelof. Jouw kamer heeft een eigen deur: de staldeur, bij de schuur.");
+  },
+  fiets(){ poke('#ef-fiets', 'g-shake', 'Tring tring!'); beep(1800, .06, 'sine', .05); setTimeout(() => beep(1800, .06, 'sine', .05), 120);
+    say(["Tring tring! Jouw fiets, met fietstassen. Je bent hier langs de knooppunten naartoe gefietst, over de dijkjes en langs de weilanden.", "De laatste kilometers ging het vanzelf. Het is hier zo plat als een pannenkoek."]); },
+  knoop(){ poke('#ef-knoop', 'g-wiggle', null, 500); say(["Een groen-wit bordje van de fietsknooppunten. Je fietst van nummer naar nummer, zonder kaart.", "Vanaf hier rijd je zo naar oude kerkjes, wierden, molens en de scheve toren van Bedum."]); },
+  bnbbord(){ poke('#ef-bnbbord', 'g-wiggle', null, 500); say(["Het bord van de B&B aan de weg: een dakje van zwarte pannen, foto's van de kamers, en een bak vol rode geraniums.", "Ernaast wappert de Groninger vlag: rood, blauw, en een groen kruis met wit. Hier ben je echt in Groningen."]); },
+  martini(){ S.ach.martini = true; save(); poke('#ef-martini', 'g-glow', "d'Olle Grieze"); say(["Ver weg aan de horizon steekt een toren boven de bomen uit: de Martinitoren, in de stad Groningen.", "Hemelsbreed 7,5 kilometer hiervandaan. De Groningers noemen hem d'Olle Grieze: de oude grijze."]); },
+  deeldeur(){ gagText($('#sc-erf [data-hs="deeldeur"]'), 'Kraaak'); beep(140, .4, 'sawtooth', .02);
+    say(["De grote deeldeuren van de schuur kraken als je ertegen duwt. Hier reden vroeger de hooiwagens naar binnen.", "Daarachter is nu de zaal, waar de koeien stonden. Morgenavond is daar een feest, zegt een briefje op de deur."]); },
+  bomen(){ poke('#ef-bomen', 'g-shake', 'Ritsel', 400); beep(2600, .05); setTimeout(() => beep(3000, .05), 80);
+    say("Je schudt aan een tak. Ritsel ritsel… en een merel vliegt boos tjilpend weg. Deze bomen staan hier al langer dan de B&B."); },
+  wolk(){ poke('#ef-wolken', 'g-pop'); say("Een wolk in de vorm van… een schaap? Een trekker? Een stroopwafel? In Groningen is de lucht zo groot dat je er de hele dag naar kunt kijken."); },
+  zon(){ poke('#ef-zon', 'g-glow'); say("De avondzon zakt achter de bomen. Over een uurtje kleurt de hele lucht oranje boven het vlakke land."); },
+  bord(){
+    S.f.moi = (S.f.moi || 0) + 1; save(); poke('#ef-chalk', 'g-pop', 'Moi!', 600);
+    if(S.f.moi >= 2 && !S.ach.moi){ S.ach.moi = true; save(); return say(["Je zegt hardop: \"Moi!\"", "Een zwaluw scheert langs. Je bent nu officieel een beetje Gronings."]); }
+    say(["Het welkomsbord op de wagen. Met krijt: Albertsmaheert. B&B, zaal, museum. Moi!", "Moi is Gronings voor hallo. En voor dag. Je zegt het de hele dag, bij komen én gaan."]);
+  },
+  hooglander(){ poke('#ps-koe', 'g-tilt', 'Moeeeh!', 150); say(["Een schilderij van een koe met lange horens en een rode vacht. Het hangt opeens scheef.", "Moeeeh, zegt ze niet. Maar je hoort het toch."]); },
+  bordjes(){ poke('#ps-bordjes', 'g-swing', null, 500); say(["Stalbordjes met de namen van de paarden die hier stonden: Bles, Mina, Dirk en Prins. Ze schommelen even aan hun spijkers.", "Elk paard had zijn eigen plek, met zijn naam erboven."]); },
+  rieten(){ poke('#ps-rieten', 'g-jump', 'Kraak'); beep(180, .2, 'triangle', .03); say("Je ploft in de rieten stoel. Kraak! Hij zit heerlijk."); },
+  bloemen(){ gagText($('#sc-stal [data-hs="bloemen"]'), 'Hatsjoe!'); say("Je ruikt aan de bloemen. Hatsjoe! Verse bloemen van Ditty, in elke kamer."); }
+});

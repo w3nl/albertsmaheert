@@ -243,7 +243,9 @@ def ree(p, grazing=False, head_id=None):
              '<circle cx="58" cy="-92" r="2.6" fill="#1a100a"/><circle cx="59" cy="-93" r=".8" fill="#fff"/>'
              f'<path d="M46 -96 C40 -110 44 -114 50 -106Z M52 -98 C52 -114 58 -114 58 -102Z" fill="{fur}" stroke="{fur_d}" stroke-width="1.2"/>'
              '<path d="M47 -104 C45 -108 46 -110 48 -106" stroke="#e8b8a0" stroke-width="2"/></g>')
-    g = [f'<path d="M-32 -50 L-36 -18 L-34 0 M-24 -48 L-22 -18 L-26 0 M24 -50 L26 -20 L24 0 M32 -50 L36 -20 L34 0" stroke="{fur_d}" stroke-width="5" fill="none" stroke-linecap="round"/>',
+    # vier losse poten (klasse rleg a/b): zet "walking" op een ouder en ze stappen (css/base.css)
+    leg = lambda d, c: f'<path class="rleg {c}" d="{d}" stroke="{fur_d}" stroke-width="5" fill="none" stroke-linecap="round"/>'
+    g = [leg('M-32 -50 L-36 -18 L-34 0', 'a') + leg('M-24 -48 L-22 -18 L-26 0', 'b') + leg('M24 -50 L26 -20 L24 0', 'b') + leg('M32 -50 L36 -20 L34 0', 'a'),
          f'<path d="M-42 -62 C-44 -76 -24 -82 0 -80 C22 -80 36 -74 40 -62 C42 -50 32 -44 0 -44 C-28 -44 -42 -48 -42 -62Z" fill="{fur}" stroke="{fur_d}" stroke-width="1.4"/>',
          f'<path d="M-30 -50 C-10 -46 14 -46 30 -50" stroke="{belly}" stroke-width="5" fill="none" opacity=".7"/>',
          f'<ellipse cx="-42" cy="-64" rx="7" ry="9" fill="#f6efe4"/>',
@@ -313,12 +315,14 @@ SCENES = {
     },
     'kamer': {
         'ditty': lambda: place(ditty('kmD', hold='koffie'), 0, 0, 1.3),
+        'ree': lambda: place(ree('kmE'), 0, 0, .3),
     },
     'museum': {
         'roelof': lambda: place(roelof('muR', tool=None), 0, 0, 1.35),
     },
     'dak': {
-        'ree': lambda: place(ree('dkE', grazing=True), 0, 0, .22) + place(ree('dkE2'), 60, 4, .2, flip=True),
+        'ree': lambda: place(ree('dkE', grazing=True), 0, 0, .22),
+        'ree2': lambda: place(ree('dkE2'), 0, 0, .2),
     },
     'zaal': {
         'ditty': lambda: place(ditty('zaD', hold=None), 0, 0, 1.35),
