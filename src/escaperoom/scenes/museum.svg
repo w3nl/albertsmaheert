@@ -104,8 +104,9 @@
     <g stroke="#9a7442" stroke-width="2"><path d="M236 650 L540 310 M216 646 L526 304" /></g>
     <path d="M220 660 L260 600 L280 700 M300 560 L340 690" stroke="#3a5a8a" stroke-width="6" />
     <circle cx="246" cy="700" r="20" fill="#2a2a2a" /><circle cx="246" cy="700" r="8" fill="#c4302b" />
-    <g id="mu-bale" class="mu-bale"><rect x="-30" y="-22" width="60" height="38" rx="3" fill="url(#muStraw)" stroke="#a8862e" stroke-width="2" transform="translate(300 560) rotate(-47)" /></g>
-    <rect x="400" y="400" width="54" height="36" rx="3" fill="url(#muStraw)" stroke="#a8862e" stroke-width="2" transform="rotate(-47 427 418)" />
+    <!-- de balen op de band: bij een klik schuiven ze samen één plek omhoog (css: #mu-bale.lift); de bovenste gaat de
+         zolder op en onderaan komt een nieuwe aan, zodat het daarna weer precies zo staat -->
+    <g id="mu-bale" class="mu-bale"><g class="bale-in"><rect x="-30" y="-19" width="60" height="38" rx="3" fill="url(#muStraw)" stroke="#a8862e" stroke-width="2" transform="translate(250 608) rotate(-47)" /><path d="M-30 -6 h60 M-30 6 h60" stroke="#b89a40" stroke-width="2" transform="translate(250 608) rotate(-47)" /></g><g class="bale-mid"><rect x="-30" y="-19" width="60" height="38" rx="3" fill="url(#muStraw)" stroke="#a8862e" stroke-width="2" transform="translate(340 512) rotate(-47)" /><path d="M-30 -6 h60 M-30 6 h60" stroke="#b89a40" stroke-width="2" transform="translate(340 512) rotate(-47)" /></g><g class="bale-out"><rect x="-30" y="-19" width="60" height="38" rx="3" fill="url(#muStraw)" stroke="#a8862e" stroke-width="2" transform="translate(430 416) rotate(-47)" /><path d="M-30 -6 h60 M-30 6 h60" stroke="#b89a40" stroke-width="2" transform="translate(430 416) rotate(-47)" /></g></g>
   </g>
   <!-- strobalen opgestapeld -->
   <g id="mu-balen">
