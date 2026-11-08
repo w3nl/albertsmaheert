@@ -253,6 +253,19 @@ def ree(p, grazing=False, head_id=None):
     return ''.join(g)
 
 
+def haas(p):
+    """Een haas, van opzij, kijkend naar rechts: lange oren met zwarte puntjes, een wit staartje. Oorsprong op de grond."""
+    fur, fur_d = '#9a7a56', '#6a5034'
+    return (f'<path d="M-30 -2 C-34 -14 -22 -18 -8 -14 L-4 -2Z" fill="{fur_d}"/>'
+            f'<path d="M-36 -26 C-40 -44 -10 -50 10 -40 C22 -34 24 -22 16 -14 C4 -6 -26 -6 -36 -26Z" fill="{fur}" stroke="{fur_d}" stroke-width="1.4"/>'
+            f'<circle cx="-38" cy="-30" r="6" fill="#f6efe4"/>'
+            f'<path d="M12 -16 L18 -2 M6 -16 L8 -2" stroke="{fur_d}" stroke-width="4" stroke-linecap="round"/>'
+            f'<path d="M10 -38 C14 -50 30 -52 34 -42 C36 -34 28 -30 20 -32Z" fill="{fur}" stroke="{fur_d}" stroke-width="1.4"/>'
+            f'<path d="M14 -46 C8 -70 14 -78 20 -60Z M20 -46 C20 -72 28 -78 28 -58Z" fill="{fur}" stroke="{fur_d}" stroke-width="1.4"/>'
+            '<path d="M10 -66 C10 -72 13 -76 15 -70 M21 -68 C22 -74 26 -76 27 -70" stroke="#1a1410" stroke-width="3" fill="none" stroke-linecap="round"/>'
+            '<circle cx="26" cy="-42" r="2.6" fill="#1a100a"/><circle cx="27" cy="-43" r=".8" fill="#fff"/><circle cx="34" cy="-38" r="1.6" fill="#3a2418"/>')
+
+
 # ---------------------------------------------------------------- portretten
 def portrait(title, bg, body, tx, ty, sc, sepia=False):
     filt = ('<filter id="sep"><feColorMatrix type="matrix" values=".39 .77 .19 0 0  .35 .69 .17 0 0  .27 .53 .13 0 0  0 0 0 1 0"/></filter>' if sepia else '')
@@ -308,6 +321,7 @@ SCENES = {
     'erf': {
         'roelof': lambda: place(roelof('efR', tool='hamer', arm_id='ef-arm'), 0, 0, 1.0),
         'ree': lambda: place(ree('efE', head_id='ef-reehead'), 0, 0, .55),
+        'haas': lambda: place(haas('efH'), 0, 0, .7),
     },
     'stal': {},
     'zolder': {
@@ -323,6 +337,7 @@ SCENES = {
     'dak': {
         'ree': lambda: place(ree('dkE', grazing=True), 0, 0, .22),
         'ree2': lambda: place(ree('dkE2'), 0, 0, .2),
+        'haas': lambda: place(haas('dkH'), 0, 0, .3),
     },
     'zaal': {
         'ditty': lambda: place(ditty('zaD', hold=None), 0, 0, 1.35),
@@ -334,6 +349,7 @@ SCENES = {
     },
     'tuin': {
         'ree': lambda: place(ree('tnE', head_id='tn-reehead'), 0, 0, .9),
+        'haas': lambda: place(haas('tnH'), 0, 0, .8),
     },
 }
 

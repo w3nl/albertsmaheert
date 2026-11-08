@@ -97,6 +97,11 @@
     <g><rect x="200" y="740" width="120" height="10" fill="#8a6440" /><path d="M210 750 v50 M310 750 v50" stroke="#8a6440" stroke-width="6" /><path d="M360 770 h40 v-60 h-10 v50 h-30z" fill="#3a3a52" /></g>
   </g>
 
+  <!-- een haas die heen en weer huppelt -->
+  <g id="tn-haas"><g class="ree-walk" style="--walk:-240px;--dir:-1;--walkt:16s"><g class="haas-hop"><g transform="translate(520 650)">
+    <!-- @personage haas --><g transform="translate(0 0) scale(0.8 0.8)"><path d="M-30 -2 C-34 -14 -22 -18 -8 -14 L-4 -2Z" fill="#6a5034"/><path d="M-36 -26 C-40 -44 -10 -50 10 -40 C22 -34 24 -22 16 -14 C4 -6 -26 -6 -36 -26Z" fill="#9a7a56" stroke="#6a5034" stroke-width="1.4"/><circle cx="-38" cy="-30" r="6" fill="#f6efe4"/><path d="M12 -16 L18 -2 M6 -16 L8 -2" stroke="#6a5034" stroke-width="4" stroke-linecap="round"/><path d="M10 -38 C14 -50 30 -52 34 -42 C36 -34 28 -30 20 -32Z" fill="#9a7a56" stroke="#6a5034" stroke-width="1.4"/><path d="M14 -46 C8 -70 14 -78 20 -60Z M20 -46 C20 -72 28 -78 28 -58Z" fill="#9a7a56" stroke="#6a5034" stroke-width="1.4"/><path d="M10 -66 C10 -72 13 -76 15 -70 M21 -68 C22 -74 26 -76 27 -70" stroke="#1a1410" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="26" cy="-42" r="2.6" fill="#1a100a"/><circle cx="27" cy="-43" r=".8" fill="#fff"/><circle cx="34" cy="-38" r="1.6" fill="#3a2418"/></g><!-- @einde haas -->
+  </g></g></g></g>
+
   <!-- een egel die over het gras scharrelt -->
   <g id="tn-egel"><g class="tn-egelwalk"><g transform="translate(860 860)">
     <ellipse cx="0" cy="-10" rx="22" ry="13" fill="#6a5440" />
@@ -106,7 +111,7 @@
   </g></g></g>
 
   <!-- de ree, aan de rand van de tuin -->
-  <g id="tn-ree" class="tn-ree"><g class="ree-walk walking" style="--walk:-220px;--walkt:24s"><g transform="translate(1420 560)">
+  <g id="tn-ree" class="tn-ree"><g class="ree-walk walking" style="--walk:-220px;--dir:-1;--walkt:24s"><g transform="translate(1420 560)">
     <!-- @personage ree --><g transform="translate(0 0) scale(0.9 0.9)"><path class="rleg a" d="M-32 -50 L-36 -18 L-34 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path class="rleg b" d="M-24 -48 L-22 -18 L-26 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path class="rleg b" d="M24 -50 L26 -20 L24 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path class="rleg a" d="M32 -50 L36 -20 L34 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-42 -62 C-44 -76 -24 -82 0 -80 C22 -80 36 -74 40 -62 C42 -50 32 -44 0 -44 C-28 -44 -42 -48 -42 -62Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.4"/><path d="M-30 -50 C-10 -46 14 -46 30 -50" stroke="#e8d2b4" stroke-width="5" fill="none" opacity=".7"/><ellipse cx="-42" cy="-64" rx="7" ry="9" fill="#f6efe4"/><g id="tn-reehead"><g><path d="M30 -58 C34 -72 38 -84 46 -92 L58 -86 C52 -78 48 -66 44 -54Z" fill="#a8714a"/><path d="M44 -94 C50 -100 62 -100 70 -94 C76 -90 78 -84 74 -82 C66 -80 58 -82 52 -80 C46 -82 42 -88 44 -94Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.4"/><ellipse cx="75" cy="-84" rx="3" ry="2.4" fill="#2a1a10"/><circle cx="58" cy="-92" r="2.6" fill="#1a100a"/><circle cx="59" cy="-93" r=".8" fill="#fff"/><path d="M46 -96 C40 -110 44 -114 50 -106Z M52 -98 C52 -114 58 -114 58 -102Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.2"/><path d="M47 -104 C45 -108 46 -110 48 -106" stroke="#e8b8a0" stroke-width="2"/></g></g></g><!-- @einde ree -->
   </g></g></g>
 
@@ -122,6 +127,7 @@
     <rect class="hit" data-hs="tnree" data-label="De ree, die in het maanlicht door de tuin loopt" x="1160" y="486" width="350" height="84" fill="transparent" />
     <rect class="hit" data-hs="terras" data-label="Het terras op het zuiden" x="150" y="726" width="300" height="100" fill="transparent" />
     <rect class="hit" data-hs="sterren" data-label="De sterren" x="150" y="40" width="900" height="120" fill="transparent" />
+    <rect class="hit" data-hs="haas" data-label="Een haas die door de tuin huppelt" x="250" y="600" width="300" height="60" fill="transparent" />
     <rect class="hit" data-hs="egel" data-label="Een egel in het gras" x="760" y="820" width="260" height="60" fill="transparent" />
     <rect class="hit" data-hs="maan" data-label="De maan" x="1250" y="130" width="100" height="100" fill="transparent" />
     <rect class="hit" data-hs="stad2" data-label="De lichtjes van Groningen en de Martinitoren" x="1060" y="360" width="180" height="110" fill="transparent" />
