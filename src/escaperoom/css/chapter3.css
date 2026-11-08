@@ -1,8 +1,13 @@
 /* Hoofdstuk 3: het museum en het platte dak. */
 @keyframes muSway{0%,100%{transform:rotate(-1.2deg)}50%{transform:rotate(1.2deg)}}
 .mu-sway{transform-box:fill-box;transform-origin:50% 0%;animation:muSway 6s ease-in-out infinite}
-@keyframes muLift{0%{transform:translate(0,0)}100%{transform:translate(160px,-170px)}}
-#mu-bale.lift{animation:muLift 3s linear}
+@keyframes muBelt{from{transform:translate(0,0)}to{transform:translate(90px,-96px)}}
+@keyframes muBaleIn{0%{opacity:0}35%,100%{opacity:1}}
+@keyframes muBaleOut{0%,60%{opacity:1}100%{opacity:0}}
+#mu-bale .bale-in{opacity:0}
+#mu-bale.lift{animation:muBelt 2.6s linear}
+#mu-bale.lift .bale-in{animation:muBaleIn 2.6s linear forwards}
+#mu-bale.lift .bale-out{animation:muBaleOut 2.6s linear forwards}
 @keyframes muShake{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
 .mu-running #mu-trekbody{animation:muShake .12s linear infinite}
 @keyframes muPuf{0%{transform:translateY(0) scale(.6);opacity:.8}100%{transform:translate(20px,-70px) scale(1.6);opacity:0}}

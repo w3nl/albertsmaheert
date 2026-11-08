@@ -43,7 +43,7 @@ Object.assign(H, {
         ['roelof', "De 633 heb ik nu al veertig jaar. En de meeste machines hier in het museum heb ik ook zelf weer netjes gemaakt: schuren, lakken, bouten erin."], "De hele schuur trilt een beetje mee."]); }
     say("Je zet de trekker weer uit. Pfff. Stilte.");
   },
-  lift(){ gag('#mu-bale', 'lift', 3000); beep(200, .1, 'triangle', .03); say(["Een balenlift: een lopende band van hout, schuin omhoog. Zo gingen de balen hooi en stro naar de zolder.", "Vroeger tilde je alles met de hand, of met de katrol."]); },
+  lift(){ gag('#mu-bale', 'lift', 2600); beep(200, .1, 'triangle', .03); say(["Een balenlift: een lopende band van hout, schuin omhoog. Ratel ratel: de balen schuiven een plekje op en de bovenste verdwijnt de zolder op.", "Vroeger tilde je alles met de hand, of met de katrol."]); },
   wand(){ say(["Een hele wand oud gereedschap: spaden, rieken, een zeis, een hooivork, een schoffel.", "Elk ding heeft een kaartje met zijn naam. Roelof weet van elk stuk wie ermee werkte."]); },
   plaat(){ say(["Een oude schoolplaat: koeien, schapen en een boerderij. Daar leerden kinderen vroeger van in de klas.", ['roelof', "Ditty was vroeger juf op een basisschool. Zulke platen hingen in haar klas ook nog. Vraag maar, ze kan er alles over vertellen."]]); },
   katrollen(){ say("Rode katrollen aan de paal. Weet je nog, op de hooizolder? Twee touwen, de halve kracht."); },
