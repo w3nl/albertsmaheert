@@ -10,14 +10,17 @@ PAARDJE_SAY[3] = ["Bovenop de strobalen staat het hobbelpaardje. Hoe komt dat no
 /* De vier letters en waar ze vandaan komen. */
 const LETTERS = [['bascule', 'G'], ['karn', 'R'], ['akkers', 'U'], ['spreuk', 'P']];
 function applyMuseum(){
-  const f = S.f;
+  const f = F(3);
+  veil('museum', .2);
+  vis('#mu-roelof', S.ch === 3); vis('#sc-museum [data-hs="roelof"]', S.ch === 3);
+  vis('#mu-hydro84-pass', S.ch === 3);
   vis('#mu-kistje', !f.kistOpen); vis('#mu-kistopen', !!f.kistOpen);
   vis('#mu-paardje', !f.paardjeTaken); vis('#hit-mupaardje', !f.paardjeTaken);
   const got = LETTERS.filter(([k]) => f[k]).map(([, l]) => l);
   $('#mu-letters').innerHTML = got.map((l, i) => `<text x="${1068 + i * 18}" y="545">${l}</text>`).join('');
-  $('#sc-museum').classList.toggle('mu-running', !!f.tractor);
+  $('#sc-museum').classList.toggle('mu-running', !!S.f.tractor);
 }
-function applyDak(){}
+function applyDak(){ veil('dak', .35); }
 
 const H2 = { roelof: H.roelof, paardje: H.paardje };
 Object.assign(H, {
@@ -29,13 +32,14 @@ Object.assign(H, {
     say([['roelof', "Alle vier! Leg ze in het kistje. Wat voor woord is het?"]]);
   },
   kistje(){
+    if(S.ch > 3) return say("Het kistje van Thedema staat open. Er liggen vier letters in: G, R, U en P. De grup!");
     if(!S.f.kistOpen) return say(has('oudesleutel') ? "Het kistje van Thedema, van donker hout met koperen banden. Het slot heeft een sleutelgat met een krul. Gebruik de oude sleutel." : "Op slot.");
     if(LETTERS.every(([k]) => S.f[k])) return openWoord();
     openHarm3();
   },
-  bascule(){ if(S.f.bascule) return say("De bascule staat in evenwicht. Onder het schaaltje lag het koperen plaatje met de G."); openBascule(); },
-  karn(){ if(S.f.karn) return say("De karntonnen. Op de bodem van de grootste is een R gebrand."); openKarn(); },
-  spreuk(){ if(S.f.spreuk) return say("Nait soez'n, moi doun: niet zeuren, gewoon doen. Achter het bord zat de P."); openSpreuk(); },
+  bascule(){ if(F(3).bascule) return say("De bascule staat in evenwicht. Onder het schaaltje lag het koperen plaatje met de G."); openBascule(); },
+  karn(){ if(F(3).karn) return say("De karntonnen. Op de bodem van de grootste is een R gebrand."); openKarn(); },
+  spreuk(){ if(F(3).spreuk) return say("Nait soez'n, moi doun: niet zeuren, gewoon doen. Achter het bord zat de P."); openSpreuk(); },
   trekker(){
     S.f.tractor = !S.f.tractor; save(); applyVisuals();
     if(S.f.tractor){ S.ach.tractor = true; save(); beep(80, .4, 'sawtooth', .05); setTimeout(() => beep(90, .3, 'sawtooth', .05), 300);
@@ -53,14 +57,12 @@ Object.assign(H, {
   haksel(){ gag('#mu-vlieg', 'spin', 2200); beep(300, .1, 'square', .02); setTimeout(() => beep(300, .1, 'square', .02), 200);
     say(["Een groene strohakselaar met een groot vliegwiel. Je draait aan de slinger: tsjak, tsjak, tsjak!", "Het mes hakt stro in kleine stukjes, als voer of strooisel voor de koeien."]); },
   muladder(){ go('dak'); },
+  mudeur(){ go('erf'); },
   /* ---- het dak ---- */
   naarmuseum(){ go('museum'); },
-  naarzaal(){
-    if(S.f.out3) return nextChapter();
-    say(["Het luik naar de zaal, de oude koestal. Je hoort beneden stoelen schuiven.", ['ditty', "Nog niet naar binnen kijken! Het feest is pas vanavond!"]]);
-  },
+  naarzaal(){ enterRoom('zaal'); },
   akkers(){
-    if(S.f.akkers) return say("De drie akkers: A, B en C. Harm wist precies wat er elk jaar moest groeien.");
+    if(F(3).akkers) return say("De drie akkers: A, B en C. Harm wist precies wat er elk jaar moest groeien.");
     if(!has('kaart')) return say("Drie akkers in de verte: A, B en C. Je ziet strepen van ploegen in de grond.");
     openAkkers();
   },
@@ -119,7 +121,7 @@ function openBascule(){
     body.querySelectorAll('[data-a]').forEach(b => b.onclick = () => {
       const sum = W.filter(w => on[w]).reduce((a, c) => a + c, 0);
       if(sum * 10 !== 70){ nope(); return fb('#bs-fb', 'Eerst de bascule in evenwicht krijgen: leg gewichtjes op het schaaltje tot hij recht hangt.', 'bad'); }
-      if(b.dataset.a === '70'){ b.classList.add('ok'); S.f.bascule = true; save(); fb('#bs-fb', '7 kilo op het schaaltje, dus 70 kilo op de brug. Een mud aardappelen weegt 70 kilo! Onder het schaaltje glimt iets…', 'good'); return solved(() => { applyVisuals(); say(["Onder het schaaltje zit een koperen plaatje. Er staat een letter op: G.", ['roelof', "De eerste letter! G."]]); }, 2200); }
+      if(b.dataset.a === '70'){ b.classList.add('ok'); S.f.bascule = true; save(); fb('#bs-fb', '7 kilo op het schaaltje, dus 70 kilo op de brug. Een mud aardappelen weegt 70 kilo! Onder het schaaltje glimt iets…', 'good'); return solved(() => { applyVisuals(); say(["Onder het schaaltje zit een koperen plaatje. Er staat een letter op: G.", ['roelof', LETTERS.filter(([k]) => S.f[k]).length === 1 ? "De eerste letter! G." : "Weer een letter! G."]]); }, 2200); }
       nope(); fb('#bs-fb', b.dataset.a === '7' ? 'Op het schaaltje ligt 7 kilo. Maar elke kilo daar houdt 10 kilo op de brug in evenwicht…' : 'Reken het na: 7 kilo op het schaaltje, keer 10.', 'bad');
     });
   });
@@ -225,7 +227,7 @@ function openWoord(){
 /* ---------- begin en einde ---------- */
 function intro3(){
   give('oudesleutel');
-  say([['sys', "Zaterdagmiddag. Roelof neemt je mee naar de andere schuur, aan de overkant van het platte dak."],
+  say([['sys', "Zaterdagmiddag. Roelof neemt je mee over het erf, door de grote deeldeuren, naar zijn museum."],
        ['roelof', "Dit is mijn museum: het boerenleven van vroeger. Mijn International-trekkers, karntonnen, melkbussen: alles wat ik kon vinden, en het meeste heb ik zelf weer opgeknapt."],
        ['roelof', "En dit is het kistje uit de borg Thedema. Gevonden in 2012, toen we de hooizolder verbouwden. Nu hebben we eindelijk de sleutel!"]], () => { S.f.introDone = true; save(); });
 }

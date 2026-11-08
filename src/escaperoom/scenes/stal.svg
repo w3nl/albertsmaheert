@@ -113,9 +113,10 @@
   <g>
     <g clip-path="url(#psWin1)">
       <rect x="690" y="230" width="140" height="250" fill="url(#psDusk)" />
-      <circle class="ps-star" cx="730" cy="270" r="1.8" fill="#fff" /><circle class="ps-star b" cx="790" cy="300" r="1.5" fill="#fff" />
-      <circle cx="790" cy="400" r="20" fill="#fff4d0" opacity=".9" />
-      <path d="M690 440 h140 v40 h-140z" fill="#3a5a3a" />
+      <circle class="sky-ochtend" cx="744" cy="340" r="60" fill="#ffe8a0" opacity=".5" /><circle class="sky-ochtend" cx="744" cy="340" r="20" fill="#fff4c4" />
+      <circle class="ps-star sky-nacht" cx="730" cy="270" r="1.8" fill="#fff" /><circle class="ps-star b sky-nacht" cx="790" cy="300" r="1.5" fill="#fff" />
+      <circle class="sky-donker" cx="790" cy="400" r="20" fill="#fff4d0" opacity=".9" />
+      <path class="ps-wei" d="M690 440 h140 v40 h-140z" fill="#3a5a3a" />
       <path d="M690 446 h140" stroke="#2a4a2a" stroke-width="3" />
     </g>
     <path d="M700 470 v-170 a60 60 0 0 1 120 0 v170z" fill="none" stroke="#e9e2d2" stroke-width="10" />
@@ -139,15 +140,42 @@
   <g id="ps-fotos">
     <rect x="890" y="200" width="190" height="236" rx="4" fill="#5a4232" opacity=".25" />
     <g stroke="#3a2a1a" stroke-width="5" fill="#d9c8a0">
-      <rect x="902" y="212" width="74" height="96" /><rect x="994" y="212" width="74" height="96" />
-      <rect x="902" y="326" width="74" height="96" /><rect x="994" y="326" width="74" height="96" />
+        <rect x="908" y="218" width="62" height="84" fill="#b9c5c4" />
+        <path d="M908 272 Q925 257 940 267 T970 263 V302 H908Z" fill="#79866a" />
+        <path d="M908 284 Q930 278 948 283 T970 279" fill="none" stroke="#9b9b75" stroke-width="2" />
+        <rect x="1000" y="218" width="62" height="84" fill="#c2c1b2" />
+        <path d="M1000 272 Q1017 260 1034 267 T1062 262 V302 H1000Z" fill="#7e8469" />
+        <path d="M1000 284 Q1024 278 1040 283 T1062 279" fill="none" stroke="#9b9b75" stroke-width="2" />
+        <rect x="908" y="332" width="62" height="84" fill="#b5bec0" />
+        <path d="M908 386 Q925 371 941 380 T970 376 V416 H908Z" fill="#737f66" />
+        <path d="M908 397 Q929 391 946 396 T970 392" fill="none" stroke="#9b9b75" stroke-width="2" />
+        <rect x="1000" y="332" width="62" height="84" fill="#c3bba9" />
+        <path d="M1000 386 Q1018 374 1035 381 T1062 375 V416 H1000Z" fill="#777e62" />
+        <path d="M1000 397 Q1023 391 1040 396 T1062 392" fill="none" stroke="#9b9b75" stroke-width="2" />
     </g>
-    <g fill="#6a5440" opacity=".85">
-      <path d="M914 296 l6 -26 c10 -10 30 -10 38 -4 l4 -16 l8 4 l-4 22 l2 20 h-6 l-2 -14 h-30 l-4 14z" />
-      <path d="M1006 296 l6 -24 c10 -8 30 -8 36 -2 l10 -10 l6 6 l-8 14 l0 16 h-6 l-2 -14 h-30 l-4 14z" />
-      <path d="M914 410 l6 -26 c10 -10 30 -10 38 -4 l6 -20 l6 4 l-4 26 l2 20 h-6 l-2 -14 h-30 l-4 14z" />
-      <path d="M1006 410 l6 -26 c10 -10 30 -10 38 -4 l10 12 l-6 4 l-8 -2 l2 16 h-6 l-2 -14 h-30 l-4 14z" />
-    </g>
+    <defs>
+      <symbol id="ps-horse-photo" viewBox="0 0 80 110">
+        <ellipse cx="41" cy="99" rx="33" ry="4" fill="#30271e" opacity=".22" />
+        <path d="M21 55 C14 58 16 70 9 78 C18 75 23 67 26 61Z" fill="#493329" />
+        <path d="M23 67 L21 84 L22 97 M32 68 L32 84 L34 98 M51 68 L49 84 L48 98 M58 64 L60 82 L61 97" fill="none" stroke="#493329" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M16 53 C16 43 27 39 40 41 C54 41 62 48 62 57 C61 67 50 71 36 70 C23 70 16 64 16 53Z" fill="currentColor" stroke="#493329" stroke-width="2" />
+        <path d="M22 50 C29 43 40 42 49 45" fill="none" stroke="#fff" stroke-width="2" opacity=".2" />
+        <path d="M49 54 C53 45 53 34 61 24 L69 27 C66 39 68 49 62 61 L56 69Z" fill="currentColor" stroke="#493329" stroke-width="2" />
+        <path d="M50 51 C56 42 55 31 62 23 L65 25 C59 35 63 42 57 52Z" fill="#493329" />
+        <path d="M61 27 C63 18 69 14 75 18 L79 26 L74 33 L65 35Z" fill="currentColor" stroke="#493329" stroke-width="2" />
+        <path d="M65 20 L64 11 Q69 14 70 20 M71 18 L75 11 Q78 16 75 21" fill="currentColor" stroke="#493329" stroke-width="1.7" stroke-linejoin="round" />
+        <path d="M72 28 Q76 26 79 29 Q77 34 72 33Z" fill="#c49676" />
+        <circle cx="70" cy="23" r="1.6" fill="#241910" />
+        <circle cx="77" cy="30" r="1" fill="#493329" />
+        <path d="M18 98 h7 M30 99 h7 M45 99 h7 M57 98 h7" stroke="#251d17" stroke-width="3" stroke-linecap="round" />
+      </symbol>
+    </defs>
+    <use href="#ps-horse-photo" x="908" y="218" width="62" height="84" color="#9a5c3b" />
+    <path d="M962 235 C960 239 960 243 962 247" fill="none" stroke="#f1e7d2" stroke-width="2" stroke-linecap="round" />
+    <use href="#ps-horse-photo" x="1000" y="218" width="62" height="84" color="#574037" />
+    <use href="#ps-horse-photo" x="908" y="332" width="62" height="84" color="#76503c" />
+    <path d="M928 405 v7 M948 406 v7" stroke="#eee3ce" stroke-width="2" stroke-linecap="round" />
+    <use href="#ps-horse-photo" x="1000" y="332" width="62" height="84" color="#9c927f" />
     <g font-family="Caveat, cursive" font-size="15" fill="#3a2a1a" text-anchor="middle">
       <text x="939" y="304">Bles</text><text x="1031" y="304">Mina</text><text x="939" y="418">Dirk</text><text x="1031" y="418">Prins</text>
     </g>
@@ -161,9 +189,27 @@
   <g>
     <g clip-path="url(#psWin2)">
       <rect x="1110" y="230" width="140" height="250" fill="url(#psDusk)" />
-      <circle class="ps-star" cx="1150" cy="290" r="1.6" fill="#fff" /><circle class="ps-star c" cx="1212" cy="262" r="1.8" fill="#fff" />
-      <path d="M1110 440 h140 v40 h-140z" fill="#3a5a3a" />
-      <g class="ps-ree" fill="#5a3a26"><ellipse cx="1190" cy="436" rx="16" ry="7" /><path d="M1202 434 l8 -14 l6 2 l-6 14z" /><path d="M1180 440 v10 M1200 440 v10" stroke="#5a3a26" stroke-width="3" /></g>
+      <circle class="ps-star sky-nacht" cx="1150" cy="290" r="1.6" fill="#fff" /><circle class="ps-star c sky-nacht" cx="1212" cy="262" r="1.8" fill="#fff" />
+      <path class="ps-wei" d="M1110 440 h140 v40 h-140z" fill="#3a5a3a" />
+      <g class="ree-walk walking" style="--walk:180px;--dir:1;--walkt:24s">
+        <g id="ps-ree" transform="translate(1144 434) scale(.82)">
+          <path class="rleg a ps-ree-leg" d="M-16 -13 L-18 1 L-18 8" fill="none" stroke="#68452f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path class="rleg b ps-ree-leg" d="M-7 -12 L-5 1 L-5 8" fill="none" stroke="#68452f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path class="rleg b ps-ree-leg" d="M12 -13 L12 1 L14 8" fill="none" stroke="#68452f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path class="rleg a ps-ree-leg" d="M20 -12 L22 1 L21 8" fill="none" stroke="#68452f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M-24 -20 C-24 -31 -14 -34 0 -33 C14 -33 25 -29 25 -19 C24 -10 12 -8 0 -9 C-13 -8 -23 -11 -24 -20Z" fill="#9a6947" stroke="#68452f" stroke-width="1.5" />
+          <path d="M-22 -23 C-16 -31 -8 -33 -2 -32 C-7 -26 -12 -20 -19 -17Z" fill="#ead9bb" opacity=".8" />
+          <path d="M15 -27 C19 -31 23 -39 27 -43 L34 -39 C31 -34 29 -28 27 -22Z" fill="#9a6947" stroke="#68452f" stroke-width="1.5" />
+          <g class="ps-ree-head">
+            <ellipse cx="34" cy="-43" rx="10" ry="6.5" fill="#a57450" stroke="#68452f" stroke-width="1.5" />
+            <path d="M28 -47 L26 -57 Q30 -55 33 -48 M35 -48 L38 -57 Q41 -54 39 -46" fill="#9a6947" stroke="#68452f" stroke-width="1.5" stroke-linejoin="round" />
+            <path d="M40 -41 q7 0 9 3 q-5 4 -11 1z" fill="#c28b68" />
+            <circle cx="37" cy="-45" r="1.5" fill="#241910" />
+            <circle cx="48" cy="-38" r="1.4" fill="#241910" />
+          </g>
+          <path d="M-18 8 h4 M-7 8 h4 M12 8 h4 M19 8 h4" stroke="#35271e" stroke-width="2.5" stroke-linecap="round" />
+        </g>
+      </g>
     </g>
     <path d="M1120 470 v-170 a60 60 0 0 1 120 0 v170z" fill="none" stroke="#e9e2d2" stroke-width="10" />
     <path d="M1180 240 v230 M1120 330 h120 M1120 400 h120" stroke="#e9e2d2" stroke-width="5" />
@@ -242,7 +288,7 @@
 
   <!-- klikvlakken -->
   <g class="hits">
-    <rect class="hit" data-hs="uitstal" data-label="De staldeur: naar het erf" x="76" y="296" width="168" height="364" fill="transparent" />
+    <rect class="hit" data-hs="uitstal" data-label="De deur naar de hal" x="76" y="296" width="168" height="364" fill="transparent" />
     <rect class="hit" data-hs="haak" data-label="Een haak boven de deur" x="130" y="256" width="60" height="44" fill="transparent" />
     <rect class="hit" data-hs="plank" data-label="Een oude plank boven de deur" x="80" y="222" width="160" height="34" fill="transparent" />
     <rect class="hit" data-hs="ruif" data-label="De oude ruif" x="300" y="300" width="350" height="200" fill="transparent" />

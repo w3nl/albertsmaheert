@@ -5,7 +5,7 @@ const HINTS = {
   /* hoofdstuk 1 */
   goot: ["Roelof staat op een ladder bij de dakgoot. Klik op hem: hij heeft hulp nodig met rekenen.", "3 millimeter per meter, en de goot is 12 meter: 12 × 3 = 36 millimeter."],
   post: ["Je sleutel zit in het sleutelkastje naast de voordeur. Lees het briefje op de deur: de code staat op elke brief die hier aankomt.", "Kijk op de brievenbus: Wolddijk 60, 9784 TE Noordwolde. De code is de postcode zonder letters: 9784."],
-  stal: ["Je hebt de sleutel. Waar is jouw kamer?", "Klik op de staldeur van de schuur, met het bordje Paardenstal ernaast."],
+  stal: ["Je hebt de sleutel. Waar is jouw kamer?", "Klik op de staldeur van de schuur, met het bordje Paardenstal ernaast. In de hal is links de deur van jouw kamer."],
   hoefijzer: ["Er moet iets boven de deur van de Paardenstal hangen. Heb je onder de welkomswagen op het erf goed gekeken?", "In het gras onder de wagen ligt een hoefijzer. Pak het, ga naar de Paardenstal en gebruik het op de haak boven de deur."],
   hoef: ["Hang het hoefijzer aan de spijker boven de staldeur. Weet je nog wat Roelof zei?", "Met de open kant naar boven, anders valt het geluk eruit."],
   schoft: ["\"Kiek bie de schoft\": kijk bij de schoft. Tussen de ramen hangen oude foto's van de paarden, met een stokmaat.", "Een paard meet je aan de schoft (boven de voorbenen), niet aan het hoofd. Prins graast, maar is het grootst: 168 cm."],
@@ -26,7 +26,7 @@ const HINTS = {
   /* hoofdstuk 4 */
   lampjes: ["De feestverlichting doet het niet: de lampjes zitten in serie. Klik op de slinger en meet met Roelofs tester.", "Meet steeds in het midden (tot 8, dan 12, dan 10, dan 11). Lampje 11 is stuk: vervang het."],
   tafel: ["Ditty puzzelt met de tafelschikking. Klik op de tafel of op Ditty.", "Stoel 1 Ditty, 2 Roelof, 3 Jij, 4 tante Grietje, 5 buurman Jan."],
-  pool: ["Roelof zoekt zijn dopsleutel. Neef Sjoerd daagt je uit aan de pooltafel.", "Richt op ruit 2: zo kaatst de witte bal via de bovenband in het middenzakje."],
+  pool: ["Roelof zoekt zijn dopsleutel. Neef Sjoerd daagt je uit aan de pooltafel in de hal: door de deur achter de feesttafel.", "Richt op ruit 2: zo kaatst de witte bal via de bovenband in het middenzakje."],
   sporen: ["Roelof vergat zijn koevoet in de tuin. Ga door de glazen deuren naar buiten en bekijk de sporen in het gras.", "Spoor 1 (twee puntige teentjes, een hartje) is van de ree. Het loopt naar de schommels: pak daar de koevoet."],
   bouten: ["Op de glazen plaat in de vloer zitten vier bouten.", "Gebruik de dopsleutel op de glazen plaat."],
   wrik: ["De bouten zijn los. Nu de zware plaat nog.", "Gebruik de koevoet op de glazen plaat, en open het trommeltje."],
@@ -37,7 +37,7 @@ function stage1(){
   if(!f.goot) return 'goot';
   if(!f.post) return 'post';
   if(!f.stalOpen) return 'stal';
-  if(!f.hoef) return has('hoefijzer') ? 'hoef' : 'hoefijzer';
+  if(!f.hoef && !f.schoft) return has('hoefijzer') ? 'hoef' : 'hoefijzer';
   if(!f.schoft) return 'schoft';
   if(!f.licht) return 'licht';
   return 'brief';
@@ -48,7 +48,7 @@ function stage2(){
   if(!f.telmerk) return 'telmerk';
   if(!f.behang) return 'behang';
   if(!f.prenten) return 'prenten';
-  return 'kast';
+  return f.kast ? null : 'kast';
 }
 function stage3(){
   const f = S.f;
@@ -64,7 +64,7 @@ function stage4(){
   if(!f.lampjes) return 'lampjes';
   if(!f.tafel) return 'tafel';
   if(!f.pool && !f.bouten) return 'pool';
-  if(!f.sporen && !f.grupOpen) return 'sporen';
+  if(!f.koevoetTaken && !f.grupOpen) return 'sporen';
   if(!f.bouten) return 'bouten';
   return 'wrik';
 }

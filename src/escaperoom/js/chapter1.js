@@ -11,9 +11,41 @@ Object.assign(ITEMS, {
 });
 
 /* ---------- de kamers tekenen ---------- */
-function buildErf(){}
+/* Het erf en de hal horen bij elk hoofdstuk; na hoofdstuk 1 ziet het erf eruit zoals aan het eind daarvan. */
+const erfFlags = () => F(1);
+/* Het moment van de dag per hoofdstuk, en waar de zon (of in hoofdstuk 4 de maan) dan staat. */
+const DAGDEEL = { 1: 'avond', 2: 'ochtend', 3: 'middag', 4: 'nacht' };
+const KLOKTIJD = { 1: '19:12', 2: '08:12', 3: '14:12', 4: '21:12' };
+const ZON = { avond: [1460, 300, 'De avondzon'], ochtend: [680, 150, 'De ochtendzon'], middag: [1080, 55, 'De zon'], nacht: [420, 70, 'De maan'] };
+function dagdeel(scene){
+  const t = DAGDEEL[S.ch] || 'avond';
+  Object.values(DAGDEEL).forEach(k => $('#sc-' + scene).classList.toggle('t-' + k, k === t));
+  return t;
+}
+/* 's Avonds in hoofdstuk 4 zijn de kamers die overdag getekend zijn wat donkerder; de lucht achter het raam volgt het dagdeel. */
+function veil(scene, op){
+  dagdeel(scene);
+  const sc = $('#sc-' + scene); let v = sc.querySelector('.veil');
+  if(!v){ v = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    [['class', 'veil'], ['width', 1600], ['height', 900], ['fill', '#0a1430'], ['pointer-events', 'none']].forEach(([k, val]) => v.setAttribute(k, val));
+    sc.insertBefore(v, sc.querySelector('.hits')); }
+  v.setAttribute('opacity', DAGDEEL[S.ch] === 'nacht' ? op : 0);
+}
+function buildErf(){
+  const scene = $('#sc-erf'), hydro = $('#ef-hydro84'), trees = $('#ef-bomen');
+  if(scene && hydro && trees && hydro.nextElementSibling !== trees) scene.insertBefore(hydro, trees);
+}
 function applyErf(){
-  const f = S.f;
+  buildErf();
+  const f = erfFlags(), t = dagdeel('erf'), [zx, zy, zl] = ZON[t];
+  $('#ef-sunpos').setAttribute('transform', `translate(${zx - 1460} ${zy - 300})`);
+  vis('#ef-sunpos', t !== 'nacht'); vis('#ef-night', t === 'nacht'); vis('#ef-moon', t === 'nacht');
+  vis('#ef-hydro84', S.ch === 3);
+  vis('#ef-swallows', t !== 'nacht'); vis('#hit-zwaluw', t !== 'nacht');
+  const hz = $('#hit-zon'); hz.setAttribute('x', zx - 40); hz.setAttribute('y', zy - 40); setLabel('#hit-zon', zl);
+  // Ditty's briefje hangt er tot ze terug is uit Bedum (het eind van hoofdstuk 1)
+  const note = S.ch === 1 && !S.f.out1;
+  vis('#ef-note', note); vis('#sc-erf [data-hs="briefje"]', note);
   vis('#ef-ladder', !f.goot); vis('#ef-roelof', !f.goot);
   vis('#sc-erf [data-hs="roelof"]', !f.goot); vis('#sc-erf [data-hs="ladder"]', !f.goot);
   vis('#ef-drip', !f.goot);
@@ -22,7 +54,9 @@ function applyErf(){
   $('#ef-kastled').setAttribute('fill', f.post ? '#5fd36a' : '#e2483d');
 }
 function applyStal(){
-  const f = S.f;
+  const f = F(1);
+  dagdeel('stal');
+  $('#ps-time').textContent = KLOKTIJD[S.ch] || KLOKTIJD[1];
   vis('#ps-shoe', !!f.hoef);
   vis('#ps-plankcover', !f.hoef);
   vis('#ps-carve', !!f.hoef);
@@ -51,14 +85,15 @@ const H = {
   },
   /* ---- het erf ---- */
   roelof(){
-    if(!S.f.introDone) return;
+    // introDone kan ontbreken als de intro werd onderbroken (menu, ander klikvlak): blokkeer alleen tijdens het gesprek
+    if(!S.f.introDone && !$('#dialog').hidden) return;
     if(!S.f.goot) return say([['roelof', "Moi! Jij bent zeker de gast voor de Paardenstal. Ik ben Roelof. Ditty doet de B&B, ik doe de klusjes. En die zijn er altijd."],
       ['roelof', "Deze dakgoot loopt over, zie je die druppels aan het eind? Het water stroomt de verkeerde kant op. Help je even mee rekenen?"]], () => openGoot());
     say([['roelof', "Dank je wel!"]]);
   },
-  ladder(){ say(S.f.goot ? "De ladder is weg." : ["Een lange aluminium ladder, tegen de dakgoot. Roelof staat erop.", "Hij staat precies voor het sleutelkastje. Daar kom je dus niet bij zolang Roelof bezig is."]); },
+  ladder(){ say(erfFlags().goot ? "De ladder is weg." : ["Een lange aluminium ladder, tegen de dakgoot. Roelof staat erop.", "Hij staat precies voor het sleutelkastje. Daar kom je dus niet bij zolang Roelof bezig is."]); },
   goot(){
-    if(S.f.goot) return say("De dakgoot loopt nu mooi schuin af naar de regenpijp. Geen druppel loopt er meer over.");
+    if(erfFlags().goot) return say("De dakgoot loopt nu mooi schuin af naar de regenpijp. Geen druppel loopt er meer over.");
     say(["Een zinken dakgoot langs het voorhuis. Aan het rechter eind druppelt het water over de rand.", "De regenpijp zit aan de linkerkant."]);
   },
   voordeur(){
@@ -73,8 +108,8 @@ const H = {
       <div class="sig">Tot straks! Ditty</div></div>`); },
   huisnr(){ say(["Huisnummer 60. Wolddijk 60.", "De Wolddijk is een van de oudste wegen van de stad Groningen naar het noorden, het Hogeland."]); },
   kastje(){
-    if(S.f.post) return say("Het sleutelkastje staat open. Leeg: jouw sleutel heb je al.");
-    if(!S.f.goot) return say(["Het sleutelkastje, met zes knopjes en een rood lampje.", "De ladder van Roelof staat ervoor. Daar kun je niet bij zonder hem eraf te duwen. En dat doe je natuurlijk niet."]);
+    if(erfFlags().post) return say("Het sleutelkastje staat open. Leeg: jouw sleutel heb je al.");
+    if(!erfFlags().goot) return say(["Het sleutelkastje, met zes knopjes en een rood lampje.", "De ladder van Roelof staat ervoor. Daar kun je niet bij zonder hem eraf te duwen. En dat doe je natuurlijk niet."]);
     openKastje();
   },
   brievenbus(){
@@ -83,13 +118,12 @@ const H = {
   ramen(){ say("Witte ramen met kleine ruitjes en groene luiken. In de vensterbank staan bloemen. Ditty houdt van bloemen, dat zie je overal."); },
   schoorsteen(){ say("Er komt een dun rookpluimpje uit de schoorsteen. Er staat vast koffie, of een pan soep."); },
   dakramen(){ say(["Drie dakramen in het grote dak van de schuur. Daar was vroeger de hooizolder.", "Nu zijn het drie B&B-kamers, genoemd naar borgen die hier vroeger in de buurt stonden: Thedema, Alma en Folkerda."]); },
-  deeldeur(){ say(["De grote deeldeuren van de schuur. Hier reden vroeger de hooiwagens naar binnen.", "Daarachter is nu de zaal, waar de koeien stonden. Morgenavond is daar een feest, zegt een briefje op de deur."]); },
   stalraam(){ say("Een boograam met een hobbelpaardje in de vensterbank. Dat moet jouw kamer zijn: de Paardenstal."); },
   stal(){
-    if(S.f.stalOpen) return go('stal');
+    if(erfFlags().stalOpen) return go('hal');
     if(!has('sleutel')) return say(["De staldeur van de oude paardenstal. Op het bordje ernaast staat: Paardenstal.", "Op slot. Je sleutel ligt in het sleutelkastje bij de voordeur, zegt Ditty's briefje."]);
     take('sleutel'); S.f.stalOpen = true; save(); beep(500, .06); setTimeout(() => beep(700, .08), 120);
-    say("Klik, klak. De staldeur gaat open, de bovenste helft eerst. Je stapt naar binnen…", () => go('stal'));
+    say(["Klik, klak. De staldeur gaat open. Je stapt naar binnen, in de hal met de pooltafel.", "Links is de deur van jouw kamer, de Paardenstal. De trap gaat naar de hooizolder, en de dubbele deuren naar de zaal."], () => go('hal'));
   },
   bord(){
     S.f.moi = (S.f.moi || 0) + 1; save();
@@ -99,7 +133,7 @@ const H = {
   bnbbord(){ say(["Het bord van de B&B aan de weg: een dakje van zwarte pannen, foto's van de kamers, en een bak vol rode geraniums.", "Ernaast wappert de Groninger vlag: rood, blauw, en een groen kruis met wit. Hier ben je echt in Groningen."]); },
   geiten(){ gag('#ef-geiten', 'mek', 1400); beep(420, .25, 'sawtooth', .03); setTimeout(() => beep(380, .3, 'sawtooth', .03), 260);
     say(["Mèèèh! Drie geitjes in het veld voor de boerderij. Een witte, een bruine en een zwarte.", ['roelof', "Vroeger hadden we koeien en schapen. De laatste jaren houden de geitjes het gras kort. En ze eten alles, ook de bloemen van Ditty."]]); },
-  ballon(){ gag('#ef-balloons', 'bob', 1200); beep(700, .05, 'sine', .04); say("Rode ballonnen aan de wagen. Morgen is er feest in de zaal."); },
+  ballon(){ gag('#ef-balloons', 'bob', 1200); beep(700, .05, 'sine', .04); say(S.ch === 4 ? "Rode ballonnen aan de wagen. Het feest in de zaal is begonnen!" : S.ch > 1 ? "Rode ballonnen aan de wagen. Vanavond is er feest in de zaal." : "Rode ballonnen aan de wagen. Morgen is er feest in de zaal."); },
   wiel(){ gag('#ef-wheel', 'spin', 2200); beep(200, .1, 'triangle', .04); say(["Je geeft het wagenwiel een zetje. Het draait knarsend een rondje.", "Een houten wiel met een ijzeren band eromheen. Die band zette de smid er gloeiend heet om: als hij afkoelt, krimpt hij, en dan zit alles muurvast."]); },
   hoef(){ S.f.hoefTaken = true; give('hoefijzer'); applyVisuals(); say(["In het gras onder de wagen glimt iets. Een oud hoefijzer!", "Roestig, met nog een paar nagelgaatjes. Dat bewaar je."]); },
   fiets(){ say(["Jouw fiets, met fietstassen. Je bent hier langs de knooppunten naartoe gefietst, over de dijkjes en langs de weilanden.", "De laatste kilometers ging het vanzelf. Het is hier zo plat als een pannenkoek."]); },
@@ -116,33 +150,33 @@ const H = {
     say("Zwaluwen scheren over het erf en vangen muggen. Hoeveel zijn het er?");
   },
   /* ---- de Paardenstal ---- */
-  uitstal(){
-    if(S.f.out1) return nextChapter();
-    go('erf');
-  },
+  uitstal(){ go('hal'); },
   haak(){
-    if(S.f.hoef) return say("Het hoefijzer hangt aan de spijker, met de open kant naar boven. Zo blijft het geluk erin.");
+    if(F(1).hoef) return say("Het hoefijzer hangt aan de spijker, met de open kant naar boven. Zo blijft het geluk erin.");
     say(["Boven de deur zit een dikke spijker in een oude plank. Daar hing vroeger vast iets aan.", has('hoefijzer') ? "Je denkt aan het hoefijzer in je rugzak." : "Er hangt niets aan."]);
   },
   plank(){
-    if(S.f.hoef) return say(["Er is iets in de plank gekerfd, heel oud: Kiek bie de schoft. H.", "Kiek bie de schoft is Gronings voor: kijk bij de schoft. En H… wie is H?"]);
+    if(F(1).hoef) return say(["Er is iets in de plank gekerfd, heel oud: Kiek bie de schoft. H.", "Kiek bie de schoft is Gronings voor: kijk bij de schoft. En H… wie is H?"]);
     say("Een oude plank boven de deur, met een spijker erin. Hij zit een beetje los.");
   },
   ruif(){
     poke('#ps-ruif', 'g-shake', null, 300);
-    if(S.f.brief) return say("De oude ruif. Hier trokken de paarden vroeger hun hooi uit. Nu is het versiering, en een heel goede verstopplek.");
+    if(F(1).brief) return say("De oude ruif. Hier trokken de paarden vroeger hun hooi uit. Nu is het versiering, en een heel goede verstopplek.");
     say(["Een oude ruif, het rek waar de paarden hun hooi uit plukten. Eronder de voerbak.", "Roelof heeft hem laten zitten toen de stal een kamer werd. Er ligt nog wat stro in."]);
   },
   bordjes(){ say(["Stalbordjes met de namen van de paarden die hier stonden: Bles, Mina, Dirk en Prins.", "Elk paard had zijn eigen plek, met zijn naam erboven."]); },
   prins(){
-    if(!S.f.schoft) return say("Het stalbordje van Prins. Het zit een beetje scheef.");
-    if(S.f.brief) return say("Achter het bordje van Prins zit een gat in de muur. Leeg nu.");
-    if(!S.f.licht) return say(["Achter het bordje van Prins zit een gat in de muur. Pikdonker.", "Je steekt je hand niet zomaar in een gat van honderd jaar oud. Had je maar licht…"]);
+    if(!F(1).schoft) return say("Het stalbordje van Prins. Het zit een beetje scheef.");
+    if(F(1).brief) return say("Achter het bordje van Prins zit een gat in de muur. Leeg nu.");
+    if(!F(1).licht) return say(["Achter het bordje van Prins zit een gat in de muur. Pikdonker.", "Je steekt je hand niet zomaar in een gat van honderd jaar oud. Had je maar licht…"]);
     openBlik();
   },
   fotos(){ openFotos(); },
-  raam1(){ say(["Een boograam, zoals in een echte paardenstal. Buiten wordt het donker; de maan komt op.", "De ramen liggen op het oosten. Morgenvroeg schijnt de zon hier als eerste naar binnen: lekker koel in de zomer, zegt Ditty."]); },
-  raam2(){ say(["Achter in de wei staat een ree te grazen, een donker silhouet tegen de lucht.", "Hij kijkt niet eens op."]); },
+  raam1(){ say({ 2: ["De ochtendzon schijnt door het boograam. De ramen liggen op het oosten: hier komt de zon als eerste binnen.", "Buiten glinstert de dauw op het gras."],
+    3: "Door het boograam zie je een blauwe lucht boven de wei. De zon staat nu hoog, aan de andere kant van de boerderij.",
+    4: "Buiten is het donker. De maan staat boven de wei, en uit de zaal klinkt muziek." }[S.ch]
+    || ["Een boograam, zoals in een echte paardenstal. Buiten wordt het donker; de maan komt op.", "De ramen liggen op het oosten. Morgenvroeg schijnt de zon hier als eerste naar binnen: lekker koel in de zomer, zegt Ditty."]); },
+  raam2(){ say(S.ch === 2 || S.ch === 3 ? ["Achter in de wei staat een ree te grazen, in het zonnetje.", "Hij kijkt niet eens op."] : ["Achter in de wei staat een ree te grazen, een donker silhouet tegen de lucht.", "Hij kijkt niet eens op."]); },
   hooglander(){ beep(150, .5, 'sawtooth', .03); say(["Een schilderij van een koe met lange horens en een rode pony.", "Moeeeh, zegt ze niet. Maar je hoort het toch."]); },
   bed(){
     S.f.bed = (S.f.bed || 0) + 1; save(); gag('#ps-bed', 'boing', 600); beep(260, .08, 'sine', .05);
@@ -285,6 +319,18 @@ function openFotos(){
   const ticks = [];
   for(let cm = 100; cm <= 200; cm += 10) ticks.push(`<path d="M8 ${scale(cm)} h${cm % 50 ? 8 : 14}" stroke="#3a2a1a" stroke-width="2"/>${cm % 20 === 0 ? `<text x="26" y="${scale(cm) + 4}" font-family="IBM Plex Mono, monospace" font-size="10" fill="#3a2a1a">${cm}</text>` : ''}`);
   openModal('Oude paardenfoto\'s', 'Bles, Mina, Dirk en Prins · ze stonden hier ooit, elk op zijn eigen plek', `
+    <div class="horse-photos" aria-label="De vier oude paardenfoto's">
+      ${HORSES.map(([name, , , color, blaze]) => `<figure class="horse-photo">
+        <svg viewBox="0 0 80 110" role="img" aria-label="${name}">
+          <rect width="80" height="110" fill="#bcc9c8" />
+          <path d="M0 75 Q20 67 40 73 T80 68 V110 H0Z" fill="#77856a" />
+          <path d="M0 84 Q20 78 40 83 T80 78" fill="none" stroke="#9b9b75" stroke-width="2" />
+          <use href="scenes/stal.svg#ps-horse-photo" width="80" height="110" color="${color}" />
+          ${blaze ? '<path d="M62 25 Q65 34 61 46" fill="none" stroke="#f3efe6" stroke-width="2.5" stroke-linecap="round" />' : ''}
+        </svg>
+        <figcaption>${name}</figcaption>
+      </figure>`).join('')}
+    </div>
     <svg viewBox="0 0 560 230" class="pz-svg" aria-hidden="true" style="max-width:640px">
       <rect width="560" height="230" fill="#4a3a2a" rx="6"/>
       <rect x="4" y="4" width="48" height="222" fill="#e9dcb8"/>${ticks.join('')}
@@ -298,7 +344,7 @@ function openFotos(){
     <div class="feedback" id="f-fb"></div>`, body => {
     body.querySelectorAll('.opt').forEach(b => b.onclick = () => {
       const v = b.dataset.v;
-      if(S.f.schoft) return fb('#f-fb', 'Prins was het grootst: 168 centimeter aan de schoft.', 'good');
+      if(F(1).schoft) return fb('#f-fb', 'Prins was het grootst: 168 centimeter aan de schoft.', 'good');
       if(v === 'Prins'){ b.classList.add('ok'); S.f.schoft = true; save(); fb('#f-fb', 'Prins: 168 centimeter aan de schoft, ook al graast hij met zijn hoofd omlaag. Er klinkt iets bij de ruif…', 'good'); return solved(schoftDone, 1800); }
       nope();
       fb('#f-fb', v === 'Bles' ? 'Bles steekt zijn hoofd het hoogst in de lucht. Maar dat zegt niks: kijk naar de schoft.'
@@ -365,20 +411,22 @@ Object.assign(H, {
   schoorsteen(){ poke('#ef-house .ef-smoke', 'g-pop', 'Puf!', 200); say("Er komt een dun rookpluimpje uit de schoorsteen. Er staat vast koffie, of een pan soep."); },
   voordeur(){
     beep(880, .15, 'sine', .05); setTimeout(() => beep(660, .25, 'sine', .05), 180);
-    if(!S.f.post){ gagText($('#ef-door'), 'Ding dong!'); return say(["Je drukt op de bel. Ding dong… Niemand.", "Op de deur hangt een briefje."]); }
+    if(!erfFlags().post){ gagText($('#ef-door'), 'Ding dong!'); return say(["Je drukt op de bel. Ding dong… Niemand.", "Op de deur hangt een briefje."]); }
     say("De voordeur van het voorhuis. Daar wonen Ditty en Roelof. Jouw kamer heeft een eigen deur: de staldeur, bij de schuur.");
   },
   fiets(){ poke('#ef-fiets', 'g-shake', 'Tring tring!'); beep(1800, .06, 'sine', .05); setTimeout(() => beep(1800, .06, 'sine', .05), 120);
-    say(["Tring tring! Jouw fiets, met fietstassen. Je bent hier langs de knooppunten naartoe gefietst, over de dijkjes en langs de weilanden.", "De laatste kilometers ging het vanzelf. Het is hier zo plat als een pannenkoek."]); },
+    openExit('Jouw fiets', 'Met fietstassen · langs de knooppunten hierheen gefietst',
+      "Tring tring! Je bent hier over de dijkjes en langs de weilanden naartoe gefietst. Het is hier zo plat als een pannenkoek. Fiets je weer naar huis?",
+      [['Naar huis fietsen', 'Terug naar het beginscherm', toMenu]]); },
   knoop(){ poke('#ef-knoop', 'g-wiggle', null, 500); say(["Een groen-wit bordje van de fietsknooppunten. Je fietst van nummer naar nummer, zonder kaart.", "Vanaf hier rijd je zo naar oude kerkjes, wierden, molens en de scheve toren van Bedum."]); },
   bnbbord(){ poke('#ef-bnbbord', 'g-wiggle', null, 500); say(["Het bord van de B&B aan de weg: een dakje van zwarte pannen, foto's van de kamers, en een bak vol rode geraniums.", "Ernaast wappert de Groninger vlag: rood, blauw, en een groen kruis met wit. Hier ben je echt in Groningen."]); },
   martini(){ S.ach.martini = true; save(); poke('#ef-martini', 'g-glow', "d'Olle Grieze"); say(["Ver weg aan de horizon steekt een toren boven de bomen uit: de Martinitoren, in de stad Groningen.", "Hemelsbreed 7,5 kilometer hiervandaan. De Groningers noemen hem d'Olle Grieze: de oude grijze."]); },
-  deeldeur(){ gagText($('#sc-erf [data-hs="deeldeur"]'), 'Kraaak'); beep(140, .4, 'sawtooth', .02);
-    say(["De grote deeldeuren van de schuur kraken als je ertegen duwt. Hier reden vroeger de hooiwagens naar binnen.", "Daarachter is nu de zaal, waar de koeien stonden. Morgenavond is daar een feest, zegt een briefje op de deur."]); },
+  deeldeur(){ gagText($('#sc-erf [data-hs="deeldeur"]'), 'Kraaak'); beep(140, .4, 'sawtooth', .02); enterRoom('museum'); },
   bomen(){ poke('#ef-bomen', 'g-shake', 'Ritsel', 400); beep(2600, .05); setTimeout(() => beep(3000, .05), 80);
     say("Je schudt aan een tak. Ritsel ritsel… en een merel vliegt boos tjilpend weg. Deze bomen staan hier al langer dan de B&B."); },
   wolk(){ poke('#ef-wolken', 'g-pop'); say("Een wolk in de vorm van… een schaap? Een trekker? Een stroopwafel? In Groningen is de lucht zo groot dat je er de hele dag naar kunt kijken."); },
-  zon(){ poke('#ef-zon', 'g-glow'); say("De avondzon zakt achter de bomen. Over een uurtje kleurt de hele lucht oranje boven het vlakke land."); },
+  zon(){ poke(S.ch === 4 ? '#ef-maan' : '#ef-zon', 'g-glow'); say({ 2: "De ochtendzon schijnt over het erf. De dauw ligt nog op het gras.", 3: "De middagzon staat hoog boven het vlakke land. Lekker weer om te fietsen.",
+    4: "Een volle maan boven de schuur. Uit de zaal klinkt muziek en gelach: het feest is begonnen." }[S.ch] || "De avondzon zakt achter de bomen. Over een uurtje kleurt de hele lucht oranje boven het vlakke land."); },
   bord(){
     S.f.moi = (S.f.moi || 0) + 1; save(); poke('#ef-chalk', 'g-pop', 'Moi!', 600);
     if(S.f.moi >= 2 && !S.ach.moi){ S.ach.moi = true; save(); return say(["Je zegt hardop: \"Moi!\"", "Een zwaluw scheert langs. Je bent nu officieel een beetje Gronings."]); }
@@ -388,4 +436,27 @@ Object.assign(H, {
   bordjes(){ poke('#ps-bordjes', 'g-swing', null, 500); say(["Stalbordjes met de namen van de paarden die hier stonden: Bles, Mina, Dirk en Prins. Ze schommelen even aan hun spijkers.", "Elk paard had zijn eigen plek, met zijn naam erboven."]); },
   rieten(){ poke('#ps-rieten', 'g-jump', 'Kraak'); beep(180, .2, 'triangle', .03); say("Je ploft in de rieten stoel. Kraak! Hij zit heerlijk."); },
   bloemen(){ gagText($('#sc-stal [data-hs="bloemen"]'), 'Hatsjoe!'); say("Je ruikt aan de bloemen. Hatsjoe! Verse bloemen van Ditty, in elke kamer."); }
+});
+/* Als hoofdstuk 1 klaar is, ga je via het bed (slapen) naar hoofdstuk 2. */
+const bedSpring = H.bed;
+H.bed = h => {
+  if(!S.f.out1) return bedSpring(h);
+  openExit('Het bed', 'Extra lang, met een okergele sprei', "Het is laat. Morgen na het ontbijt gaan jullie zoeken op de hooizolder.",
+    [['Slapen tot morgen', 'Door naar hoofdstuk 2', nextChapter], ['Nog even op het bed springen', '', () => bedSpring(h)]]);
+};
+
+/* ---------- de hal: de recreatieruimte met de pooltafel, in elk hoofdstuk (zoals in het echt) ---------- */
+function applyHal(){ dagdeel('hal'); }
+Object.assign(H, {
+  hlbuiten(){ go('erf'); },
+  hlstal(){ enterRoom('stal'); },
+  hltrap(){ enterRoom('zolder'); },
+  hlzaal(){ enterRoom('zaal'); },
+  hlvoetbal(){ poke('#hl-voetbal', 'g-shake', 'Goal!', 500); say("Je draait aan een stang. Klak! Het balletje schiet in het doel. De blauwe mannetjes kijken beteuterd."); },
+  hltafeltennis(){ poke('#hl-tafeltennis', 'g-wiggle', 'Pok pok'); beep(900, .03); setTimeout(() => beep(900, .03), 260);
+    say("De tafeltennistafel staat opgeklapt tegen de muur. Je kaatst een balletje ertegen: pok, pok, pok. Je bent je eigen tegenstander."); },
+  hlkeu(){ poke('#hl-keu', 'g-tilt'); say(["Een rek met keuen, en een krijtbordje met de stand: Sjoerd 3, Roelof 1.", "Neef Sjoerd is de pooltafelkampioen van de familie. Dat staat er in elk geval."]); },
+  hllamp(h){ poke('.hl-lamp', 'g-swing'); toggleLamp('lamp-hl', h); },
+  lampje(h){ toggleLamp(h.dataset.lamp, h); },
+  pool(){ say(["De pooltafel. De ballen liggen nog klaar van het laatste potje.", "Er hangen keuen aan de muur. Zaterdagavond, op het feest, komt neef Sjoerd: die daagt iedereen uit."]); }
 });

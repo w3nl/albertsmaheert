@@ -5,6 +5,10 @@
 .ef-cloud{animation:efDrift 38s ease-in-out infinite alternate}
 .ef-cloud.b{animation-duration:52s;animation-delay:-12s}
 .ef-cloud.c{animation-duration:44s;animation-delay:-20s}
+@keyframes efHydroDrive{0%,2%{transform:translateX(200px);opacity:0}4%{transform:translateX(170px);opacity:1}46%{transform:translateX(-1700px);opacity:1}48%,50%{transform:translateX(-1700px);opacity:0}94%{transform:translateX(170px);opacity:1}96%,100%{transform:translateX(200px);opacity:0}}
+.ef-hydro84-drive{animation:efHydroDrive 36s linear infinite}
+@keyframes efHydroFace{0%,46%{transform:scaleX(1);animation-timing-function:steps(1,end)}48%,96%{transform:scaleX(-1);animation-timing-function:steps(1,end)}98%,100%{transform:scaleX(1)}}
+.ef-hydro84-facing{transform-box:fill-box;transform-origin:center;animation:efHydroFace 36s steps(1,end) infinite}
 @keyframes efSwallow{0%{transform:translate(-120px,30px) scaleX(1)}25%{transform:translate(80px,-10px)}50%{transform:translate(260px,40px)}75%{transform:translate(90px,70px)}100%{transform:translate(-120px,30px)}}
 .ef-sw{animation:efSwallow 9s ease-in-out infinite}
 .ef-sw.b{animation-duration:11s;animation-delay:-3s}
@@ -36,6 +40,51 @@
 @keyframes efRock{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
 .ef-paardje{transform-box:fill-box;transform-origin:50% 100%}
 
+/* ---- het moment van de dag op het erf en achter de buitendeur van de hal (dagdeel() in chapter1.js) ---- */
+#sc-erf.t-ochtend #efSky stop:nth-child(1){stop-color:#8ec5ea}
+#sc-erf.t-ochtend #efSky stop:nth-child(2){stop-color:#d6e9f0}
+#sc-erf.t-ochtend #efSky stop:nth-child(3){stop-color:#ffe2c4}
+#sc-erf.t-middag #efSky stop:nth-child(1){stop-color:#3f8fd6}
+#sc-erf.t-middag #efSky stop:nth-child(2){stop-color:#8cc4ea}
+#sc-erf.t-middag #efSky stop:nth-child(3){stop-color:#dcecf2}
+#sc-erf.t-nacht #efSky stop:nth-child(1){stop-color:#0e1a3a}
+#sc-erf.t-nacht #efSky stop:nth-child(2){stop-color:#2a3a6a}
+#sc-erf.t-nacht #efSky stop:nth-child(3){stop-color:#b8705a}
+#sc-erf.t-nacht #ef-wolken{fill:#8a96b8;opacity:.35}
+#sc-erf.t-ochtend #ef-wolken{fill:#fff4ec}
+@keyframes efStar{0%,100%{opacity:.3}50%{opacity:1}}
+.ef-star{animation:efStar 3s ease-in-out infinite}
+.ef-star.b{animation-delay:-1s}.ef-star.c{animation-delay:-2s}
+#sc-hal.t-ochtend #hlEvening stop:nth-child(1){stop-color:#9ccbe8}
+#sc-hal.t-ochtend #hlEvening stop:nth-child(2){stop-color:#f4e6cc}
+#sc-hal.t-middag #hlEvening stop:nth-child(1){stop-color:#4a96d8}
+#sc-hal.t-middag #hlEvening stop:nth-child(2){stop-color:#bcdcf0}
+#sc-hal.t-nacht #hlEvening stop:nth-child(1){stop-color:#0e1a3a}
+#sc-hal.t-nacht #hlEvening stop:nth-child(2){stop-color:#2a3a6a}
+#sc-hal.t-nacht #hlEvening stop:nth-child(3){stop-color:#1e3a24}
+#sc-hal.t-ochtend .hl-sun{transform:translate(50px,10px)}
+#sc-hal.t-middag .hl-sun{transform:translate(20px,-24px);fill:#fff4c4}
+#sc-hal.t-nacht .hl-sun{fill:#f4f0dc}
+
+/* ---- de lucht achter de boogramen van de Paardenstal (op het oosten) ---- */
+#sc-stal.t-avond #psDusk stop:nth-child(1){stop-color:#4a6aa8}
+#sc-stal.t-avond #psDusk stop:nth-child(2){stop-color:#9aaed4}
+#sc-stal.t-avond #psDusk stop:nth-child(3){stop-color:#f0c4a4}
+#sc-stal.t-ochtend #psDusk stop:nth-child(1){stop-color:#8ec5ea}
+#sc-stal.t-ochtend #psDusk stop:nth-child(2){stop-color:#e4eef0}
+#sc-stal.t-ochtend #psDusk stop:nth-child(3){stop-color:#ffe0bc}
+#sc-stal.t-middag #psDusk stop:nth-child(1){stop-color:#4a96d8}
+#sc-stal.t-middag #psDusk stop:nth-child(2){stop-color:#9cc8ea}
+#sc-stal.t-middag #psDusk stop:nth-child(3){stop-color:#dcecf2}
+#sc-stal.t-ochtend .ps-wei,#sc-stal.t-middag .ps-wei{fill:#6a9a4a}
+#sc-stal.t-avond .ps-wei{fill:#4a6a40}
+
+/* ---- de hal (in elk hoofdstuk) ---- */
+@keyframes hlGlow{0%,100%{opacity:.85}50%{opacity:1}}
+.hl-glow{animation:hlGlow 4s ease-in-out infinite}
+.hl-twinkle{animation:psTwinkle 2.4s ease-in-out infinite}
+.hl-twinkle.b{animation-delay:-1.2s}
+
 /* ---- de Paardenstal ---- */
 @keyframes psSwing{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg)}}
 .ps-lamp{transform-box:fill-box;transform-origin:50% 0%;animation:psSwing 5s ease-in-out infinite}
@@ -53,7 +102,8 @@
 #ps-notes.notes{animation:psNotes 1.6s ease-out}
 @keyframes psGlow{0%,100%{opacity:.8}50%{opacity:1}}
 #ps-torchglow{animation:psGlow 1.8s ease-in-out infinite}
-.ps-ree{animation:efGraze 9s ease-in-out infinite;transform-box:fill-box;transform-origin:80% 80%}
+@keyframes psReeGraze{0%,100%{transform:rotate(0)}50%{transform:rotate(7deg)}}
+.ps-ree-head{transform-box:fill-box;transform-origin:0% 65%;animation:psReeGraze 6s ease-in-out infinite}
 @keyframes efFlag{0%,100%{transform:translate(800px,470px) skewY(0) scaleX(1)}50%{transform:translate(800px,470px) skewY(4deg) scaleX(.92)}}
 .ef-flag{animation:efFlag 2.2s ease-in-out infinite}
 @keyframes efMek{0%,100%{transform:translateY(0)}30%{transform:translateY(-8px)}60%{transform:translateY(0)}80%{transform:translateY(-4px)}}

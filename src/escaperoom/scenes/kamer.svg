@@ -27,6 +27,16 @@
       <rect x="0" y="30" width="80" height="14" fill="#7a8494" opacity=".55" /><rect x="30" y="0" width="14" height="80" fill="#7a8494" opacity=".55" />
       <rect x="0" y="60" width="80" height="4" fill="#4a5464" opacity=".5" /><rect x="60" y="0" width="4" height="80" fill="#4a5464" opacity=".5" />
     </pattern>
+    <pattern id="kmBedThedema" width="96" height="64" patternUnits="userSpaceOnUse">
+      <rect width="96" height="64" fill="#eee9df" />
+      <path d="M0 10 H96 M0 30 H96 M0 50 H96" stroke="#5d554d" stroke-width="6" />
+      <path d="M0 18 H96 M0 38 H96 M0 58 H96" stroke="#b8b0a5" stroke-width="3" />
+    </pattern>
+    <pattern id="kmBedFolkerda" width="72" height="72" patternUnits="userSpaceOnUse">
+      <rect width="72" height="72" fill="#e9e3d8" />
+      <path d="M0 22 H72 M0 56 H72 M20 0 V72 M54 0 V72" stroke="#8a8176" stroke-width="7" opacity=".72" />
+      <path d="M0 38 H72 M38 0 V72" stroke="#f8f5ed" stroke-width="4" />
+    </pattern>
     <linearGradient id="kmSlope" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#f6f2ea" />
       <stop offset="1" stop-color="#ddd6c8" />
@@ -88,9 +98,9 @@
   </defs>
 
   <!-- de muur, met het behang van deze kamer -->
-  <rect id="km-wall-thedema" width="1600" height="640" fill="url(#kmPlanks)" />
-  <rect id="km-wall-alma" width="1600" height="640" fill="url(#kmFlowers)" />
-  <rect id="km-wall-folkerda" width="1600" height="640" fill="url(#kmDamask)" />
+  <rect id="km-wall-thedema" width="1600" height="640" fill="url(#kmDamask)" />
+  <rect id="km-wall-alma" width="1600" height="640" fill="url(#kmPlanks)" />
+  <rect id="km-wall-folkerda" width="1600" height="640" fill="url(#kmFlowers)" />
   <!-- het schuine dak rechts -->
   <path d="M1120 0 L1600 0 L1600 420Z" fill="url(#kmSlope)" />
   <path d="M1120 0 L1600 420" stroke="#c9c0ae" stroke-width="4" />
@@ -105,13 +115,15 @@
     <g clip-path="url(#kmView)">
       <rect x="1272" y="156" width="236" height="230" fill="url(#kmSky)" />
       <g class="km-cloud" fill="#fff" opacity=".9"><ellipse cx="1320" cy="196" rx="30" ry="8" /><ellipse cx="1336" cy="190" rx="16" ry="8" /></g>
+      <g class="sky-nacht" fill="#fff"><circle cx="1290" cy="170" r="1.4" /><circle cx="1380" cy="180" r="1.6" /><circle cx="1420" cy="230" r="1.2" /><circle cx="1490" cy="170" r="1.4" /><circle cx="1440" cy="196" r="13" fill="#f4f0dc" /></g>
       <!-- de rand van de stad (4 km) en de Martinitoren (7,5 km) -->
-      <g fill="#8a98a8"><rect x="1300" y="292" width="60" height="16" /><rect x="1372" y="296" width="44" height="12" /><rect x="1440" y="290" width="50" height="18" /></g>
+      <g class="sky-land" fill="#8a98a8"><rect x="1300" y="292" width="60" height="16" /><rect x="1372" y="296" width="44" height="12" /><rect x="1440" y="290" width="50" height="18" /></g>
+      <g class="sky-nacht" fill="#ffd27a"><circle cx="1310" cy="300" r="1.6" /><circle cx="1330" cy="298" r="1.4" /><circle cx="1350" cy="302" r="1.6" /><circle cx="1384" cy="302" r="1.4" /><circle cx="1404" cy="300" r="1.4" /><circle cx="1450" cy="298" r="1.6" /><circle cx="1478" cy="300" r="1.4" /></g>
       <g id="km-martini" fill="#6a7a8a"><rect x="1462" y="252" width="7" height="56" /><rect x="1460" y="266" width="11" height="3" /><path d="M1462 252 l3.5 -12 l3.5 12z" /></g>
-      <path d="M1272 306 H1508 V386 H1272Z" fill="#8fb45a" />
+      <path class="sky-land" d="M1272 306 H1508 V386 H1272Z" fill="#8fb45a" />
       <path d="M1272 306 H1508" stroke="#6a8a46" stroke-width="3" />
-      <g fill="#5e8a46"><ellipse cx="1296" cy="304" rx="22" ry="9" /><ellipse cx="1480" cy="304" rx="26" ry="9" /></g>
-      <g fill="#7fae5a"><path d="M1272 340 H1508 V386 H1272Z" /></g>
+      <g class="sky-land" fill="#5e8a46"><ellipse cx="1296" cy="304" rx="22" ry="9" /><ellipse cx="1480" cy="304" rx="26" ry="9" /></g>
+      <g class="sky-land" fill="#7fae5a"><path d="M1272 340 H1508 V386 H1272Z" /></g>
       <!-- een kale boom vlak voor het raam, zoals op de foto -->
       <path d="M1300 386 V330 M1300 350 L1284 330 M1300 342 L1318 322 M1290 336 L1280 318 M1312 328 L1322 310" stroke="#5a4a3a" stroke-width="4" fill="none" stroke-linecap="round" />
       <!-- de ree loopt door de wei -->
@@ -191,11 +203,11 @@
   </g>
 
   <!-- de kroonluchter met glazen kraaltjes (zoals in de echte kamers) -->
-  <g id="km-luchter" class="km-luchter">
+  <g id="km-luchter" class="km-luchter lamp">
     <path d="M1160 154 V220" stroke="#e9e2d2" stroke-width="3" />
     <ellipse cx="1160" cy="224" rx="34" ry="8" fill="#e9e2d2" stroke="#bdb6a6" />
     <g fill="#f6f2ea" opacity=".9"><rect x="1128" y="226" width="3" height="30" rx="1.5" /><rect x="1135" y="226" width="3" height="36" rx="1.5" /><rect x="1142" y="226" width="3" height="30" rx="1.5" /><rect x="1149" y="226" width="3" height="46" rx="1.5" /><rect x="1156" y="226" width="3" height="40" rx="1.5" /><rect x="1163" y="226" width="3" height="46" rx="1.5" /><rect x="1170" y="226" width="3" height="40" rx="1.5" /><rect x="1177" y="226" width="3" height="36" rx="1.5" /><rect x="1184" y="226" width="3" height="30" rx="1.5" /><rect x="1191" y="226" width="3" height="36" rx="1.5" /></g>
-    <circle cx="1160" cy="250" r="60" fill="url(#kmLampG)" />
+    <circle class="lamp-glow" cx="1160" cy="250" r="60" fill="url(#kmLampG)" />
   </g>
 
   <!-- het bed met een geruit dekbed, en nachtkastjes met lampjes -->
@@ -204,7 +216,7 @@
     <rect x="950" y="430" width="440" height="60" rx="8" fill="#5e5e68" />
     <ellipse cx="1060" cy="520" rx="80" ry="30" fill="#7a6e66" />
     <ellipse cx="1270" cy="520" rx="80" ry="30" fill="#7a6e66" />
-    <path d="M950 560 L860 900 H1490 L1400 560Z" fill="url(#kmPlaid)" stroke="#9aa0a8" stroke-width="2" />
+    <path id="km-bedspread" d="M950 560 L860 900 H1490 L1400 560Z" fill="url(#kmBedThedema)" stroke="#9aa0a8" stroke-width="2" />
     <path d="M950 560 L1400 560 L1410 600 L940 600Z" fill="#f6f6f4" />
     <g>
       <rect x="840" y="520" width="80" height="100" fill="#f4efe4" stroke="#bfb6a2" stroke-width="2" />
@@ -212,8 +224,8 @@
       <rect x="1420" y="520" width="80" height="100" fill="#f4efe4" stroke="#bfb6a2" stroke-width="2" />
       <path d="M1444 520 l6 -50 h20 l6 50z" fill="#c9c0b0" /><path d="M1436 470 h48 l-8 -40 h-32z" fill="#2a2a30" />
     </g>
-    <circle class="km-glow" cx="880" cy="460" r="70" fill="url(#kmLampG)" pointer-events="none" />
-    <circle class="km-glow b" cx="1460" cy="460" r="70" fill="url(#kmLampG)" pointer-events="none" />
+    <circle class="km-glow lamp-glow" data-of="lamp-km1" cx="880" cy="460" r="70" fill="url(#kmLampG)" pointer-events="none" />
+    <circle class="km-glow b lamp-glow" data-of="lamp-km2" cx="1460" cy="460" r="70" fill="url(#kmLampG)" pointer-events="none" />
     <!-- Folkerda: de drie prenten liggen op het bed -->
     <g id="km-prints-bed">
       <g transform="rotate(-8 1040 680)"><rect x="980" y="640" width="120" height="86" fill="#3a2a1e" stroke="#c9a24a" stroke-width="3" /><use href="#km-borg-thedema" x="988" y="648" width="104" height="70" /></g>
@@ -252,7 +264,8 @@
     <rect class="hit" data-hs="kmree" data-label="Een ree in de wei" x="1272" y="310" width="236" height="76" fill="transparent" />
     <rect class="hit" data-hs="gordijnen" data-label="De paarse gordijnen" x="1216" y="126" width="48" height="296" fill="transparent" />
     <rect class="hit" data-hs="gordijnen" data-label="De paarse gordijnen" x="1516" y="126" width="48" height="296" fill="transparent" />
-    <rect class="hit" data-hs="kmlamp" data-label="Een nachtlampje" x="840" y="430" width="80" height="90" fill="transparent" />
+    <rect class="hit" data-hs="lampje" data-lamp="lamp-km1" data-label="Een nachtlampje" x="840" y="430" width="80" height="90" fill="transparent" />
+    <rect class="hit" data-hs="lampje" data-lamp="lamp-km2" data-label="Een nachtlampje" x="1420" y="430" width="80" height="90" fill="transparent" />
     <rect class="hit" id="hit-rieten" data-hs="kmrieten" data-label="Een rieten stoel" x="712" y="566" width="146" height="154" fill="transparent" />
     <rect class="hit" id="hit-ditty" data-hs="ditty" data-label="Ditty" x="640" y="610" width="120" height="250" fill="transparent" />
   </g>

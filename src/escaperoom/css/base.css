@@ -180,6 +180,19 @@ button.chip:hover{border-color:var(--amber);color:var(--amber)}
 .folder ul{margin:0 0 12px;padding-left:20px;display:grid;gap:4px}
 .folder .row{display:flex;gap:8px;flex-wrap:wrap}
 a.btn{text-decoration:none;display:inline-block}
+/* het moment van de dag: dagdeel() in js/chapter1.js zet .t-avond, .t-ochtend, .t-middag of .t-nacht op een kamer.
+   sky-dag = ochtend en middag, sky-donker = avond en nacht; sky-land wordt 's nachts donker */
+.scene:not(.t-avond) .sky-avond,.scene:not(.t-ochtend) .sky-ochtend,.scene:not(.t-middag) .sky-middag,.scene:not(.t-nacht) .sky-nacht,
+.t-avond .sky-dag,.t-nacht .sky-dag,.t-ochtend .sky-donker,.t-middag .sky-donker{display:none}
+.t-nacht .sky-land{filter:brightness(.4) saturate(.7)}
+/* een lamp die uit staat (toggleLamp in js/core.js) */
+.lamp.off .lamp-bulb,.lamp-bulb.off{fill:#5a5a5a}
+.lamp-bulb.off *{animation:none}
+.lamp.off .lamp-glow,.lamp-glow.off{display:none}
+/* Links naar de echte website openen in een nieuw tabblad: een pijltje uit een vakje erachter, zoals overal op het web */
+a[target="_blank"]::after{content:"";content:"" / " (opent de website in een nieuw tabblad)";display:inline-block;width:.85em;height:.85em;margin-left:.35em;vertical-align:-.08em;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5'/%3E%3C/svg%3E") center/contain no-repeat}
 @media (max-width:620px){.promo{display:none}}
 
 /* ---------- gedeelde onderdelen van de puzzels ---------- */
@@ -196,6 +209,10 @@ a.btn{text-decoration:none;display:inline-block}
 .pz-row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
 .pz-row > *{min-width:0}
 .pz-svg{width:100%;max-width:520px;height:auto;display:block}
+.horse-photos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;width:100%;max-width:560px;margin:0 0 14px}
+.horse-photo{min-width:0;margin:0;overflow:hidden;border:1px solid #8a7052;border-radius:4px;background:#33271e}
+.horse-photo svg{display:block;width:100%;height:auto;aspect-ratio:8/11}
+.horse-photo figcaption{padding:4px 2px;text-align:center;color:#e9dcb8;font-family:var(--f-hand);font-size:15px;line-height:1.1}
 .pz-input{font-family:var(--f-mono);font-size:22px;letter-spacing:.2em;width:9ch;padding:6px 10px;border-radius:4px;border:1px solid var(--line);background:#120c08;color:var(--paper)}
 .keypad{display:grid;grid-template-columns:repeat(3,56px);gap:6px;margin-top:10px}
 .keypad button{height:46px;border-radius:6px;border:1px solid var(--line);background:#2a2f36;color:#e9eef2;font-family:var(--f-mono);font-size:18px}
@@ -214,7 +231,7 @@ label.opt{display:flex;flex-direction:column;gap:2px;cursor:default}
 .walking .rleg.b{animation-delay:-.4s}
 /* Heen en weer lopen: een dier kijkt altijd de kant op waar het heen loopt. De tekening kijkt naar rechts; --walk is de
    afstand (negatief = eerst naar links) en --dir moet dan -1 zijn, zodat het dier eerst naar links kijkt. */
-@keyframes reeWalk{0%{transform:translateX(0) scaleX(var(--dir,1))}46%{transform:translateX(var(--walk,160px)) scaleX(var(--dir,1))}50%{transform:translateX(var(--walk,160px)) scaleX(calc(-1 * var(--dir,1)))}96%{transform:translateX(0) scaleX(calc(-1 * var(--dir,1)))}100%{transform:translateX(0) scaleX(var(--dir,1))}}
+@keyframes reeWalk{0%{transform:translateX(0) scaleX(var(--dir,1))}46%{transform:translateX(var(--walk,160px)) scaleX(var(--dir,1));animation-timing-function:steps(1,end)}50%{transform:translateX(var(--walk,160px)) scaleX(calc(-1 * var(--dir,1)))}96%{transform:translateX(0) scaleX(calc(-1 * var(--dir,1)));animation-timing-function:steps(1,end)}100%{transform:translateX(0) scaleX(var(--dir,1))}}
 .ree-walk{transform-box:fill-box;transform-origin:50% 50%;animation:reeWalk var(--walkt,22s) linear infinite}
 
 /* Grapjes: dingen die bewegen als je erop klikt (poke() in js/core.js). */

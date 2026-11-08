@@ -14,6 +14,7 @@ function ambKey(){
   switch(S.scene){
     case 'erf': return 'erf';
     case 'stal': return 'stal';
+    case 'hal': return 'hal';
     case 'zolder': case 'kamer': return 'zolder';
     case 'museum': return 'museum' + (f.tractor ? '+trekker' : '');
     case 'dak': return 'dak';
@@ -80,6 +81,9 @@ const SOUNDSCAPES = {
   // de stal: een krekel buiten, het tikken van de wekkerradio
   stal(ctx, out){ ambNoise(ctx, out, 300, .5, .015);
     ambEvery(400, 900, () => chirp(ctx, out, 5200, 5000, .04, .006)); },
+  // de hal: het zoemen van de biljartlamp, af en toe het tikken van poolballen
+  hal(ctx, out){ ambHum(ctx, out, 100, .006);
+    ambEvery(5000, 11000, () => { chirp(ctx, out, 2200, 2000, .03, .012); setTimeout(() => chirp(ctx, out, 2000, 1800, .03, .008), 180); }); },
   // de hooizolder: het hout kraakt, vogels buiten
   zolder(ctx, out){ ambNoise(ctx, out, 700, .7, .02);
     ambEvery(3000, 7000, () => chirp(ctx, out, 2600 + Math.random() * 900, 1900, .18, .01));

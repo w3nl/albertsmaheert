@@ -26,6 +26,8 @@ function applyZaal(){
   $('#za-bulbs').querySelectorAll('ellipse').forEach(e => e.setAttribute('fill', f.lampjes ? e.dataset.c : '#6a6a6a'));
   $('#sc-zaal').classList.toggle('za-on', !!f.lampjes);
   vis('#za-dark', !f.lampjes);
+  vis('#za-gasten', !f.tafel); vis('#hit-gasten', !f.tafel);
+  vis('#za-gastenzit', !!f.tafel); vis('#za-benenzit', !!f.tafel); vis('#hit-gastenzit', !!f.tafel);
   vis('#za-bouten', !f.bouten);
   vis('#za-plaat', !f.grupOpen);
   vis('#za-grupblik', !!f.grupOpen && !f.out4);
@@ -36,7 +38,7 @@ function applyTuin(){
   vis('#tn-koevoet', !!S.f.sporen && !S.f.koevoetTaken); vis('#hit-koevoet', !!S.f.sporen && !S.f.koevoetTaken);
 }
 
-const H3 = { roelof: H.roelof, ditty: H.ditty };
+const H3 = { roelof: H.roelof, ditty: H.ditty, pool: H.pool };
 Object.assign(H, {
   roelof(h){
     if(S.scene !== 'zaal') return H3.roelof(h);
@@ -45,7 +47,7 @@ Object.assign(H, {
     if(!f.lampjes) return say([['roelof', "De slinger met lampjes doet het niet. Ze zitten in serie: één lampje stuk en de hele slinger is donker."], ['roelof', "Ik heb een tester. Help je zoeken? Klik maar op de lampjes."]]);
     if(!f.tafel) return say([['roelof', "Ditty is druk met de tafel. Ik blijf er maar even uit de buurt, haha."]]);
     if(!f.grupOpen) return say([['roelof', "Zie je die glazen plaat in de vloer? Daaronder ligt een stukje van de oude grup, de mestgoot achter de koeien."],
-      ['roelof', "Vier bouten en een zware plaat. Ik heb een dopsleutel nodig, en mijn koevoet. Waar laat ik toch altijd mijn spullen?"]]);
+      ['roelof', 'Vier bouten en een zware plaat. ' + gereedschap()]]);
     say([['roelof', "Open! Kijk, daar in de grup…"]]);
   },
   ditty(h){
@@ -62,6 +64,7 @@ Object.assign(H, {
   koeien(){ say(["Bordjes met koeiennamen: Klaske, Bertha, Trijntje, Grietje, Dina.", "Hier stond elke koe op haar eigen plek, met haar naam erboven. Net als de paarden in de Paardenstal.", ['roelof', "Koeien en schapen hadden we hier vroeger. Later werd het akkerbouw: kool, graan en suikerbieten."]]); },
   stalraam(){ say("Een klein stalraampje met ijzeren roeden. Buiten is het donker; de eerste sterren komen op."); },
   tuindeur(){ go('tuin'); },
+  naarhal(){ go('hal'); },
   koffie(){ S.f.koffie = (S.f.koffie || 0) + 1; save(); beep(300, .3, 'sawtooth', .02); if(S.f.koffie >= 3){ S.ach.koffie = true; save(); } say("Het koffieapparaat pruttelt. Een kop koffie, met een koekje erbij. In Groningen hoort dat zo."); },
   gastenboek(){
     S.ach.gastenboek = true; save();
@@ -70,7 +73,7 @@ Object.assign(H, {
       <p style="margin-top:10px">Op de site van de Albertsmaheert staat het echte gastenboek. Schrijf jij er ook iets in, als je er geweest bent?</p>
       <div class="row" style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn" href="${SITE}gastenboek/" target="_blank" rel="noopener">Het echte gastenboek</a><a class="btn ghost" href="${SITE}reserveer/" target="_blank" rel="noopener">Reserveren</a></div>`);
   },
-  pool(){ if(S.f.pool) return say("De pooltafel. De ballen liggen klaar voor een nieuw potje."); openPool(); },
+  pool(){ if(S.ch !== 4) return H3.pool(); if(S.f.pool) return say("De pooltafel. De ballen liggen klaar voor een nieuw potje."); openPool(); },
   grup(){
     const f = S.f;
     if(f.out4 || f.grupOpen) return f.out4 ? say("De oude grup, onder het glas. Hier lag Harms schat honderd jaar lang.") : openFoto();
@@ -132,7 +135,15 @@ function lampjesDone(){
   applyVisuals(); chord([523, 659, 784, 1046], 90);
   say(["Floep! De hele slinger springt aan, rood, geel, blauw en groen. De oude koestal glanst.",
        ['roelof', "Zestien lampjes, en in vier keer meten wist je het. Steeds halveren: 16, 8, 4, 2, 1. Zo zoek je alles!"],
-       ['ditty', "Prachtig! Nu de tafel nog. Help je mij even?"]]);
+       S.f.tafel ? ['ditty', "Prachtig! En de tafel is ook al klaar. Nu kan het feest echt beginnen!"] : ['ditty', "Prachtig! Nu de tafel nog. Help je mij even?"]]);
+}
+/* Wat Roelof nog mist voor de grup; de puzzels in de zaal en de tuin kunnen in elke volgorde. */
+function gereedschap(){
+  const sleutel = S.f.bouten || has('dopsleutel'), koevoet = S.f.grupOpen || has('koevoet');
+  if(sleutel && koevoet) return "Je hebt mijn dopsleutel en mijn koevoet al gevonden. Dan kan die plaat eraf!";
+  if(sleutel) return "Mijn dopsleutel heb je al. Nu mijn koevoet nog: waar heb ik die toch gelaten?";
+  if(koevoet) return "Mijn koevoet heb je al. Nu mijn dopsleutel nog: waar heb ik die toch gelaten?";
+  return "Ik heb mijn dopsleutel en mijn koevoet nodig, en ik weet niet meer waar ik ze heb gelaten. Vanmiddag was ik in de tuin, en daarvoor aan het poolen in de hal…";
 }
 
 /* ---------- puzzel 2: de tafelschikking (logisch redeneren) ---------- */
@@ -173,7 +184,8 @@ function tafelDone(){
   applyVisuals();
   say([['ditty', "Zie je wel, dat past precies. Aan tafel, allemaal!"],
        ['gast', "Proost op Ditty en Roelof!"],
-       ['roelof', "En nu… de grup. Onder die glazen plaat in de vloer. Maar ik heb mijn dopsleutel en mijn koevoet nodig, en ik weet niet meer waar ik ze heb gelaten."]]);
+       S.f.lampjes ? ['roelof', 'En nu… de grup. Onder die glazen plaat in de vloer. ' + gereedschap()]
+                   : ['roelof', "Nu de lampjes nog. In het donker vindt niemand zijn stoel… en ook de grup niet."]]);
 }
 
 /* ---------- puzzel 3: de pooltafel (hoek van inval = hoek van terugkaatsing) ---------- */
@@ -236,7 +248,7 @@ function openSporen(){
 function grupBouten(){
   if(!S.f.lampjes || !S.f.tafel) return H.grup();
   take('dopsleutel'); S.f.bouten = true; save(); applyVisuals(); beep(500, .05); setTimeout(() => beep(450, .05), 200); setTimeout(() => beep(400, .05), 400); setTimeout(() => beep(350, .05), 600);
-  say(["Krrr, krrr, krrr, krrr. Een voor een draai je de vier bouten los.", ['roelof', "Nu nog die zware plaat. Waar is mijn koevoet…?"]]);
+  say(["Krrr, krrr, krrr, krrr. Een voor een draai je de vier bouten los.", ['roelof', has('koevoet') ? "Nu nog die zware plaat. Pak mijn koevoet maar!" : "Nu nog die zware plaat. Waar is mijn koevoet…?"]]);
 }
 function grupOpen(){
   if(!S.f.bouten) return say("De plaat zit nog met vier bouten vast. Eerst die eruit.");
@@ -275,7 +287,7 @@ function win4(){
   S.f.out4 = true; save(); applyVisuals(); chord([523,659,784,1046,1318,1568], 110);
   say([['roelof', "Een foto van de boerderij, in 1921. Kijk: de paarden! Bles, Mina, Dirk en Prins. En die man met de pet… dat moet Harm zijn."],
        ['ditty', "\"Zet de koffie aan en laat de deur open.\" Nou, Harm, dat doen we hier nog steeds."],
-       ['sys', "Ditty hangt de foto aan de muur van de zaal, naast de koeiennamen. Iedereen heft het glas."],
+       ['sys', "Ditty hangt de foto aan de muur van de zaal, naast het stalraampje. Iedereen heft het glas."],
        ['roelof', "Op Harm! En op iedereen die hier aan tafel zit."],
        ['ditty', "En jij: kom gauw terug. Dan maak ik de Paardenstal voor je klaar. Of Thedema, Alma of Folkerda. Moi!"]], showWin);
 }
@@ -301,14 +313,14 @@ Object.assign(H, {
   quilt(){ poke('#za-quilt', 'g-swing'); say("Een quilt met rode en groene lapjes, met de hand gemaakt. Hij wappert even als je erlangs loopt."); },
   kachel(){ poke('#za-hoek', 'g-glow', 'Warm!'); say(["De zithoek: een zwarte bank, een rieten stoel en een kachel die zacht brandt.", "Na het feest is dit de beste plek in de zaal. Met een kop koffie, natuurlijk."]); },
   palen(){ gagText($('#sc-zaal [data-hs="palen"]'), 'Klop klop'); beep(160, .1, 'square', .03); say("Een zware, donkere houten paal op een gemetselde voet. Hij draagt de balken van de oude koestal. Klop klop: massief."); },
-  dakraamza(){ poke('#za-dakramen', 'g-glow'); say("Door de dakramen zie je de eerste sterren, en de maan boven de schuur."); },
+  dakraamza(){ poke('#za-dakramen', 'g-glow'); enterRoom('dak'); },
   bar(){ gagText($('#sc-zaal [data-hs="bar"]'), 'Proost!'); beep(1400, .08, 'sine', .04); setTimeout(() => beep(1700, .08, 'sine', .04), 90);
     say("De bar, met krukken en drie zwarte hanglampen. Hier staat de koffie, de thee, en vanavond ook iets feestelijkers."); },
   stalraam(){ say("Een klein stalraampje met een plantje in de vensterbank. Vroeger keken de koeien hierdoor naar buiten. Nu kijkt een geranium."); },
   border(){ poke('#tn-border', 'g-wiggle'); say("Een border vol bloemen: lavendel, goudsbloemen, rozen. Ditty's trots. Ook in het donker ruik je ze."); },
   bomen(h){
     if(S.scene !== 'tuin') return bomenErf(h);
-    poke('#tn-lampjes', 'g-glow'); say("Oude fruitbomen met lampjes erin. Appels en peren. Morgen bij het ontbijt misschien appelmoes?");
+    toggleLamp('tn-lampjes', h);
   },
   terras(){ gagText($('#sc-tuin [data-hs="terras"]'), 'Aaah'); say(["Het terras op het zuiden, met een tafeltje en een stoel. Hier ontbijt je in de zomer met uitzicht over de weilanden.", "Overdag zie je vanaf hier de stad Groningen liggen, 4 kilometer verderop."]); },
   sterren(){ [2400, 2800, 3200].forEach((f, i) => setTimeout(() => beep(f, .05, 'sine', .03), i * 120)); say("Zoveel sterren! Hier op het platteland is het 's nachts echt donker. Zie je de Grote Beer?"); },

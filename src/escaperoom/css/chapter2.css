@@ -17,3 +17,10 @@
 @keyframes kmTinkle{0%,100%{transform:rotate(0)}25%{transform:rotate(3deg)}75%{transform:rotate(-3deg)}}
 .km-luchter{transform-box:view-box;transform-origin:1160px 154px;animation:kmTinkle 6s ease-in-out infinite}
 #km-luchter.tinkle{animation-duration:.5s}
+
+/* ---- de lucht door het hooiluik en het raam van de kamers (dagdeel() in js/chapter1.js) ---- */
+#sc-zolder.t-ochtend #zlSky stop:nth-child(1),#sc-kamer.t-ochtend #kmSky stop:nth-child(1){stop-color:#9ccbe8}
+#sc-zolder.t-ochtend #zlSky stop:nth-child(2),#sc-kamer.t-ochtend #kmSky stop:nth-child(2){stop-color:#ffe6c8}
+#sc-zolder.t-nacht #zlSky stop:nth-child(1),#sc-kamer.t-nacht #kmSky stop:nth-child(1){stop-color:#0e1a3a}
+#sc-zolder.t-nacht #zlSky stop:nth-child(2),#sc-kamer.t-nacht #kmSky stop:nth-child(2){stop-color:#3a4a7a}
+#sc-zolder.t-nacht .zl-cloud,#sc-kamer.t-nacht .km-cloud{fill:#6a7698;opacity:.4}

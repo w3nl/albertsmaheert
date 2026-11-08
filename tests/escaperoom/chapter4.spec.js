@@ -27,13 +27,15 @@ test('hoofdstuk 4: lampjes, tafelschikking, pool, sporen en de schat onder de gr
   await expect(page.locator('#d-txt')).toContainText('vier dikke bouten', { timeout: 5_000 });
   await skip(page);
 
-  // pool: ruit 2
+  // pool, in de hal: ruit 2
+  await walk(page, 'naarhal', 'hal');
   await hs(page, 'pool');
   await page.locator('[data-h="200"]').click();
   await expect(page.locator('#pl-fb')).toHaveClass(/bad/);
   await page.locator('[data-h="100"]').click();
   await waitModalClosed(page);
   await expect(page.locator('.slot[title="Dopsleutel"]')).toBeVisible();
+  await walk(page, 'hlzaal', 'zaal');
 
   // de tuin: het spoor van de ree
   await walk(page, 'tuindeur', 'tuin');

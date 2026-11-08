@@ -1,9 +1,70 @@
 const { test, expect } = require('@playwright/test');
 const { startChapter, hs, walk, skip, useSlot, waitModalClosed, expectWin } = require('./helpers');
 
+test('de Hydro 84 rijdt achter de boerderij heen en terug en keert om', async ({ page }) => {
+  await startChapter(page, 3);
+  await page.evaluate(() => { S.scene = 'erf'; applyVisuals(); });
+  await expect(page.locator('#ef-hydro84')).toBeVisible();
+  await page.evaluate(() => { motionPref = 'on'; applyMotion(); });
+  const poseAt = seconds => page.locator('.ef-hydro84-drive').evaluate(async (el, time) => {
+    const facing = el.querySelector('.ef-hydro84-facing');
+    const driveAnimation = el.getAnimations()[0], faceAnimation = facing.getAnimations()[0];
+    driveAnimation.pause(); faceAnimation.pause();
+    driveAnimation.currentTime = time * 1000; faceAnimation.currentTime = time * 1000;
+    await new Promise(requestAnimationFrame);
+    const position = new DOMMatrix(getComputedStyle(el).transform).m41;
+    const direction = new DOMMatrix(getComputedStyle(facing).transform).a;
+    return { position, facing: direction, opacity: Number(getComputedStyle(el).opacity) };
+  }, seconds);
+  const rightEnd = await poseAt(.1);
+  const outbound = await poseAt(8);
+  const leftEnd = await poseAt(18);
+  const returnTrip = await poseAt(31);
+  expect(rightEnd.position).toBeGreaterThan(150);
+  expect(rightEnd.position).toBeLessThan(220);
+  expect(rightEnd.facing).toBeGreaterThan(0);
+  expect(rightEnd.opacity).toBe(0);
+  expect(outbound.position).toBeLessThan(0);
+  expect(leftEnd.position).toBe(-1700);
+  expect(leftEnd.facing).toBeLessThan(0);
+  expect(leftEnd.opacity).toBe(0);
+  expect(returnTrip.position).toBeGreaterThan(outbound.position);
+  expect(outbound.facing).toBeGreaterThan(0);
+  expect(returnTrip.facing).toBeLessThan(0);
+  await page.evaluate(() => { S.ch = 4; applyVisuals(); });
+  await expect(page.locator('#ef-hydro84')).toBeHidden();
+});
+
 test('hoofdstuk 3: het kistje, vier letters en het woord GRUP', async ({ page }) => {
   await startChapter(page, 3);
   await expect(page.locator('#chap')).toHaveText('Hoofdstuk 3 · Het museum van Roelof');
+  const floorContacts = await page.evaluate(() => {
+    const bottom = el => el.getBBox().y + el.getBBox().height;
+    const cans = document.querySelector('#mu-melk'), cansBox = cans.getBBox();
+    const cansShift = cans.transform.baseVal.consolidate().matrix.f;
+    return {
+      floor: document.querySelector('#mu-floor-edge').getBBox().y,
+      hay: bottom(document.querySelector('#mu-balen')),
+      ladder: bottom(document.querySelector('#mu-ladder')),
+      cans: bottom(cans) + cansShift
+    };
+  });
+  expect(floorContacts.hay).toBe(floorContacts.floor);
+  expect(floorContacts.ladder).toBe(floorContacts.floor);
+  expect(floorContacts.cans).toBe(floorContacts.floor);
+  const rockingHorseContact = await page.evaluate(() => {
+    const horse = document.querySelector('#mu-paardje');
+    const box = horse.getBBox();
+    const matrix = horse.transform.baseVal.consolidate().matrix;
+    const horseBottom = matrix.f + (box.y + box.height) * matrix.d;
+    const baleTop = Math.min(...[...document.querySelectorAll('#mu-balen rect')].map(rect => rect.getBBox().y));
+    return { horseBottom, baleTop };
+  });
+  expect(Math.abs(rockingHorseContact.horseBottom - rockingHorseContact.baleTop)).toBeLessThan(1);
+  await expect(page.locator('#mu-stuurwiel')).toHaveAttribute('aria-label', 'Stuurwiel met drie spaken');
+  await expect(page.locator('#mu-stuurwiel path')).toHaveCount(3);
+  await expect(page.locator('#mu-hydro84-pass')).toBeVisible();
+  expect(await page.locator('#mu-hydro84-pass .mu-hydro84-drive').evaluate(el => getComputedStyle(el).animationName)).toBe('muHydroPass');
 
   await useSlot(page, 'Oude sleutel');
   await hs(page, 'kistje'); await skip(page);

@@ -4,14 +4,16 @@
 /* ---------- hoofdstukken ---------- */
 const LAST_CH = 4;   // het nieuwste hoofdstuk; verhoog het als je er een toevoegt
 /* Een hoofdstuk openen (menu, "Door naar hoofdstuk N"): in de stand waarin je het achterliet, of vers als je er nog
-   nooit was. Opnieuw spelen (FRESH) begint een hoofdstuk echt opnieuw; Nieuw spel wist alle hoofdstukken. */
+   nooit was. Opnieuw spelen (FRESH) begint een hoofdstuk echt opnieuw; Nieuw spel (resetAll) wist alles. */
 const FRESH = { 1: () => startNew(), 2: () => startCh(2), 3: () => startCh(3), 4: () => startCh(4) };
 const START = { 1: () => openChapter(1), 2: () => openChapter(2), 3: () => openChapter(3), 4: () => openChapter(4) };
-function openChapter(n){
+function openChapter(n, scene){
   const st = loadChapter(n);
   if(!st) return FRESH[n]();
   const ach = Object.assign({}, st.ach, S.ach);
   S = Object.assign(fresh(), st, { ach, started: true }); sel = null;
+  if(scene) S.scene = scene;
+  recoverPendingChapter2();
   if(n > 1) setUnlocked(n);
   $('#title').hidden = true; $('#win').hidden = true; renderInv(); applyVisuals(); $('#timer').textContent = fmt(S.t); save();
   exitLabels();
@@ -21,18 +23,58 @@ function resetChapters(){ for(let n = 1; n <= LAST_CH; n++){ try{ localStorage.r
 /* Waar elk hoofdstuk begint, en het gesprekje waarmee het opent (introN in chapterN.js). */
 const CH_START = { 2: ['zolder', () => intro2()], 3: ['museum', () => intro3()], 4: ['zaal', () => intro4()] };
 function chapterDone(){ return !!S.f['out' + S.ch]; }
+function recoverPendingChapter2(){
+  if(S.ch !== 2 || !S.f.kast || S.f.out2) return;
+  if(!has('oudesleutel')) S.inv.push('oudesleutel');
+  S.f.out2 = true;
+  setUnlocked(3);
+  save();
+}
 function nextChapter(){ const f = START[S.ch + 1]; if(f) f(); }
 function startCh(n){
   const [scene, intro] = CH_START[n];
   S = Object.assign(fresh(), { ch: n, scene, ach: S.ach || {}, started: true }); sel = null; setUnlocked(n);
   $('#title').hidden = true; $('#win').hidden = true; renderInv(); applyVisuals(); $('#timer').textContent = '00:00'; save(); intro();
 }
-/* De uitgang van een kamer leidt naar het volgende hoofdstuk zodra het hoofdstuk klaar is. */
+/* Deuren naar een kamer van een ander hoofdstuk (enterRoom): de close-up bij de keuze, en wat je hoort als hij nog dicht is. */
+const DOORS = {
+  stal: ['De Paardenstal', 'Jouw kamer van vrijdagavond', "Je kamer, met de oude ruif, de stalbordjes en het extra lange bed."],
+  zolder: ['De trap naar de hooizolder', 'Thedema, Alma en Folkerda', "Een smalle, steile trap naar de oude hooizolder, met de gebinten en de drie kamers."],
+  museum: ['Het museum van Roelof', 'Achter de grote deeldeuren', "Daarachter staan Roelofs trekkers, de karntonnen, de melkbussen en het kistje van Thedema."],
+  dak: ['Het platte dak', 'Door het luik in de dakramen', "Boven de zaal ligt het platte dak, tussen de twee schuren, met uitzicht tot aan de stad."],
+  zaal: ['De zaal', 'De oude koestal', "De zaal, waar vroeger de koeien stonden. Zaterdagavond is hier het feest."]
+};
+const CLOSED = {
+  2: "De hooizolder is voor morgenochtend. Nu slapen daar andere gasten: sst!",
+  3: () => S.ch === 2 ? [['roelof', "Eerst de sleutel van het kistje vinden! Harm schreef: begin boven."]] : [['roelof', "Mijn museum? Dat laat ik je later dit weekend zien. Nog even geduld!"]],
+  4: [['ditty', "Nog niet in de zaal kijken! Het feest is pas zaterdagavond."]]
+};
+/* Naar een kamer lopen. Kamers van dit en eerdere hoofdstukken zijn open; het volgende hoofdstuk alleen als dit klaar is. */
+function enterRoom(scene){
+  const n = ROOMS[scene].ch;
+  if(n <= S.ch) return go(scene);
+  const [title, sub, text] = DOORS[scene], go2 = () => openChapter(n, scene);
+  if(n === S.ch + 1 && chapterDone()) return openExit(title, sub, text, [[tx('Door naar hoofdstuk {n}', { n }), CH_NAMES[n - 1], go2]]);
+  const c = CLOSED[n];
+  say(typeof c === 'function' ? c() : c);
+}
+const DOOR_LABELS = [['#sc-hal [data-hs="hlstal"]', 'De deur van de Paardenstal', 'stal'], ['#sc-hal [data-hs="hltrap"]', 'De trap naar de hooizolder', 'zolder'],
+  ['#sc-hal [data-hs="hlzaal"]', 'De deuren naar de zaal', 'zaal'], ['#sc-erf [data-hs="deeldeur"]', 'De deeldeuren: het museum van Roelof', 'museum'],
+  ['#sc-dak [data-hs="naarzaal"]', 'Het luik naar de zaal', 'zaal'], ['#sc-zaal [data-hs="dakraamza"]', 'De dakramen, met het luik naar het platte dak', 'dak']];
+/* De deuren zeggen erbij of ze naar een ander hoofdstuk gaan; het bed in de Paardenstal gaat naar hoofdstuk 2. */
 function exitLabels(){
-  const open = chapterDone() && S.ch < LAST_CH, n = S.ch + 1;
-  setLabel('#sc-stal [data-hs="uitstal"]', open && S.ch === 1 ? tx('Slapen en dan: door naar hoofdstuk {n}', { n }) : 'De staldeur: naar het erf');
-  setLabel('#sc-zolder [data-hs="trap"]', open && S.ch === 2 ? tx('De trap af, naar het museum: door naar hoofdstuk {n}', { n }) : 'De trap naar beneden');
-  setLabel('#sc-dak [data-hs="naarzaal"]', open && S.ch === 3 ? tx('Naar de zaal: door naar hoofdstuk {n}', { n }) : 'Het luik naar de zaal');
+  const done = chapterDone();
+  DOOR_LABELS.forEach(([sel, label, scene]) => { const m = ROOMS[scene].ch;
+    setLabel(sel, label + (m === S.ch + 1 && done ? tx(' · door naar hoofdstuk {m}', { m }) : '')); });
+  setLabel('#sc-stal [data-hs="bed"]', done && S.ch === 1 ? 'Het bed: slapen en door naar hoofdstuk 2' : 'Het bed');
+}
+/* Een uitgang: kies waarheen. opts = [[label, uitleg, actie], …]; "Blijven" (of stay) komt er altijd bij. */
+function openExit(title, sub, text, opts, stay = 'Blijven'){
+  openModal(title, sub, `<p>${esc(text)}</p><div class="opts" style="grid-template-columns:1fr">${opts.map(([l, s], i) =>
+    `<button type="button" class="opt" data-x="${i}"><b>${esc(l)}</b>${s ? `<small>${esc(s)}</small>` : ''}</button>`).join('')}
+    <button type="button" class="opt" data-x=""><b>${esc(stay)}</b></button></div>`, body => {
+    body.querySelectorAll('[data-x]').forEach(b => b.onclick = () => { const o = opts[b.dataset.x]; closeModal(); if(o) o[2](); });
+  });
 }
 function refreshMenu(){
   const fin = chapterDone();
@@ -92,7 +134,7 @@ function openScores(){
   const rows = CH_NAMES.map((n, i) => { const r = all[i + 1];
     return `<tr class="${r ? '' : 'todo'}"><td><b>${i + 1}</b> ${n}</td>` + (r ? `<td>${fmt(r.t)}</td><td>${r.hints}</td><td>${rankFor(r.hints)}</td>` : `<td colspan="3">Nog niet gespeeld</td>`) + '</tr>'; }).join('');
   const got = ACH.filter(([k]) => S.ach[k]).length;
-  openModal('Scores', 'Je beste resultaat per hoofdstuk. Een nieuw spel houdt ze.', `
+  openModal('Scores', 'Je beste resultaat per hoofdstuk. Ook een nieuw spel houdt ze.', `
     <table class="scores"><thead><tr><th>Hoofdstuk</th><th>Snelste tijd</th><th>Minste hints</th><th>Rang</th></tr></thead><tbody>${rows}</tbody></table>
     ${Object.keys(all).length ? '' : '<div class="feedback">Nog geen hoofdstuk uitgespeeld. Speel er een uit, dan zie je hier je tijd.</div>'}
     <h4 class="scores-h">${tx('Prestaties ({n} van {m})', { n: got, m: ACH.length })}</h4>
@@ -103,6 +145,7 @@ $('#btn-scores').onclick = openScores;
 $('#btn-hint').onclick = () => {
   if(!$('#title').hidden || chapterDone()) return;
   const st = stage_(); const lv = S.hl[st] || 0; const arr = HINTS[st];
+  if(!st || !arr) return;
   S.hints++; S.hl[st] = lv + 1; save(); applyVisuals();
   say([['sys', tx(lv >= arr.length - 1 ? 'Grote hint: {hint}' : 'Hint: {hint}', { hint: arr[Math.min(lv, arr.length - 1)] })]]);
 };
@@ -133,8 +176,9 @@ const ACH = [['paardje', 'Raad gevraagd aan het hobbelpaardje'], ['ree', 'Een re
 function startNew(){ S = Object.assign(fresh(), { ach: S.ach || {} }); S.started = true; sel = null; $('#title').hidden = true; $('#win').hidden = true; renderInv(); applyVisuals(); $('#timer').textContent = '00:00'; save(); intro1(); }
 function contLine(){
   const f = S.f;
-  if(S.scene === 'erf') return f.goot ? "Terug op het erf. De zwaluwen scheren laag over het gras." : "Terug op het erf. Roelof staat nog op de ladder en tikt tegen de dakgoot.";
+  if(S.scene === 'erf') return erfFlags().goot ? "Terug op het erf. De zwaluwen scheren laag over het gras." : "Terug op het erf. Roelof staat nog op de ladder en tikt tegen de dakgoot.";
   if(S.scene === 'stal') return "Terug in kamer Paardenstal. Het ruikt een beetje naar hooi, heel lang geleden.";
+  if(S.scene === 'hal') return "Terug in de hal. Op de pooltafel liggen de ballen klaar.";
   if(S.scene === 'zolder') return "Terug op de hooizolder. De oude gebinten kraken zachtjes.";
   if(S.scene === 'kamer') return tx('Terug in kamer {k}.', { k: KAMER_NAAM[S.kamer || 'thedema'] });
   if(S.scene === 'museum') return "Terug in het museum van Roelof. De oude klok tikt.";
@@ -143,19 +187,30 @@ function contLine(){
   return "Terug in de zaal. Het feest is in volle gang.";
 }
 function cont(){ $('#title').hidden = true; S.started = true; renderInv(); applyVisuals(); $('#timer').textContent = fmt(S.t); say([['sys', contLine()]]); }
-$('#btn-new').onclick = () => { resetChapters(); startNew(); };
+/* Nieuw spel: alles terug naar het begin, ook de vrijgespeelde hoofdstukken en de prestaties. Alleen de beste tijden blijven. */
+function resetAll(){
+  resetChapters();
+  for(let n = 2; n <= LAST_CH; n++){ try{ localStorage.removeItem(UNLOCK_KEY(n)); }catch(e){} }
+  S.ach = {}; startNew();
+}
+$('#btn-new').onclick = () => {
+  if(!S.started && !unlocked(2)) return resetAll();
+  openExit('Nieuw spel', 'Alles weer vanaf het begin', "Je begint helemaal opnieuw: alle hoofdstukken, puzzels en prestaties gaan terug naar het begin, en je speelt de hoofdstukken weer een voor een vrij. Je beste tijden blijven bewaard.",
+    [['Ja, nieuw spel', 'Alles wissen en beginnen bij vrijdagavond', resetAll]], 'Nee, terug naar het menu');
+};
 $('#btn-cont').onclick = () => chapterDone() ? nextChapter() : cont();
 $('#btn-again').onclick = () => (FRESH[S.ch] || startNew)();
 $('#btn-next').onclick = nextChapter;
 for(let n = 1; n <= LAST_CH; n++) $('#btn-ch' + n).onclick = START[n];
 const STAY = {
-  1: "Kijk maar rustig rond in de Paardenstal. Klik op de staldeur als je wilt gaan slapen en door wilt naar hoofdstuk {n}.",
-  2: "Kijk maar rustig rond op de hooizolder. Klik op de trap als je door wilt naar hoofdstuk {n}.",
-  3: "Kijk maar rustig rond op het platte dak. Klik op het luik als je door wilt naar hoofdstuk {n}.",
+  1: "Kijk maar rustig rond, ook in de hal en op het erf. Klik op het bed om te gaan slapen, of neem in de hal de trap: door naar hoofdstuk {n}.",
+  2: "Kijk maar rustig rond op de hooizolder. Het museum (hoofdstuk {n}) is achter de deeldeuren op het erf: de trap af, door de hal naar buiten.",
+  3: "Kijk maar rustig rond. Het feest (hoofdstuk {n}) is in de zaal: door het luik op het platte dak, of via het erf en de hal.",
   4: "Kijk maar rustig rond. Het feest gaat nog wel even door, en de reeën kijken mee vanuit de tuin."
 };
 $('#btn-stay').onclick = () => { $('#win').hidden = true; exitLabels(); say([['sys', tx(STAY[S.ch] || STAY[1], { n: S.ch + 1 })]]); };
-$('#btn-menu').onclick = () => { closeModal(); $('#dialog').hidden = true; queue = []; stopSpeaking(); $('#title').hidden = false; $('#win').hidden = true; refreshMenu(); };
+function toMenu(){ closeModal(); $('#dialog').hidden = true; queue = []; stopSpeaking(); $('#title').hidden = false; $('#win').hidden = true; refreshMenu(); }
+$('#btn-menu').onclick = toMenu;
 
 const ROT_LINES = [
   "Roelof zegt: een gebint staat ook niet op zijn kant. Draai je telefoon en zie de hele kamer.",
@@ -208,14 +263,28 @@ function start(data){
   applyMotion();
   const saved = (data && data.v === 1) ? data : load();
   if(saved){ S = Object.assign(fresh(), saved); }
+  recoverPendingChapter2();
   refreshMenu();
   renderInv(); applyVisuals(); $('#timer').textContent = fmt(S.t);
 }
 /* ---------- installeerbare app (PWA) ---------- */
+let gameSWRegistration = null;
+function checkSWUpdate(){
+  if(!gameSWRegistration || !navigator.onLine || document.visibilityState !== 'visible') return;
+  gameSWRegistration.update().catch(() => {});
+}
+function watchSWRegistration(registration){
+  gameSWRegistration = registration;
+  window.addEventListener('online', checkSWUpdate);
+  document.addEventListener('visibilitychange', checkSWUpdate);
+}
 if('serviceWorker' in navigator && document.querySelector('link[rel="manifest"]') && /^https?:$/.test(location.protocol)){
   navigator.serviceWorker.addEventListener('message', e => { if(e.data && e.data.type === 'version') swVersion(e.data.cache); });
-  navigator.serviceWorker.register('sw.js').catch(() => {});
-  navigator.serviceWorker.ready.then(r => r.active && r.active.postMessage({ type: 'version?' })).catch(() => {});
+  navigator.serviceWorker.register('sw.js').then(watchSWRegistration).catch(() => {});
+  navigator.serviceWorker.ready.then(r => {
+    watchSWRegistration(r);
+    r.active && r.active.postMessage({ type: 'version?' });
+  }).catch(() => {});
 }
 /* De service worker heeft een nieuwere versie dan de code op deze pagina: bied herladen aan (het spel is opgeslagen). */
 function swVersion(cache){

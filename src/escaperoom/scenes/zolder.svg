@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" class="scene" id="sc-zolder" viewBox="0 0 1600 900"
-  preserveAspectRatio="xMidYMid slice" aria-label="De hooizolder: de overloop met de oude gebinten en de deuren van Thedema, Alma en Folkerda">
+  preserveAspectRatio="xMidYMid slice" aria-label="De hooizolder: de overloop met de oude gebinten en de deuren van Folkerda, Alma en Thedema">
   <defs>
     <linearGradient id="zlWall" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#f3ede0" />
@@ -75,7 +75,7 @@
       <rect x="280" y="330" width="140" height="310" fill="#cbbfa6" />
       <rect x="290" y="340" width="120" height="300" fill="url(#zlDoor)" stroke="#a89a80" stroke-width="2" />
       <circle cx="396" cy="500" r="5" fill="#8a8a8a" />
-      <rect x="310" y="372" width="80" height="26" rx="4" fill="#5e4632" /><text x="350" y="391" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="15" font-weight="600" fill="#f8f0e0">Thedema</text>
+      <rect x="310" y="372" width="80" height="26" rx="4" fill="#5e4632" /><text x="350" y="391" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="15" font-weight="600" fill="#f8f0e0">Folkerda</text>
     </g>
     <g>
       <rect x="600" y="330" width="140" height="310" fill="#cbbfa6" />
@@ -87,16 +87,17 @@
       <rect x="980" y="330" width="140" height="310" fill="#cbbfa6" />
       <rect x="990" y="340" width="120" height="300" fill="url(#zlDoor)" stroke="#a89a80" stroke-width="2" />
       <circle cx="1096" cy="500" r="5" fill="#8a8a8a" />
-      <rect x="1010" y="372" width="80" height="26" rx="4" fill="#5e4632" /><text x="1050" y="391" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="15" font-weight="600" fill="#f8f0e0">Folkerda</text>
+      <rect x="1010" y="372" width="80" height="26" rx="4" fill="#5e4632" /><text x="1050" y="391" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="15" font-weight="600" fill="#f8f0e0">Thedema</text>
     </g>
   </g>
 
   <!-- het oude hooiluik in de achtergevel, met de katrol aan de hijsbalk -->
   <g id="zl-luik">
     <rect x="1230" y="250" width="200" height="270" fill="url(#zlSky)" />
-    <circle cx="1400" cy="290" r="60" fill="url(#zlSun)" />
+    <circle class="sky-dag" cx="1400" cy="290" r="60" fill="url(#zlSun)" />
+    <g class="sky-nacht" fill="#fff"><circle cx="1262" cy="276" r="1.6" /><circle cx="1350" cy="262" r="1.4" /><circle cx="1410" cy="320" r="1.6" /><circle cx="1300" cy="350" r="1.2" /><circle cx="1390" cy="290" r="14" fill="#f4f0dc" /></g>
     <g class="zl-cloud" fill="#fff" opacity=".9"><ellipse cx="1290" cy="300" rx="40" ry="10" /><ellipse cx="1310" cy="292" rx="22" ry="10" /></g>
-    <path d="M1230 470 Q1300 440 1360 462 T1430 450 V520 H1230Z" fill="#5e8a46" />
+    <path class="sky-land" d="M1230 470 Q1300 440 1360 462 T1430 450 V520 H1230Z" fill="#5e8a46" />
     <path d="M1230 486 H1430" stroke="#8fb45a" stroke-width="4" opacity=".7" />
     <circle cx="1386" cy="452" r="22" fill="#4f7a3a" /><rect x="1383" y="460" width="6" height="22" fill="#5a4030" />
     <rect x="1222" y="242" width="216" height="286" fill="none" stroke="#6e5034" stroke-width="16" />
@@ -188,9 +189,9 @@
   <!-- klikvlakken -->
   <g class="hits">
     <rect class="hit" data-hs="trap" data-label="De trap naar beneden" x="0" y="550" width="230" height="350" fill="transparent" />
-    <rect class="hit" data-hs="thedema" data-label="Kamer Thedema" x="286" y="334" width="128" height="306" fill="transparent" />
+    <rect class="hit" data-hs="folkerda" data-label="Kamer Folkerda" x="286" y="334" width="128" height="306" fill="transparent" />
     <rect class="hit" data-hs="alma" data-label="Kamer Alma" x="606" y="334" width="128" height="306" fill="transparent" />
-    <rect class="hit" data-hs="folkerda" data-label="Kamer Folkerda" x="986" y="334" width="128" height="306" fill="transparent" />
+    <rect class="hit" data-hs="thedema" data-label="Kamer Thedema" x="986" y="334" width="128" height="306" fill="transparent" />
     <rect class="hit" data-hs="luik" data-label="Het oude hooiluik" x="1180" y="250" width="290" height="280" fill="transparent" />
     <rect class="hit" data-hs="katrol" data-label="De katrol aan de hijsbalk" x="1370" y="196" width="80" height="80" fill="transparent" />
     <rect class="hit" data-hs="kast" data-label="Een kastje in de stijl" x="862" y="398" width="52" height="124" fill="transparent" />

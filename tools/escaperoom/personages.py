@@ -355,6 +355,11 @@ SCENES = {
                            + alive(place(guest('zaG2', 'bruin', '#1f1f1f', 'curly', '#d9822b', '#3b3f4a'), 70, 4, 1.3), 6)
                            + alive(place(guest('zaG3', 'roze', '#cfcac2', 'bald', '#5a8a4a', '#4a4036', glass=False), 140, 0, 1.28), 9)
                            + alive(place(guest('zaG4', 'licht', '#e0b860', 'short', '#c73f6d', '#2b3f66'), 214, 6, 1.2), 12)),
+        # dezelfde gasten, aan tafel op de achterste stoelen: de heupen vallen achter het tafelblad
+        'gastenzit': lambda: (alive(place(guest('zaS1', 'licht', '#7a4a26', 'long', '#2f6fb1', '#334', dress=True), 400, 738, 1.15), 3)
+                              + alive(place(guest('zaS2', 'bruin', '#1f1f1f', 'curly', '#d9822b', '#3b3f4a'), 580, 754, 1.15), 6)
+                              + alive(place(guest('zaS3', 'roze', '#cfcac2', 'bald', '#5a8a4a', '#4a4036', glass=False), 780, 754, 1.15), 9)
+                              + alive(place(guest('zaS4', 'licht', '#e0b860', 'short', '#c73f6d', '#2b3f66'), 960, 752, 1.12), 12)),
     },
     'tuin': {
         'ree': lambda: place(ree('tnE', head_id='tn-reehead'), 0, 0, .9),

@@ -55,17 +55,29 @@
     </radialGradient>
   </defs>
 
-  <!-- lucht, zon en wolken -->
+  <!-- lucht, zon en wolken (de kleuren en de plek van de zon hangen af van het hoofdstuk: css .t-ochtend enz.) -->
   <rect width="1600" height="900" fill="url(#efSky)" />
-  <circle cx="1460" cy="300" r="160" fill="url(#efSun)" />
-  <circle id="ef-zon" cx="1460" cy="300" r="34" fill="#fff4c4" />
+  <g id="ef-sunpos">
+    <circle cx="1460" cy="300" r="160" fill="url(#efSun)" />
+    <circle id="ef-zon" cx="1460" cy="300" r="34" fill="#fff4c4" />
+  </g>
+  <!-- zaterdagavond: sterren en de maan, achter de bomen en de daken -->
+  <g id="ef-moon">
+    <g fill="#fff">
+      <circle class="ef-star" cx="360" cy="30" r="2" /><circle class="ef-star b" cx="610" cy="110" r="1.6" /><circle class="ef-star c" cx="700" cy="40" r="2.2" />
+      <circle class="ef-star" cx="860" cy="100" r="1.6" /><circle class="ef-star b" cx="990" cy="30" r="2" /><circle class="ef-star c" cx="1040" cy="130" r="1.4" />
+      <circle class="ef-star" cx="1110" cy="60" r="1.6" /><circle class="ef-star b" cx="560" cy="30" r="1.4" /><circle class="ef-star c" cx="1180" cy="20" r="1.8" />
+    </g>
+    <circle cx="420" cy="70" r="70" fill="url(#efSun)" opacity=".45" />
+    <g id="ef-maan"><circle cx="420" cy="70" r="26" fill="#f4f0dc" /><circle cx="412" cy="64" r="5" fill="#d8d2b8" /><circle cx="428" cy="80" r="4" fill="#d8d2b8" /></g>
+  </g>
   <g id="ef-wolken" class="ef-clouds" fill="#ffffff" opacity=".85">
     <g class="ef-cloud"><ellipse cx="220" cy="110" rx="90" ry="26" /><ellipse cx="270" cy="96" rx="60" ry="30" /><ellipse cx="180" cy="100" rx="50" ry="22" /></g>
     <g class="ef-cloud b"><ellipse cx="900" cy="70" rx="110" ry="24" /><ellipse cx="960" cy="56" rx="60" ry="26" /></g>
     <g class="ef-cloud c"><ellipse cx="1300" cy="150" rx="80" ry="18" /><ellipse cx="1340" cy="140" rx="46" ry="20" /></g>
   </g>
   <!-- zwaluwen -->
-  <g class="ef-swallows" fill="none" stroke="#1f2430" stroke-width="3" stroke-linecap="round">
+  <g id="ef-swallows" class="ef-swallows" fill="none" stroke="#1f2430" stroke-width="3" stroke-linecap="round">
     <g transform="translate(640 70)"><path class="ef-sw" d="M0 0 q8 -8 16 0 q8 -8 16 0" /></g>
     <g transform="translate(760 40)"><path class="ef-sw b" d="M0 0 q6 -6 12 0 q6 -6 12 0" /></g>
     <g transform="translate(1040 90)"><path class="ef-sw c" d="M0 0 q7 -7 14 0 q7 -7 14 0" /></g>
@@ -121,6 +133,7 @@
     <!-- de grote deeldeuren -->
     <rect x="680" y="470" width="150" height="100" fill="#2f5a3e" stroke="#e9e2d2" stroke-width="5" />
     <path d="M755 470 v100 M680 470 L755 570 M830 470 L755 570" stroke="#e9e2d2" stroke-width="4" />
+    <rect x="715" y="444" width="80" height="22" rx="4" fill="#c4302b" stroke="#e9e2d2" stroke-width="2" /><text x="755" y="460" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="13" font-weight="600" fill="#fff">Museum</text>
     <!-- de paardenstal: een staldeur en twee boogramen -->
     <g id="ef-staldoor">
       <rect x="1088" y="452" width="84" height="118" fill="#7a4a26" stroke="#e9e2d2" stroke-width="5" />
@@ -199,7 +212,7 @@
       <circle id="ef-kastled" cx="471" cy="474" r="2" fill="#e2483d" />
     </g>
     <!-- buitenlamp -->
-    <path d="M318 412 h10 v-6 h-10z" fill="#2a2a2a" /><path d="M312 412 h22 l-4 22 h-14z" fill="#f6e2a0" stroke="#2a2a2a" stroke-width="2" />
+    <g id="lamp-ef" class="lamp"><path d="M318 412 h10 v-6 h-10z" fill="#2a2a2a" /><path class="lamp-bulb" d="M312 412 h22 l-4 22 h-14z" fill="#f6e2a0" stroke="#2a2a2a" stroke-width="2" /></g>
   </g>
 
   <!-- het grindpad en het gras -->
@@ -207,6 +220,41 @@
   <path d="M330 570 L452 570 L640 900 L80 900Z" fill="#d6c7a6" />
   <g fill="#bfae8a"><circle cx="300" cy="700" r="3" /><circle cx="420" cy="640" r="3" /><circle cx="360" cy="800" r="4" /><circle cx="500" cy="760" r="3" /><circle cx="250" cy="850" r="4" /><circle cx="460" cy="860" r="3" /><circle cx="390" cy="600" r="2" /></g>
   <path d="M1080 570 L1180 570 L1300 900 L1000 900Z" fill="#cdbf9e" opacity=".8" />
+  <g id="ef-hydro84" class="ef-hydro84" aria-label="International Hydro 84 met een hooikar rijdt over het erf">
+    <title>International Hydro 84 met een hooikar</title>
+    <g class="ef-hydro84-drive">
+      <g transform="translate(1400 487) scale(.22)">
+      <g class="ef-hydro84-facing">
+      <ellipse cx="214" cy="128" rx="224" ry="8" fill="#29351f" opacity=".18" />
+      <path d="M30 82 H188 V95 H30Z" fill="#8e161c" />
+      <circle cx="48" cy="101" r="23" fill="#252529" /><circle cx="48" cy="101" r="12" fill="#efe6c8" stroke="#c9bd98" stroke-width="2" />
+      <circle cx="157" cy="96" r="39" fill="#252529" /><circle cx="157" cy="96" r="23" fill="#efe6c8" stroke="#c9bd98" stroke-width="3" />
+      <path d="M16 65 H122 L132 88 H20Z" fill="#d42a30" stroke="#7a1a16" stroke-width="3" />
+      <path d="M20 68 v16 M24 68 v16 M28 68 v16 M32 68 v16" stroke="#30343a" stroke-width="2" />
+      <path d="M45 73 H105" stroke="#efe6c8" stroke-width="4" />
+      <text x="75" y="71" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" font-weight="700" fill="#f6f2e6">INTERNATIONAL</text>
+      <text x="104" y="84" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#f6f2e6">HYDRO 84</text>
+      <path d="M119 62 L126 20 H184 L190 68 L178 70 L174 53 H138 L132 76Z" fill="#d42a30" stroke="#7a1a16" stroke-width="3" />
+      <path d="M130 23 H179 L183 53 H126Z" fill="#303b3c" stroke="#252529" stroke-width="3" />
+      <path d="M134 27 H154 V50 H130Z M159 27 H175 L179 50 H159Z" fill="#b9d1d8" stroke="#efe6c8" stroke-width="2" />
+      <path d="M125 18 H187 V25 H124Z" fill="#efe6c8" stroke="#8a8064" stroke-width="2" />
+      <path d="M146 54 V76 M147 56 l17 9 M115 72 Q116 48 155 46 Q190 47 199 73 L188 76 Q182 58 157 58 Q134 58 129 78Z" fill="#a81c22" stroke="#7a1a16" stroke-width="3" />
+      <path d="M79 60 V32" stroke="#252529" stroke-width="5" /><path d="M74 32 h10" stroke="#252529" stroke-width="4" />
+      <path d="M193 84 L218 91" stroke="#5a3020" stroke-width="5" stroke-linecap="round" />
+      <path d="M216 91 H449 V102 H216Z" fill="#8e161c" stroke="#5a0e10" stroke-width="3" />
+      <path d="M224 88 V114 M435 88 V114" stroke="#6a3020" stroke-width="5" />
+      <circle cx="363" cy="108" r="22" fill="#252529" /><circle cx="363" cy="108" r="12" fill="#efe6c8" stroke="#c9bd98" stroke-width="2" />
+      <path d="M223 91 L241 42 H423 L449 91Z" fill="#d3b45e" stroke="#a8862e" stroke-width="3" />
+      <path d="M243 48 L258 80 M278 45 L292 81 M316 45 L328 81 M354 45 L366 81 M392 46 L405 81" stroke="#f1d980" stroke-width="3" />
+      <path d="M244 44 v42 M422 44 v42" stroke="#8d7138" stroke-width="2" />
+      </g>
+      </g>
+    </g>
+  </g>
+  <g id="ef-hydro84-struik" fill="url(#efTree)" opacity=".95">
+    <ellipse cx="1410" cy="510" rx="12" ry="5" />
+    <ellipse cx="1422" cy="508" rx="12" ry="6" />
+  </g>
   <g class="ef-grass" stroke="#3f7a2a" stroke-width="3" stroke-linecap="round" fill="none">
     <path d="M700 640 l-4 -16 M706 640 l2 -18 M712 640 l6 -14" />
     <path d="M900 760 l-4 -16 M906 760 l2 -18 M912 760 l6 -14" />
@@ -221,7 +269,7 @@
 
   <!-- het nieuwe B&B-bord aan de weg, met een dakje van zwarte pannen, geraniums en de Groninger vlag -->
   <g id="ef-bnbbord">
-    <path d="M846 560 L800 470" stroke="#e9e2d2" stroke-width="5" stroke-linecap="round" />
+    <path d="M800 560 V470" stroke="#e9e2d2" stroke-width="5" stroke-linecap="round" />
     <g class="ef-flag" transform="translate(800 470)">
       <clipPath id="efFlagClip"><path d="M0 0 C20 -8 40 8 64 0 C70 14 70 30 64 44 C40 52 20 36 0 44Z" /></clipPath>
       <g clip-path="url(#efFlagClip)">
@@ -257,7 +305,7 @@
   </g></g></g></g>
 
   <!-- de ree bij de bomen -->
-  <g id="ef-ree" class="ef-ree"><g class="ree-walk walking" style="--walk:180px;--walkt:26s"><g transform="translate(940 640)">
+  <g id="ef-ree" class="ef-ree"><g class="ree-walk walking" style="--walk:180px;--dir:1;--walkt:26s"><g transform="translate(940 640)">
     <!-- @personage ree --><g transform="translate(0 0) scale(0.55 0.55)"><path class="rleg a" d="M-32 -50 L-36 -18 L-34 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path class="rleg b" d="M-24 -48 L-22 -18 L-26 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path class="rleg b" d="M24 -50 L26 -20 L24 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path class="rleg a" d="M32 -50 L36 -20 L34 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-42 -62 C-44 -76 -24 -82 0 -80 C22 -80 36 -74 40 -62 C42 -50 32 -44 0 -44 C-28 -44 -42 -48 -42 -62Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.4"/><path d="M-30 -50 C-10 -46 14 -46 30 -50" stroke="#e8d2b4" stroke-width="5" fill="none" opacity=".7"/><ellipse cx="-42" cy="-64" rx="7" ry="9" fill="#f6efe4"/><g id="ef-reehead"><g><path d="M30 -58 C34 -72 38 -84 46 -92 L58 -86 C52 -78 48 -66 44 -54Z" fill="#a8714a"/><path d="M44 -94 C50 -100 62 -100 70 -94 C76 -90 78 -84 74 -82 C66 -80 58 -82 52 -80 C46 -82 42 -88 44 -94Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.4"/><ellipse cx="75" cy="-84" rx="3" ry="2.4" fill="#2a1a10"/><circle cx="58" cy="-92" r="2.6" fill="#1a100a"/><circle cx="59" cy="-93" r=".8" fill="#fff"/><path d="M46 -96 C40 -110 44 -114 50 -106Z M52 -98 C52 -114 58 -114 58 -102Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.2"/><path d="M47 -104 C45 -108 46 -110 48 -106" stroke="#e8b8a0" stroke-width="2"/></g></g></g><!-- @einde ree -->
   </g></g></g>
 
@@ -278,7 +326,7 @@
     <path d="M108 530 L150 570 M312 530 L270 570" stroke="#5e4128" stroke-width="8" />
     <rect x="130" y="556" width="160" height="104" rx="4" fill="#26302a" stroke="#7a5a3a" stroke-width="9" />
     <g id="ef-chalk" font-family="Caveat, cursive" fill="#f3efe6" text-anchor="middle">
-      <text x="210" y="592" font-size="30" font-weight="700">Albertsmaheert</text>
+      <text x="210" y="592" font-size="28" font-weight="700" textLength="136" lengthAdjust="spacingAndGlyphs">Albertsmaheert</text>
       <text x="210" y="618" font-size="17">B&amp;B · zaal · museum</text>
       <text id="ef-chalkmoi" x="210" y="646" font-size="24" font-weight="700">Moi!</text>
     </g>
@@ -349,6 +397,20 @@
     <path d="M1512 568 h28 m-8 -7 l8 7 l-8 7" stroke="#2f8a3e" stroke-width="4" fill="none" />
   </g>
 
+  <!-- zaterdagavond (hoofdstuk 4): donker, met licht achter de ramen; de maan blijft helder -->
+  <g id="ef-night" pointer-events="none">
+    <mask id="efNightMask"><rect width="1600" height="900" fill="#fff" /><circle cx="420" cy="70" r="30" fill="#000" /></mask>
+    <rect width="1600" height="900" fill="#0a1430" opacity=".42" mask="url(#efNightMask)" />
+    <g fill="#ffcf6a" opacity=".8">
+      <rect x="176" y="340" width="96" height="130" /><rect x="518" y="340" width="96" height="130" />
+      <rect x="356" y="420" width="68" height="44" />
+      <path d="M848 238 h70 l4 80 h-78z M1008 238 h70 l4 80 h-78z M1130 238 h70 l4 80 h-78z" />
+      <path d="M990 570 v-60 a24 24 0 0 1 48 0 v60z M1222 570 v-60 a24 24 0 0 1 48 0 v60z" />
+    </g>
+    <g stroke="#3a3020" stroke-width="4"><path d="M224 340 v130 M176 383 h96 M176 426 h96 M566 340 v130 M518 383 h96 M518 426 h96 M884 238 v80 M1044 238 v80 M1166 238 v80 M1014 486 v84 M990 530 h48 M1246 486 v84 M1222 530 h48" /></g>
+    <circle class="lamp-glow" data-of="lamp-ef" cx="323" cy="424" r="46" fill="url(#efSun)" opacity=".7" />
+  </g>
+
   <rect width="1600" height="900" fill="url(#efVign)" pointer-events="none" />
 
   <!-- klikvlakken -->
@@ -362,9 +424,9 @@
     <rect class="hit" data-hs="huisnr" data-label="Het huisnummer" x="448" y="410" width="42" height="32" fill="transparent" />
     <rect class="hit" data-hs="ramen" data-label="De ramen van het voorhuis" x="170" y="334" width="110" height="140" fill="transparent" />
     <rect class="hit" data-hs="schoorsteen" data-label="De schoorsteen" x="494" y="96" width="46" height="84" fill="transparent" />
-    <rect class="hit" data-hs="stal" data-label="De staldeur: de Paardenstal" x="1084" y="430" width="92" height="142" fill="transparent" />
+    <rect class="hit" data-hs="stal" data-label="De staldeur: naar binnen, de hal" x="1084" y="430" width="92" height="142" fill="transparent" />
     <rect class="hit" data-hs="dakramen" data-label="De dakramen van de hooizolder" x="836" y="210" width="380" height="120" fill="transparent" />
-    <rect class="hit" data-hs="deeldeur" data-label="De grote deeldeuren" x="676" y="470" width="158" height="100" fill="transparent" />
+    <rect class="hit" data-hs="deeldeur" data-label="De deeldeuren: het museum van Roelof" x="676" y="440" width="158" height="130" fill="transparent" />
     <rect class="hit" data-hs="stalraam" data-label="Een boograam met een hobbelpaardje" x="1218" y="480" width="56" height="92" fill="transparent" />
     <rect class="hit" data-hs="bord" data-label="Het welkomsbord" x="126" y="552" width="168" height="112" fill="transparent" />
     <rect class="hit" data-hs="ballon" data-label="Rode ballonnen" x="70" y="360" width="290" height="80" fill="transparent" />
@@ -372,10 +434,11 @@
     <rect class="hit" id="hit-hoef" data-hs="hoef" data-label="Iets glimt in het gras" x="186" y="806" width="52" height="46" fill="transparent" />
     <rect class="hit" id="hit-paardje" data-hs="paardje" data-label="Een houten hobbelpaardje" x="186" y="690" width="58" height="50" fill="transparent" />
     <rect class="hit" data-hs="brievenbus" data-label="De brievenbus" x="1356" y="560" width="92" height="90" fill="transparent" />
-    <rect class="hit" data-hs="fiets" data-label="Jouw fiets" x="1190" y="696" width="160" height="152" fill="transparent" />
+    <rect class="hit" data-hs="fiets" data-label="Jouw fiets: naar huis (het beginscherm)" x="1190" y="696" width="160" height="152" fill="transparent" />
     <rect class="hit" data-hs="knoop" data-label="Een fietsknooppunt" x="1466" y="536" width="92" height="64" fill="transparent" />
     <rect class="hit" data-hs="martini" data-label="De Martinitoren in Groningen, 7,5 km verderop" x="1440" y="376" width="32" height="96" fill="transparent" />
-    <rect class="hit" data-hs="bnbbord" data-label="Het bord van de B&amp;B, met de Groninger vlag" x="706" y="460" width="160" height="290" fill="transparent" />
+    <rect class="hit" data-hs="bnbbord" data-label="Het bord van de B&amp;B, met de Groninger vlag" x="706" y="572" width="160" height="178" fill="transparent" />
+    <rect class="hit" data-hs="bnbbord" data-label="Het bord van de B&amp;B, met de Groninger vlag" x="836" y="462" width="40" height="56" fill="transparent" />
     <rect class="hit" data-hs="geiten" data-label="Geitjes in het weitje naast de schuur" x="1208" y="588" width="150" height="56" fill="transparent" />
     <rect class="hit" data-hs="haas" data-label="Een haas die over het gras huppelt" x="630" y="770" width="320" height="64" fill="transparent" />
     <rect class="hit" id="hit-ree" data-hs="ree" data-label="Een ree, die rustig over het erf loopt" x="900" y="576" width="250" height="66" fill="transparent" />
@@ -383,7 +446,8 @@
     <rect class="hit" data-hs="bomen" data-label="De grote bomen achter de boerderij" x="1260" y="40" width="340" height="180" fill="transparent" />
     <rect class="hit" data-hs="wolk" data-label="Een wolk" x="120" y="70" width="200" height="70" fill="transparent" />
     <rect class="hit" data-hs="wolk" data-label="Een wolk" x="800" y="40" width="220" height="50" fill="transparent" />
-    <rect class="hit" data-hs="zon" data-label="De avondzon" x="1420" y="260" width="80" height="80" fill="transparent" />
-    <rect class="hit" data-hs="zwaluw" data-label="Zwaluwen" x="600" y="20" width="560" height="80" fill="transparent" />
+    <rect class="hit" id="hit-zon" data-hs="zon" data-label="De avondzon" x="1420" y="260" width="80" height="80" fill="transparent" />
+    <rect class="hit" id="hit-zwaluw" data-hs="zwaluw" data-label="Zwaluwen" x="600" y="20" width="560" height="80" fill="transparent" />
+    <rect class="hit" data-hs="lampje" data-lamp="lamp-ef" data-label="De buitenlamp" x="306" y="402" width="34" height="38" fill="transparent" />
   </g>
 </svg>

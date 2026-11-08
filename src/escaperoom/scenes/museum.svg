@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" class="scene" id="sc-museum" viewBox="0 0 1600 900"
-  preserveAspectRatio="xMidYMid slice" aria-label="Het boerenleven-museum van Roelof in de andere schuur">
+  preserveAspectRatio="xMidYMid slice"
+  aria-label="Het boerenleven-museum van Roelof in de andere schuur">
   <defs>
     <pattern id="muReed" width="40" height="14" patternUnits="userSpaceOnUse">
       <rect width="40" height="14" fill="#8a7050" />
@@ -47,8 +48,10 @@
   <rect x="0" y="296" width="1600" height="26" fill="#8a6e4e" />
   <!-- de grijze betonvloer -->
   <path d="M0 720 H1600 V900 H0Z" fill="url(#muFloor)" />
-  <path d="M0 720 H1600" stroke="#7e858c" stroke-width="2" />
-  <g stroke="#9ea4aa" stroke-width="2" opacity=".6"><path d="M400 720 L300 900 M1000 720 L1080 900 M0 800 H1600" /></g>
+  <path id="mu-floor-edge" d="M0 720 H1600" stroke="#7e858c" stroke-width="2" />
+  <g stroke="#9ea4aa" stroke-width="2" opacity=".6">
+    <path d="M400 720 L300 900 M1000 720 L1080 900 M0 800 H1600" />
+  </g>
 
   <!-- een zware stijl met de rode katrollen (zoals in het echte museum) -->
   <g id="mu-paal">
@@ -56,10 +59,14 @@
     <rect x="1290" y="360" width="110" height="20" fill="#9a7c58" />
     <g id="mu-katrollen" class="mu-sway">
       <path d="M1344 380 V420" stroke="#c9a46a" stroke-width="4" />
-      <rect x="1330" y="420" width="28" height="44" rx="12" fill="#c4302b" stroke="#7a1a16" stroke-width="2" /><circle cx="1344" cy="442" r="6" fill="#7a1a16" />
+      <rect x="1330" y="420" width="28" height="44" rx="12" fill="#c4302b" stroke="#7a1a16"
+        stroke-width="2" />
+      <circle cx="1344" cy="442" r="6" fill="#7a1a16" />
       <path d="M1344 464 q-8 12 0 20" stroke="#5a5f66" stroke-width="4" fill="none" />
       <path d="M1344 484 V540" stroke="#c9a46a" stroke-width="4" />
-      <rect x="1330" y="540" width="28" height="44" rx="12" fill="#c4302b" stroke="#7a1a16" stroke-width="2" /><circle cx="1344" cy="562" r="6" fill="#7a1a16" />
+      <rect x="1330" y="540" width="28" height="44" rx="12" fill="#c4302b" stroke="#7a1a16"
+        stroke-width="2" />
+      <circle cx="1344" cy="562" r="6" fill="#7a1a16" />
     </g>
     <circle cx="1344" cy="640" r="26" fill="none" stroke="#c9a46a" stroke-width="7" />
     <circle cx="1344" cy="640" r="16" fill="none" stroke="#b8925a" stroke-width="6" />
@@ -67,53 +74,136 @@
 
   <!-- de gereedschapswand: draadgaas met spaden, vorken, een zeis -->
   <g id="mu-wand">
-    <rect x="430" y="340" width="520" height="250" fill="url(#muGrid)" />
+    <rect x="430" y="340" width="410" height="250" fill="url(#muGrid)" />
     <g stroke-linecap="round">
-      <path d="M460 350 L470 580" stroke="#8a6440" stroke-width="7" /><path d="M462 580 l18 -50 h-10 l-14 52z" fill="#2a2a2a" />
-      <path d="M510 345 L516 590" stroke="#a07a50" stroke-width="7" /><path d="M500 520 h32 l-4 50 h-24z" fill="#3a3a3a" />
-      <path d="M560 340 L565 560" stroke="#8a6440" stroke-width="7" /><path d="M548 560 l4 34 M565 560 v36 M582 560 l-4 34" stroke="#3a3a3a" stroke-width="4" />
-      <path d="M610 350 L612 580" stroke="#a07a50" stroke-width="7" /><path d="M598 540 l14 -10 l14 10 v38 h-28z" fill="#2a2a2a" />
-      <path d="M660 338 L680 590" stroke="#8a6440" stroke-width="7" /><path d="M672 346 C720 340 760 360 790 400" stroke="#4a4a4a" stroke-width="6" fill="none" />
-      <path d="M720 350 L722 570" stroke="#a07a50" stroke-width="7" /><path d="M706 570 q4 -30 16 -32 q12 2 16 32" stroke="#3a3a3a" stroke-width="4" fill="none" />
-      <path d="M770 344 L774 580" stroke="#8a6440" stroke-width="7" /><path d="M760 580 l6 20 M774 580 v22 M788 580 l-6 20" stroke="#3a3a3a" stroke-width="4" />
-      <path d="M820 340 L824 590" stroke="#a07a50" stroke-width="7" /><path d="M812 540 h24 l-2 46 h-20z" fill="#3a3a3a" />
-      <path d="M870 346 L876 580" stroke="#8a6440" stroke-width="7" /><path d="M856 580 l6 24 M870 580 l2 26 M884 580 l-2 24 M898 580 l-6 22" stroke="#3a3a3a" stroke-width="3" />
-      <path d="M920 350 L924 570" stroke="#a07a50" stroke-width="7" />
+      <path d="M460 350 L470 580" stroke="#8a6440" stroke-width="7" />
+      <path d="M462 580 l18 -50 h-10 l-14 52z" fill="#2a2a2a" />
+      <path d="M510 345 L516 590" stroke="#a07a50" stroke-width="7" />
+      <path d="M500 520 h32 l-4 50 h-24z" fill="#3a3a3a" />
+      <path d="M560 340 L565 560" stroke="#8a6440" stroke-width="7" />
+      <path d="M548 560 l4 34 M565 560 v36 M582 560 l-4 34" stroke="#3a3a3a" stroke-width="4" />
+      <path d="M610 350 L612 580" stroke="#a07a50" stroke-width="7" />
+      <path d="M598 540 l14 -10 l14 10 v38 h-28z" fill="#2a2a2a" />
+      <path d="M660 338 L680 590" stroke="#8a6440" stroke-width="7" />
+      <path d="M672 346 C720 340 760 360 790 400" stroke="#4a4a4a" stroke-width="6" fill="none" />
+      <path d="M720 350 L722 570" stroke="#a07a50" stroke-width="7" />
+      <path d="M706 570 q4 -30 16 -32 q12 2 16 32" stroke="#3a3a3a" stroke-width="4" fill="none" />
+      <path d="M770 344 L774 580" stroke="#8a6440" stroke-width="7" />
+      <path d="M760 580 l6 20 M774 580 v22 M788 580 l-6 20" stroke="#3a3a3a" stroke-width="4" />
+      <path d="M820 340 L824 590" stroke="#a07a50" stroke-width="7" />
+      <path d="M812 540 h24 l-2 46 h-20z" fill="#3a3a3a" />
     </g>
-    <g fill="#f6f2e6" stroke="#9aa0a6"><rect x="520" y="440" width="22" height="12" /><rect x="700" y="470" width="22" height="12" /><rect x="860" y="430" width="22" height="12" /></g>
+    <g fill="#f6f2e6" stroke="#9aa0a6">
+      <rect x="520" y="440" width="22" height="12" />
+      <rect x="700" y="470" width="22" height="12" />
+    </g>
+  </g>
+  <!-- de deur naar het erf: een staldeur waarvan de bovenhelft openstaat -->
+  <g id="mu-deur">
+    <rect x="852" y="322" width="116" height="398" fill="#8a6e4e" />
+    <rect class="mu-doorsky" x="862" y="332" width="96" height="170" fill="#9cc8ea" />
+    <path class="sky-land" d="M862 450 h96 v52 h-96z" fill="#7aa04a" />
+    <clipPath id="muHydroWindowClip"><rect x="862" y="332" width="96" height="170" /></clipPath>
+    <g id="mu-hydro84-pass" clip-path="url(#muHydroWindowClip)" aria-hidden="true">
+      <g class="mu-hydro84-drive">
+        <g transform="translate(874 478) scale(.16)">
+          <path d="M30 82 H188 V95 H30Z" fill="#8e161c" />
+          <circle cx="48" cy="101" r="23" fill="#252529" /><circle cx="48" cy="101" r="12" fill="#efe6c8" />
+          <circle cx="157" cy="96" r="39" fill="#252529" /><circle cx="157" cy="96" r="23" fill="#efe6c8" />
+          <path d="M16 65 H122 L132 88 H20Z" fill="#d42a30" stroke="#7a1a16" stroke-width="3" />
+          <path d="M119 62 L126 20 H184 L190 68 L178 70 L174 53 H138 L132 76Z" fill="#d42a30" stroke="#7a1a16" stroke-width="3" />
+          <path d="M130 23 H179 L183 53 H126Z" fill="#303b3c" stroke="#252529" stroke-width="3" />
+          <path d="M134 27 H154 V50 H130Z M159 27 H175 L179 50 H159Z" fill="#b9d1d8" stroke="#efe6c8" stroke-width="2" />
+          <path d="M125 18 H187 V25 H124Z" fill="#efe6c8" />
+          <path d="M193 84 L218 91 M216 91 H449 V102 H216Z" stroke="#5a3020" stroke-width="5" fill="none" />
+          <circle cx="363" cy="108" r="22" fill="#252529" /><circle cx="363" cy="108" r="12" fill="#efe6c8" />
+          <path d="M223 91 L241 42 H423 L449 91Z" fill="#d3b45e" stroke="#a8862e" stroke-width="3" />
+        </g>
+      </g>
+    </g>
+    <circle class="mu-sun" cx="930" cy="380" r="16" fill="#fff4c4" />
+    <path d="M862 332 l-20 10 v160 l20 -10z" fill="#2f5a3e" stroke="#1f3e2a" stroke-width="2" />
+    <rect x="862" y="502" width="96" height="218" fill="#2f5a3e" stroke="#1f3e2a" stroke-width="3" />
+    <path d="M874 514 h72 v196 h-72z" fill="none" stroke="#24482f" stroke-width="3" />
+    <rect x="874" y="304" width="72" height="20" rx="4" fill="#1f9a4a" />
+    <text x="910" y="319" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="13"
+      font-weight="600" fill="#fff">Erf</text>
   </g>
   <!-- een schoolplaat aan de muur -->
   <g id="mu-plaat">
     <rect x="980" y="340" width="190" height="130" fill="#c9a24a" stroke="#6a4a2a" stroke-width="5" />
     <rect x="990" y="350" width="170" height="110" fill="#d8e6b0" />
     <rect x="990" y="350" width="170" height="44" fill="#a8cce0" />
-    <path d="M1100 394 l20 -24 l26 24z" fill="#b4513a" /><rect x="1104" y="394" width="38" height="24" fill="#c46a4a" />
-    <g><ellipse cx="1030" cy="420" rx="22" ry="12" fill="#f4f2ec" /><circle cx="1022" cy="416" r="5" fill="#2a2a2a" /><circle cx="1036" cy="422" r="4" fill="#2a2a2a" /><path d="M1012 428 v10 M1046 428 v10" stroke="#2a2a2a" stroke-width="3" /><ellipse cx="1054" cy="412" rx="7" ry="5" fill="#2a2a2a" /></g>
-    <g><ellipse cx="1080" cy="436" rx="12" ry="8" fill="#eee" /><circle cx="1090" cy="432" r="4" fill="#eee" /></g>
+    <path d="M1100 394 l20 -24 l26 24z" fill="#b4513a" />
+    <rect x="1104" y="394" width="38" height="24" fill="#c46a4a" />
+    <g>
+      <ellipse cx="1030" cy="420" rx="22" ry="12" fill="#f4f2ec" />
+      <circle cx="1022" cy="416" r="5" fill="#2a2a2a" />
+      <circle cx="1036" cy="422" r="4" fill="#2a2a2a" />
+      <path d="M1012 428 v10 M1046 428 v10" stroke="#2a2a2a" stroke-width="3" />
+      <ellipse cx="1054" cy="412" rx="7" ry="5" fill="#2a2a2a" />
+    </g>
+    <g>
+      <ellipse cx="1080" cy="436" rx="12" ry="8" fill="#eee" />
+      <circle cx="1090" cy="432" r="4" fill="#eee" />
+    </g>
   </g>
   <!-- het spreukenbord met Groninger wijsheden -->
   <g id="mu-spreuk">
     <rect x="1190" y="350" width="110" height="140" fill="#f4eee0" stroke="#3a6a9a" stroke-width="6" />
-    <g fill="#3a6a9a" font-family="Caveat, cursive" font-size="17" text-anchor="middle"><text x="1245" y="378">Nait</text><text x="1245" y="398">soez'n,</text><text x="1245" y="422">moi</text><text x="1245" y="442">doun</text></g>
+    <g fill="#3a6a9a" font-family="Caveat, cursive" font-size="17" text-anchor="middle">
+      <text x="1245" y="378">Nait</text>
+      <text x="1245" y="398">soez'n,</text>
+      <text x="1245" y="422">moi</text>
+      <text x="1245" y="442">doun</text>
+    </g>
     <path d="M1206 460 q39 14 78 0" stroke="#3a6a9a" stroke-width="3" fill="none" />
   </g>
 
   <!-- de balenlift: een houten lopende band, schuin omhoog naar de zolder -->
   <g id="mu-lift">
     <path d="M200 640 L520 300 L556 316 L240 660Z" fill="#c9a06a" stroke="#7a5a30" stroke-width="3" />
-    <g stroke="#9a7442" stroke-width="2"><path d="M236 650 L540 310 M216 646 L526 304" /></g>
-    <path d="M220 660 L260 600 L280 700 M300 560 L340 690" stroke="#3a5a8a" stroke-width="6" />
-    <circle cx="246" cy="700" r="20" fill="#2a2a2a" /><circle cx="246" cy="700" r="8" fill="#c4302b" />
-    <!-- de balen op de band: bij een klik schuiven ze samen één plek omhoog (css: #mu-bale.lift); de bovenste gaat de
+    <g stroke="#9a7442" stroke-width="2">
+      <path d="M236 650 L540 310 M216 646 L526 304" />
+    </g>
+    <path d="M220 660 L260 600 L280 720 M300 560 L340 720" stroke="#3a5a8a" stroke-width="6" />
+    <circle cx="246" cy="700" r="20" fill="#2a2a2a" />
+    <circle cx="246" cy="700" r="8" fill="#c4302b" />
+    <!-- de balen op de band: bij een klik schuiven ze samen één plek omhoog (css: #mu-bale.lift);
+    de bovenste gaat de
          zolder op en onderaan komt een nieuwe aan, zodat het daarna weer precies zo staat -->
-    <g id="mu-bale" class="mu-bale"><g class="bale-in"><rect x="-30" y="-19" width="60" height="38" rx="3" fill="url(#muStraw)" stroke="#a8862e" stroke-width="2" transform="translate(250 608) rotate(-47)" /><path d="M-30 -6 h60 M-30 6 h60" stroke="#b89a40" stroke-width="2" transform="translate(250 608) rotate(-47)" /></g><g class="bale-mid"><rect x="-30" y="-19" width="60" height="38" rx="3" fill="url(#muStraw)" stroke="#a8862e" stroke-width="2" transform="translate(340 512) rotate(-47)" /><path d="M-30 -6 h60 M-30 6 h60" stroke="#b89a40" stroke-width="2" transform="translate(340 512) rotate(-47)" /></g><g class="bale-out"><rect x="-30" y="-19" width="60" height="38" rx="3" fill="url(#muStraw)" stroke="#a8862e" stroke-width="2" transform="translate(430 416) rotate(-47)" /><path d="M-30 -6 h60 M-30 6 h60" stroke="#b89a40" stroke-width="2" transform="translate(430 416) rotate(-47)" /></g></g>
+    <g id="mu-bale" class="mu-bale">
+      <g class="bale-in">
+        <rect x="-30" y="-19" width="60" height="38" rx="3" fill="url(#muStraw)" stroke="#a8862e"
+          stroke-width="2" transform="translate(250 608) rotate(-47)" />
+        <path d="M-30 -6 h60 M-30 6 h60" stroke="#b89a40" stroke-width="2"
+          transform="translate(250 608) rotate(-47)" />
+      </g>
+      <g class="bale-mid">
+        <rect x="-30" y="-19" width="60" height="38" rx="3" fill="url(#muStraw)" stroke="#a8862e"
+          stroke-width="2" transform="translate(340 512) rotate(-47)" />
+        <path d="M-30 -6 h60 M-30 6 h60" stroke="#b89a40" stroke-width="2"
+          transform="translate(340 512) rotate(-47)" />
+      </g>
+      <g class="bale-out">
+        <rect x="-30" y="-19" width="60" height="38" rx="3" fill="url(#muStraw)" stroke="#a8862e"
+          stroke-width="2" transform="translate(430 416) rotate(-47)" />
+        <path d="M-30 -6 h60 M-30 6 h60" stroke="#b89a40" stroke-width="2"
+          transform="translate(430 416) rotate(-47)" />
+      </g>
+    </g>
   </g>
   <!-- strobalen opgestapeld -->
   <g id="mu-balen">
-    <rect x="560" y="600" width="110" height="60" fill="url(#muStraw)" stroke="#a8862e" stroke-width="2" />
-    <rect x="670" y="600" width="110" height="60" fill="url(#muStraw)" stroke="#a8862e" stroke-width="2" />
-    <rect x="615" y="540" width="110" height="60" fill="url(#muStraw)" stroke="#a8862e" stroke-width="2" />
-    <g stroke="#b89a40" stroke-width="2"><path d="M570 620 h90 M680 620 h90 M625 560 h90" /></g>
+    <rect x="560" y="660" width="110" height="60" fill="url(#muStraw)" stroke="#a8862e"
+      stroke-width="2" />
+    <rect x="670" y="660" width="110" height="60" fill="url(#muStraw)" stroke="#a8862e"
+      stroke-width="2" />
+    <rect x="615" y="600" width="110" height="60" fill="url(#muStraw)" stroke="#a8862e"
+      stroke-width="2" />
+    <g stroke="#b89a40" stroke-width="2">
+      <path d="M570 680 h90 M680 680 h90 M625 620 h90" />
+    </g>
   </g>
 
   <!-- de witte tafel met het kistje van Thedema en de bascule -->
@@ -123,17 +213,21 @@
     <path d="M876 618 V760 M1244 618 V760" stroke="#c9c5bb" stroke-width="2" fill="none" />
   </g>
   <g id="mu-kistje">
-    <rect x="1040" y="548" width="110" height="52" rx="4" fill="#6a4426" stroke="#3a2412" stroke-width="3" />
+    <rect x="1040" y="548" width="110" height="52" rx="4" fill="#6a4426" stroke="#3a2412"
+      stroke-width="3" />
     <path d="M1040 548 Q1095 516 1150 548" fill="#7a5030" stroke="#3a2412" stroke-width="3" />
     <path d="M1040 570 h110 M1062 548 v52 M1128 548 v52" stroke="#c9a24a" stroke-width="3" />
-    <rect id="mu-slot" x="1086" y="560" width="18" height="22" rx="2" fill="#c9a24a" stroke="#8a6a20" stroke-width="2" />
+    <rect id="mu-slot" x="1086" y="560" width="18" height="22" rx="2" fill="#c9a24a"
+      stroke="#8a6a20" stroke-width="2" />
     <circle cx="1095" cy="569" r="3" fill="#3a2412" />
   </g>
   <g id="mu-kistopen">
-    <rect x="1040" y="548" width="110" height="52" rx="4" fill="#6a4426" stroke="#3a2412" stroke-width="3" />
+    <rect x="1040" y="548" width="110" height="52" rx="4" fill="#6a4426" stroke="#3a2412"
+      stroke-width="3" />
     <path d="M1040 548 L1052 500 H1162 L1150 548" fill="#7a5030" stroke="#3a2412" stroke-width="3" />
     <path d="M1048 552 h94" stroke="#1a0e06" stroke-width="8" />
-    <g id="mu-letters" font-family="Fredoka, sans-serif" font-weight="700" font-size="16" fill="#f6e2a0" text-anchor="middle"></g>
+    <g id="mu-letters" font-family="Fredoka, sans-serif" font-weight="700" font-size="16"
+      fill="#f6e2a0" text-anchor="middle"></g>
   </g>
   <!-- de decimaalbascule: één kilo op het schaaltje houdt tien kilo op de brug in evenwicht -->
   <g id="mu-bascule">
@@ -142,80 +236,157 @@
     <path d="M892 520 L1008 500" stroke="#3a4a3a" stroke-width="5" />
     <path d="M996 500 v16 M980 518 h32" stroke="#3a4a3a" stroke-width="3" />
     <rect x="980" y="514" width="32" height="6" fill="#7a8a6a" />
-    <g fill="#2a2a2a"><rect x="986" y="506" width="8" height="8" /><rect x="998" y="508" width="6" height="6" /></g>
-    <g fill="#b8925a" stroke="#7a5a30"><path d="M900 584 c-6 -26 50 -30 56 0z" /></g>
-    <text x="928" y="574" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#3a2614">mud</text>
+    <g fill="#2a2a2a">
+      <rect x="986" y="506" width="8" height="8" />
+      <rect x="998" y="508" width="6" height="6" />
+    </g>
+    <g fill="#b8925a" stroke="#7a5a30">
+      <path d="M900 584 c-6 -26 50 -30 56 0z" />
+    </g>
+    <text x="928" y="574" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9"
+      fill="#3a2614">mud</text>
   </g>
 
   <!-- karntonnen, melkbussen en een juk -->
-  <g id="mu-melk">
+  <g id="mu-melk" transform="translate(0 30)">
     <g fill="#8a5a3a" stroke="#4a2a1a" stroke-width="2">
       <path d="M1400 560 h40 l6 20 v110 h-52 v-110z" fill="#9a4a2e" />
       <path d="M1450 570 h40 l6 20 v100 h-52 v-100z" fill="#c9b06a" />
       <path d="M1500 560 h40 l6 20 v110 h-52 v-110z" fill="#6a3a2a" />
       <path d="M1540 576 h40 l6 20 v94 h-52 v-94z" fill="#9aa0a6" />
     </g>
-    <g font-family="IBM Plex Mono, monospace" font-size="12" fill="#f6efe2" text-anchor="middle"><text x="1420" y="640">756</text><text x="1520" y="640">517</text></g>
+    <g font-family="IBM Plex Mono, monospace" font-size="12" fill="#f6efe2" text-anchor="middle">
+      <text x="1420" y="640">756</text>
+      <text x="1520" y="640">517</text>
+    </g>
   </g>
   <g id="mu-juk" class="mu-sway">
     <path d="M1400 300 L1420 360 M1560 300 L1540 360" stroke="#c9a46a" stroke-width="4" />
-    <path d="M1400 362 C1440 352 1460 376 1480 368 C1500 376 1520 352 1560 362 L1560 376 C1520 366 1500 390 1480 382 C1460 390 1440 366 1400 376Z" fill="#2f8a7a" stroke="#1a5a4a" stroke-width="2" />
+    <path
+      d="M1400 362 C1440 352 1460 376 1480 368 C1500 376 1520 352 1560 362 L1560 376 C1520 366 1500 390 1480 382 C1460 390 1440 366 1400 376Z"
+      fill="#2f8a7a" stroke="#1a5a4a" stroke-width="2" />
     <path d="M1460 372 C1470 380 1490 380 1500 372" stroke="#c4302b" stroke-width="7" fill="none" />
     <path d="M1416 376 V470 M1544 376 V470" stroke="#5a5f66" stroke-width="2" />
-    <path d="M1396 470 h40 l-6 44 h-28z M1524 470 h40 l-6 44 h-28z" fill="#a9b0b6" stroke="#6a7076" stroke-width="2" />
+    <path d="M1396 470 h40 l-6 44 h-28z M1524 470 h40 l-6 44 h-28z" fill="#a9b0b6" stroke="#6a7076"
+      stroke-width="2" />
   </g>
   <g id="mu-karn">
-    <path d="M1150 860 L1162 720 H1238 L1250 860Z" fill="url(#muBarrel)" stroke="#5a3418" stroke-width="3" />
-    <g stroke="#3a3f46" stroke-width="5"><path d="M1160 736 H1240 M1154 800 H1246 M1151 850 H1249" /></g>
-    <rect x="1156" y="712" width="88" height="12" rx="4" fill="#c49060" stroke="#5a3418" stroke-width="2" />
-    <path id="mu-stamper" class="mu-stamp" d="M1200 712 V600" stroke="#c49060" stroke-width="9" stroke-linecap="round" />
+    <path d="M1150 860 L1162 720 H1238 L1250 860Z" fill="url(#muBarrel)" stroke="#5a3418"
+      stroke-width="3" />
+    <g stroke="#3a3f46" stroke-width="5">
+      <path d="M1160 736 H1240 M1154 800 H1246 M1151 850 H1249" />
+    </g>
+    <rect x="1156" y="712" width="88" height="12" rx="4" fill="#c49060" stroke="#5a3418"
+      stroke-width="2" />
+    <path id="mu-stamper" class="mu-stamp" d="M1200 712 V600" stroke="#c49060" stroke-width="9"
+      stroke-linecap="round" />
     <path d="M1188 602 h24" stroke="#c49060" stroke-width="7" stroke-linecap="round" />
     <g transform="translate(1340 860)">
       <path d="M-62 0 L-54 -110 H54 L62 0Z" fill="url(#muBarrel)" stroke="#5a3418" stroke-width="3" />
-      <g stroke="#3a3f46" stroke-width="5"><path d="M-55 -96 H55 M-58 -50 H58 M-61 -10 H61" /></g>
-      <rect x="-56" y="-120" width="112" height="14" rx="4" fill="#c49060" stroke="#5a3418" stroke-width="2" />
+      <g stroke="#3a3f46" stroke-width="5">
+        <path d="M-55 -96 H55 M-58 -50 H58 M-61 -10 H61" />
+      </g>
+      <rect x="-56" y="-120" width="112" height="14" rx="4" fill="#c49060" stroke="#5a3418"
+        stroke-width="2" />
       <path d="M0 -120 V-170 M-30 -150 h60" stroke="#3a3f46" stroke-width="6" />
       <circle cx="0" cy="-150" r="18" fill="none" stroke="#3a3f46" stroke-width="5" />
-      <path d="M18 -150 h26 v18" stroke="#3a3f46" stroke-width="5" fill="none" /><rect x="38" y="-134" width="12" height="20" rx="4" fill="#c49060" />
+      <path d="M18 -150 h26 v18" stroke="#3a3f46" stroke-width="5" fill="none" />
+      <rect x="38" y="-134" width="12" height="20" rx="4" fill="#c49060" />
     </g>
   </g>
 
   <!-- de rode trekker met de crèmekleurige wielen -->
-  <!-- de rode International D-326 met crèmekleurige velgen, door Roelof zelf opgeknapt (naar de foto's van het museum) -->
+  <!-- de rode International D-326 met crèmekleurige velgen, door Roelof zelf opgeknapt (naar de
+  foto's van het museum) -->
   <g id="mu-trekker">
     <defs>
-      <linearGradient id="muHood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ee4a4e"/><stop offset=".35" stop-color="#d42a30"/><stop offset="1" stop-color="#9a161c"/></linearGradient>
-      <linearGradient id="muFender" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e83a40"/><stop offset="1" stop-color="#a01a20"/></linearGradient>
-      <linearGradient id="muChrome" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset=".5" stop-color="#b8bec4"/><stop offset="1" stop-color="#e2e6ea"/></linearGradient>
+      <linearGradient id="muHood" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ee4a4e" />
+        <stop offset=".35" stop-color="#d42a30" />
+        <stop offset="1" stop-color="#9a161c" />
+      </linearGradient>
+      <linearGradient id="muFender" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#e83a40" />
+        <stop offset="1" stop-color="#a01a20" />
+      </linearGradient>
+      <linearGradient id="muChrome" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f4f6f8" />
+        <stop offset=".5" stop-color="#b8bec4" />
+        <stop offset="1" stop-color="#e2e6ea" />
+      </linearGradient>
     </defs>
     <!-- de vooras: een steun van het chassis naar het voorwiel -->
-    <path d="M90 612 L94 686 M106 612 L102 686" stroke="#8e161c" stroke-width="8" stroke-linecap="round" />
+    <path d="M90 612 L94 686 M106 612 L102 686" stroke="#8e161c" stroke-width="8"
+      stroke-linecap="round" />
     <!-- de achteras en de trekhaak -->
     <path d="M380 612 h30 v14 h-30z" fill="#7a1a16" />
-    <circle cx="98" cy="686" r="45.5" fill="#1c1c1f"/><polygon points="138.9,683.1 148.0,685.0 147.6,692.0 138.9,688.9" fill="#26262a"/><polygon points="137.4,697.3 145.3,702.2 142.6,708.6 135.5,702.7" fill="#26262a"/><polygon points="131.2,710.1 136.9,717.4 132.2,722.5 127.5,714.5" fill="#26262a"/><polygon points="120.9,720.0 123.9,728.8 117.6,732.0 116.0,722.9" fill="#26262a"/><polygon points="107.9,725.8 107.7,735.1 100.7,735.9 102.3,726.8" fill="#26262a"/><polygon points="93.7,726.8 90.3,735.4 83.5,733.8 88.1,725.8" fill="#26262a"/><polygon points="80.0,722.9 73.9,729.8 68.0,726.0 75.1,720.0" fill="#26262a"/><polygon points="68.5,714.5 60.3,718.9 56.1,713.3 64.8,710.1" fill="#26262a"/><polygon points="60.5,702.7 51.4,704.0 49.3,697.4 58.6,697.3" fill="#26262a"/><polygon points="57.1,688.9 48.0,687.0 48.4,680.0 57.1,683.1" fill="#26262a"/><polygon points="58.6,674.7 50.7,669.8 53.4,663.4 60.5,669.3" fill="#26262a"/><polygon points="64.8,661.9 59.1,654.6 63.8,649.5 68.5,657.5" fill="#26262a"/><polygon points="75.1,652.0 72.1,643.2 78.4,640.0 80.0,649.1" fill="#26262a"/><polygon points="88.1,646.2 88.3,636.9 95.3,636.1 93.7,645.2" fill="#26262a"/><polygon points="102.3,645.2 105.7,636.6 112.5,638.2 107.9,646.2" fill="#26262a"/><polygon points="116.0,649.1 122.1,642.2 128.0,646.0 120.9,652.0" fill="#26262a"/><polygon points="127.5,657.5 135.7,653.1 139.9,658.7 131.2,661.9" fill="#26262a"/><polygon points="135.5,669.3 144.6,668.0 146.7,674.6 137.4,674.7" fill="#26262a"/><circle cx="98" cy="686" r="39" fill="none" stroke="#3a3a40" stroke-width="2"/><circle cx="98" cy="686" r="32" fill="#efe6c8" stroke="#c9bd98" stroke-width="2.5"/><circle cx="98" cy="686" r="22" fill="#e9dfbf" stroke="#c9bd98" stroke-width="2"/><circle cx="115.0" cy="686.0" r="2.6" fill="#a81c22"/><circle cx="106.5" cy="700.7" r="2.6" fill="#a81c22"/><circle cx="89.5" cy="700.7" r="2.6" fill="#a81c22"/><circle cx="81.0" cy="686.0" r="2.6" fill="#a81c22"/><circle cx="89.5" cy="671.3" r="2.6" fill="#a81c22"/><circle cx="106.5" cy="671.3" r="2.6" fill="#a81c22"/><circle cx="98" cy="686" r="10" fill="#c4302b" stroke="#7a1a16" stroke-width="2"/><circle cx="96" cy="683" r="3" fill="#e8686c"/>
+    <circle cx="98" cy="686" r="45.5" fill="#1c1c1f" />
+    <polygon points="138.9,683.1 148.0,685.0 147.6,692.0 138.9,688.9" fill="#26262a" />
+    <polygon points="137.4,697.3 145.3,702.2 142.6,708.6 135.5,702.7" fill="#26262a" />
+    <polygon points="131.2,710.1 136.9,717.4 132.2,722.5 127.5,714.5" fill="#26262a" />
+    <polygon points="120.9,720.0 123.9,728.8 117.6,732.0 116.0,722.9" fill="#26262a" />
+    <polygon points="107.9,725.8 107.7,735.1 100.7,735.9 102.3,726.8" fill="#26262a" />
+    <polygon points="93.7,726.8 90.3,735.4 83.5,733.8 88.1,725.8" fill="#26262a" />
+    <polygon points="80.0,722.9 73.9,729.8 68.0,726.0 75.1,720.0" fill="#26262a" />
+    <polygon points="68.5,714.5 60.3,718.9 56.1,713.3 64.8,710.1" fill="#26262a" />
+    <polygon points="60.5,702.7 51.4,704.0 49.3,697.4 58.6,697.3" fill="#26262a" />
+    <polygon points="57.1,688.9 48.0,687.0 48.4,680.0 57.1,683.1" fill="#26262a" />
+    <polygon points="58.6,674.7 50.7,669.8 53.4,663.4 60.5,669.3" fill="#26262a" />
+    <polygon points="64.8,661.9 59.1,654.6 63.8,649.5 68.5,657.5" fill="#26262a" />
+    <polygon points="75.1,652.0 72.1,643.2 78.4,640.0 80.0,649.1" fill="#26262a" />
+    <polygon points="88.1,646.2 88.3,636.9 95.3,636.1 93.7,645.2" fill="#26262a" />
+    <polygon points="102.3,645.2 105.7,636.6 112.5,638.2 107.9,646.2" fill="#26262a" />
+    <polygon points="116.0,649.1 122.1,642.2 128.0,646.0 120.9,652.0" fill="#26262a" />
+    <polygon points="127.5,657.5 135.7,653.1 139.9,658.7 131.2,661.9" fill="#26262a" />
+    <polygon points="135.5,669.3 144.6,668.0 146.7,674.6 137.4,674.7" fill="#26262a" />
+    <circle cx="98" cy="686" r="39" fill="none" stroke="#3a3a40" stroke-width="2" />
+    <circle cx="98" cy="686" r="32" fill="#efe6c8" stroke="#c9bd98" stroke-width="2.5" />
+    <circle cx="98" cy="686" r="22" fill="#e9dfbf" stroke="#c9bd98" stroke-width="2" />
+    <circle cx="115.0" cy="686.0" r="2.6" fill="#a81c22" />
+    <circle cx="106.5" cy="700.7" r="2.6" fill="#a81c22" />
+    <circle cx="89.5" cy="700.7" r="2.6" fill="#a81c22" />
+    <circle cx="81.0" cy="686.0" r="2.6" fill="#a81c22" />
+    <circle cx="89.5" cy="671.3" r="2.6" fill="#a81c22" />
+    <circle cx="106.5" cy="671.3" r="2.6" fill="#a81c22" />
+    <circle cx="98" cy="686" r="10" fill="#c4302b" stroke="#7a1a16" stroke-width="2" />
+    <circle cx="96" cy="683" r="3" fill="#e8686c" />
     <g id="mu-trekbody" class="mu-trek">
       <!-- het chassis en het motorblok onder de kap -->
       <path d="M60 602 H300 V626 H60Z" fill="#8e161c" />
       <path d="M84 556 H256 V608 H84Z" fill="#a81c22" stroke="#6a1014" stroke-width="2" />
       <g fill="#8e161c" stroke="#5a0e10" stroke-width="1.5">
-        <rect x="96" y="562" width="44" height="26" rx="3" /><path d="M102 562 v26 M110 562 v26 M118 562 v26 M126 562 v26 M134 562 v26" />
-        <rect x="150" y="566" width="30" height="22" rx="4" /><circle cx="196" cy="580" r="11" /><circle cx="196" cy="580" r="4" fill="#5a0e10" />
+        <rect x="96" y="562" width="44" height="26" rx="3" />
+        <path d="M102 562 v26 M110 562 v26 M118 562 v26 M126 562 v26 M134 562 v26" />
+        <rect x="150" y="566" width="30" height="22" rx="4" />
+        <circle cx="196" cy="580" r="11" />
+        <circle cx="196" cy="580" r="4" fill="#5a0e10" />
         <rect x="214" y="562" width="34" height="40" rx="5" fill="#2a2a2e" />
       </g>
       <path d="M150 596 h70" stroke="#c9ccd0" stroke-width="5" stroke-linecap="round" />
-      <path d="M142 590 q10 -14 24 -6 M184 588 v14" stroke="#2a2a2e" stroke-width="4" fill="none" stroke-linecap="round" />
+      <path d="M142 590 q10 -14 24 -6 M184 588 v14" stroke="#2a2a2e" stroke-width="4" fill="none"
+        stroke-linecap="round" />
       <!-- de motorkap: smal en rond, met de grille vooraan -->
-      <path d="M58 600 V532 Q58 506 84 504 H252 Q266 504 268 518 L272 560 H258 V556 H84 V600Z" fill="url(#muHood)" stroke="#7a1a16" stroke-width="2.5" />
+      <path d="M58 600 V532 Q58 506 84 504 H252 Q266 504 268 518 L272 560 H258 V556 H84 V600Z"
+        fill="url(#muHood)" stroke="#7a1a16" stroke-width="2.5" />
       <path d="M86 510 H250" stroke="#ff8a8e" stroke-width="3" opacity=".55" stroke-linecap="round" />
       <path d="M44 526 Q44 508 62 506 V600 H44Z" fill="#c4262c" stroke="#7a1a16" stroke-width="2" />
-      <g stroke="#5a0e10" stroke-width="3" stroke-linecap="round"><path d="M48 520 h10 M47 532 h11 M46 544 h12 M46 556 h12 M46 568 h12 M46 580 h12 M46 592 h12" /></g>
+      <g stroke="#5a0e10" stroke-width="3" stroke-linecap="round">
+        <path
+          d="M48 520 h10 M47 532 h11 M46 544 h12 M46 556 h12 M46 568 h12 M46 580 h12 M46 592 h12" />
+      </g>
       <!-- de koplamp opzij van de grille -->
-      <circle cx="40" cy="552" r="14" fill="#1a1a1e" /><circle cx="36" cy="552" r="9" fill="url(#muChrome)" /><circle cx="33" cy="549" r="3" fill="#fff" />
+      <circle cx="40" cy="552" r="14" fill="#1a1a1e" />
+      <circle cx="36" cy="552" r="9" fill="url(#muChrome)" />
+      <circle cx="33" cy="549" r="3" fill="#fff" />
       <!-- de chromen naamstrip en het typeplaatje -->
-      <rect x="94" y="522" width="132" height="13" rx="3" fill="url(#muChrome)" stroke="#8a9096" stroke-width="1" />
-      <text x="160" y="532" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" font-weight="600" fill="#2a3036" letter-spacing="1.6">INTERNATIONAL</text>
-      <rect x="168" y="540" width="40" height="12" rx="2" fill="#efe6c8" stroke="#8a9096" stroke-width="1" />
-      <text x="188" y="549.5" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" font-weight="600" fill="#2a3036">D-326</text>
+      <rect x="94" y="522" width="132" height="13" rx="3" fill="url(#muChrome)" stroke="#8a9096"
+        stroke-width="1" />
+      <text x="160" y="532" text-anchor="middle" font-family="IBM Plex Mono, monospace"
+        font-size="9.5" font-weight="600" fill="#2a3036" letter-spacing="1.6">INTERNATIONAL</text>
+      <rect x="168" y="540" width="40" height="12" rx="2" fill="#efe6c8" stroke="#8a9096"
+        stroke-width="1" />
+      <text x="188" y="549.5" text-anchor="middle" font-family="IBM Plex Mono, monospace"
+        font-size="8.5" font-weight="600" fill="#2a3036">D-326</text>
       <path d="M238 528 l8 8 M242 524 l8 8" stroke="#2a2a2e" stroke-width="3" stroke-linecap="round" />
       <!-- de uitlaat en de luchtinlaat met zijn kapje -->
       <path d="M150 504 V438" stroke="#1f1f22" stroke-width="10" stroke-linecap="round" />
@@ -223,37 +394,98 @@
       <path d="M184 504 V476" stroke="#1f1f22" stroke-width="9" />
       <path d="M176 478 Q184 464 192 478Z" fill="#1f1f22" />
       <circle cx="226" cy="503" r="6" fill="url(#muChrome)" />
-      <g id="mu-puf" class="mu-puf" fill="#9aa0a6" opacity="0"><circle cx="150" cy="424" r="10" /><circle cx="158" cy="400" r="14" /></g>
+      <g id="mu-puf" class="mu-puf" fill="#9aa0a6" opacity="0">
+        <circle cx="150" cy="424" r="10" />
+        <circle cx="158" cy="400" r="14" />
+      </g>
       <!-- het dashboard, de stuurkolom en het stuur -->
-      <path d="M262 518 L300 478" stroke="#2a2a2e" stroke-width="7" stroke-linecap="round" />
-      <ellipse cx="304" cy="472" rx="26" ry="6" fill="none" stroke="#1f1f22" stroke-width="5" transform="rotate(-22 304 472)" />
-      <circle cx="300" cy="476" r="3" fill="#1f1f22" />
+      <path d="M262 518 L300 476" stroke="#2a2a2e" stroke-width="7" stroke-linecap="round" />
+      <g id="mu-stuurwiel" aria-label="Stuurwiel met drie spaken" transform="rotate(-22 300 476)">
+        <ellipse cx="300" cy="476" rx="24" ry="9" fill="none" stroke="#1f1f22" stroke-width="5" />
+        <path d="M300 476 L278 476" stroke="#1f1f22" stroke-width="2.5" stroke-linecap="round" />
+        <path d="M300 476 L311 468" stroke="#1f1f22" stroke-width="2.5" stroke-linecap="round" />
+        <path d="M300 476 L311 484" stroke="#1f1f22" stroke-width="2.5" stroke-linecap="round" />
+        <circle cx="300" cy="476" r="4" fill="#2a2a2e" stroke="#777b80" stroke-width="1" />
+      </g>
       <!-- het grote ronde spatbord over het achterwiel -->
-      <path d="M210 560 Q214 520 260 512 Q330 504 360 520 Q392 536 398 580 L398 596 L384 596 Q380 544 330 534 Q262 526 238 560Z" fill="url(#muFender)" stroke="#7a1a16" stroke-width="2.5" />
+      <path
+        d="M210 560 Q214 520 260 512 Q330 504 360 520 Q392 536 398 580 L398 596 L384 596 Q380 544 330 534 Q262 526 238 560Z"
+        fill="url(#muFender)" stroke="#7a1a16" stroke-width="2.5" />
       <path d="M262 520 Q330 512 372 540" stroke="#ff8a8e" stroke-width="3" fill="none" opacity=".5" />
       <rect x="386" y="568" width="10" height="16" rx="3" fill="#f2a23a" stroke="#8a5a1a" />
       <!-- het kuipstoeltje op zijn veer, met de beugel -->
       <path d="M332 520 V500" stroke="#2a2a2e" stroke-width="6" />
       <path d="M312 488 Q334 504 358 486 L362 494 Q334 514 308 494Z" fill="#1f1f22" />
       <path d="M310 488 Q334 498 356 482" stroke="#4a4a50" stroke-width="2" fill="none" />
-      <path d="M352 486 Q366 462 382 470" stroke="#1f1f22" stroke-width="7" fill="none" stroke-linecap="round" />
+      <path d="M352 486 Q366 462 382 470" stroke="#1f1f22" stroke-width="7" fill="none"
+        stroke-linecap="round" />
       <!-- de opstap -->
       <path d="M226 596 h-10 v24 h22" stroke="#c4302b" stroke-width="5" fill="none" />
     </g>
-    <g class="mu-wheel"><circle cx="305" cy="640" r="83.0" fill="#1c1c1f"/><polygon points="378.8,634.1 397.0,637.2 396.2,651.9 378.8,645.9" fill="#26262a"/><polygon points="377.4,655.1 394.0,663.3 389.2,677.1 374.1,666.5" fill="#26262a"/><polygon points="370.3,674.9 383.9,687.4 375.3,699.4 363.9,684.9" fill="#26262a"/><polygon points="357.8,691.9 367.3,707.7 355.7,716.8 348.8,699.6" fill="#26262a"/><polygon points="341.0,704.6 345.7,722.5 332.0,727.9 330.3,709.6" fill="#26262a"/><polygon points="321.4,712.2 320.8,730.6 306.2,732.0 309.6,713.9" fill="#26262a"/><polygon points="300.4,713.9 294.6,731.4 280.2,728.6 288.6,712.2" fill="#26262a"/><polygon points="279.7,709.6 269.3,724.8 256.3,718.0 269.0,704.6" fill="#26262a"/><polygon points="261.2,699.6 246.9,711.3 236.2,701.1 252.2,691.9" fill="#26262a"/><polygon points="246.1,684.9 229.1,692.0 221.8,679.3 239.7,674.9" fill="#26262a"/><polygon points="235.9,666.5 217.5,668.6 214.1,654.3 232.6,655.1" fill="#26262a"/><polygon points="231.2,645.9 213.0,642.8 213.8,628.1 231.2,634.1" fill="#26262a"/><polygon points="232.6,624.9 216.0,616.7 220.8,602.9 235.9,613.5" fill="#26262a"/><polygon points="239.7,605.1 226.1,592.6 234.7,580.6 246.1,595.1" fill="#26262a"/><polygon points="252.2,588.1 242.7,572.3 254.3,563.2 261.2,580.4" fill="#26262a"/><polygon points="269.0,575.4 264.3,557.5 278.0,552.1 279.7,570.4" fill="#26262a"/><polygon points="288.6,567.8 289.2,549.4 303.8,548.0 300.4,566.1" fill="#26262a"/><polygon points="309.6,566.1 315.4,548.6 329.8,551.4 321.4,567.8" fill="#26262a"/><polygon points="330.3,570.4 340.7,555.2 353.7,562.0 341.0,575.4" fill="#26262a"/><polygon points="348.8,580.4 363.1,568.7 373.8,578.9 357.8,588.1" fill="#26262a"/><polygon points="363.9,595.1 380.9,588.0 388.2,600.7 370.3,605.1" fill="#26262a"/><polygon points="374.1,613.5 392.5,611.4 395.9,625.7 377.4,624.9" fill="#26262a"/><circle cx="305" cy="640" r="72" fill="none" stroke="#3a3a40" stroke-width="2"/><circle cx="305" cy="640" r="62" fill="#efe6c8" stroke="#c9bd98" stroke-width="3"/><circle cx="305" cy="640" r="56" fill="none" stroke="#d9cea8" stroke-width="3"/><polygon points="305.0,600.0 322.6,615.7 343.0,627.6 333.5,649.3 328.5,672.4 305.0,670.0 281.5,672.4 276.5,649.3 267.0,627.6 287.4,615.7" fill="#e9dfbf" stroke="#b8ac86" stroke-width="2" stroke-linejoin="round"/><circle cx="339.0" cy="640.0" r="3.4" fill="#d8d0b4"/><circle cx="315.5" cy="672.3" r="3.4" fill="#d8d0b4"/><circle cx="277.5" cy="660.0" r="3.4" fill="#d8d0b4"/><circle cx="277.5" cy="620.0" r="3.4" fill="#d8d0b4"/><circle cx="315.5" cy="607.7" r="3.4" fill="#d8d0b4"/><circle cx="305" cy="640" r="17" fill="#c4302b" stroke="#7a1a16" stroke-width="2"/><circle cx="316.0" cy="640.0" r="2.2" fill="#7a1a16"/><circle cx="312.8" cy="647.8" r="2.2" fill="#7a1a16"/><circle cx="305.0" cy="651.0" r="2.2" fill="#7a1a16"/><circle cx="297.2" cy="647.8" r="2.2" fill="#7a1a16"/><circle cx="294.0" cy="640.0" r="2.2" fill="#7a1a16"/><circle cx="297.2" cy="632.2" r="2.2" fill="#7a1a16"/><circle cx="305.0" cy="629.0" r="2.2" fill="#7a1a16"/><circle cx="312.8" cy="632.2" r="2.2" fill="#7a1a16"/><circle cx="305" cy="640" r="5" fill="#8e161c"/></g>
+    <g class="mu-wheel">
+      <circle cx="305" cy="640" r="83.0" fill="#1c1c1f" />
+      <polygon points="378.8,634.1 397.0,637.2 396.2,651.9 378.8,645.9" fill="#26262a" />
+      <polygon points="377.4,655.1 394.0,663.3 389.2,677.1 374.1,666.5" fill="#26262a" />
+      <polygon points="370.3,674.9 383.9,687.4 375.3,699.4 363.9,684.9" fill="#26262a" />
+      <polygon points="357.8,691.9 367.3,707.7 355.7,716.8 348.8,699.6" fill="#26262a" />
+      <polygon points="341.0,704.6 345.7,722.5 332.0,727.9 330.3,709.6" fill="#26262a" />
+      <polygon points="321.4,712.2 320.8,730.6 306.2,732.0 309.6,713.9" fill="#26262a" />
+      <polygon points="300.4,713.9 294.6,731.4 280.2,728.6 288.6,712.2" fill="#26262a" />
+      <polygon points="279.7,709.6 269.3,724.8 256.3,718.0 269.0,704.6" fill="#26262a" />
+      <polygon points="261.2,699.6 246.9,711.3 236.2,701.1 252.2,691.9" fill="#26262a" />
+      <polygon points="246.1,684.9 229.1,692.0 221.8,679.3 239.7,674.9" fill="#26262a" />
+      <polygon points="235.9,666.5 217.5,668.6 214.1,654.3 232.6,655.1" fill="#26262a" />
+      <polygon points="231.2,645.9 213.0,642.8 213.8,628.1 231.2,634.1" fill="#26262a" />
+      <polygon points="232.6,624.9 216.0,616.7 220.8,602.9 235.9,613.5" fill="#26262a" />
+      <polygon points="239.7,605.1 226.1,592.6 234.7,580.6 246.1,595.1" fill="#26262a" />
+      <polygon points="252.2,588.1 242.7,572.3 254.3,563.2 261.2,580.4" fill="#26262a" />
+      <polygon points="269.0,575.4 264.3,557.5 278.0,552.1 279.7,570.4" fill="#26262a" />
+      <polygon points="288.6,567.8 289.2,549.4 303.8,548.0 300.4,566.1" fill="#26262a" />
+      <polygon points="309.6,566.1 315.4,548.6 329.8,551.4 321.4,567.8" fill="#26262a" />
+      <polygon points="330.3,570.4 340.7,555.2 353.7,562.0 341.0,575.4" fill="#26262a" />
+      <polygon points="348.8,580.4 363.1,568.7 373.8,578.9 357.8,588.1" fill="#26262a" />
+      <polygon points="363.9,595.1 380.9,588.0 388.2,600.7 370.3,605.1" fill="#26262a" />
+      <polygon points="374.1,613.5 392.5,611.4 395.9,625.7 377.4,624.9" fill="#26262a" />
+      <circle cx="305" cy="640" r="72" fill="none" stroke="#3a3a40" stroke-width="2" />
+      <circle cx="305" cy="640" r="62" fill="#efe6c8" stroke="#c9bd98" stroke-width="3" />
+      <circle cx="305" cy="640" r="56" fill="none" stroke="#d9cea8" stroke-width="3" />
+      <polygon
+        points="305.0,600.0 322.6,615.7 343.0,627.6 333.5,649.3 328.5,672.4 305.0,670.0 281.5,672.4 276.5,649.3 267.0,627.6 287.4,615.7"
+        fill="#e9dfbf" stroke="#b8ac86" stroke-width="2" stroke-linejoin="round" />
+      <circle cx="339.0" cy="640.0" r="3.4" fill="#d8d0b4" />
+      <circle cx="315.5" cy="672.3" r="3.4" fill="#d8d0b4" />
+      <circle cx="277.5" cy="660.0" r="3.4" fill="#d8d0b4" />
+      <circle cx="277.5" cy="620.0" r="3.4" fill="#d8d0b4" />
+      <circle cx="315.5" cy="607.7" r="3.4" fill="#d8d0b4" />
+      <circle cx="305" cy="640" r="17" fill="#c4302b" stroke="#7a1a16" stroke-width="2" />
+      <circle cx="316.0" cy="640.0" r="2.2" fill="#7a1a16" />
+      <circle cx="312.8" cy="647.8" r="2.2" fill="#7a1a16" />
+      <circle cx="305.0" cy="651.0" r="2.2" fill="#7a1a16" />
+      <circle cx="297.2" cy="647.8" r="2.2" fill="#7a1a16" />
+      <circle cx="294.0" cy="640.0" r="2.2" fill="#7a1a16" />
+      <circle cx="297.2" cy="632.2" r="2.2" fill="#7a1a16" />
+      <circle cx="305.0" cy="629.0" r="2.2" fill="#7a1a16" />
+      <circle cx="312.8" cy="632.2" r="2.2" fill="#7a1a16" />
+      <circle cx="305" cy="640" r="5" fill="#8e161c" />
+    </g>
   </g>
 
   <!-- de ladder naar het platte dak -->
   <g id="mu-ladder">
-    <path d="M760 300 V660 M820 300 V660" stroke="#8a6440" stroke-width="10" />
-    <path d="M760 330 h60 M760 370 h60 M760 410 h60 M760 450 h60 M760 490 h60 M760 530 h60 M760 570 h60 M760 610 h60 M760 650 h60" stroke="#a07a50" stroke-width="7" />
-    <rect x="740" y="260" width="100" height="40" fill="#5a4a3a" /><rect x="750" y="266" width="80" height="30" fill="#b8d6ec" />
+    <path d="M760 300 V720 M820 300 V720" stroke="#8a6440" stroke-width="10" />
+    <path
+      d="M760 330 h60 M760 370 h60 M760 410 h60 M760 450 h60 M760 490 h60 M760 530 h60 M760 570 h60 M760 610 h60 M760 650 h60 M760 690 h60"
+      stroke="#a07a50" stroke-width="7" />
+    <rect x="740" y="260" width="100" height="40" fill="#5a4a3a" />
+    <rect class="mu-doorsky" x="750" y="266" width="80" height="30" fill="#b8d6ec" />
   </g>
 
   <!-- de groene strohakselaar met zijn grote vliegwiel (zoals in het echte museum) -->
   <g id="mu-haksel">
-    <path d="M940 880 L980 760 L1010 760 L1040 880 M1060 880 L1030 770" stroke="#6ac43a" stroke-width="12" stroke-linecap="round" fill="none" />
-    <rect x="960" y="740" width="110" height="34" rx="4" fill="#7a5030" stroke="#4a2a12" stroke-width="2" />
+    <path d="M940 880 L980 760 L1010 760 L1040 880 M1060 880 L1030 770" stroke="#6ac43a"
+      stroke-width="12" stroke-linecap="round" fill="none" />
+    <rect x="960" y="740" width="110" height="34" rx="4" fill="#7a5030" stroke="#4a2a12"
+      stroke-width="2" />
     <g id="mu-vlieg" class="mu-vlieg">
       <circle cx="1010" cy="740" r="72" fill="none" stroke="#7ad13e" stroke-width="12" />
       <circle cx="1010" cy="740" r="72" fill="none" stroke="#4a8a22" stroke-width="2" />
@@ -262,43 +494,143 @@
       <path d="M1010 740 c20 -40 60 -40 70 -20 c-20 0 -40 10 -70 20z" fill="#2a2a2a" />
       <circle cx="1010" cy="740" r="14" fill="#5aa82e" stroke="#2a5a12" stroke-width="2" />
     </g>
-    <rect x="1050" y="790" width="40" height="22" rx="2" fill="#f6f2e6" stroke="#9aa0a6" transform="rotate(8 1070 800)" />
-    <text x="1070" y="805" text-anchor="middle" font-family="Caveat, cursive" font-size="10" fill="#2a2a2a" transform="rotate(8 1070 800)">hakselaar</text>
+    <rect x="1050" y="790" width="40" height="22" rx="2" fill="#f6f2e6" stroke="#9aa0a6"
+      transform="rotate(8 1070 800)" />
+    <text x="1070" y="805" text-anchor="middle" font-family="Caveat, cursive" font-size="10"
+      fill="#2a2a2a" transform="rotate(8 1070 800)">hakselaar</text>
   </g>
 
   <!-- Roelof -->
-  <g id="mu-roelof"><g transform="translate(560 830)">
-    <!-- @personage roelof --><g class="idle" style="animation-delay:-0.4s"><g transform="translate(0 0) scale(1.35 1.35)"><defs><linearGradient id="muRKiel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3e8a74"/><stop offset="1" stop-color="#1a443a"/></linearGradient></defs><path d="M-18 -76 L-17 -4 L-5 -4 L-6 -76Z M18 -76 L17 -4 L5 -4 L6 -76Z" fill="#2e6a5a" stroke="#00000030" stroke-width="1"/><path d="M-21 -1 C-21 -9 -6 -10 -4 -6 L-4 0 Z M21 -1 C21 -9 6 -10 4 -6 L4 0 Z" fill="#2a2420"/><path d="M-24 0 C-26 -10 -8 -12 -3 -6 L-3 0Z M24 0 C26 -10 8 -12 3 -6 L3 0Z" fill="#2a2420"/><path d="M-32 -66 C-34 -110 -30 -132 -18 -140 C-8 -144 8 -144 18 -140 C30 -132 34 -110 32 -66Z" fill="url(#muRKiel)" stroke="#00000030" stroke-width="1.2"/><path d="M-8 -143 L0 -132 L8 -143" stroke="#1a443a" stroke-width="3" fill="none"/><path d="M0 -132 V-70" stroke="#c9a24a" stroke-width="1.6"/><rect x="10" y="-126" width="14" height="12" rx="2" fill="#1a443a"/><path d="M14 -128 v-8 M18 -128 v-6" stroke="#c9a24a" stroke-width="2"/><path d="M-30 -78 h60" stroke="#1a443a" stroke-width="3"/><path d="M-28 -132 C-40 -112 -40 -92 -36 -76" stroke="url(#muRKiel)" stroke-width="17" fill="none" stroke-linecap="round"/><ellipse cx="-36" cy="-70" rx="6.5" ry="7.2" fill="#e9b48c" stroke="#c48a64" stroke-width="0.91"/><path d="M-37.3 -75.8 q5.9 -0.7 5.9 4.5" stroke="#c48a64" stroke-width="0.91" fill="none" opacity=".6"/><path d="M28 -132 C40 -112 42 -96 40 -80" stroke="url(#muRKiel)" stroke-width="17" fill="none" stroke-linecap="round"/><ellipse cx="40" cy="-74" rx="6.5" ry="7.2" fill="#e9b48c" stroke="#c48a64" stroke-width="0.91"/><path d="M38.7 -79.8 q5.9 -0.7 5.9 4.5" stroke="#c48a64" stroke-width="0.91" fill="none" opacity=".6"/><rect x="-6" y="-152" width="12" height="12" fill="#c48a64"/><defs><radialGradient id="muRSk" cx="0.42" cy="0.35" r="0.8"><stop offset="0" stop-color="#e9b48c"/><stop offset="1" stop-color="#c48a64"/></radialGradient></defs><ellipse cx="-18.1" cy="-167.5" rx="3.8" ry="4.9" fill="#e9b48c" stroke="#c48a64" stroke-width="0.95"/><ellipse cx="18.1" cy="-167.5" rx="3.8" ry="4.9" fill="#e9b48c" stroke="#c48a64" stroke-width="0.95"/><ellipse cx="0" cy="-169" rx="19" ry="20.1" fill="url(#muRSk)" stroke="#c48a64" stroke-width="0.95"/><g class="eyes" style="animation-delay:-5.6s"><ellipse cx="-6.8" cy="-169.4" rx="2.09" ry="2.85" fill="#2a1b14"/><circle cx="-6.1" cy="-170.3" r="0.85" fill="#fff"/><path d="M-9.9 -174.5 q3.0 -1.9 6.1 0.4" stroke="#9a968e" stroke-width="1.52" fill="none" stroke-linecap="round"/><ellipse cx="6.8" cy="-169.4" rx="2.09" ry="2.85" fill="#2a1b14"/><circle cx="7.6" cy="-170.3" r="0.85" fill="#fff"/><path d="M3.8 -174.5 q3.0 -1.9 6.1 0.4" stroke="#9a968e" stroke-width="1.52" fill="none" stroke-linecap="round"/></g><ellipse cx="-10.5" cy="-163.3" rx="3.2" ry="2.1" fill="#e48a76" opacity=".55"/><ellipse cx="10.5" cy="-163.3" rx="3.2" ry="2.1" fill="#e48a76" opacity=".55"/><ellipse cx="0" cy="-165.2" rx="2.7" ry="2.1" fill="#c48a64" opacity=".7"/><circle cx="-0.8" cy="-166.0" r="0.76" fill="#fff" opacity=".6"/><path d="M-5.7 -159.9 q5.7 4.9 11.4 0" stroke="#8a3a2a" stroke-width="1.33" fill="none" stroke-linecap="round"/><ellipse cx="-4" cy="-184" rx="8" ry="4" fill="#fff" opacity=".22"/><path d="M-17.5 -182 C-20 -176 -20.5 -170 -19.5 -164 M17.5 -182 C20 -176 20.5 -170 19.5 -164" stroke="#d4d2cc" stroke-width="4.5" fill="none" stroke-linecap="round"/><g fill="#ffffff22" stroke="#2a2420" stroke-width="1.52"><rect x="-13.3" y="-175.1" width="12.9" height="11.4" rx="5.7"/><rect x="0.4" y="-175.1" width="12.9" height="11.4" rx="5.7"/></g><path d="M-0.4 -169.4 q0.4 -1.5 0.8 0 M-13.3 -169.4 l-9.5 -1.0 M13.3 -169.4 l9.5 -1.0" stroke="#2a2420" stroke-width="1.33" fill="none"/></g></g><!-- @einde roelof -->
-  </g></g>
+  <g id="mu-roelof">
+    <g transform="translate(560 830)">
+      <!-- @personage roelof -->
+      <g class="idle" style="animation-delay:-0.4s">
+        <g transform="translate(0 0) scale(1.35 1.35)">
+          <defs>
+            <linearGradient id="muRKiel" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#3e8a74" />
+              <stop offset="1" stop-color="#1a443a" />
+            </linearGradient>
+          </defs>
+          <path d="M-18 -76 L-17 -4 L-5 -4 L-6 -76Z M18 -76 L17 -4 L5 -4 L6 -76Z" fill="#2e6a5a"
+            stroke="#00000030" stroke-width="1" />
+          <path d="M-21 -1 C-21 -9 -6 -10 -4 -6 L-4 0 Z M21 -1 C21 -9 6 -10 4 -6 L4 0 Z"
+            fill="#2a2420" />
+          <path d="M-24 0 C-26 -10 -8 -12 -3 -6 L-3 0Z M24 0 C26 -10 8 -12 3 -6 L3 0Z"
+            fill="#2a2420" />
+          <path
+            d="M-32 -66 C-34 -110 -30 -132 -18 -140 C-8 -144 8 -144 18 -140 C30 -132 34 -110 32 -66Z"
+            fill="url(#muRKiel)" stroke="#00000030" stroke-width="1.2" />
+          <path d="M-8 -143 L0 -132 L8 -143" stroke="#1a443a" stroke-width="3" fill="none" />
+          <path d="M0 -132 V-70" stroke="#c9a24a" stroke-width="1.6" />
+          <rect x="10" y="-126" width="14" height="12" rx="2" fill="#1a443a" />
+          <path d="M14 -128 v-8 M18 -128 v-6" stroke="#c9a24a" stroke-width="2" />
+          <path d="M-30 -78 h60" stroke="#1a443a" stroke-width="3" />
+          <path d="M-28 -132 C-40 -112 -40 -92 -36 -76" stroke="url(#muRKiel)" stroke-width="17"
+            fill="none" stroke-linecap="round" />
+          <ellipse cx="-36" cy="-70" rx="6.5" ry="7.2" fill="#e9b48c" stroke="#c48a64"
+            stroke-width="0.91" />
+          <path d="M-37.3 -75.8 q5.9 -0.7 5.9 4.5" stroke="#c48a64" stroke-width="0.91" fill="none"
+            opacity=".6" />
+          <path d="M28 -132 C40 -112 42 -96 40 -80" stroke="url(#muRKiel)" stroke-width="17"
+            fill="none" stroke-linecap="round" />
+          <ellipse cx="40" cy="-74" rx="6.5" ry="7.2" fill="#e9b48c" stroke="#c48a64"
+            stroke-width="0.91" />
+          <path d="M38.7 -79.8 q5.9 -0.7 5.9 4.5" stroke="#c48a64" stroke-width="0.91" fill="none"
+            opacity=".6" />
+          <rect x="-6" y="-152" width="12" height="12" fill="#c48a64" />
+          <defs>
+            <radialGradient id="muRSk" cx="0.42" cy="0.35" r="0.8">
+              <stop offset="0" stop-color="#e9b48c" />
+              <stop offset="1" stop-color="#c48a64" />
+            </radialGradient>
+          </defs>
+          <ellipse cx="-18.1" cy="-167.5" rx="3.8" ry="4.9" fill="#e9b48c" stroke="#c48a64"
+            stroke-width="0.95" />
+          <ellipse cx="18.1" cy="-167.5" rx="3.8" ry="4.9" fill="#e9b48c" stroke="#c48a64"
+            stroke-width="0.95" />
+          <ellipse cx="0" cy="-169" rx="19" ry="20.1" fill="url(#muRSk)" stroke="#c48a64"
+            stroke-width="0.95" />
+          <g class="eyes" style="animation-delay:-5.6s">
+            <ellipse cx="-6.8" cy="-169.4" rx="2.09" ry="2.85" fill="#2a1b14" />
+            <circle cx="-6.1" cy="-170.3" r="0.85" fill="#fff" />
+            <path d="M-9.9 -174.5 q3.0 -1.9 6.1 0.4" stroke="#9a968e" stroke-width="1.52"
+              fill="none" stroke-linecap="round" />
+            <ellipse cx="6.8" cy="-169.4" rx="2.09" ry="2.85" fill="#2a1b14" />
+            <circle cx="7.6" cy="-170.3" r="0.85" fill="#fff" />
+            <path d="M3.8 -174.5 q3.0 -1.9 6.1 0.4" stroke="#9a968e" stroke-width="1.52" fill="none"
+              stroke-linecap="round" />
+          </g>
+          <ellipse cx="-10.5" cy="-163.3" rx="3.2" ry="2.1" fill="#e48a76" opacity=".55" />
+          <ellipse cx="10.5" cy="-163.3" rx="3.2" ry="2.1" fill="#e48a76" opacity=".55" />
+          <ellipse cx="0" cy="-165.2" rx="2.7" ry="2.1" fill="#c48a64" opacity=".7" />
+          <circle cx="-0.8" cy="-166.0" r="0.76" fill="#fff" opacity=".6" />
+          <path d="M-5.7 -159.9 q5.7 4.9 11.4 0" stroke="#8a3a2a" stroke-width="1.33" fill="none"
+            stroke-linecap="round" />
+          <ellipse cx="-4" cy="-184" rx="8" ry="4" fill="#fff" opacity=".22" />
+          <path
+            d="M-17.5 -182 C-20 -176 -20.5 -170 -19.5 -164 M17.5 -182 C20 -176 20.5 -170 19.5 -164"
+            stroke="#d4d2cc" stroke-width="4.5" fill="none" stroke-linecap="round" />
+          <g fill="#ffffff22" stroke="#2a2420" stroke-width="1.52">
+            <rect x="-13.3" y="-175.1" width="12.9" height="11.4" rx="5.7" />
+            <rect x="0.4" y="-175.1" width="12.9" height="11.4" rx="5.7" />
+          </g>
+          <path d="M-0.4 -169.4 q0.4 -1.5 0.8 0 M-13.3 -169.4 l-9.5 -1.0 M13.3 -169.4 l9.5 -1.0"
+            stroke="#2a2420" stroke-width="1.33" fill="none" />
+        </g>
+      </g><!-- @einde
+      roelof -->
+    </g>
+  </g>
 
   <!-- het hobbelpaardje (de gratis hint), op de strobalen -->
-  <g id="mu-paardje" transform="translate(670 540) scale(.3)" fill="#d9ad6e" stroke="#7a4a20" stroke-width="6">
+  <g id="mu-paardje" transform="translate(670 598.5) scale(.3)" fill="#d9ad6e" stroke="#7a4a20"
+    stroke-width="6">
     <path d="M-56 -6 Q0 16 56 -6" fill="none" stroke-width="9" />
     <path d="M-30 -44 L-38 0 M-16 -44 L-20 4 M16 -44 L20 4 M30 -44 L38 0" stroke-width="9" />
     <path d="M-40 -60 C-40 -74 30 -76 34 -60 C36 -48 28 -40 0 -40 C-30 -40 -40 -46 -40 -60Z" />
-    <path d="M24 -64 C30 -86 38 -100 50 -104 C62 -106 70 -98 68 -90 C66 -84 58 -84 52 -84 C48 -76 44 -66 38 -58Z" />
-    <circle cx="56" cy="-96" r="3" fill="#2a1a0c" stroke="none" /><path d="M-10 -66 h22 v6 h-22z" fill="#c4302b" stroke="none" />
+    <path
+      d="M24 -64 C30 -86 38 -100 50 -104 C62 -106 70 -98 68 -90 C66 -84 58 -84 52 -84 C48 -76 44 -66 38 -58Z" />
+    <circle cx="56" cy="-96" r="3" fill="#2a1a0c" stroke="none" />
+    <path d="M-10 -66 h22 v6 h-22z" fill="#c4302b" stroke="none" />
   </g>
 
   <rect width="1600" height="900" fill="url(#muVign)" pointer-events="none" />
 
   <g class="hits">
-    <rect class="hit" data-hs="trekker" data-label="Een rode International-trekker" x="30" y="430" width="370" height="310" fill="transparent" />
-    <rect class="hit" data-hs="lift" data-label="De balenlift" x="200" y="300" width="360" height="300" fill="transparent" />
-    <rect class="hit" data-hs="wand" data-label="De gereedschapswand" x="430" y="340" width="300" height="250" fill="transparent" />
-    <rect class="hit" data-hs="muladder" data-label="De ladder naar het platte dak" x="740" y="260" width="100" height="400" fill="transparent" />
-    <rect class="hit" data-hs="wand" data-label="De gereedschapswand" x="840" y="340" width="110" height="160" fill="transparent" />
-    <rect class="hit" data-hs="plaat" data-label="Een oude schoolplaat" x="976" y="336" width="198" height="138" fill="transparent" />
-    <rect class="hit" data-hs="spreuk" data-label="Een spreukenbord" x="1186" y="346" width="118" height="148" fill="transparent" />
-    <rect class="hit" data-hs="bascule" data-label="De bascule" x="876" y="494" width="150" height="110" fill="transparent" />
-    <rect class="hit" data-hs="kistje" data-label="Het kistje van Thedema" x="1036" y="500" width="130" height="104" fill="transparent" />
-    <rect class="hit" data-hs="katrollen" data-label="Rode katrollen aan een paal" x="1316" y="380" width="56" height="300" fill="transparent" />
-    <rect class="hit" data-hs="juk" data-label="Een juk met emmers" x="1390" y="296" width="180" height="222" fill="transparent" />
-    <rect class="hit" data-hs="bussen" data-label="Melkbussen" x="1394" y="556" width="200" height="140" fill="transparent" />
-    <rect class="hit" data-hs="karn" data-label="De karntonnen" x="1148" y="596" width="270" height="270" fill="transparent" />
-    <rect class="hit" data-hs="balen" data-label="Strobalen" x="560" y="560" width="220" height="100" fill="transparent" />
-    <rect class="hit" id="hit-mupaardje" data-hs="paardje" data-label="Een houten hobbelpaardje" x="650" y="500" width="44" height="44" fill="transparent" />
-    <rect class="hit" data-hs="haksel" data-label="Een groene strohakselaar" x="930" y="660" width="170" height="220" fill="transparent" />
-    <rect class="hit" data-hs="roelof" data-label="Roelof" x="510" y="600" width="110" height="240" fill="transparent" />
+    <rect class="hit" data-hs="trekker" data-label="Een rode International-trekker" x="30" y="430"
+      width="370" height="310" fill="transparent" />
+    <rect class="hit" data-hs="lift" data-label="De balenlift" x="200" y="300" width="360"
+      height="300" fill="transparent" />
+    <rect class="hit" data-hs="wand" data-label="De gereedschapswand" x="430" y="340" width="300"
+      height="250" fill="transparent" />
+    <rect class="hit" data-hs="muladder" data-label="De ladder naar het platte dak" x="740" y="260"
+      width="100" height="400" fill="transparent" />
+    <rect class="hit" data-hs="mudeur" data-label="De deur naar het erf" x="848" y="300" width="124"
+      height="192" fill="transparent" />
+    <rect class="hit" data-hs="plaat" data-label="Een oude schoolplaat" x="976" y="336" width="198"
+      height="138" fill="transparent" />
+    <rect class="hit" data-hs="spreuk" data-label="Een spreukenbord" x="1186" y="346" width="118"
+      height="148" fill="transparent" />
+    <rect class="hit" data-hs="bascule" data-label="De bascule" x="876" y="494" width="150"
+      height="110" fill="transparent" />
+    <rect class="hit" data-hs="kistje" data-label="Het kistje van Thedema" x="1036" y="500"
+      width="130" height="104" fill="transparent" />
+    <rect class="hit" data-hs="katrollen" data-label="Rode katrollen aan een paal" x="1316" y="380"
+      width="56" height="300" fill="transparent" />
+    <rect class="hit" data-hs="juk" data-label="Een juk met emmers" x="1390" y="296" width="180"
+      height="222" fill="transparent" />
+    <rect class="hit" data-hs="bussen" data-label="Melkbussen" x="1394" y="556" width="200"
+      height="140" fill="transparent" />
+    <rect class="hit" data-hs="karn" data-label="De karntonnen" x="1148" y="596" width="270"
+      height="270" fill="transparent" />
+    <rect class="hit" data-hs="balen" data-label="Strobalen" x="560" y="560" width="220"
+      height="100" fill="transparent" />
+    <rect class="hit" id="hit-mupaardje" data-hs="paardje" data-label="Een houten hobbelpaardje"
+      x="650" y="500" width="44" height="44" fill="transparent" />
+    <rect class="hit" data-hs="haksel" data-label="Een groene strohakselaar" x="930" y="660"
+      width="170" height="220" fill="transparent" />
+    <rect class="hit" data-hs="roelof" data-label="Roelof" x="510" y="600" width="110" height="240"
+      fill="transparent" />
   </g>
 </svg>

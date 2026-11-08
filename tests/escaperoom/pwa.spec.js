@@ -25,6 +25,20 @@ test('de escaperoom is een installeerbare app die offline werkt', async ({ page,
   await context.setOffline(false);
 });
 
+test('bij online hervatten controleert de service worker op updates', async ({ page }) => {
+  await page.goto('./');
+  await page.evaluate(() => navigator.serviceWorker.ready);
+  const updates = await page.evaluate(async () => {
+    const registration = await navigator.serviceWorker.getRegistration();
+    let calls = 0;
+    registration.update = () => { calls++; return Promise.resolve(registration); };
+    window.dispatchEvent(new Event('online'));
+    await new Promise(resolve => setTimeout(resolve, 0));
+    return calls;
+  });
+  expect(updates).toBeGreaterThan(0);
+});
+
 test('elk bestand in de offline-lijst bestaat, en elk spelbestand staat erin', async () => {
   const sw = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
   const core = [...sw.match(/const CORE = \[([\s\S]*?)\];/)[1].matchAll(/'\.\/([^']*)'/g)].map(m => m[1]).filter(Boolean);

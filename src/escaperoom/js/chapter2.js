@@ -2,6 +2,7 @@
 // en Folkerda (kamer: één tekening, met per kamer ander behang, een andere prent en andere dingen). Geladen door js/boot.js.
 
 const KAMER_NAAM = { thedema: 'Thedema', alma: 'Alma', folkerda: 'Folkerda' };
+const KAMER_BEDSPREI = { thedema: 'url(#kmBedThedema)', alma: 'url(#kmPlaid)', folkerda: 'url(#kmBedFolkerda)' };
 /* Het teken dat Harm in elke kamer in het gebint kerfde: telmerken (I = 1, Λ = 5, X = 10), en wat ze betekenen. */
 const MERK = { thedema: ['ΛII', 7], alma: ['IIII', 4], folkerda: ['XI', 11] };
 
@@ -13,24 +14,27 @@ PAARDJE_SAY[2] = ["Op de baal stro staat het hobbelpaardje! Ditty heeft het vano
   "Het knikt alweer. Je stopt het in je rugzak: laat het iets zien als je vastzit."];
 
 function applyZolder(){
-  const f = S.f;
-  vis('#zl-roelof', !!f.katrol); vis('#hit-zlroelof', !!f.katrol);
+  const f = F(2), here = S.ch === 2;
+  veil('zolder', .3);
+  vis('#zl-roelof', !!f.katrol && here); vis('#hit-zlroelof', !!f.katrol && here);
   vis('#zl-kist', !!f.katrol); vis('#hit-zlkist', !!f.katrol);
   vis('#zl-rope', !f.katrol); vis('#zl-hook', !f.katrol);
   vis('#zl-kast', !f.kast); vis('#zl-kastopen', !!f.kast);
   vis('#zl-paardje', !f.paardjeTaken); vis('#hit-zlpaardje', !f.paardjeTaken);
 }
 function applyKamer(){
-  const f = S.f, k = S.kamer || 'thedema';
+  const f = F(2), k = S.kamer || 'thedema';
+  veil('kamer', .3);
   ['thedema', 'alma', 'folkerda'].forEach(n => vis('#km-wall-' + n, k === n));
+  $('#km-bedspread').setAttribute('fill', KAMER_BEDSPREI[k] || KAMER_BEDSPREI.thedema);
   const hung = !!f.prenten;
   vis('#km-print', hung); vis('#km-print-empty', !hung);
   $('#km-print-use').setAttribute('href', '#km-borg-' + k);
   $('#km-print-cap').textContent = { thedema: 'Thedema in 1622', alma: 'Alma te Noordwolde', folkerda: 'Folkerda te Dijkshorn' }[k];
   vis('#km-loose', k === 'alma' && !f.behang); vis('#hit-loose', k === 'alma' && !f.behang);
-  vis('#km-rieten', k === 'alma'); vis('#hit-rieten', k === 'alma');
+  vis('#km-rieten', k === 'alma' || k === 'folkerda'); vis('#hit-rieten', k === 'alma' || k === 'folkerda');
   vis('#km-prints-bed', k === 'folkerda' && !hung); vis('#hit-printsbed', k === 'folkerda' && !hung);
-  vis('#km-ditty', k === 'folkerda'); vis('#hit-ditty', k === 'folkerda');
+  vis('#km-ditty', k === 'folkerda' && S.ch === 2); vis('#hit-ditty', k === 'folkerda' && S.ch === 2);
   const found = { thedema: f.telmerk, alma: f.behang, folkerda: f.prenten }[k];
   vis('#km-mark', !!found);
   $('#km-marktxt').textContent = MERK[k][0];
@@ -40,21 +44,18 @@ function toKamer(k){ S.kamer = k; save(); go('kamer'); }
 const H1 = { roelof: H.roelof };   // Roelof op het erf (hoofdstuk 1); hier komen de andere kamers bij
 Object.assign(H, {
   /* ---- de overloop ---- */
-  trap(){
-    if(S.f.out2) return nextChapter();
-    say(S.f.katrol ? "De trap naar beneden, naar de eetzaal en het erf. Eerst de sleutel vinden!" : ["De trap naar beneden. Smal en steil: hier kwam vroeger niemand, alleen het hooi.", "Van beneden roept iemand. Het komt van buiten, bij het oude hooiluik."]);
-  },
+  trap(){ go('hal'); },
   thedema(){ toKamer('thedema'); },
   alma(){ toKamer('alma'); },
   folkerda(){ toKamer('folkerda'); },
   luik(){
-    if(S.f.katrol) return say(["Door het oude hooiluik kijk je over de tuin en de weilanden naar de stad Groningen. De Martinitoren staat hemelsbreed maar 7,5 kilometer weg.", "Hier ging vroeger het hooi naar binnen, met de katrol aan de hijsbalk."]);
+    if(F(2).katrol) return say(["Door het oude hooiluik kijk je over de tuin en de weilanden naar de stad Groningen. De Martinitoren staat hemelsbreed maar 7,5 kilometer weg.", "Hier ging vroeger het hooi naar binnen, met de katrol aan de hijsbalk."]);
     say([['roelof', "Hé, daarboven! Kun je me even helpen?"],
          ['roelof', "Mijn gereedschapskist moet naar boven, en de trap is te smal. Hij weegt 40 kilo. We doen het zoals vroeger met het hooi: met de katrol!"]], () => openKatrol());
   },
-  katrol(){ S.f.katrol ? say("Een ijzeren katrol aan de oude hijsbalk. Hij draait nog als een zonnetje.") : H.luik(); },
+  katrol(){ F(2).katrol ? say("Een ijzeren katrol aan de oude hijsbalk. Hij draait nog als een zonnetje.") : H.luik(); },
   kast(){
-    if(S.f.kast) return say("Het kastje in de stijl staat open. Leeg nu: de sleutel heb jij.");
+    if(F(2).kast) return say("Het kastje in de stijl staat open. Leeg nu: de sleutel heb jij.");
     openKast();
   },
   gebint(){ say(["Een eiken gebint: twee zware stijlen, een ankerbalk erdoorheen en schuine korbelen. Het draagt het hele dak.", "Er zijn streepjes in het hout gehakt: III op deze stijl, ΛI op de andere. Wat zouden die betekenen?"]); },
@@ -63,7 +64,7 @@ Object.assign(H, {
   vork(){ say(["Een oude hooivork met drie tanden. Roelof heeft hem laten hangen, als herinnering.", "Of als kapstok. Dat weet je bij Roelof nooit."]); },
   folders(){ say(["Een koelkastje voor de gasten, met koude drankjes. Bovenop een rek vol folders: fietsroutes, musea, de borgen, de scheve toren van Bedum.", "Je pakt de folder van de B&B."], () => openFolder()); },
   quiltzl(){ say("Een quilt met rode en groene lapjes, met de hand gemaakt. Ditty houdt van mooie dingen aan de muur."); },
-  luchter(){ gag('#km-luchter', 'tinkle', 1500); beep(2400, .05, 'sine', .03); setTimeout(() => beep(2800, .05, 'sine', .03), 90); say("Een kroonluchter met glazen kraaltjes. Tingeling! Ze vangen het licht van de lampjes."); },
+  luchter(h){ gag('#km-luchter', 'tinkle', 1500); beep(2400, .05, 'sine', .03); setTimeout(() => beep(2800, .05, 'sine', .03), 90); toggleLamp('km-luchter', h); },
   baal(){ say("Een baal stro, als bankje. Het prikt een beetje."); },
   zlkist(){ say("Roelofs rode gereedschapskist. Hamer, schroevendraaiers, behanglijm, en een pakje stroopwafels."); },
   roelof(h){
@@ -79,12 +80,12 @@ Object.assign(H, {
   },
   /* ---- de kamers ---- */
   kamerdeur(){ go('zolder'); },
-  kmtafel(){ if(S.kamer === 'thedema' && !S.f.telmerk) return say(["Een tafel van steigerhout met verse bloemen. Er ligt een opengeslagen werkboekje van Roelof: \"Verbouwing 2012\".", "Er staat iets in over de korbelen en de stijl."], () => openTelmerk());
+  kmtafel(){ if(S.kamer === 'thedema' && !F(2).telmerk) return say(["Een tafel van steigerhout met verse bloemen. Er ligt een opengeslagen werkboekje van Roelof: \"Verbouwing 2012\".", "Er staat iets in over de korbelen en de stijl."], () => openTelmerk());
     say("Een tafel van steigerhout, met een vaas bloemen en twee stoelen met roze kussens."); },
   stijl(){
     const k = S.kamer || 'thedema';
-    if(k === 'thedema' && !S.f.telmerk) return openTelmerk();
-    const found = { thedema: S.f.telmerk, alma: S.f.behang, folkerda: S.f.prenten }[k];
+    if(k === 'thedema' && !F(2).telmerk) return openTelmerk();
+    const found = { thedema: F(2).telmerk, alma: F(2).behang, folkerda: F(2).prenten }[k];
     if(found) return say(tx('Op de stijl staat het teken van Harm: {m}, met een H ernaast.', { m: MERK[k][0] }));
     say(k === 'alma' ? "De eiken stijl van het gebint. Naast de stijl laat het behang los…" : "De eiken stijl van het gebint. Er zit nog geen teken op dat je kunt zien.");
   },
@@ -97,8 +98,8 @@ Object.assign(H, {
           folkerda: ["Borg Folkerda, te Dijkshorn bij Bedum: drie trapgevels naast elkaar, en een spitse toren."] }[k]);
   },
   behang(){
-    if(S.f.behang) return say("Het behang zit weer strak. Je ziet de naad niet eens.");
-    if(!S.f.katrol) return say(["Een baan behang laat los, van boven tot bijna onder.", "Daar heb je gereedschap en lijm voor nodig. Waar is Roelof?"]);
+    if(F(2).behang) return say("Het behang zit weer strak. Je ziet de naad niet eens.");
+    if(!F(2).katrol) return say(["Een baan behang laat los, van boven tot bijna onder.", "Daar heb je gereedschap en lijm voor nodig. Waar is Roelof?"]);
     openBehang();
   },
   kmbed(){
@@ -108,7 +109,6 @@ Object.assign(H, {
   },
   prenten(){ openPrenten(); },
   dakraam(){ S.ach.martini = true; save(); say(["Door het dakraam kijk je naar het zuiden, naar de stad Groningen: de tuin, de weilanden, 4 kilometer verderop de eerste huizen van de stad, en 7,5 kilometer weg de Martinitoren.", "Alle kamers op de hooizolder liggen aan de zuidkant. Zon de hele dag!"]); },
-  kmlamp(){ say("Een nachtlampje met een donkere kap. Knip, knip."); },
   kmrieten(){ beep(180, .2, 'triangle', .03); say("Een rieten stoel bij het raam. Kraak. Hier zou je een boek kunnen lezen. Of de reeën tellen."); },
   ditty(){
     if(S.scene === 'kamer'){
@@ -156,7 +156,9 @@ function katrolDone(){
   say(["Hijs… hijs… de katrol piept, en daar komt de rode kist door het luik naar binnen.",
        ['roelof', "Zo! Precies zoals mijn opa het hooi omhoog haalde. Wat je aan kracht wint, loop je aan touw: dat is de truc van de katrol."],
        ['sys', "Even later stommelt Roelof de trap op."],
-       ['roelof', "\"Daar waar de drie borgen elk een teken geven.\" Drie borgen… dat zijn onze kamers! Thedema, Alma en Folkerda."]]);
+       S.f.telmerk || S.f.prenten
+         ? ['roelof', "Heb je in de kamers al een teken van Harm gevonden? Goed zo! In Alma laat het behang los: daar heb ik mijn kist voor nodig."]
+         : ['roelof', "\"Daar waar de drie borgen elk een teken geven.\" Drie borgen… dat zijn onze kamers! Thedema, Alma en Folkerda."]]);
 }
 
 /* ---------- puzzel 2: telmerken (de streepjes waarmee timmerlieden de balken nummerden) ---------- */
@@ -185,6 +187,10 @@ function openTelmerk(){
 }
 function telmerkDone(){
   applyVisuals();
+  // Roelof is pas boven na de katrol
+  if(!S.f.katrol) return say(["Je zet de korbelen terug, klop klop, elk op zijn nummer. Dan blaas je het stof van de stijl.",
+       "Hier staat nog een teken, dat niet bij een korbeel hoort: ΛII… en een H. Van Harm!",
+       "ΛII: een Λ en twee streepjes. Dat is 5 + 2 = 7. Het teken van Thedema."]);
   say(["Roelof zet de korbelen terug, klop klop. Dan blaast hij het stof van de stijl.",
        ['roelof', "Kijk! Hier staat nog een teken, dat niet bij een korbeel hoort. ΛII… en een H. Van Harm!"],
        "ΛII: een Λ en twee streepjes. Dat is 5 + 2 = 7. Het teken van Thedema."]);
@@ -228,7 +234,7 @@ function behangDone(){
 /* ---------- puzzel 4: de prenten (drie borgen herkennen aan hun beschrijving) ---------- */
 const PRINTS = [['thedema', 'P'], ['folkerda', 'Q'], ['alma', 'R']];   // op het bed: P, Q, R
 function openPrenten(){
-  if(S.f.prenten) return say("De prenten hangen weer in hun eigen kamer.");
+  if(F(2).prenten) return say("De prenten hangen weer in hun eigen kamer.");
   const pick = S.prn || {};
   openModal('Drie prenten op het bed', 'Kamer Folkerda · welke borg is welke?', `
     <div class="note-paper" style="font-size:18px">Ditty's kaartje voor de gasten:<br>
@@ -253,6 +259,9 @@ function openPrenten(){
 }
 function prentenDone(){
   applyVisuals();
+  if(!S.f.katrol) return say([['ditty', "Knap! Dat zal Roelof leuk vinden. Hij is buiten, bij het oude hooiluik."],
+       ['ditty', "Wacht eens… op de achterkant van Folkerda, op het oude hout van de lijst, staat iets gekerfd. XI, en een H."],
+       "XI: een X (10) en een streepje. Dat is 11. Het teken van Folkerda. Ditty hangt de prent terug, vlak naast de stijl."]);
   say([['ditty', "Knap! Roelof, hoor je dat? De prenten zijn terug."],
        ['roelof', "Wacht eens… op de achterkant van Folkerda, op het oude hout van de lijst, staat iets gekerfd. XI, en een H."],
        "XI: een X (10) en een streepje. Dat is 11. Het teken van Folkerda. Roelof hangt de prent terug, vlak naast de stijl."]);
@@ -271,18 +280,20 @@ function openKast(){
     const bind = () => body.querySelectorAll('[data-i]').forEach(b => b.onclick = () => { const i = +b.dataset.i; v[i] = (v[i] + +b.dataset.d + 13) % 13; S.kst2 = v; save(); beep(600, .03); $('#ks-dials').innerHTML = draw(); bind(); });
     bind();
     body.querySelector('#ks-ok').onclick = () => {
-      if(v[0] === 7 && v[1] === 4 && v[2] === 11){ S.f.kast = true; save(); fb('#ks-fb', 'Klik! Het deurtje springt open.', 'good'); return solved(kastDone, 1500); }
-      nope();
       const known = [S.f.telmerk, S.f.behang, S.f.prenten].filter(Boolean).length;
+      // pas open met alle drie de tekens: anders mis je de katrol, en Roelof
+      if(v[0] === 7 && v[1] === 4 && v[2] === 11 && known === 3){ S.f.kast = true; save(); fb('#ks-fb', 'Klik! Het deurtje springt open.', 'good'); return solved(kastDone, 1500); }
+      nope();
       fb('#ks-fb', known < 3 ? 'Het deurtje geeft niet mee. Heb je de tekens van alle drie de borgen al gevonden? Kijk in de kamers.' : 'Het deurtje geeft niet mee. Zet de telmerken om in getallen: ΛII, IIII en XI.', 'bad');
     };
   });
 }
 function kastDone(){
-  applyVisuals(); give('oudesleutel');
+  S.f.out2 = true; setUnlocked(3);
+  give('oudesleutel'); applyVisuals();
   say(["In het kastje ligt een zware ijzeren sleutel met een krul, en een opgerold briefje.",
        ['harm', "Goed gezocht. Dit is de sleutel van het kistje. Maar wat erin hoort, ligt er niet in. Wie het boerenleven kent, vindt het. H."],
-       ['roelof', "Het kistje staat in mijn museum, in de andere schuur. Kom mee!"]], win2);
+       ['roelof', "Het kistje staat in mijn museum, achter de deeldeuren op het erf. Kom mee!"]], win2);
 }
 
 /* ---------- begin en einde ---------- */
@@ -309,7 +320,7 @@ Object.assign(H, {
   kmrieten(){ poke('#km-rieten', 'g-jump', 'Kraak'); beep(180, .2, 'triangle', .03); say("Een rieten stoel bij het raam. Kraak. Hier zou je een boek kunnen lezen. Of de reeën tellen."); },
   prent(){
     poke('#km-print', 'g-tilt');
-    if(!S.f.prenten) return say("Hier hing een prent: je ziet een lichtere plek op het behang. Roelof heeft vanochtend alle prenten van de muur gehaald om de lijstjes te poetsen.");
+    if(!F(2).prenten) return say("Hier hing een prent: je ziet een lichtere plek op het behang. Roelof heeft vanochtend alle prenten van de muur gehaald om de lijstjes te poetsen.");
     const k = S.kamer || 'thedema';
     say({ thedema: ["Borg Thedema, getekend in 1622: een steenhuis met een hoge, ronde toren. De prent hangt een beetje scheef; je zet hem recht.", "Deze boerderij hoorde vroeger bij borg Thedema. Een borg was het grote huis van een rijke familie in Groningen."],
           alma: ["Borg Alma, te Noordwolde: een borg met een brug over de gracht.", "Bijna alle Groninger borgen zijn verdwenen. Hun namen leven voort, ook in deze kamers."],

@@ -41,7 +41,7 @@
     <g fill="#26402a"><circle cx="250" cy="270" r="80" /><circle cx="350" cy="230" r="90" /><circle cx="430" cy="280" r="70" /><circle cx="300" cy="320" r="70" /></g>
     <path d="M1460 540 C1470 450 1500 390 1480 300 M1480 400 C1520 360 1550 350 1580 320" stroke="#3a2a1e" stroke-width="18" fill="none" stroke-linecap="round" />
     <g fill="#26402a"><circle cx="1480" cy="270" r="90" /><circle cx="1570" cy="300" r="80" /><circle cx="1400" cy="310" r="70" /></g>
-    <g id="tn-lampjes" fill="#ffe08a">
+    <g id="tn-lampjes" class="lamp lamp-bulb" fill="#ffe08a">
       <path d="M180 300 Q300 360 440 300 M1380 320 Q1480 370 1600 330" stroke="#1a1a1a" stroke-width="2" fill="none" />
       <circle class="tn-bulb" cx="210" cy="318" r="5" /><circle class="tn-bulb b" cx="250" cy="332" r="5" /><circle class="tn-bulb" cx="300" cy="338" r="5" /><circle class="tn-bulb b" cx="350" cy="334" r="5" /><circle class="tn-bulb" cx="400" cy="320" r="5" />
       <circle class="tn-bulb b" cx="1410" cy="338" r="5" /><circle class="tn-bulb" cx="1460" cy="350" r="5" /><circle class="tn-bulb b" cx="1510" cy="350" r="5" /><circle class="tn-bulb" cx="1560" cy="340" r="5" />

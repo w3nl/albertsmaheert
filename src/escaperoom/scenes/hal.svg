@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="scene" id="sc-hal" viewBox="0 0 1600 900"
+  preserveAspectRatio="xMidYMid slice" aria-label="De hal: de recreatieruimte met de pooltafel, en deuren naar buiten, de Paardenstal, de zaal en de trap naar de hooizolder">
+  <defs>
+    <linearGradient id="hlWall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4efe4" />
+      <stop offset="1" stop-color="#e6dfcf" />
+    </linearGradient>
+    <pattern id="hlPanel" width="40" height="120" patternUnits="userSpaceOnUse">
+      <rect width="40" height="120" fill="#a8743e" /><path d="M39.5 0 V120" stroke="#7e5228" stroke-width="2" />
+      <path d="M10 10 q3 50 0 100" stroke="#956434" stroke-width="1" fill="none" opacity=".7" />
+    </pattern>
+    <pattern id="hlTiles" width="80" height="40" patternUnits="userSpaceOnUse">
+      <rect width="80" height="40" fill="#9a4e34" /><rect x="1" y="1" width="38" height="18" fill="#a85a3c" /><rect x="41" y="1" width="38" height="18" fill="#9e5236" />
+      <rect x="-19" y="21" width="38" height="18" fill="#a2563a" /><rect x="21" y="21" width="38" height="18" fill="#a85a3c" /><rect x="61" y="21" width="38" height="18" fill="#9a4e34" />
+    </pattern>
+    <linearGradient id="hlBeam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a3c26" />
+      <stop offset="1" stop-color="#3a2618" />
+    </linearGradient>
+    <linearGradient id="hlEvening" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2b26a" />
+      <stop offset=".6" stop-color="#e8d3a0" />
+      <stop offset="1" stop-color="#6a8a4a" />
+    </linearGradient>
+    <linearGradient id="hlFelt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f8a4a" />
+      <stop offset="1" stop-color="#1e6a36" />
+    </linearGradient>
+    <linearGradient id="hlBlue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2a5a9a" />
+      <stop offset="1" stop-color="#1e4478" />
+    </linearGradient>
+    <radialGradient id="hlGlow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#ffe7a8" stop-opacity=".7" />
+      <stop offset="1" stop-color="#ffe7a8" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="hlVign" cx=".5" cy=".45" r=".8">
+      <stop offset=".6" stop-color="#000" stop-opacity="0" />
+      <stop offset="1" stop-color="#1a1008" stop-opacity=".45" />
+    </radialGradient>
+  </defs>
+
+  <!-- de witte muren met een houten lambrisering, en de balken van de schuur erboven -->
+  <rect width="1600" height="900" fill="url(#hlWall)" />
+  <rect x="0" y="520" width="1600" height="120" fill="url(#hlPanel)" />
+  <path d="M0 520 H1600" stroke="#6a4424" stroke-width="6" />
+  <rect width="1600" height="90" fill="#e2c9a0" />
+  <g fill="url(#hlBeam)"><rect x="0" y="0" width="1600" height="22" /><rect x="0" y="70" width="1600" height="26" />
+    <path d="M220 0 h26 v96 h-26z M640 0 h26 v96 h-26z M1080 0 h26 v96 h-26z" /></g>
+  <!-- de rode tegelvloer -->
+  <path d="M0 640 H1600 V900 H0Z" fill="url(#hlTiles)" />
+  <path d="M0 640 H1600" stroke="#5a2a1a" stroke-width="3" />
+
+  <!-- de buitendeur naar het erf: een glazen bovenhelft met de avondlucht -->
+  <g id="hl-buitendeur">
+    <rect x="34" y="294" width="172" height="350" fill="#2f5a3e" />
+    <rect x="48" y="308" width="144" height="150" fill="url(#hlEvening)" stroke="#e9e2d2" stroke-width="4" />
+    <g class="sky-nacht" fill="#fff"><circle class="hl-twinkle" cx="140" cy="330" r="1.6" /><circle class="hl-twinkle b" cx="170" cy="352" r="1.4" /><circle class="hl-twinkle" cx="64" cy="324" r="1.4" /></g>
+    <path d="M120 308 v150 M48 383 h144" stroke="#e9e2d2" stroke-width="4" />
+    <circle class="hl-sun" cx="90" cy="350" r="14" fill="#ffd27a" opacity=".85" />
+    <rect x="48" y="470" width="144" height="168" fill="#2f5a3e" stroke="#1f3e2a" stroke-width="3" />
+    <path d="M60 484 h120 v140 h-120z" fill="none" stroke="#24482f" stroke-width="3" />
+    <circle cx="178" cy="560" r="6" fill="#c9a24a" />
+    <rect x="70" y="262" width="100" height="24" rx="4" fill="#1f9a4a" /><text x="120" y="280" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="15" font-weight="600" fill="#fff">Erf</text>
+    <path d="M20 640 h200 l14 20 h-228z" fill="#5a4a36" />
+  </g>
+
+  <!-- de deur van de Paardenstal, een staldeur met een bordje en een hoefijzer -->
+  <g id="hl-staldeur">
+    <rect x="254" y="318" width="152" height="324" fill="#e9e2d2" />
+    <rect x="264" y="328" width="132" height="312" fill="#7a4a26" stroke="#5e3418" stroke-width="3" />
+    <path d="M264 470 h132" stroke="#e9e2d2" stroke-width="5" />
+    <path d="M286 340 v120 M308 340 v120 M330 340 v120 M352 340 v120 M374 340 v120 M286 482 v150 M308 482 v150 M330 482 v150 M352 482 v150 M374 482 v150" stroke="#5e3418" stroke-width="2" />
+    <circle cx="384" cy="500" r="5" fill="#2a2a2a" />
+    <rect x="270" y="284" width="120" height="26" rx="4" fill="#5e4632" /><text x="330" y="303" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="15" font-weight="600" fill="#f8f0e0">Paardenstal</text>
+    <path d="M318 262 v10 a12 12 0 0 0 24 0 v-10" fill="none" stroke="#8a8a8a" stroke-width="5" stroke-linecap="round" />
+  </g>
+
+  <!-- de tafeltennistafel, opgeklapt tegen de muur -->
+  <g id="hl-tafeltennis">
+    <rect x="452" y="330" width="78" height="270" fill="url(#hlBlue)" stroke="#16365e" stroke-width="3" />
+    <rect x="536" y="330" width="78" height="270" fill="url(#hlBlue)" stroke="#16365e" stroke-width="3" />
+    <path d="M491 334 V596 M575 334 V596 M456 334 H526 M540 334 H610 M456 596 H526 M540 596 H610" stroke="#f4f4f4" stroke-width="3" />
+    <path d="M530 330 V600 M536 330 V600" stroke="#2a2a2a" stroke-width="3" />
+    <path d="M466 600 v36 M600 600 v36" stroke="#2a2a2a" stroke-width="6" /><circle cx="466" cy="638" r="7" fill="#1a1a1a" /><circle cx="600" cy="638" r="7" fill="#1a1a1a" />
+    <g transform="translate(624 420)"><circle r="16" fill="#c4302b" /><rect x="-4" y="14" width="8" height="22" rx="3" fill="#8a5a30" /></g>
+    <circle cx="640" cy="470" r="5" fill="#fff" stroke="#ddd" />
+  </g>
+
+  <!-- de dubbele deuren naar de zaal -->
+  <g id="hl-zaaldeur">
+    <rect x="690" y="282" width="260" height="360" fill="#e9e2d2" />
+    <rect x="702" y="294" width="116" height="346" fill="#6a4228" stroke="#4a2c18" stroke-width="3" />
+    <rect x="822" y="294" width="116" height="346" fill="#6a4228" stroke="#4a2c18" stroke-width="3" />
+    <rect x="726" y="320" width="68" height="110" fill="url(#hlEvening)" stroke="#2a1a10" stroke-width="3" />
+    <rect x="846" y="320" width="68" height="110" fill="url(#hlEvening)" stroke="#2a1a10" stroke-width="3" />
+    <g class="sky-nacht" fill="#fff"><circle class="hl-twinkle" cx="744" cy="340" r="1.6" /><circle class="hl-twinkle b" cx="776" cy="356" r="1.4" /><circle class="hl-twinkle" cx="866" cy="334" r="1.6" /><circle class="hl-twinkle b" cx="896" cy="362" r="1.4" /></g>
+    <path d="M726 470 h68 v140 h-68z M846 470 h68 v140 h-68z" fill="none" stroke="#4a2c18" stroke-width="3" />
+    <path d="M808 470 v40 M832 470 v40" stroke="#c9a24a" stroke-width="5" stroke-linecap="round" />
+    <rect x="780" y="248" width="80" height="26" rx="4" fill="#5e4632" /><text x="820" y="267" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="15" font-weight="600" fill="#f8f0e0">Zaal</text>
+  </g>
+
+  <!-- het rek met de keuen, en een krijtbordje met de stand -->
+  <g id="hl-keu">
+    <rect x="990" y="330" width="56" height="20" rx="3" fill="#7a4e2e" /><rect x="990" y="560" width="56" height="16" rx="3" fill="#7a4e2e" />
+    <path d="M1000 340 L996 568 M1012 340 L1010 568 M1024 340 L1024 568 M1036 340 L1038 568" stroke="#d8b07a" stroke-width="5" stroke-linecap="round" />
+    <path d="M1000 340 v24 M1012 340 v24 M1024 340 v24 M1036 340 v24" stroke="#2a2a2a" stroke-width="5" stroke-linecap="round" />
+    <rect x="1060" y="350" width="90" height="70" fill="#2a3a2e" stroke="#7a4e2e" stroke-width="5" />
+    <g fill="#f4f0e4" font-family="Caveat, cursive" font-size="17"><text x="1070" y="374">Sjoerd 3</text><text x="1070" y="398">Roelof 1</text></g>
+  </g>
+
+  <!-- de trap naar de hooizolder, omhoog naar rechts -->
+  <g id="hl-trap">
+    <rect x="1420" y="90" width="180" height="180" fill="#3a2a1e" />
+    <path d="M1150 800 L1170 740 H1215 V680 H1260 V620 H1305 V560 H1350 V500 H1395 V440 H1440 V380 H1485 V320 H1530 V260 H1600 V800Z" fill="#c08a52" stroke="#7a4e2a" stroke-width="3" />
+    <g stroke="#7a4e2a" stroke-width="3"><path d="M1170 740 H1600 M1215 680 H1600 M1260 620 H1600 M1305 560 H1600 M1350 500 H1600 M1395 440 H1600 M1440 380 H1600 M1485 320 H1600" /></g>
+    <g fill="#a87442"><rect x="1170" y="740" width="430" height="10" /><rect x="1215" y="680" width="385" height="10" /><rect x="1260" y="620" width="340" height="10" /><rect x="1305" y="560" width="295" height="10" /><rect x="1350" y="500" width="250" height="10" /><rect x="1395" y="440" width="205" height="10" /><rect x="1440" y="380" width="160" height="10" /><rect x="1485" y="320" width="115" height="10" /><rect x="1530" y="260" width="70" height="10" /></g>
+    <path d="M1150 800 L1530 250" stroke="#5a3a20" stroke-width="16" />
+    <g stroke="#3a2618" stroke-width="5"><path d="M1180 740 v-110 M1270 620 v-110 M1360 500 v-110 M1450 380 v-110" /></g>
+    <path d="M1170 640 L1540 110" stroke="#3a2618" stroke-width="9" stroke-linecap="round" />
+    <rect x="1220" y="230" width="170" height="54" rx="5" fill="#5e4632" />
+    <g fill="#f8f0e0" font-family="Fredoka, sans-serif" font-size="14" font-weight="600" text-anchor="middle"><text x="1305" y="252">↑ Thedema · Alma</text><text x="1305" y="272">Folkerda</text></g>
+  </g>
+
+  <!-- de voetbaltafel, vooraan links -->
+  <g id="hl-voetbal">
+    <path d="M70 720 h330 l20 70 h-370z" fill="#3a6a3a" stroke="#1e3e1e" stroke-width="3" />
+    <path d="M50 790 h370 v30 h-370z" fill="#5a3a20" />
+    <path d="M70 820 v60 M400 820 v60" stroke="#3a2412" stroke-width="16" />
+    <g stroke="#c9c9c9" stroke-width="5"><path d="M30 742 H440 M24 762 H446 M18 782 H452" /></g>
+    <g fill="#c4302b"><rect x="140" y="736" width="10" height="14" /><rect x="260" y="736" width="10" height="14" /><rect x="200" y="776" width="10" height="14" /></g>
+    <g fill="#2a5a9a"><rect x="110" y="756" width="10" height="14" /><rect x="230" y="756" width="10" height="14" /><rect x="350" y="756" width="10" height="14" /></g>
+    <g fill="#1a1a1a"><rect x="14" y="736" width="16" height="12" rx="4" /><rect x="440" y="756" width="16" height="12" rx="4" /><rect x="8" y="776" width="16" height="12" rx="4" /></g>
+  </g>
+
+  <!-- de pooltafel, midden in de hal, met de lamp erboven -->
+  <g id="hl-pool">
+    <ellipse cx="800" cy="860" rx="320" ry="26" fill="#000" opacity=".18" />
+    <path d="M590 660 h420 l60 130 h-540z" fill="#5a3a20" />
+    <path d="M606 670 h388 l48 112 h-484z" fill="url(#hlFelt)" />
+    <path d="M530 790 h540 v32 h-540z" fill="#4a2e18" />
+    <path d="M548 822 v50 M1052 822 v50 M800 822 v40" stroke="#3a2412" stroke-width="18" />
+    <g fill="#0a0a0a"><circle cx="608" cy="672" r="7" /><circle cx="992" cy="672" r="7" /><circle cx="800" cy="668" r="6" /><circle cx="562" cy="784" r="9" /><circle cx="1038" cy="784" r="9" /><circle cx="800" cy="788" r="8" /></g>
+    <g><circle cx="700" cy="720" r="9" fill="#f6f2ea" /><circle cx="860" cy="704" r="9" fill="#1a1a1a" /><circle cx="884" cy="724" r="9" fill="#d6242f" /><circle cx="906" cy="702" r="9" fill="#f6d04d" /><circle cx="840" cy="740" r="9" fill="#2a5a9a" /></g>
+    <path d="M640 760 L760 724" stroke="#d8b07a" stroke-width="6" stroke-linecap="round" />
+  </g>
+  <g id="lamp-hl" class="hl-lamp lamp">
+    <path d="M800 90 V510" stroke="#1a1a1a" stroke-width="3" />
+    <path d="M700 510 h200 l20 36 h-240z" fill="#2a5a3a" stroke="#1a3a24" stroke-width="3" />
+    <g class="lamp-bulb" fill="#ffe7a8"><ellipse cx="740" cy="548" rx="16" ry="5" /><ellipse cx="800" cy="548" rx="16" ry="5" /><ellipse cx="860" cy="548" rx="16" ry="5" /></g>
+  </g>
+  <ellipse class="hl-glow lamp-glow" data-of="lamp-hl" cx="800" cy="720" rx="330" ry="120" fill="url(#hlGlow)" pointer-events="none" />
+
+  <rect width="1600" height="900" fill="url(#hlVign)" pointer-events="none" />
+
+  <g class="hits">
+    <rect class="hit" data-hs="hlbuiten" data-label="De buitendeur naar het erf" x="34" y="262" width="172" height="382" fill="transparent" />
+    <rect class="hit" data-hs="hlstal" data-label="De deur van de Paardenstal" x="254" y="262" width="152" height="380" fill="transparent" />
+    <rect class="hit" data-hs="hltafeltennis" data-label="De tafeltennistafel, opgeklapt" x="448" y="326" width="210" height="316" fill="transparent" />
+    <rect class="hit" data-hs="hlzaal" data-label="De deuren naar de zaal" x="690" y="248" width="260" height="262" fill="transparent" />
+    <rect class="hit" data-hs="hlkeu" data-label="Het rek met keuen en het krijtbordje" x="986" y="326" width="168" height="252" fill="transparent" />
+    <rect class="hit" data-hs="hltrap" data-label="De trap naar de hooizolder" x="1160" y="90" width="440" height="700" fill="transparent" />
+    <rect class="hit" data-hs="hlvoetbal" data-label="De voetbaltafel" x="10" y="716" width="450" height="110" fill="transparent" />
+    <rect class="hit" data-hs="pool" data-label="De pooltafel" x="530" y="656" width="540" height="170" fill="transparent" />
+    <rect class="hit" data-hs="hllamp" data-label="De lamp boven de pooltafel" x="690" y="500" width="220" height="56" fill="transparent" />
+  </g>
+</svg>

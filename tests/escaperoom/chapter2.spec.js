@@ -64,3 +64,19 @@ test('hoofdstuk 2: de katrol, drie tekens in drie kamers en het kastje in de sti
   await page.locator('#ks-ok').click();
   await expectWin(page, 'Zaterdagochtend · hoofdstuk 2 klaar');
 });
+
+test('de kamers op de hooizolder hebben eigen behang en dekbed', async ({ page }) => {
+  await startChapter(page, 2);
+  const rooms = [
+    ['thedema', 'kmBedThedema', false],
+    ['alma', 'kmPlaid', true],
+    ['folkerda', 'kmBedFolkerda', true]
+  ];
+  for (const [room, bedspread, hasWickerChair] of rooms) {
+    await page.evaluate(room => { S.kamer = room; S.scene = 'kamer'; applyVisuals(); }, room);
+    await expect(page.locator('#km-wall-' + room)).toBeVisible();
+    await expect(page.locator('#km-bedspread')).toHaveAttribute('fill', `url(#${bedspread})`);
+    if (hasWickerChair) await expect(page.locator('#km-rieten')).toBeVisible();
+    else await expect(page.locator('#km-rieten')).toBeHidden();
+  }
+});

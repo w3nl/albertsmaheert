@@ -28,3 +28,13 @@
 @keyframes dkWiek0{from{transform:translate(540px,340px) rotate(0)}to{transform:translate(540px,340px) rotate(360deg)}}
 .dk-wieken{animation:dkWiek0 8s linear infinite}
 #dk-molen.fast .dk-wieken{animation-duration:1.5s}
+
+/* ---- 's avonds (hoofdstuk 4): de lucht boven het dak en door de museumdeur (dagdeel() in js/chapter1.js) ---- */
+@keyframes muHydroPass{0%,44%{transform:translateX(100px);opacity:0}46%{transform:translateX(40px);opacity:1}51%{transform:translateX(-12px);opacity:1}53%,100%{transform:translateX(-100px);opacity:0}}
+.mu-hydro84-drive{animation:muHydroPass 36s linear infinite}
+#sc-dak.t-nacht #dkSky stop:nth-child(1){stop-color:#0e1a3a}
+#sc-dak.t-nacht #dkSky stop:nth-child(2){stop-color:#2a3a6a}
+#sc-dak.t-nacht #dkSky stop:nth-child(3){stop-color:#8a6a6a}
+#sc-dak.t-nacht #dk-wolken{fill:#6a7698;opacity:.35}
+#sc-museum.t-nacht .mu-doorsky{fill:#1a2a50}
+#sc-museum.t-nacht .mu-sun{fill:#f4f0dc}

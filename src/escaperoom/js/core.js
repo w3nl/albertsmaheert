@@ -14,7 +14,7 @@ function tx(s, vars){ if(s == null) return s; let out = String(s); if(vars) out 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 
 /* Beweging: 'auto' volgt de instelling "minder beweging" van het apparaat; 'on' en 'off' gaan daar overheen. */
-let motionPref = (() => { try{ return localStorage.getItem(KEY + '-motion') || 'auto'; }catch(e){ return 'auto'; } })();
+let motionPref = (() => { try{ return localStorage.getItem(KEY + '-motion') || 'on'; }catch(e){ return 'on'; } })();
 const deviceReducesMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 function reducedMotion(){ return motionPref === 'off' || (motionPref === 'auto' && deviceReducesMotion()); }
 function applyMotion(){
@@ -29,13 +29,13 @@ function applyMotion(){
 let soundOn = (() => { try{ return localStorage.getItem(KEY + '-sound') !== '0'; }catch(e){ return true; } })();
 
 /* ---------- opslaan ---------- */
-/* Vrijgespeelde hoofdstukken hebben elk een eigen sleutel (KEY-ch2 …), zodat ze een nieuw spel overleven. */
+/* Vrijgespeelde hoofdstukken hebben elk een eigen sleutel (KEY-ch2 …); Nieuw spel wist ze (resetAll() in app.js). */
 const UNLOCK_KEY = n => KEY + '-ch' + n;
 function unlocked(n){ if(n <= 1) return true; try{ return localStorage.getItem(UNLOCK_KEY(n)) === '1'; }catch(e){ return false; } }
 function setUnlocked(n){ try{ localStorage.setItem(UNLOCK_KEY(n), '1'); }catch(e){} }
 /* save() bewaart het spel, en ook de stand van het hoofdstuk waarin je bent (KEY-st1 … -st4): kom je later terug in
    dat hoofdstuk (via het menu of "Door naar hoofdstuk N"), dan staat alles nog zoals je het achterliet. Alleen
-   Nieuw spel wist die standen (resetChapters() in app.js). */
+   Nieuw spel wist die standen (resetAll() in app.js). */
 function save(){ try{ const d = JSON.stringify(S); localStorage.setItem(KEY, d); if(S.started) localStorage.setItem(KEY + '-st' + S.ch, d); }catch(e){} }
 function loadChapter(n){ try{ const d = JSON.parse(localStorage.getItem(KEY + '-st' + n) || 'null'); return d && d.v === 1 && d.ch === n ? d : null; }catch(e){ return null; } }
 function load(){ try{ const d = JSON.parse(localStorage.getItem(KEY)||'null'); return d && d.v===1 ? d : null; }catch(e){ return null; } }
@@ -162,16 +162,25 @@ function visFlush(){
 }
 
 /* ---------- de kamers ---------- */
-/* Elke kamer: zijn hoofdstuk, de titel bovenaan en de functie die laat zien hoe het er nu bij staat (in chapterN.js). */
+/* Elke kamer: zijn hoofdstuk (0: het erf en de hal horen bij elk hoofdstuk), de titel bovenaan en de functie die laat zien hoe het er nu bij staat (in chapterN.js).
+   Kamers van een eerder hoofdstuk blijven open; je ziet ze zoals aan het eind van dat hoofdstuk (F(n) en DONE). */
+const DONE = {
+  1: { introDone:true, goot:true, post:true, stalOpen:true, hoefTaken:true, hoef:true, schoft:true, licht:true, brief:true, out1:true, paardjeTaken:true },
+  2: { introDone:true, katrol:true, telmerk:true, behang:true, prenten:true, kast:true, out2:true, paardjeTaken:true },
+  3: { introDone:true, kistOpen:true, bascule:true, karn:true, spreuk:true, akkers:true, out3:true, paardjeTaken:true }
+};
+const F = ch => S.ch === ch ? S.f : (DONE[ch] || {});
+const chTitle = name => () => tx('Hoofdstuk {n} · {name}', { n: S.ch, name: typeof name === 'function' ? name() : name });
 const ROOMS = {
-  erf:    { ch:1, title:'Hoofdstuk 1 · Welkom op de Wolddijk', apply:() => applyErf() },
-  stal:   { ch:1, title:'Hoofdstuk 1 · Kamer Paardenstal', apply:() => applyStal() },
-  zolder: { ch:2, title:'Hoofdstuk 2 · Op de hooizolder', apply:() => applyZolder() },
-  kamer:  { ch:2, title:() => 'Hoofdstuk 2 · Kamer ' + KAMER_NAAM[S.kamer || 'thedema'], apply:() => applyKamer() },
-  museum: { ch:3, title:'Hoofdstuk 3 · Het museum van Roelof', apply:() => applyMuseum() },
-  dak:    { ch:3, title:'Hoofdstuk 3 · Op het platte dak', apply:() => applyDak() },
-  zaal:   { ch:4, title:'Hoofdstuk 4 · Feest in de zaal', apply:() => applyZaal() },
-  tuin:   { ch:4, title:'Hoofdstuk 4 · De tuin op het zuiden', apply:() => applyTuin() }
+  erf:    { ch:0, title:() => S.ch === 1 ? 'Hoofdstuk 1 · Welkom op de Wolddijk' : tx('Hoofdstuk {n} · Het erf', { n: S.ch }), apply:() => applyErf() },
+  hal:    { ch:0, title:chTitle('De hal'), apply:() => applyHal() },
+  stal:   { ch:1, title:chTitle('Kamer Paardenstal'), apply:() => applyStal() },
+  zolder: { ch:2, title:chTitle('Op de hooizolder'), apply:() => applyZolder() },
+  kamer:  { ch:2, title:chTitle(() => 'Kamer ' + KAMER_NAAM[S.kamer || 'thedema']), apply:() => applyKamer() },
+  museum: { ch:3, title:chTitle('Het museum van Roelof'), apply:() => applyMuseum() },
+  dak:    { ch:3, title:chTitle('Op het platte dak'), apply:() => applyDak() },
+  zaal:   { ch:4, title:chTitle('Feest in de zaal'), apply:() => applyZaal() },
+  tuin:   { ch:4, title:chTitle('De tuin op het zuiden'), apply:() => applyTuin() }
 };
 function applyVisuals(){
   // een kamer waar je net binnenkomt (of een nieuw spel) wordt meteen getekend; veranderingen die je ziet gaan zacht
@@ -181,8 +190,20 @@ function applyVisuals(){
   const title = (ROOMS[S.scene] || ROOMS.erf).title;
   $('#chap').textContent = typeof title === 'function' ? title() : title;
   for(const id in ROOMS) if($('#sc-' + id)) ROOMS[id].apply();
+  applyLamps();
   if(typeof exitLabels === 'function') exitLabels();
   $('#hint-count').textContent = S.hints;
+}
+/* Lampen aan en uit: een .lamp met een id, en zijn .lamp-glow (erin, of los met data-of="id"). S.lampOff onthoudt wat uit staat. */
+function applyLamps(){
+  const off = S.lampOff || {};
+  document.querySelectorAll('.lamp[id]').forEach(l => l.classList.toggle('off', !!off[l.id]));
+  document.querySelectorAll('.lamp-glow[data-of]').forEach(g => g.classList.toggle('off', !!off[g.dataset.of]));
+}
+function toggleLamp(id, h){
+  S.lampOff = S.lampOff || {}; S.lampOff[id] = !S.lampOff[id]; save(); applyLamps();
+  beep(S.lampOff[id] ? 300 : 600, .04);
+  if(h) gagText(h, S.lampOff[id] ? 'Klik. Uit.' : 'Klik. Aan!');
 }
 function go(scene){
   const f = $('#fade'); f.classList.add('on'); beep(220,.08,'sine',.04);
