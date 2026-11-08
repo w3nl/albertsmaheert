@@ -53,6 +53,12 @@ npm run validate                # de hele site bouwen
 
 De kamers en hun ligging (Paardenstal beneden met ramen op het oosten; Thedema, Alma en Folkerda op de hooizolder aan de zuidkant met gebinten en uitzicht op de Martinitoren), extra lange boxsprings, de eetzaal, de zaal in de vroegere koestal, de recreatiezaal met pooltafel, de tuin op het zuiden met trampoline, schommels en reeën, de welkomswagen met krijtbord en rode ballonnen, het B&B-bord aan de weg met de Groninger vlag, de overloop met koelkastje, folders en quilt, de kroonluchters, de zaal (vurenhouten wanden, donkere balken met dakramen, grijze betonvloer, donkere tafels met rode en zwarte stoelen, palen op gemetselde voeten, de bar met krukken, de zithoek met kachel en de witte buffetkast), de borgprenten, de knooppuntenroute en de scheve toren van Bedum komen van de site en de foto's. Het museum is getekend naar foto's van het echte museum: een rode International-trekker met crèmekleurige wielen (Roelof heeft de D-326, de 633 en de Hydro 84 zelf opgeknapt; de 633 heeft hij al veertig jaar), de balenlift, de gereedschapswand, karntonnen, melkbussen, het juk, de rode katrollen, de schoolplaat en de groene strohakselaar.
 
+## Opslaan en de hoofdstukken
+
+- `S` is het hele spel, in `localStorage['amh-v1']`. `save()` bewaart daarnaast de stand van het huidige hoofdstuk in `amh-v1-st1` … `-st4`.
+- **Een hoofdstuk houdt zijn stand.** Open je een hoofdstuk via het menu of met "Door naar hoofdstuk N" (`openChapter(n)` in `app.js`), dan kom je terug in de stand waarin je het verliet: een opgelost hoofdstuk blijft opgelost, met alle deuren open, en de uitgang leidt weer naar het volgende hoofdstuk. Bestaat er nog geen stand, dan begint het hoofdstuk vers (`FRESH[n]`).
+- **"Opnieuw spelen"** op het eindscherm begint alleen dat hoofdstuk opnieuw. **"Nieuw spel"** wist de stand van alle hoofdstukken (`resetChapters()`); de vrijgespeelde hoofdstukken (`-ch2` … `-ch4`), de scores en de prestaties blijven.
+
 ## Oplossingen (spoilers)
 
 Hoofdstuk 1, vrijdagavond (erf en Paardenstal):

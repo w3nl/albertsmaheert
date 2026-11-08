@@ -83,3 +83,40 @@ test('de folder in de brievenbus linkt naar de echte B&B', async ({ page }) => {
   await expect(page.locator('.folder')).toContainText('Thedema');
   await expect(page.locator('.folder a.btn').first()).toHaveAttribute('href', 'https://albertsmaheert.nl/reserveer/');
 });
+
+test('een hoofdstuk houdt zijn stand: terug via het menu is alles nog opgelost; alleen Nieuw spel wist het', async ({ page }) => {
+  // hoofdstuk 1 is uitgespeeld (in de Paardenstal), daarna ben je aan hoofdstuk 2 begonnen
+  await seed(page, { ch: 1, scene: 'stal', f: { introDone: true, goot: true, post: true, stalOpen: true, hoef: true, schoft: true, licht: true, brief: true, out1: true } });
+  await page.evaluate(() => { save(); });
+  await page.locator('#btn-cont').click();          // "Door naar hoofdstuk 2"
+  await skip(page);
+  await expect(page.locator('#chap')).toHaveText('Hoofdstuk 2 · Op de hooizolder');
+  await hs(page, 'luik'); await skip(page);
+  await page.locator('.opt[data-v="2"]').click();    // de katrol, in hoofdstuk 2
+  await expect(page.locator('#modal')).toBeHidden({ timeout: 15_000 });
+  await skip(page);
+
+  // terug naar hoofdstuk 1 via het menu: nog steeds opgelost, en je loopt vrij tussen de kamers
+  await page.locator('#btn-menu').click();
+  await page.locator('#btn-ch1').click();
+  await expect(page.locator('#sc-stal')).toHaveClass(/(^|\s)on(\s|$)/);
+  await expect(page.locator('#d-txt')).toContainText('Kijk maar rustig rond', { timeout: 5_000 });
+  await skip(page);
+  expect(await page.evaluate(() => S.f.out1 && S.f.hoef)).toBe(true);
+  await expect(page.locator('#ps-carve')).toBeVisible();
+  await hs(page, 'uitstal');                         // de staldeur leidt nu naar hoofdstuk 2…
+  await skip(page);
+  // …en daar staat de katrol nog steeds opgelost
+  await expect(page.locator('#chap')).toHaveText('Hoofdstuk 2 · Op de hooizolder');
+  expect(await page.evaluate(() => S.f.katrol)).toBe(true);
+
+  // Nieuw spel: alles weer op nul, ook hoofdstuk 2
+  await page.locator('#btn-menu').click();
+  await page.locator('#btn-new').click();
+  await skip(page);
+  expect(await page.evaluate(() => S.f.goot)).toBeFalsy();
+  await page.locator('#btn-menu').click();
+  await page.locator('#btn-ch2').click();
+  await skip(page);
+  expect(await page.evaluate(() => S.f.katrol)).toBeFalsy();
+});
