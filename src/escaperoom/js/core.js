@@ -33,7 +33,11 @@ let soundOn = (() => { try{ return localStorage.getItem(KEY + '-sound') !== '0';
 const UNLOCK_KEY = n => KEY + '-ch' + n;
 function unlocked(n){ if(n <= 1) return true; try{ return localStorage.getItem(UNLOCK_KEY(n)) === '1'; }catch(e){ return false; } }
 function setUnlocked(n){ try{ localStorage.setItem(UNLOCK_KEY(n), '1'); }catch(e){} }
-function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+/* save() bewaart het spel, en ook de stand van het hoofdstuk waarin je bent (KEY-st1 … -st4): kom je later terug in
+   dat hoofdstuk (via het menu of "Door naar hoofdstuk N"), dan staat alles nog zoals je het achterliet. Alleen
+   Nieuw spel wist die standen (resetChapters() in app.js). */
+function save(){ try{ const d = JSON.stringify(S); localStorage.setItem(KEY, d); if(S.started) localStorage.setItem(KEY + '-st' + S.ch, d); }catch(e){} }
+function loadChapter(n){ try{ const d = JSON.parse(localStorage.getItem(KEY + '-st' + n) || 'null'); return d && d.v === 1 && d.ch === n ? d : null; }catch(e){ return null; } }
 function load(){ try{ const d = JSON.parse(localStorage.getItem(KEY)||'null'); return d && d.v===1 ? d : null; }catch(e){ return null; } }
 
 /* ---------- geluidjes ---------- */

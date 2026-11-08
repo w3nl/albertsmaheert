@@ -3,7 +3,21 @@
 
 /* ---------- hoofdstukken ---------- */
 const LAST_CH = 4;   // het nieuwste hoofdstuk; verhoog het als je er een toevoegt
-const START = { 1: () => startNew(), 2: () => startCh(2), 3: () => startCh(3), 4: () => startCh(4) };
+/* Een hoofdstuk openen (menu, "Door naar hoofdstuk N"): in de stand waarin je het achterliet, of vers als je er nog
+   nooit was. Opnieuw spelen (FRESH) begint een hoofdstuk echt opnieuw; Nieuw spel wist alle hoofdstukken. */
+const FRESH = { 1: () => startNew(), 2: () => startCh(2), 3: () => startCh(3), 4: () => startCh(4) };
+const START = { 1: () => openChapter(1), 2: () => openChapter(2), 3: () => openChapter(3), 4: () => openChapter(4) };
+function openChapter(n){
+  const st = loadChapter(n);
+  if(!st) return FRESH[n]();
+  const ach = Object.assign({}, st.ach, S.ach);
+  S = Object.assign(fresh(), st, { ach, started: true }); sel = null;
+  if(n > 1) setUnlocked(n);
+  $('#title').hidden = true; $('#win').hidden = true; renderInv(); applyVisuals(); $('#timer').textContent = fmt(S.t); save();
+  exitLabels();
+  say([['sys', chapterDone() ? tx(STAY[n] || STAY[1], { n: n + 1 }) : contLine()]]);
+}
+function resetChapters(){ for(let n = 1; n <= LAST_CH; n++){ try{ localStorage.removeItem(KEY + '-st' + n); }catch(e){} } }
 /* Waar elk hoofdstuk begint, en het gesprekje waarmee het opent (introN in chapterN.js). */
 const CH_START = { 2: ['zolder', () => intro2()], 3: ['museum', () => intro3()], 4: ['zaal', () => intro4()] };
 function chapterDone(){ return !!S.f['out' + S.ch]; }
@@ -129,9 +143,9 @@ function contLine(){
   return "Terug in de zaal. Het feest is in volle gang.";
 }
 function cont(){ $('#title').hidden = true; S.started = true; renderInv(); applyVisuals(); $('#timer').textContent = fmt(S.t); say([['sys', contLine()]]); }
-$('#btn-new').onclick = startNew;
+$('#btn-new').onclick = () => { resetChapters(); startNew(); };
 $('#btn-cont').onclick = () => chapterDone() ? nextChapter() : cont();
-$('#btn-again').onclick = () => (START[S.ch] || startNew)();
+$('#btn-again').onclick = () => (FRESH[S.ch] || startNew)();
 $('#btn-next').onclick = nextChapter;
 for(let n = 1; n <= LAST_CH; n++) $('#btn-ch' + n).onclick = START[n];
 const STAY = {
