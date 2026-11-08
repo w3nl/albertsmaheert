@@ -1,0 +1,219 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="scene" id="sc-kamer" viewBox="0 0 1600 900"
+  preserveAspectRatio="xMidYMid slice" aria-label="Een B&amp;B-kamer op de hooizolder, met de oude gebinten">
+  <defs>
+    <!-- Thedema: behang van oude planken -->
+    <pattern id="kmPlanks" width="64" height="300" patternUnits="userSpaceOnUse">
+      <rect width="64" height="300" fill="#b8b0a2" />
+      <rect x="0" width="20" height="300" fill="#a49c8c" /><rect x="22" width="22" height="300" fill="#c4bcae" /><rect x="46" width="17" height="300" fill="#9c9484" />
+      <path d="M21 0 V300 M45 0 V300 M63 0 V300" stroke="#7a7262" stroke-width="2" />
+      <ellipse cx="32" cy="120" rx="4" ry="9" fill="none" stroke="#857d6e" stroke-width="1.5" /><path d="M8 40 q4 30 0 60 M54 180 q-3 40 0 80" stroke="#8a8272" stroke-width="1" fill="none" />
+    </pattern>
+    <!-- Alma: behang met grijze klaprozen -->
+    <pattern id="kmFlowers" width="120" height="160" patternUnits="userSpaceOnUse">
+      <rect width="120" height="160" fill="#f4f1ea" />
+      <path d="M30 160 C34 120 24 90 30 50 M90 80 C94 50 84 30 90 0 M90 160 C86 130 92 110 90 80" stroke="#b8b4aa" stroke-width="2" fill="none" />
+      <g fill="#c9c5bb"><ellipse cx="30" cy="44" rx="14" ry="11" /><ellipse cx="90" cy="124" rx="14" ry="11" /></g>
+      <g fill="#a9a59b"><circle cx="30" cy="44" r="4" /><circle cx="90" cy="124" r="4" /></g>
+      <path d="M30 90 q14 -6 16 -16 M90 30 q-14 -4 -18 -14" stroke="#c9c5bb" stroke-width="5" fill="none" stroke-linecap="round" />
+    </pattern>
+    <!-- Folkerda: zacht damastbehang -->
+    <pattern id="kmDamask" width="90" height="120" patternUnits="userSpaceOnUse">
+      <rect width="90" height="120" fill="#cdbfa8" />
+      <path d="M45 10 C60 30 60 50 45 60 C30 50 30 30 45 10Z M45 60 C60 70 60 90 45 110 C30 90 30 70 45 60Z" fill="#bcae96" />
+      <path d="M0 60 C15 50 15 30 0 20 M90 60 C75 50 75 30 90 20 M0 60 C15 70 15 90 0 100 M90 60 C75 70 75 90 90 100" fill="none" stroke="#b3a58c" stroke-width="3" />
+    </pattern>
+    <pattern id="kmPlaid" width="80" height="80" patternUnits="userSpaceOnUse">
+      <rect width="80" height="80" fill="#eef0f2" />
+      <rect x="0" y="30" width="80" height="14" fill="#7a8494" opacity=".55" /><rect x="30" y="0" width="14" height="80" fill="#7a8494" opacity=".55" />
+      <rect x="0" y="60" width="80" height="4" fill="#4a5464" opacity=".5" /><rect x="60" y="0" width="4" height="80" fill="#4a5464" opacity=".5" />
+    </pattern>
+    <linearGradient id="kmSlope" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6f2ea" />
+      <stop offset="1" stop-color="#ddd6c8" />
+    </linearGradient>
+    <linearGradient id="kmFloor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c49a6a" />
+      <stop offset="1" stop-color="#9a7448" />
+    </linearGradient>
+    <linearGradient id="kmOak" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7a5a3a" />
+      <stop offset=".5" stop-color="#a07e58" />
+      <stop offset="1" stop-color="#6a4c30" />
+    </linearGradient>
+    <linearGradient id="kmSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7fb2e0" />
+      <stop offset="1" stop-color="#d8eaf4" />
+    </linearGradient>
+    <radialGradient id="kmVign" cx=".5" cy=".45" r=".78">
+      <stop offset=".6" stop-color="#000" stop-opacity="0" />
+      <stop offset="1" stop-color="#2a1a08" stop-opacity=".45" />
+    </radialGradient>
+    <radialGradient id="kmLampG" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#ffe2a0" stop-opacity=".5" />
+      <stop offset="1" stop-color="#ffe2a0" stop-opacity="0" />
+    </radialGradient>
+    <!-- de drie borgen, getekend naar de oude prenten (ook gebruikt in de close-up met de prenten) -->
+    <symbol id="km-borg-thedema" viewBox="0 0 160 110">
+      <rect width="160" height="110" fill="#efe6d0" />
+      <path d="M0 92 H160" stroke="#6a6050" stroke-width="2" />
+      <path d="M30 92 V48 L44 34 L58 48 V92Z" fill="#cfc6b0" stroke="#4a4236" stroke-width="2" />
+      <path d="M58 92 V40 h8 v-6 h6 v-6 h8 v6 h6 v6 h8 V92Z" fill="#d9d0ba" stroke="#4a4236" stroke-width="2" />
+      <path d="M94 92 V38 a12 12 0 0 1 24 0 V92Z" fill="#cfc6b0" stroke="#4a4236" stroke-width="2" />
+      <path d="M94 38 Q106 6 118 38" fill="#8a8070" stroke="#4a4236" stroke-width="2" /><path d="M106 18 v-12" stroke="#4a4236" stroke-width="2" />
+      <g fill="#4a4236"><rect x="66" y="52" width="6" height="9" /><rect x="78" y="52" width="6" height="9" /><rect x="102" y="54" width="6" height="9" /><rect x="102" y="72" width="6" height="9" /><rect x="40" y="60" width="6" height="8" /></g>
+      <path d="M126 92 v-14 h22 v14 M130 78 l7 -8 l7 8" stroke="#4a4236" stroke-width="1.5" fill="none" />
+      <path d="M8 98 q30 4 60 0 M90 100 q30 3 60 -2" stroke="#8a8070" stroke-width="1" fill="none" />
+    </symbol>
+    <symbol id="km-borg-alma" viewBox="0 0 160 110">
+      <rect width="160" height="110" fill="#efe6d0" />
+      <path d="M0 94 H160" stroke="#6a6050" stroke-width="2" />
+      <path d="M0 96 q40 6 80 0 t80 0 V110 H0Z" fill="#c9c0a8" opacity=".7" />
+      <path d="M50 88 V44 h6 v-8 h6 v-8 h8 v-8 h6 v8 h8 v8 h6 v8 h6 V88Z" fill="#d9d0ba" stroke="#4a4236" stroke-width="2" />
+      <path d="M96 88 V50 L120 40 L136 50 V88Z" fill="#cfc6b0" stroke="#4a4236" stroke-width="2" />
+      <path d="M114 42 v-26 M110 22 h8" stroke="#4a4236" stroke-width="2" /><path d="M111 30 l3 -10 l3 10z" fill="#4a4236" />
+      <g fill="#4a4236"><rect x="62" y="52" width="6" height="9" /><rect x="78" y="52" width="6" height="9" /><rect x="104" y="58" width="6" height="9" /><rect x="120" y="58" width="6" height="9" /></g>
+      <path d="M68 88 v-12 a5 5 0 0 1 10 0 v12" fill="#4a4236" />
+      <path d="M40 104 L68 88 L80 88 L60 106" fill="#bfb69e" stroke="#4a4236" stroke-width="1.5" />
+      <path d="M44 102 l4 -3 M50 99 l4 -3 M56 96 l4 -3" stroke="#4a4236" stroke-width="1" />
+    </symbol>
+    <symbol id="km-borg-folkerda" viewBox="0 0 160 110">
+      <rect width="160" height="110" fill="#efe6d0" />
+      <path d="M0 92 H160" stroke="#6a6050" stroke-width="2" />
+      <path d="M16 92 V56 h6 v-6 h6 v-6 h8 v6 h6 v6 h6 V92Z M48 92 V56 h6 v-6 h6 v-6 h8 v6 h6 v6 h6 V92Z M80 92 V56 h6 v-6 h6 v-6 h8 v6 h6 v6 h6 V92Z" fill="#d9d0ba" stroke="#4a4236" stroke-width="2" />
+      <path d="M112 92 V48 h18 V92Z" fill="#cfc6b0" stroke="#4a4236" stroke-width="2" />
+      <path d="M112 48 L121 12 L130 48Z" fill="#8a8070" stroke="#4a4236" stroke-width="2" />
+      <g fill="#4a4236"><rect x="26" y="64" width="6" height="9" /><rect x="58" y="64" width="6" height="9" /><rect x="90" y="64" width="6" height="9" /><rect x="118" y="58" width="6" height="8" /></g>
+      <path d="M136 92 l8 -18 l8 18" stroke="#6a8a4a" stroke-width="6" fill="none" />
+    </symbol>
+  </defs>
+
+  <!-- de muur, met het behang van deze kamer -->
+  <rect id="km-wall-thedema" width="1600" height="640" fill="url(#kmPlanks)" />
+  <rect id="km-wall-alma" width="1600" height="640" fill="url(#kmFlowers)" />
+  <rect id="km-wall-folkerda" width="1600" height="640" fill="url(#kmDamask)" />
+  <!-- het schuine dak rechts -->
+  <path d="M1120 0 L1600 0 L1600 420Z" fill="url(#kmSlope)" />
+  <path d="M1120 0 L1600 420" stroke="#c9c0ae" stroke-width="4" />
+  <!-- een dakraam in de schuinte, met uitzicht naar het zuiden -->
+  <g id="km-dakraam">
+    <path d="M1330 70 L1470 70 L1560 250 L1420 250Z" fill="url(#kmSky)" stroke="#f4efe4" stroke-width="12" />
+    <path d="M1390 180 L1540 180 L1560 250 L1420 250Z" fill="#7fae5a" />
+    <path d="M1382 160 L1530 160 L1540 180 L1390 180Z" fill="#a7c47a" />
+    <g fill="#6a7a8a"><rect x="1462" y="138" width="5" height="24" /><path d="M1462 138 l2.5 -9 l2.5 9z" /></g>
+    <g fill="#5e8a46"><ellipse cx="1410" cy="162" rx="22" ry="8" /><ellipse cx="1520" cy="160" rx="18" ry="7" /></g>
+    <g class="km-cloud" fill="#fff" opacity=".85"><ellipse cx="1420" cy="104" rx="26" ry="7" /><ellipse cx="1434" cy="98" rx="14" ry="7" /></g>
+    <path d="M1400 70 L1490 250" stroke="#f4efe4" stroke-width="6" />
+  </g>
+
+  <!-- de vloer -->
+  <path d="M0 640 H1600 V900 H0Z" fill="url(#kmFloor)" />
+  <g stroke="#8a6440" stroke-width="2" opacity=".55"><path d="M0 680 H1600 M0 740 H1600 M0 810 H1600 M0 880 H1600 M200 640 L120 680 M600 680 L580 740 M1000 740 L1020 810 M400 810 L380 880 M1300 640 L1320 680" /></g>
+
+  <!-- de deur terug naar de overloop -->
+  <g id="km-door">
+    <rect x="34" y="290" width="164" height="350" fill="#e9e2d2" />
+    <rect x="44" y="300" width="144" height="340" fill="#f4efe4" stroke="#bfb6a2" stroke-width="2" />
+    <circle cx="174" cy="480" r="6" fill="#8a8a8a" />
+    <path d="M70 330 h30 c6 0 6 -14 0 -14 h-30 z" fill="none" stroke="#8a8a8a" stroke-width="3" />
+  </g>
+
+  <!-- tafel van steigerhout met twee stoelen en roze kussens -->
+  <g id="km-tafel">
+    <rect x="230" y="520" width="280" height="22" fill="#c9bca4" stroke="#8a7a60" stroke-width="2" />
+    <path d="M246 542 V700 M494 542 V700" stroke="#b0a288" stroke-width="16" />
+    <g><path d="M366 520 c-6 -24 -2 -36 4 -46 h20 c6 10 10 22 4 46z" fill="#eef4f6" opacity=".9" stroke="#b8c4ca" /><circle cx="372" cy="466" r="10" fill="#e98aa6" /><circle cx="390" cy="458" r="11" fill="#f0a6bc" /><circle cx="380" cy="448" r="9" fill="#e98aa6" /><path d="M380 474 v-20" stroke="#5a8a4a" stroke-width="2" /></g>
+    <g>
+      <path d="M180 470 h46 v120 h-46z" fill="#c9bca4" stroke="#8a7a60" stroke-width="2" /><path d="M176 590 h70 v14 h-70z" fill="#c9bca4" /><rect x="180" y="574" width="66" height="18" rx="6" fill="#e9a6bc" />
+      <path d="M182 604 V720 M240 604 V720" stroke="#b0a288" stroke-width="10" />
+      <path d="M560 470 h-46 v120 h46z" fill="#c9bca4" stroke="#8a7a60" stroke-width="2" /><path d="M564 590 h-70 v14 h70z" fill="#c9bca4" /><rect x="494" y="574" width="66" height="18" rx="6" fill="#e9a6bc" />
+      <path d="M558 604 V720 M500 604 V720" stroke="#b0a288" stroke-width="10" />
+    </g>
+  </g>
+
+  <!-- het gebint: de stijl, de korbeel en de ankerbalk, honderden jaren oud -->
+  <g id="km-gebint">
+    <rect x="590" y="0" width="54" height="640" fill="url(#kmOak)" />
+    <path d="M644 360 L860 150" stroke="url(#kmOak)" stroke-width="40" />
+    <path d="M590 360 L380 150" stroke="url(#kmOak)" stroke-width="40" />
+    <rect x="0" y="110" width="1180" height="44" fill="#8a6a48" />
+    <path d="M0 110 H1180 M0 154 H1180" stroke="#5a3e26" stroke-width="2" />
+    <g stroke="#5a3e26" stroke-width="1.5" opacity=".6" fill="none"><path d="M604 20 q4 200 -2 600 M628 40 q-4 240 2 560" /><ellipse cx="616" cy="260" rx="6" ry="14" /></g>
+    <g fill="#4a321e"><circle cx="617" cy="340" r="6" /><circle cx="617" cy="132" r="6" /></g>
+    <!-- het teken van Harm in het hout (verschijnt als je het gevonden hebt) -->
+    <g id="km-mark" font-family="IBM Plex Mono, monospace" font-weight="600" fill="#2a1a0c" text-anchor="middle">
+      <rect x="596" y="392" width="42" height="64" rx="4" fill="#f6e2a0" opacity=".35" />
+      <text id="km-marktxt" x="617" y="430" font-size="22">ΛII</text>
+      <text x="617" y="450" font-size="10">H.</text>
+    </g>
+  </g>
+
+  <!-- de prent aan de muur -->
+  <g id="km-print">
+    <rect x="690" y="210" width="190" height="150" fill="#3a2a1e" stroke="#c9a24a" stroke-width="4" />
+    <use id="km-print-use" href="#km-borg-thedema" x="702" y="222" width="166" height="114" />
+    <text id="km-print-cap" x="785" y="352" text-anchor="middle" font-family="Caveat, cursive" font-size="16" fill="#f3e6c4">Thedema in 1622</text>
+  </g>
+  <rect id="km-print-empty" x="690" y="210" width="190" height="150" fill="#fff" opacity=".25" stroke="#b3a58c" stroke-dasharray="6 4" />
+
+  <!-- Alma: een losse baan behang -->
+  <g id="km-loose">
+    <path d="M900 160 H980 V520 C960 540 930 560 900 540Z" fill="#ece7dc" stroke="#c9c5bb" stroke-width="2" />
+    <path d="M900 160 V540" stroke="#b8b4aa" stroke-width="2" />
+    <path d="M980 520 C950 500 940 470 950 440 C966 470 974 494 980 520Z" fill="#d9d4c8" />
+    <rect x="904" y="200" width="70" height="280" fill="#d9d2c0" opacity=".5" />
+  </g>
+
+  <!-- het bed met een geruit dekbed, en nachtkastjes met lampjes -->
+  <g id="km-bed">
+    <rect x="940" y="420" width="460" height="150" rx="10" fill="#4a4a52" />
+    <rect x="950" y="430" width="440" height="60" rx="8" fill="#5e5e68" />
+    <ellipse cx="1060" cy="520" rx="80" ry="30" fill="#7a6e66" />
+    <ellipse cx="1270" cy="520" rx="80" ry="30" fill="#7a6e66" />
+    <path d="M950 560 L860 900 H1490 L1400 560Z" fill="url(#kmPlaid)" stroke="#9aa0a8" stroke-width="2" />
+    <path d="M950 560 L1400 560 L1410 600 L940 600Z" fill="#f6f6f4" />
+    <g>
+      <rect x="840" y="520" width="80" height="100" fill="#f4efe4" stroke="#bfb6a2" stroke-width="2" />
+      <path d="M864 520 l6 -50 h20 l6 50z" fill="#c9c0b0" /><path d="M856 470 h48 l-8 -40 h-32z" fill="#2a2a30" />
+      <rect x="1420" y="520" width="80" height="100" fill="#f4efe4" stroke="#bfb6a2" stroke-width="2" />
+      <path d="M1444 520 l6 -50 h20 l6 50z" fill="#c9c0b0" /><path d="M1436 470 h48 l-8 -40 h-32z" fill="#2a2a30" />
+    </g>
+    <circle class="km-glow" cx="880" cy="460" r="70" fill="url(#kmLampG)" pointer-events="none" />
+    <circle class="km-glow b" cx="1460" cy="460" r="70" fill="url(#kmLampG)" pointer-events="none" />
+    <!-- Folkerda: de drie prenten liggen op het bed -->
+    <g id="km-prints-bed">
+      <g transform="rotate(-8 1040 680)"><rect x="980" y="640" width="120" height="86" fill="#3a2a1e" stroke="#c9a24a" stroke-width="3" /><use href="#km-borg-thedema" x="988" y="648" width="104" height="70" /></g>
+      <g transform="rotate(5 1180 700)"><rect x="1120" y="660" width="120" height="86" fill="#3a2a1e" stroke="#c9a24a" stroke-width="3" /><use href="#km-borg-folkerda" x="1128" y="668" width="104" height="70" /></g>
+      <g transform="rotate(-3 1320 690)"><rect x="1260" y="650" width="120" height="86" fill="#3a2a1e" stroke="#c9a24a" stroke-width="3" /><use href="#km-borg-alma" x="1268" y="658" width="104" height="70" /></g>
+    </g>
+  </g>
+
+  <!-- Alma: een rieten stoel -->
+  <g id="km-rieten">
+    <path d="M720 600 C720 560 850 560 850 600 L858 720 H712Z" fill="#b8915a" stroke="#7a5a30" stroke-width="3" />
+    <g stroke="#8a6a3a" stroke-width="2" opacity=".7"><path d="M724 620 h122 M720 650 h130 M716 680 h138" /><path d="M750 580 v140 M790 576 v144 M824 580 v140" /></g>
+    <rect x="740" y="596" width="90" height="66" rx="14" fill="#f2ead8" stroke="#d9cbb2" stroke-width="2" />
+  </g>
+
+  <!-- Ditty, in Folkerda -->
+  <g id="km-ditty"><g transform="translate(700 860)">
+    <!-- @personage ditty --><g transform="translate(0 0) scale(1.3 1.3)"><defs><linearGradient id="kmDVest" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a674aa"/><stop offset="1" stop-color="#5e3a64"/></linearGradient></defs><path d="M-22 -168 C-28 -146 -26 -132 -20 -124 L20 -124 C26 -132 28 -146 22 -168Z" fill="#d6c29a"/><path d="M-16 -64 L-15 -4 L-5 -4 L-6 -64Z M16 -64 L15 -4 L5 -4 L6 -64Z" fill="#3a4664" stroke="#00000030" stroke-width="1"/><path d="M-19 -1 C-19 -9 -6 -10 -4 -6 L-4 0 Z M19 -1 C19 -9 6 -10 4 -6 L4 0 Z" fill="#5a3a2a"/><path d="M-30 -66 L-24 -100 L24 -100 L30 -66Z" fill="#4a5a7a"/><path d="M-28 -98 C-31 -114 -28 -128 -16 -134 C-8 -137 8 -137 16 -134 C28 -128 31 -114 28 -98Z" fill="url(#kmDVest)" stroke="#00000030" stroke-width="1.2"/><path d="M-18 -126 h36 v18 C22 -96 24 -80 26 -64 L-26 -64 C-24 -80 -22 -96 -18 -108Z" fill="#f6efe2" stroke="#d9cbb2" stroke-width="1.2"/><path d="M-22 -108 h44" stroke="#c94a5a" stroke-width="3"/><g transform="translate(-12 -92)"><circle r="3" fill="#e2687a"/><circle r="1.2" fill="#f6d04d"/></g><g transform="translate(6 -86)"><circle r="3" fill="#e2687a"/><circle r="1.2" fill="#f6d04d"/></g><g transform="translate(-4 -76)"><circle r="3" fill="#e2687a"/><circle r="1.2" fill="#f6d04d"/></g><g transform="translate(14 -72)"><circle r="3" fill="#e2687a"/><circle r="1.2" fill="#f6d04d"/></g><g transform="translate(-16 -72)"><circle r="3" fill="#e2687a"/><circle r="1.2" fill="#f6d04d"/></g><g transform="translate(10 -100)"><circle r="3" fill="#e2687a"/><circle r="1.2" fill="#f6d04d"/></g><path d="M-6 -126 L0 -134 L6 -126" stroke="#d9cbb2" stroke-width="2" fill="none"/><path d="M-24 -126 C-36 -110 -36 -94 -28 -84" stroke="url(#kmDVest)" stroke-width="11" fill="none" stroke-linecap="round"/><ellipse cx="-27" cy="-80" rx="6" ry="6.6" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.84"/><path d="M-28.2 -85.4 q5.4 -0.6 5.4 4.2" stroke="#d79c7c" stroke-width="0.84" fill="none" opacity=".6"/><path d="M24 -126 C34 -112 30 -100 20 -96" stroke="url(#kmDVest)" stroke-width="11" fill="none" stroke-linecap="round"/><g><path d="M12 -114 h20 l-2 24 h-16z" fill="#f2efe8" stroke="#9a948a" stroke-width="1.4"/><path d="M32 -108 q8 2 6 10 q-2 6 -8 4" stroke="#9a948a" stroke-width="2.4" fill="none"/><path d="M12 -114 l-6 -4 M14 -114 h16" stroke="#9a948a" stroke-width="2"/><path d="M16 -102 q6 -3 10 0" stroke="#6a8ec4" stroke-width="2" fill="none"/></g><ellipse cx="20" cy="-96" rx="6" ry="6.6" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.84"/><path d="M18.8 -101.4 q5.4 -0.6 5.4 4.2" stroke="#d79c7c" stroke-width="0.84" fill="none" opacity=".6"/><rect x="-5" y="-146" width="10" height="12" fill="#d79c7c"/><defs><radialGradient id="kmDSk" cx="0.42" cy="0.35" r="0.8"><stop offset="0" stop-color="#f3c2a4"/><stop offset="1" stop-color="#d79c7c"/></radialGradient></defs><ellipse cx="-17.1" cy="-158.6" rx="3.6" ry="4.7" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.90"/><ellipse cx="17.1" cy="-158.6" rx="3.6" ry="4.7" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.90"/><ellipse cx="0" cy="-160" rx="18" ry="19.1" fill="url(#kmDSk)" stroke="#d79c7c" stroke-width="0.90"/><ellipse cx="-6.5" cy="-160.4" rx="1.98" ry="2.70" fill="#2a1b14"/><circle cx="-5.8" cy="-161.3" r="0.81" fill="#fff"/><path d="M-9.4 -165.2 q2.9 -1.8 5.8 0.4" stroke="#2a1b14" stroke-width="1.44" fill="none" stroke-linecap="round"/><ellipse cx="6.5" cy="-160.4" rx="1.98" ry="2.70" fill="#2a1b14"/><circle cx="7.2" cy="-161.3" r="0.81" fill="#fff"/><path d="M3.6 -165.2 q2.9 -1.8 5.8 0.4" stroke="#2a1b14" stroke-width="1.44" fill="none" stroke-linecap="round"/><ellipse cx="-9.9" cy="-154.6" rx="3.1" ry="2.0" fill="#ee8f86" opacity=".55"/><ellipse cx="9.9" cy="-154.6" rx="3.1" ry="2.0" fill="#ee8f86" opacity=".55"/><ellipse cx="0" cy="-156.4" rx="2.5" ry="2.0" fill="#d79c7c" opacity=".7"/><circle cx="-0.7" cy="-157.1" r="0.72" fill="#fff" opacity=".6"/><path d="M-5.4 -151.4 q5.4 4.7 10.8 0" stroke="#8a3a2a" stroke-width="1.26" fill="none" stroke-linecap="round"/><path d="M-20 -158 C-24 -184 -4 -186 4 -182 C16 -186 24 -176 20 -156 C16 -168 8 -172 -2 -174 C-8 -168 -14 -166 -20 -158Z" fill="#d6c29a"/><path d="M-20 -160 C-25 -146 -23 -136 -18 -128 M20 -160 C25 -146 23 -136 18 -128" stroke="#d6c29a" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M-6 -180 C2 -183 10 -180 14 -172" stroke="#efe0bd" stroke-width="2.5" fill="none" stroke-linecap="round"/><g fill="#ffffff30" stroke="#5a3a2a" stroke-width="1.6"><rect x="-15" y="-182" width="12" height="7" rx="3"/><rect x="3" y="-182" width="12" height="7" rx="3"/></g></g><!-- @einde ditty -->
+  </g></g>
+
+  <rect width="1600" height="900" fill="url(#kmVign)" pointer-events="none" />
+
+  <!-- klikvlakken -->
+  <g class="hits">
+    <rect class="hit" data-hs="kamerdeur" data-label="De deur naar de overloop" x="44" y="300" width="144" height="340" fill="transparent" />
+    <rect class="hit" data-hs="kmtafel" data-label="De tafel van steigerhout" x="176" y="440" width="390" height="180" fill="transparent" />
+    <rect class="hit" data-hs="stijl" data-label="De eiken stijl van het gebint" x="590" y="160" width="54" height="480" fill="transparent" />
+    <rect class="hit" data-hs="korbeel" data-label="Een schuine balk: een korbeel" x="660" y="150" width="200" height="140" fill="transparent" />
+    <rect class="hit" data-hs="prent" data-label="Een oude prent" x="690" y="210" width="190" height="150" fill="transparent" />
+    <rect class="hit" id="hit-loose" data-hs="behang" data-label="Een losse baan behang" x="896" y="160" width="88" height="390" fill="transparent" />
+    <rect class="hit" data-hs="kmbed" data-label="Het bed" x="940" y="420" width="460" height="140" fill="transparent" />
+    <rect class="hit" id="hit-printsbed" data-hs="prenten" data-label="Drie prenten op het bed" x="970" y="630" width="420" height="130" fill="transparent" />
+    <rect class="hit" data-hs="dakraam" data-label="Het dakraam" x="1330" y="70" width="230" height="180" fill="transparent" />
+    <rect class="hit" data-hs="kmlamp" data-label="Een nachtlampje" x="840" y="430" width="80" height="90" fill="transparent" />
+    <rect class="hit" id="hit-rieten" data-hs="kmrieten" data-label="Een rieten stoel" x="712" y="566" width="146" height="154" fill="transparent" />
+    <rect class="hit" id="hit-ditty" data-hs="ditty" data-label="Ditty" x="640" y="610" width="120" height="250" fill="transparent" />
+  </g>
+</svg>

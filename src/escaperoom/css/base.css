@@ -1,0 +1,209 @@
+/* Basis: kleuren (tokens), opbouw, speelveld, gesprekken, zakken, titel- en eindscherm en close-ups. */
+/* Opbouw: één speelveld van 16:9, de gespreksstrook onderin, de zakken eronder.
+   Eén warme stijl: oud eikenhout, baksteenrood en strogoud, als een boerderij in de avondzon. De namen van de tokens zijn dezelfde als in Hello, IT. */
+:root{
+  --ink:#1e1610;          /* donker eikenhout */
+  --panel:#2e2218;
+  --line:#5e4632;
+  --paper:#f8f0e0;        /* papier, tekst */
+  --muted:#c9b393;
+  --amber:#e8b04a;        /* strogoud: de accentkleur */
+  --red:#b4513a;          /* baksteenrood */
+  --phosphor:#9bd17a;     /* weidegroen: goed! */
+  --sky:#6fb3e8;
+  --danger:#ff7a6b;
+  --f-display:"Fredoka", "Trebuchet MS", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --f-hand:"Caveat", "Comic Sans MS", cursive;
+  color-scheme:dark;
+}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--ink);color:var(--paper);font-family:var(--f-display);font-size:15px;line-height:1.45;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,.hit:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.wrap{max-width:1280px;margin:0 auto;padding-block:14px 28px;display:flex;flex-direction:column;gap:12px}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;justify-content:space-between}
+.brand{display:flex;align-items:baseline;gap:12px;min-width:0;flex-wrap:wrap}
+.brand h1{font-size:clamp(20px,2.4vw,28px);font-weight:800;letter-spacing:-.02em;margin:0;line-height:1}
+.brand h1 span{color:var(--amber)}
+.brand small{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.chip{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;padding:7px 11px;border:1px solid var(--line);background:var(--panel);border-radius:4px;display:inline-flex;gap:6px;align-items:center}
+button.chip:hover{border-color:var(--amber);color:var(--amber)}
+.timer{font-variant-numeric:tabular-nums;color:var(--phosphor)}
+
+/* stage */
+.frame{position:relative}
+.stage{position:relative;aspect-ratio:16/9;width:100%;max-width:100%;overflow:hidden;border-radius:6px;background:#000;box-shadow:0 0 0 1px var(--line),0 30px 60px -30px #000;user-select:none;-webkit-user-select:none}
+.scene{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;pointer-events:none;transition:opacity .6s ease}
+.scene.on{opacity:1;pointer-events:auto}
+.hit{fill:transparent;cursor:pointer;stroke:transparent;stroke-width:3}
+.hit.item-cursor{cursor:copy}
+.stage.reveal .hit{stroke:var(--amber);stroke-dasharray:10 8;fill:rgba(240,165,58,.08)}
+.hit:hover{fill:rgba(255,220,150,.05)}
+.tip{position:absolute;pointer-events:none;background:rgba(10,10,8,.88);border:1px solid var(--amber);color:var(--paper);font-family:var(--f-mono);font-size:12px;padding:4px 8px;border-radius:3px;white-space:nowrap;transform:translate(-50%,-140%);z-index:5}
+.fade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .35s}
+.fade.on{opacity:1}
+
+/* dialogue strip */
+.dialog{background:rgba(12,12,9,.92);border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:4px;padding:12px 16px 14px;cursor:pointer;min-height:84px}
+.dialog .who{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:4px;display:flex;justify-content:space-between;gap:12px}
+.dialog .who em{font-style:normal;color:var(--muted);letter-spacing:.08em}
+.dialog .txt{font-size:16px;max-width:75ch;text-wrap:pretty}
+.dialog.who-sys{border-left-color:var(--muted)} .dialog.who-sys .who{color:var(--muted)}
+.dialog.sung .txt{font-style:italic}
+@media (min-width:760px){
+  .dialog{position:absolute;left:3%;right:3%;bottom:3.5%;z-index:4;backdrop-filter:blur(3px)}
+}
+
+/* inventory */
+.tray{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.tray-label{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.slots{display:flex;gap:8px;flex-wrap:wrap}
+.slot{width:64px;height:64px;border:1px dashed var(--line);border-radius:4px;background:var(--panel);display:grid;place-items:center;padding:0}
+.slot svg{width:44px;height:44px}
+.slot.filled{border-style:solid}
+.slot.sel{border-color:var(--amber);box-shadow:0 0 0 2px rgba(240,165,58,.3),inset 0 0 16px rgba(240,165,58,.15)}
+.tray-hint{font-size:13px;color:var(--muted);min-width:0;flex:1 1 220px}
+
+/* overlays: title & victory */
+.overlay{position:absolute;inset:0;z-index:8;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:14px;padding:6% 7%;
+  background:radial-gradient(120% 90% at 20% 30%,rgba(180,81,58,.42),transparent 60%),linear-gradient(90deg,rgba(30,22,16,.95) 0%,rgba(30,22,16,.82) 55%,rgba(30,22,16,.4) 100%)}
+.overlay .eyebrow{font-family:var(--f-mono);font-size:clamp(10px,1.1vw,12px);letter-spacing:.2em;text-transform:uppercase;color:var(--phosphor)}
+.overlay h2{font-size:clamp(30px,7vw,96px);font-weight:800;line-height:.9;letter-spacing:-.04em;margin:0;text-wrap:balance}
+.overlay h2 .cursor{color:var(--amber);animation:blink 1s steps(2) infinite}
+.overlay p{max-width:52ch;margin:0;color:var(--paper);font-size:clamp(13px,1.4vw,17px)}
+.overlay .row{display:flex;gap:10px;flex-wrap:wrap}
+.btn{font-family:var(--f-mono);font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:11px 18px;border-radius:3px;border:1px solid var(--amber);background:var(--amber);color:#24120a}
+.btn.ghost{background:transparent;color:var(--amber)}
+.btn:hover{filter:brightness(1.1)}
+.btn:disabled{opacity:.4;cursor:not-allowed;filter:none}
+.stats{display:flex;gap:22px;flex-wrap:wrap;font-family:var(--f-mono)}
+.stats div{display:flex;flex-direction:column}
+.stats b{font-size:clamp(18px,2.6vw,30px);color:var(--amber);font-variant-numeric:tabular-nums}
+.stats span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.ach{display:flex;gap:6px;flex-wrap:wrap}
+.ach span{font-family:var(--f-mono);font-size:11px;padding:3px 8px;border:1px solid var(--line);border-radius:20px;color:var(--muted)}
+.ach span.got{border-color:var(--phosphor);color:var(--phosphor)}
+@media (max-width:620px){.overlay{padding:16px;gap:8px}.overlay p{display:none}.overlay p.keep{display:block}}
+
+/* modal close-ups */
+.modal{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;
+  padding:calc(12px + env(safe-area-inset-top,0px)) max(12px, env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(12px, env(safe-area-inset-left,0px))}
+.panel{position:relative;width:100%;max-width:820px;max-height:100%;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:20px;box-shadow:0 40px 80px -20px #000}
+.panel h3{margin:0 0 4px;font-size:20px;letter-spacing:-.01em}
+.panel .sub{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.close{position:absolute;top:12px;right:12px;font-family:var(--f-mono);font-size:12px;background:transparent;border:1px solid var(--line);padding:5px 9px;border-radius:3px}
+.close:hover{border-color:var(--amber);color:var(--amber)}
+.feedback{font-family:var(--f-mono);font-size:13px;color:var(--muted);margin-top:12px;min-height:1.4em}
+.feedback.good{color:var(--phosphor)} .feedback.bad{color:var(--danger)}
+
+
+/* ---------- title screen: chapter list ---------- */
+.chapters{display:flex;flex-wrap:wrap;gap:6px;align-items:center;max-width:640px}
+.chap-l{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.chapb{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:12px;padding:5px 10px 5px 5px;border-radius:20px;border:1px solid var(--line);background:rgba(10,10,8,.6);color:var(--paper)}
+.chapb b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--amber);color:#24120a;font-size:12px}
+.chapb:hover{border-color:var(--amber);color:var(--amber)}
+@media (max-width:620px), (max-height:520px){ .chapb span{display:none} .chapb{padding:4px} .chapb b{width:28px;height:28px;font-size:13px} }
+.overlay{overflow-y:auto}
+
+/* until js/boot.js has loaded the game */
+.overlay.loading .row, .overlay.loading .chapters{visibility:hidden}
+
+/* ---------- portraits ---------- */
+.dialog.has-face{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:start}
+.dialog .d-face{width:64px;height:64px;border-radius:10px;display:block;box-shadow:0 0 0 2px rgba(255,255,255,.08)}
+.d-body{min-width:0}
+@keyframes facepop{from{transform:scale(.85);opacity:.4}to{transform:none;opacity:1}}
+.d-face.face-in{animation:facepop .22s ease-out}
+.talk-row{display:flex;gap:12px;align-items:flex-start;margin-top:12px}
+.talk-row .talk-a{margin-top:0;flex:1;min-width:0}
+.talk-face{width:72px;height:72px;border-radius:10px;flex:0 0 auto}
+@media (max-width:620px), (max-height:520px){ .dialog.has-face{grid-template-columns:44px 1fr;gap:10px} .dialog .d-face{width:44px;height:44px;border-radius:8px} .talk-face{width:52px;height:52px} }
+/* language switch (js/i18n.js): the current language is lit */
+.chip.lang{gap:4px}
+.chip.lang span{opacity:.45}
+.chip.lang span.on{opacity:1;color:var(--amber);font-weight:600}
+/* scores overview (app.js openScores) */
+.scores{width:100%;border-collapse:collapse;font-family:var(--f-mono);font-size:13px}
+.scores th{text-align:left;font-weight:600;color:var(--muted);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid var(--line)}
+.scores td{padding:8px;border-bottom:1px solid var(--line)}
+.scores td b{color:var(--amber);margin-right:6px}
+.scores tr.todo td{color:var(--muted)}
+.scores tr.total td{font-weight:600;color:var(--phosphor);border-bottom:none}
+.scores-h{margin:18px 0 8px;font-size:14px}
+@media (max-width:520px){.scores{font-size:11px}.scores th,.scores td{padding:6px 4px}.scores th{font-size:9px}}
+/* version number on the title screen, and the "new version" bar (app.js swVersion) */
+.overlay .credits{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.overlay .credits a{color:var(--muted);text-underline-offset:3px}
+.overlay .credits a:hover{color:var(--amber)}
+.overlay .version{position:absolute;right:12px;bottom:8px;font-family:var(--f-mono);font-size:11px;color:var(--muted);opacity:.7}
+.update-bar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:30;display:flex;gap:12px;align-items:center;max-width:calc(100vw - 32px);
+  padding:10px 14px;background:var(--panel);border:1px solid var(--amber);border-radius:6px;font-size:14px;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+/* motion in the interface: a new item pops into your pockets, the end screen's title bounces in */
+@keyframes slotpop{0%{transform:scale(.4)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+.slot.pop{animation:slotpop .45s ease-out}
+@keyframes titlein{0%{transform:translateY(20px) scale(.9);opacity:0}70%{transform:translateY(-4px) scale(1.03);opacity:1}100%{transform:none}}
+#win:not([hidden]) h2{animation:titlein .6s ease-out}
+/* Smooth showing and hiding (vis() in core.js): things fade in and out of a room instead of popping.
+   Big changes of light (day, night, a storm) use the slow fade; a few elements have their own data-in/data-out. */
+@keyframes visIn{from{opacity:0}to{opacity:1}}
+@keyframes visOut{from{opacity:1}to{opacity:0}}
+.vis-in{animation:visIn .8s ease-out both}
+.vis-out{animation:visOut .7s ease-in both}
+.vis-slow-in{animation:visIn 2.4s ease-in-out both}
+.vis-slow-out{animation:visOut 2.4s ease-in-out both}
+
+/* een losse knop onderaan een close-up is niet zo breed als het venster */
+.panel #m-body > div > .btn{align-self:flex-start}
+
+/* Ozosnel loopt: elk been (.hleg, uit tools/personages.py) zwaait vanuit de heup of schouder; de diagonale paren a en b
+   lopen een halve pas uit elkaar. Zet de klasse walking op een ouder om hem te laten lopen. */
+@keyframes hlegStep{0%,100%{transform:rotate(13deg)}50%{transform:rotate(-13deg)}}
+.walking .hleg{transform-box:fill-box;transform-origin:50% 4%;animation:hlegStep .9s ease-in-out infinite}
+.walking .hleg.b{animation-delay:-.45s}
+/* grapjes: een woordje dat even boven iets opstijgt (gagText in core.js) */
+@keyframes gagUp{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translateY(-50px);opacity:0}}
+.gag-txt{font-family:Fredoka,sans-serif;font-weight:700;font-size:34px;fill:#fff7d6;stroke:#3a1d12;stroke-width:5px;paint-order:stroke;text-anchor:middle;pointer-events:none;animation:gagUp 1.3s ease-out forwards}
+
+/* ---------- Albertsmaheert: reclame, folder, voettekst ---------- */
+.promo{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;max-width:620px;padding:10px 14px;border:1px solid var(--line);border-left:3px solid var(--phosphor);border-radius:4px;background:rgba(20,14,10,.6);font-size:13px;color:var(--paper)}
+.promo span{flex:1 1 100%}
+.promo a,.overlay .credits a,.site-foot a,.folder a:not(.btn){color:var(--amber);text-underline-offset:3px}
+.site-foot{font-family:var(--f-mono);font-size:11px;color:var(--muted);text-align:center;letter-spacing:.04em}
+.folder p{margin:0 0 10px;max-width:65ch}
+.folder ul{margin:0 0 12px;padding-left:20px;display:grid;gap:4px}
+.folder .row{display:flex;gap:8px;flex-wrap:wrap}
+a.btn{text-decoration:none;display:inline-block}
+@media (max-width:620px){.promo{display:none}}
+
+/* ---------- gedeelde onderdelen van de puzzels ---------- */
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:10px}
+.opt{font:inherit;text-align:left;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:rgba(255,255,255,.04);color:var(--paper)}
+.opt:hover{border-color:var(--amber)}
+.opt.on{border-color:var(--amber);background:rgba(232,176,74,.16)}
+.opt.ok{border-color:var(--phosphor);background:rgba(155,209,122,.14)}
+.opt b{display:block;color:var(--amber);font-size:15px}
+.opt small{color:var(--muted)}
+.note-paper{background:#fbf3df;color:#2a2018;border-radius:4px;padding:16px 18px;font-family:var(--f-hand);font-size:22px;line-height:1.3;box-shadow:0 6px 20px rgba(0,0,0,.4);max-width:560px}
+.note-paper.old{background:#e9d9b0;background-image:radial-gradient(circle at 20% 30%,rgba(120,80,30,.18),transparent 40%),radial-gradient(circle at 80% 70%,rgba(120,80,30,.15),transparent 45%)}
+.note-paper .sig{text-align:right;margin-top:6px}
+.pz-row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.pz-row > *{min-width:0}
+.pz-svg{width:100%;max-width:520px;height:auto;display:block}
+.pz-input{font-family:var(--f-mono);font-size:22px;letter-spacing:.2em;width:9ch;padding:6px 10px;border-radius:4px;border:1px solid var(--line);background:#120c08;color:var(--paper)}
+.keypad{display:grid;grid-template-columns:repeat(3,56px);gap:6px;margin-top:10px}
+.keypad button{height:46px;border-radius:6px;border:1px solid var(--line);background:#2a2f36;color:#e9eef2;font-family:var(--f-mono);font-size:18px}
+.keypad button:hover{border-color:var(--amber)}
+.lcd{font-family:var(--f-mono);font-size:24px;letter-spacing:.3em;background:#0a1a10;color:#6aff8a;padding:6px 12px;border-radius:4px;min-width:6ch;display:inline-block;text-align:center}
+.dial{display:inline-flex;flex-direction:column;align-items:center;gap:4px;margin-right:10px}
+.dial button{width:44px;height:30px;border-radius:4px;border:1px solid var(--line);background:var(--panel);color:var(--paper)}
+.dial .face{width:64px;height:56px;display:grid;place-items:center;border:2px solid #7a5a36;border-radius:6px;background:#d9c39a;color:#3a2614;font-family:var(--f-mono);font-size:22px;font-weight:600}
+.opt select{margin-top:6px;width:100%;font:inherit;font-size:14px;padding:5px 6px;border-radius:4px;border:1px solid var(--line);background:#120c08;color:var(--paper)}
+label.opt{display:flex;flex-direction:column;gap:2px;cursor:default}
+.dial small{font-family:var(--f-mono);font-size:11px;color:var(--muted)}

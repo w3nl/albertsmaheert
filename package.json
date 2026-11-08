@@ -3,10 +3,13 @@
   "private": true,
   "scripts": {
     "build": "eleventy",
-    "validate": "npm run build"
+    "validate": "npm run build",
+    "start:escaperoom": "node tests/escaperoom/serve.js",
+    "test:escaperoom": "playwright test -c playwright.config.cjs"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.2"
+    "@11ty/eleventy": "^3.1.2",
+    "@playwright/test": "1.63.0"
   },
   "engines": {
     "node": ">=24 <27"

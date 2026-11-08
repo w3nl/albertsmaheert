@@ -26,3 +26,14 @@ Missing credentials or a failed purge mark the workflow as failed, but do not ro
 ## Copilot issues
 
 For larger site changes, create an **Agent Task** issue with a clear goal and acceptance criteria. When GitHub Copilot coding agent is enabled for the repository, assign it to the issue and review its pull request before merging.
+
+## Escaperoom
+
+*Het Geheim van de Albertsmaheert* is een escaperoom in de browser over de boerderij: de Paardenstal, de hooizolder (Thedema, Alma en Folkerda), het museum van Roelof en een feest in de zaal. Het spel staat op `/escaperoom/` en in `src/escaperoom/`, en wordt ongewijzigd meegekopieerd bij het bouwen.
+
+```bash
+npm run start:escaperoom   # http://127.0.0.1:4174/escaperoom/
+npm run test:escaperoom    # speelt alle hoofdstukken uit (eerst: npx playwright install chromium)
+```
+
+Hoe het in elkaar zit, en de oplossingen van alle puzzels: [docs/escaperoom.md](docs/escaperoom.md).

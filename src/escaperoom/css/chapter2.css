@@ -1,0 +1,16 @@
+/* Hoofdstuk 2: de hooizolder en de kamers Thedema, Alma en Folkerda. */
+@keyframes zlCloud{0%{transform:translateX(-20px)}100%{transform:translateX(70px)}}
+.zl-cloud{animation:zlCloud 30s ease-in-out infinite alternate}
+@keyframes zlSwing{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+#zl-hook{transform-box:view-box;transform-origin:1420px 246px;animation:zlSwing 3s ease-in-out infinite}
+@keyframes zlPeep{0%,100%{transform:translateY(0)}30%,70%{transform:translateY(-6px)}}
+#zl-nest.peep .zl-chicks circle{animation:zlPeep .3s ease-in-out 3}
+.zl-chicks circle{transform-box:fill-box}
+@keyframes zlBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.zl-chicks circle:first-child{animation:zlBob 1.4s ease-in-out infinite}
+@keyframes zlDust{0%{transform:translate(0,0);opacity:0}20%{opacity:.7}100%{transform:translate(40px,120px);opacity:0}}
+@keyframes kmGlow{0%,100%{opacity:.8}50%{opacity:1}}
+.km-glow{animation:kmGlow 4s ease-in-out infinite}
+.km-glow.b{animation-delay:-2s}
+@keyframes kmCloud{0%{transform:translateX(-10px)}100%{transform:translateX(70px)}}
+.km-cloud{animation:kmCloud 24s ease-in-out infinite alternate}

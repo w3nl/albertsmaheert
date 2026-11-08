@@ -1,0 +1,25 @@
+/* Hoofdstuk 3: het museum en het platte dak. */
+@keyframes muSway{0%,100%{transform:rotate(-1.2deg)}50%{transform:rotate(1.2deg)}}
+.mu-sway{transform-box:fill-box;transform-origin:50% 0%;animation:muSway 6s ease-in-out infinite}
+@keyframes muLift{0%{transform:translate(0,0)}100%{transform:translate(160px,-170px)}}
+#mu-bale.lift{animation:muLift 3s linear}
+@keyframes muShake{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.mu-running #mu-trekbody{animation:muShake .12s linear infinite}
+@keyframes muPuf{0%{transform:translateY(0) scale(.6);opacity:.8}100%{transform:translate(20px,-70px) scale(1.6);opacity:0}}
+.mu-running #mu-puf{opacity:1;transform-box:fill-box;transform-origin:center;animation:muPuf 1s ease-out infinite}
+#mu-puf{opacity:0}
+@keyframes muSpin{to{transform:rotate(360deg)}}
+#mu-vlieg{transform-box:view-box;transform-origin:1010px 740px}
+#mu-vlieg.spin{animation:muSpin .7s linear 3}
+@keyframes muStamp{0%,100%{transform:translateY(0)}50%{transform:translateY(16px)}}
+.mu-stamp{animation:muStamp 2.4s ease-in-out infinite}
+/* het dak */
+@keyframes dkDrift{0%{transform:translateX(-40px)}100%{transform:translateX(80px)}}
+.dk-cloud{animation:dkDrift 40s ease-in-out infinite alternate}
+.dk-cloud.b{animation-duration:55s;animation-delay:-15s}.dk-cloud.c{animation-duration:34s;animation-delay:-8s}
+@keyframes dkLark{0%,100%{transform:translate(0,0)}25%{transform:translate(30px,-14px)}50%{transform:translate(-10px,-24px)}75%{transform:translate(-30px,-6px)}}
+.dk-lark{animation:dkLark 6s ease-in-out infinite}
+@keyframes dkWiek{to{transform:translate(540px,340px) rotate(360deg)}}
+@keyframes dkWiek0{from{transform:translate(540px,340px) rotate(0)}to{transform:translate(540px,340px) rotate(360deg)}}
+.dk-wieken{animation:dkWiek0 8s linear infinite}
+#dk-molen.fast .dk-wieken{animation-duration:1.5s}

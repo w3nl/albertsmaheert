@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="scene" id="sc-zaal" viewBox="0 0 1600 900"
+  preserveAspectRatio="xMidYMid slice" aria-label="De zaal in de oude koestal, klaar voor het feest">
+  <defs>
+    <pattern id="zaBrick" width="44" height="18" patternUnits="userSpaceOnUse">
+      <rect width="44" height="18" fill="#9a4a32" />
+      <rect x="1" y="1" width="42" height="7.5" fill="#a8553a" />
+      <rect x="-21" y="10" width="42" height="7.5" fill="#924430" />
+      <rect x="23" y="10" width="42" height="7.5" fill="#a0503a" />
+    </pattern>
+    <linearGradient id="zaFloor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a88a64" />
+      <stop offset="1" stop-color="#7a6040" />
+    </linearGradient>
+    <linearGradient id="zaBeam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7a5a3a" />
+      <stop offset="1" stop-color="#4e3620" />
+    </linearGradient>
+    <linearGradient id="zaNight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1e2a50" />
+      <stop offset="1" stop-color="#5a5a7a" />
+    </linearGradient>
+    <linearGradient id="zaFelt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f8a4a" />
+      <stop offset="1" stop-color="#1e6a36" />
+    </linearGradient>
+    <radialGradient id="zaGlow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#ffd27a" stop-opacity=".55" />
+      <stop offset="1" stop-color="#ffd27a" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="zaVign" cx=".5" cy=".45" r=".78">
+      <stop offset=".55" stop-color="#000" stop-opacity="0" />
+      <stop offset="1" stop-color="#140c06" stop-opacity=".6" />
+    </radialGradient>
+  </defs>
+
+  <!-- de oude stalmuur, onderin gewit -->
+  <rect width="1600" height="900" fill="url(#zaBrick)" />
+  <rect x="0" y="420" width="1600" height="240" fill="#e9e2d2" />
+  <path d="M0 420 H1600" stroke="#c9c0ae" stroke-width="4" />
+  <!-- het plafond met balken -->
+  <rect width="1600" height="120" fill="#d9cfbc" />
+  <g fill="url(#zaBeam)"><rect x="0" y="100" width="1600" height="34" /><rect x="120" y="0" width="40" height="110" /><rect x="560" y="0" width="40" height="110" /><rect x="1000" y="0" width="40" height="110" /><rect x="1440" y="0" width="40" height="110" /></g>
+  <!-- bordjes met koeiennamen op de balk: hier stonden ze -->
+  <g id="za-koeien" font-family="Fredoka, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#f8f0e0">
+    <g><rect x="200" y="140" width="80" height="26" rx="4" fill="#3a5a3a" /><text x="240" y="158">Klaske</text></g>
+    <g><rect x="320" y="140" width="80" height="26" rx="4" fill="#3a5a3a" /><text x="360" y="158">Bertha</text></g>
+    <g><rect x="440" y="140" width="80" height="26" rx="4" fill="#3a5a3a" /><text x="480" y="158">Trijntje</text></g>
+    <g><rect x="640" y="140" width="80" height="26" rx="4" fill="#3a5a3a" /><text x="680" y="158">Grietje</text></g>
+    <g><rect x="760" y="140" width="80" height="26" rx="4" fill="#3a5a3a" /><text x="800" y="158">Dina</text></g>
+  </g>
+  <!-- kleine stalraampjes met ijzeren roeden -->
+  <g>
+    <rect x="220" y="230" width="110" height="80" fill="url(#zaNight)" stroke="#e9e2d2" stroke-width="6" />
+    <path d="M275 230 v80 M220 270 h110" stroke="#3a3a3a" stroke-width="4" />
+    <rect x="680" y="230" width="110" height="80" fill="url(#zaNight)" stroke="#e9e2d2" stroke-width="6" />
+    <path d="M735 230 v80 M680 270 h110" stroke="#3a3a3a" stroke-width="4" />
+    <circle class="za-star" cx="300" cy="248" r="1.6" fill="#fff" /><circle class="za-star b" cx="760" cy="252" r="1.6" fill="#fff" />
+  </g>
+  <!-- de glazen deuren naar de tuin op het zuiden -->
+  <g id="za-tuindeur">
+    <rect x="1170" y="220" width="220" height="440" fill="#e9e2d2" />
+    <rect x="1182" y="232" width="94" height="428" fill="url(#zaNight)" stroke="#6a5a48" stroke-width="5" />
+    <rect x="1284" y="232" width="94" height="428" fill="url(#zaNight)" stroke="#6a5a48" stroke-width="5" />
+    <g fill="#2e3a2e"><path d="M1182 560 q40 -30 94 -10 v110 h-94z" /><path d="M1284 552 q50 -20 94 0 v108 h-94z" /></g>
+    <g fill="#ffe08a"><circle class="za-twinkle" cx="1210" cy="520" r="3" /><circle class="za-twinkle b" cx="1240" cy="508" r="3" /><circle class="za-twinkle" cx="1320" cy="512" r="3" /><circle class="za-twinkle b" cx="1356" cy="524" r="3" /></g>
+    <circle cx="1350" cy="290" r="18" fill="#fff4d0" opacity=".9" />
+    <path d="M1276 420 h8 M1270 450 v30 M1290 450 v30" stroke="#c9a24a" stroke-width="4" />
+  </g>
+  <!-- de bar met koffieapparaat en het gastenboek -->
+  <g id="za-bar">
+    <rect x="30" y="500" width="290" height="220" fill="#6a4a2e" stroke="#3a2614" stroke-width="3" />
+    <rect x="20" y="490" width="310" height="20" fill="#8a6440" />
+    <g stroke="#5a3e24" stroke-width="2"><path d="M40 540 h270 M40 600 h270 M40 660 h270" /></g>
+    <g id="za-koffie"><rect x="50" y="420" width="70" height="70" rx="6" fill="#2a2a2e" /><rect x="60" y="430" width="50" height="20" rx="3" fill="#4a7a9a" /><circle cx="85" cy="470" r="6" fill="#c4302b" /><rect x="72" y="478" width="26" height="12" fill="#f2efe8" /></g>
+    <g fill="#d8eef6" opacity=".8"><path d="M150 490 l4 -30 h14 l4 30z" /><path d="M180 490 l4 -30 h14 l4 30z" /></g>
+    <g id="za-boek"><path d="M230 490 l6 -24 h70 l-6 24z" fill="#7a2a24" stroke="#3a1210" stroke-width="2" /><path d="M240 486 l4 -16 h50 l-4 16z" fill="#f6efe2" /><path d="M250 478 h34" stroke="#5a6aa8" stroke-width="2" /></g>
+  </g>
+
+  <g id="za-paardje" transform="translate(135 490) scale(0.28)" fill="#d9ad6e" stroke="#7a4a20" stroke-width="6">
+    <path d="M-56 -6 Q0 16 56 -6" fill="none" stroke-width="9" />
+    <path d="M-30 -44 L-38 0 M-16 -44 L-20 4 M16 -44 L20 4 M30 -44 L38 0" stroke-width="9" />
+    <path d="M-40 -60 C-40 -74 30 -76 34 -60 C36 -48 28 -40 0 -40 C-30 -40 -40 -46 -40 -60Z" />
+    <path d="M24 -64 C30 -86 38 -100 50 -104 C62 -106 70 -98 68 -90 C66 -84 58 -84 52 -84 C48 -76 44 -66 38 -58Z" />
+    <circle cx="56" cy="-96" r="3" fill="#2a1a0c" stroke="none" /><path d="M-10 -66 h22 v6 h-22z" fill="#c4302b" stroke="none" />
+  </g>
+
+  <!-- de feestverlichting: een lange slinger in serie (gaat aan als het lampje gerepareerd is) -->
+  <g id="za-lights">
+    <path d="M0 190 Q200 250 400 190 Q600 250 800 190 Q1000 250 1200 190 Q1400 250 1600 190" stroke="#2a2a2a" stroke-width="3" fill="none" />
+    <g id="za-bulbs"></g>
+  </g>
+
+  <!-- de vloer met een glazen plaat over een stukje van de oude grup -->
+  <path d="M0 660 H1600 V900 H0Z" fill="url(#zaFloor)" />
+  <g stroke="#6a5034" stroke-width="2" opacity=".5"><path d="M0 700 H1600 M0 760 H1600 M0 830 H1600" /></g>
+  <g id="za-grup">
+    <path d="M560 790 H1040 L1060 870 H540Z" fill="#2a2018" />
+    <path d="M580 806 H1020 L1032 852 H568Z" fill="#4a3a28" />
+    <path d="M590 820 H1010" stroke="#3a2a18" stroke-width="10" />
+    <path id="za-plaat" d="M560 790 H1040 L1060 870 H540Z" fill="#bfe0ee" opacity=".35" stroke="#e9f4f8" stroke-width="4" />
+    <g id="za-bouten" fill="#9aa0a6" stroke="#4a4e54" stroke-width="2"><circle cx="572" cy="800" r="7" /><circle cx="1028" cy="800" r="7" /><circle cx="556" cy="860" r="7" /><circle cx="1044" cy="860" r="7" /></g>
+    <g id="za-grupblik"><rect x="760" y="814" width="80" height="34" rx="4" fill="#7a8a70" stroke="#3a4434" stroke-width="2" /><path d="M764 822 h72" stroke="#c9a24a" stroke-width="2" /></g>
+  </g>
+
+  <g id="za-gasten"><g transform="translate(410 690)">
+    <!-- @personage gasten --><g transform="translate(0 0) scale(1.25 1.25)"><g transform="scale(1.0)"><path d="M-20 -164 C-26 -140 -26 -122 -18 -112 L18 -112 C26 -122 26 -140 20 -164Z" fill="#7a4a26"/><path d="M-14 -50 L-13 -4 L-5 -4 L-6 -50Z M14 -50 L13 -4 L5 -4 L6 -50Z" fill="#f6cfae" stroke="#00000030" stroke-width="1"/><path d="M-17 -1 C-17 -9 -6 -10 -4 -6 L-4 0 Z M17 -1 C17 -9 6 -10 4 -6 L4 0 Z" fill="#3a2a24"/><path d="M-30 -48 L-20 -126 C-10 -132 10 -132 20 -126 L30 -48Z" fill="#2f6fb1" stroke="#00000026" stroke-width="1.2"/><path d="M-24 -124 C-34 -106 -34 -92 -28 -80" stroke="#2f6fb1" stroke-width="11" fill="none" stroke-linecap="round"/><ellipse cx="-28" cy="-76" rx="6" ry="6.6" fill="#f6cfae" stroke="#dca383" stroke-width="0.84"/><path d="M-29.2 -81.4 q5.4 -0.6 5.4 4.2" stroke="#dca383" stroke-width="0.84" fill="none" opacity=".6"/><path d="M24 -124 C34 -110 32 -100 24 -94" stroke="#2f6fb1" stroke-width="11" fill="none" stroke-linecap="round"/><path d="M18 -116 l2 18 h8 l2 -18z" fill="#f4d58a" opacity=".9" stroke="#fff" stroke-width="1"/><path d="M18 -116 h12" stroke="#fffbe8" stroke-width="3"/><ellipse cx="24" cy="-96" rx="6" ry="6.6" fill="#f6cfae" stroke="#dca383" stroke-width="0.84"/><path d="M22.8 -101.4 q5.4 -0.6 5.4 4.2" stroke="#dca383" stroke-width="0.84" fill="none" opacity=".6"/><rect x="-5" y="-142" width="10" height="12" fill="#dca383"/><defs><radialGradient id="zaG1Sk" cx="0.42" cy="0.35" r="0.8"><stop offset="0" stop-color="#f6cfae"/><stop offset="1" stop-color="#dca383"/></radialGradient></defs><ellipse cx="-16.1" cy="-154.6" rx="3.4" ry="4.4" fill="#f6cfae" stroke="#dca383" stroke-width="0.85"/><ellipse cx="16.1" cy="-154.6" rx="3.4" ry="4.4" fill="#f6cfae" stroke="#dca383" stroke-width="0.85"/><ellipse cx="0" cy="-156" rx="17" ry="18.0" fill="url(#zaG1Sk)" stroke="#dca383" stroke-width="0.85"/><ellipse cx="-6.1" cy="-156.3" rx="1.87" ry="2.55" fill="#2a1b14"/><circle cx="-5.4" cy="-157.2" r="0.77" fill="#fff"/><path d="M-8.8 -160.9 q2.7 -1.7 5.4 0.3" stroke="#2a1b14" stroke-width="1.36" fill="none" stroke-linecap="round"/><ellipse cx="6.1" cy="-156.3" rx="1.87" ry="2.55" fill="#2a1b14"/><circle cx="6.8" cy="-157.2" r="0.77" fill="#fff"/><path d="M3.4 -160.9 q2.7 -1.7 5.4 0.3" stroke="#2a1b14" stroke-width="1.36" fill="none" stroke-linecap="round"/><ellipse cx="-9.4" cy="-150.9" rx="2.9" ry="1.9" fill="#f29b8f" opacity=".55"/><ellipse cx="9.4" cy="-150.9" rx="2.9" ry="1.9" fill="#f29b8f" opacity=".55"/><ellipse cx="0" cy="-152.6" rx="2.4" ry="1.9" fill="#dca383" opacity=".7"/><circle cx="-0.7" cy="-153.3" r="0.68" fill="#fff" opacity=".6"/><path d="M-5.1 -147.8 q5.1 4.4 10.2 0" stroke="#8a3a2a" stroke-width="1.19" fill="none" stroke-linecap="round"/><path d="M-18 -156 C-20 -178 -4 -180 2 -177 C12 -180 20 -172 18 -154 C12 -166 4 -168 -2 -170 C-8 -166 -14 -164 -18 -156Z" fill="#7a4a26"/></g></g><g transform="translate(70 4) scale(1.3 1.3)"><g transform="scale(1.0)"><path d="M-17 -74 L-16 -4 L-5 -4 L-6 -74Z M17 -74 L16 -4 L5 -4 L6 -74Z" fill="#3b3f4a" stroke="#00000030" stroke-width="1"/><path d="M-20 -1 C-20 -9 -6 -10 -4 -6 L-4 0 Z M20 -1 C20 -9 6 -10 4 -6 L4 0 Z" fill="#2a2420"/><path d="M-28 -72 C-31 -104 -28 -122 -16 -130 C-8 -134 8 -134 16 -130 C28 -122 31 -104 28 -72Z" fill="#d9822b" stroke="#00000026" stroke-width="1.2"/><path d="M-24 -124 C-34 -106 -34 -92 -28 -80" stroke="#d9822b" stroke-width="11" fill="none" stroke-linecap="round"/><ellipse cx="-28" cy="-76" rx="6" ry="6.6" fill="#a86b45" stroke="#84502f" stroke-width="0.84"/><path d="M-29.2 -81.4 q5.4 -0.6 5.4 4.2" stroke="#84502f" stroke-width="0.84" fill="none" opacity=".6"/><path d="M24 -124 C34 -110 32 -100 24 -94" stroke="#d9822b" stroke-width="11" fill="none" stroke-linecap="round"/><path d="M18 -116 l2 18 h8 l2 -18z" fill="#f4d58a" opacity=".9" stroke="#fff" stroke-width="1"/><path d="M18 -116 h12" stroke="#fffbe8" stroke-width="3"/><ellipse cx="24" cy="-96" rx="6" ry="6.6" fill="#a86b45" stroke="#84502f" stroke-width="0.84"/><path d="M22.8 -101.4 q5.4 -0.6 5.4 4.2" stroke="#84502f" stroke-width="0.84" fill="none" opacity=".6"/><rect x="-5" y="-142" width="10" height="12" fill="#84502f"/><defs><radialGradient id="zaG2Sk" cx="0.42" cy="0.35" r="0.8"><stop offset="0" stop-color="#a86b45"/><stop offset="1" stop-color="#84502f"/></radialGradient></defs><ellipse cx="-16.1" cy="-154.6" rx="3.4" ry="4.4" fill="#a86b45" stroke="#84502f" stroke-width="0.85"/><ellipse cx="16.1" cy="-154.6" rx="3.4" ry="4.4" fill="#a86b45" stroke="#84502f" stroke-width="0.85"/><ellipse cx="0" cy="-156" rx="17" ry="18.0" fill="url(#zaG2Sk)" stroke="#84502f" stroke-width="0.85"/><ellipse cx="-6.1" cy="-156.3" rx="1.87" ry="2.55" fill="#2a1b14"/><circle cx="-5.4" cy="-157.2" r="0.77" fill="#fff"/><path d="M-8.8 -160.9 q2.7 -1.7 5.4 0.3" stroke="#2a1b14" stroke-width="1.36" fill="none" stroke-linecap="round"/><ellipse cx="6.1" cy="-156.3" rx="1.87" ry="2.55" fill="#2a1b14"/><circle cx="6.8" cy="-157.2" r="0.77" fill="#fff"/><path d="M3.4 -160.9 q2.7 -1.7 5.4 0.3" stroke="#2a1b14" stroke-width="1.36" fill="none" stroke-linecap="round"/><ellipse cx="-9.4" cy="-150.9" rx="2.9" ry="1.9" fill="#c8705e" opacity=".55"/><ellipse cx="9.4" cy="-150.9" rx="2.9" ry="1.9" fill="#c8705e" opacity=".55"/><ellipse cx="0" cy="-152.6" rx="2.4" ry="1.9" fill="#84502f" opacity=".7"/><circle cx="-0.7" cy="-153.3" r="0.68" fill="#fff" opacity=".6"/><path d="M-5.1 -147.8 q5.1 4.4 10.2 0" stroke="#8a3a2a" stroke-width="1.19" fill="none" stroke-linecap="round"/><circle cx="-14" cy="-166" r="7" fill="#1f1f1f"/><circle cx="-7" cy="-173" r="7" fill="#1f1f1f"/><circle cx="2" cy="-175" r="7" fill="#1f1f1f"/><circle cx="11" cy="-171" r="7" fill="#1f1f1f"/><circle cx="16" cy="-162" r="7" fill="#1f1f1f"/><circle cx="-17" cy="-157" r="7" fill="#1f1f1f"/></g></g><g transform="translate(140 0) scale(1.28 1.28)"><g transform="scale(1.0)"><path d="M-17 -74 L-16 -4 L-5 -4 L-6 -74Z M17 -74 L16 -4 L5 -4 L6 -74Z" fill="#4a4036" stroke="#00000030" stroke-width="1"/><path d="M-20 -1 C-20 -9 -6 -10 -4 -6 L-4 0 Z M20 -1 C20 -9 6 -10 4 -6 L4 0 Z" fill="#2a2420"/><path d="M-28 -72 C-31 -104 -28 -122 -16 -130 C-8 -134 8 -134 16 -130 C28 -122 31 -104 28 -72Z" fill="#5a8a4a" stroke="#00000026" stroke-width="1.2"/><path d="M-24 -124 C-34 -106 -34 -92 -28 -80" stroke="#5a8a4a" stroke-width="11" fill="none" stroke-linecap="round"/><ellipse cx="-28" cy="-76" rx="6" ry="6.6" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.84"/><path d="M-29.2 -81.4 q5.4 -0.6 5.4 4.2" stroke="#d79c7c" stroke-width="0.84" fill="none" opacity=".6"/><path d="M24 -124 C34 -106 34 -92 28 -80" stroke="#5a8a4a" stroke-width="11" fill="none" stroke-linecap="round"/><ellipse cx="28" cy="-76" rx="6" ry="6.6" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.84"/><path d="M26.8 -81.4 q5.4 -0.6 5.4 4.2" stroke="#d79c7c" stroke-width="0.84" fill="none" opacity=".6"/><rect x="-5" y="-142" width="10" height="12" fill="#d79c7c"/><defs><radialGradient id="zaG3Sk" cx="0.42" cy="0.35" r="0.8"><stop offset="0" stop-color="#f3c2a4"/><stop offset="1" stop-color="#d79c7c"/></radialGradient></defs><ellipse cx="-16.1" cy="-154.6" rx="3.4" ry="4.4" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.85"/><ellipse cx="16.1" cy="-154.6" rx="3.4" ry="4.4" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.85"/><ellipse cx="0" cy="-156" rx="17" ry="18.0" fill="url(#zaG3Sk)" stroke="#d79c7c" stroke-width="0.85"/><ellipse cx="-6.1" cy="-156.3" rx="1.87" ry="2.55" fill="#2a1b14"/><circle cx="-5.4" cy="-157.2" r="0.77" fill="#fff"/><path d="M-8.8 -160.9 q2.7 -1.7 5.4 0.3" stroke="#2a1b14" stroke-width="1.36" fill="none" stroke-linecap="round"/><ellipse cx="6.1" cy="-156.3" rx="1.87" ry="2.55" fill="#2a1b14"/><circle cx="6.8" cy="-157.2" r="0.77" fill="#fff"/><path d="M3.4 -160.9 q2.7 -1.7 5.4 0.3" stroke="#2a1b14" stroke-width="1.36" fill="none" stroke-linecap="round"/><ellipse cx="-9.4" cy="-150.9" rx="2.9" ry="1.9" fill="#ee8f86" opacity=".55"/><ellipse cx="9.4" cy="-150.9" rx="2.9" ry="1.9" fill="#ee8f86" opacity=".55"/><ellipse cx="0" cy="-152.6" rx="2.4" ry="1.9" fill="#d79c7c" opacity=".7"/><circle cx="-0.7" cy="-153.3" r="0.68" fill="#fff" opacity=".6"/><path d="M-5.1 -147.8 q5.1 4.4 10.2 0" stroke="#8a3a2a" stroke-width="1.19" fill="none" stroke-linecap="round"/><path d="M-17 -152 C-19 -160 -16 -164 -14 -162 M17 -152 C19 -160 16 -164 14 -162" stroke="#cfcac2" stroke-width="5" fill="none" stroke-linecap="round"/></g></g><g transform="translate(214 6) scale(1.2 1.2)"><g transform="scale(1.0)"><path d="M-17 -74 L-16 -4 L-5 -4 L-6 -74Z M17 -74 L16 -4 L5 -4 L6 -74Z" fill="#2b3f66" stroke="#00000030" stroke-width="1"/><path d="M-20 -1 C-20 -9 -6 -10 -4 -6 L-4 0 Z M20 -1 C20 -9 6 -10 4 -6 L4 0 Z" fill="#2a2420"/><path d="M-28 -72 C-31 -104 -28 -122 -16 -130 C-8 -134 8 -134 16 -130 C28 -122 31 -104 28 -72Z" fill="#c73f6d" stroke="#00000026" stroke-width="1.2"/><path d="M-24 -124 C-34 -106 -34 -92 -28 -80" stroke="#c73f6d" stroke-width="11" fill="none" stroke-linecap="round"/><ellipse cx="-28" cy="-76" rx="6" ry="6.6" fill="#f6cfae" stroke="#dca383" stroke-width="0.84"/><path d="M-29.2 -81.4 q5.4 -0.6 5.4 4.2" stroke="#dca383" stroke-width="0.84" fill="none" opacity=".6"/><path d="M24 -124 C34 -110 32 -100 24 -94" stroke="#c73f6d" stroke-width="11" fill="none" stroke-linecap="round"/><path d="M18 -116 l2 18 h8 l2 -18z" fill="#f4d58a" opacity=".9" stroke="#fff" stroke-width="1"/><path d="M18 -116 h12" stroke="#fffbe8" stroke-width="3"/><ellipse cx="24" cy="-96" rx="6" ry="6.6" fill="#f6cfae" stroke="#dca383" stroke-width="0.84"/><path d="M22.8 -101.4 q5.4 -0.6 5.4 4.2" stroke="#dca383" stroke-width="0.84" fill="none" opacity=".6"/><rect x="-5" y="-142" width="10" height="12" fill="#dca383"/><defs><radialGradient id="zaG4Sk" cx="0.42" cy="0.35" r="0.8"><stop offset="0" stop-color="#f6cfae"/><stop offset="1" stop-color="#dca383"/></radialGradient></defs><ellipse cx="-16.1" cy="-154.6" rx="3.4" ry="4.4" fill="#f6cfae" stroke="#dca383" stroke-width="0.85"/><ellipse cx="16.1" cy="-154.6" rx="3.4" ry="4.4" fill="#f6cfae" stroke="#dca383" stroke-width="0.85"/><ellipse cx="0" cy="-156" rx="17" ry="18.0" fill="url(#zaG4Sk)" stroke="#dca383" stroke-width="0.85"/><ellipse cx="-6.1" cy="-156.3" rx="1.87" ry="2.55" fill="#2a1b14"/><circle cx="-5.4" cy="-157.2" r="0.77" fill="#fff"/><path d="M-8.8 -160.9 q2.7 -1.7 5.4 0.3" stroke="#2a1b14" stroke-width="1.36" fill="none" stroke-linecap="round"/><ellipse cx="6.1" cy="-156.3" rx="1.87" ry="2.55" fill="#2a1b14"/><circle cx="6.8" cy="-157.2" r="0.77" fill="#fff"/><path d="M3.4 -160.9 q2.7 -1.7 5.4 0.3" stroke="#2a1b14" stroke-width="1.36" fill="none" stroke-linecap="round"/><ellipse cx="-9.4" cy="-150.9" rx="2.9" ry="1.9" fill="#f29b8f" opacity=".55"/><ellipse cx="9.4" cy="-150.9" rx="2.9" ry="1.9" fill="#f29b8f" opacity=".55"/><ellipse cx="0" cy="-152.6" rx="2.4" ry="1.9" fill="#dca383" opacity=".7"/><circle cx="-0.7" cy="-153.3" r="0.68" fill="#fff" opacity=".6"/><path d="M-5.1 -147.8 q5.1 4.4 10.2 0" stroke="#8a3a2a" stroke-width="1.19" fill="none" stroke-linecap="round"/><path d="M-17 -158 C-19 -178 -4 -180 2 -177 C12 -180 19 -172 17 -156 C12 -166 6 -168 -2 -170 C-8 -166 -12 -164 -17 -158Z" fill="#e0b860"/></g></g><!-- @einde gasten -->
+  </g></g>
+  <!-- de lange feesttafel -->
+  <g id="za-tafel">
+    <path d="M360 640 h640 l20 30 h-680z" fill="#f6f2ea" stroke="#d9d0bc" stroke-width="2" />
+    <path d="M340 670 h680 v40 h-680z" fill="#efe8da" />
+    <path d="M360 710 V790 M1000 710 V790" stroke="#6a4a2e" stroke-width="10" />
+    <g><path d="M450 640 l3 -24 h12 l3 24z" fill="#f4d58a" opacity=".9" /><path d="M600 640 l3 -24 h12 l3 24z" fill="#c4302b" opacity=".8" /><path d="M820 640 l3 -24 h12 l3 24z" fill="#f4d58a" opacity=".9" /></g>
+    <g><ellipse cx="700" cy="638" rx="40" ry="8" fill="#e9e2d2" /><circle cx="690" cy="630" r="8" fill="#e8a040" /><circle cx="708" cy="628" r="9" fill="#d6242f" /><circle cx="700" cy="620" r="7" fill="#f6d04d" /></g>
+    <g><rect x="520" y="626" width="60" height="14" rx="6" fill="#c9a24a" /><rect x="900" y="626" width="60" height="14" rx="6" fill="#c9a24a" /></g>
+  </g>
+  <!-- de pooltafel -->
+  <g id="za-pool">
+    <path d="M1060 640 h300 l40 70 h-380z" fill="#5a3a20" />
+    <path d="M1074 646 h272 l30 56 h-332z" fill="url(#zaFelt)" />
+    <path d="M1030 710 h380 v30 h-380z" fill="#4a2e18" />
+    <path d="M1040 740 v60 M1400 740 v60" stroke="#3a2412" stroke-width="16" />
+    <g><circle cx="1150" cy="676" r="7" fill="#f6f2ea" /><circle cx="1260" cy="670" r="7" fill="#1a1a1a" /><circle cx="1290" cy="684" r="7" fill="#d6242f" /><circle cx="1310" cy="666" r="7" fill="#f6d04d" /></g>
+    <g fill="#0a0a0a"><circle cx="1076" cy="648" r="6" /><circle cx="1344" cy="648" r="6" /><circle cx="1046" cy="702" r="7" /><circle cx="1374" cy="702" r="7" /></g>
+  </g>
+
+  <!-- de gasten, Ditty en Roelof -->
+  <g id="za-ditty"><g transform="translate(330 800)">
+    <!-- @personage ditty --><g transform="translate(0 0) scale(1.35 1.35)"><defs><linearGradient id="zaDVest" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a674aa"/><stop offset="1" stop-color="#5e3a64"/></linearGradient></defs><path d="M-22 -168 C-28 -146 -26 -132 -20 -124 L20 -124 C26 -132 28 -146 22 -168Z" fill="#d6c29a"/><path d="M-16 -64 L-15 -4 L-5 -4 L-6 -64Z M16 -64 L15 -4 L5 -4 L6 -64Z" fill="#3a4664" stroke="#00000030" stroke-width="1"/><path d="M-19 -1 C-19 -9 -6 -10 -4 -6 L-4 0 Z M19 -1 C19 -9 6 -10 4 -6 L4 0 Z" fill="#5a3a2a"/><path d="M-30 -66 L-24 -100 L24 -100 L30 -66Z" fill="#4a5a7a"/><path d="M-28 -98 C-31 -114 -28 -128 -16 -134 C-8 -137 8 -137 16 -134 C28 -128 31 -114 28 -98Z" fill="url(#zaDVest)" stroke="#00000030" stroke-width="1.2"/><path d="M-18 -126 h36 v18 C22 -96 24 -80 26 -64 L-26 -64 C-24 -80 -22 -96 -18 -108Z" fill="#f6efe2" stroke="#d9cbb2" stroke-width="1.2"/><path d="M-22 -108 h44" stroke="#c94a5a" stroke-width="3"/><g transform="translate(-12 -92)"><circle r="3" fill="#e2687a"/><circle r="1.2" fill="#f6d04d"/></g><g transform="translate(6 -86)"><circle r="3" fill="#e2687a"/><circle r="1.2" fill="#f6d04d"/></g><g transform="translate(-4 -76)"><circle r="3" fill="#e2687a"/><circle r="1.2" fill="#f6d04d"/></g><g transform="translate(14 -72)"><circle r="3" fill="#e2687a"/><circle r="1.2" fill="#f6d04d"/></g><g transform="translate(-16 -72)"><circle r="3" fill="#e2687a"/><circle r="1.2" fill="#f6d04d"/></g><g transform="translate(10 -100)"><circle r="3" fill="#e2687a"/><circle r="1.2" fill="#f6d04d"/></g><path d="M-6 -126 L0 -134 L6 -126" stroke="#d9cbb2" stroke-width="2" fill="none"/><path d="M-24 -126 C-36 -110 -36 -94 -28 -84" stroke="url(#zaDVest)" stroke-width="11" fill="none" stroke-linecap="round"/><ellipse cx="-27" cy="-80" rx="6" ry="6.6" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.84"/><path d="M-28.2 -85.4 q5.4 -0.6 5.4 4.2" stroke="#d79c7c" stroke-width="0.84" fill="none" opacity=".6"/><path d="M24 -126 C36 -110 36 -94 28 -84" stroke="url(#zaDVest)" stroke-width="11" fill="none" stroke-linecap="round"/><ellipse cx="27" cy="-80" rx="6" ry="6.6" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.84"/><path d="M25.8 -85.4 q5.4 -0.6 5.4 4.2" stroke="#d79c7c" stroke-width="0.84" fill="none" opacity=".6"/><rect x="-5" y="-146" width="10" height="12" fill="#d79c7c"/><defs><radialGradient id="zaDSk" cx="0.42" cy="0.35" r="0.8"><stop offset="0" stop-color="#f3c2a4"/><stop offset="1" stop-color="#d79c7c"/></radialGradient></defs><ellipse cx="-17.1" cy="-158.6" rx="3.6" ry="4.7" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.90"/><ellipse cx="17.1" cy="-158.6" rx="3.6" ry="4.7" fill="#f3c2a4" stroke="#d79c7c" stroke-width="0.90"/><ellipse cx="0" cy="-160" rx="18" ry="19.1" fill="url(#zaDSk)" stroke="#d79c7c" stroke-width="0.90"/><ellipse cx="-6.5" cy="-160.4" rx="1.98" ry="2.70" fill="#2a1b14"/><circle cx="-5.8" cy="-161.3" r="0.81" fill="#fff"/><path d="M-9.4 -165.2 q2.9 -1.8 5.8 0.4" stroke="#2a1b14" stroke-width="1.44" fill="none" stroke-linecap="round"/><ellipse cx="6.5" cy="-160.4" rx="1.98" ry="2.70" fill="#2a1b14"/><circle cx="7.2" cy="-161.3" r="0.81" fill="#fff"/><path d="M3.6 -165.2 q2.9 -1.8 5.8 0.4" stroke="#2a1b14" stroke-width="1.44" fill="none" stroke-linecap="round"/><ellipse cx="-9.9" cy="-154.6" rx="3.1" ry="2.0" fill="#ee8f86" opacity=".55"/><ellipse cx="9.9" cy="-154.6" rx="3.1" ry="2.0" fill="#ee8f86" opacity=".55"/><ellipse cx="0" cy="-156.4" rx="2.5" ry="2.0" fill="#d79c7c" opacity=".7"/><circle cx="-0.7" cy="-157.1" r="0.72" fill="#fff" opacity=".6"/><path d="M-5.4 -151.4 q5.4 4.7 10.8 0" stroke="#8a3a2a" stroke-width="1.26" fill="none" stroke-linecap="round"/><path d="M-20 -158 C-24 -184 -4 -186 4 -182 C16 -186 24 -176 20 -156 C16 -168 8 -172 -2 -174 C-8 -168 -14 -166 -20 -158Z" fill="#d6c29a"/><path d="M-20 -160 C-25 -146 -23 -136 -18 -128 M20 -160 C25 -146 23 -136 18 -128" stroke="#d6c29a" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M-6 -180 C2 -183 10 -180 14 -172" stroke="#efe0bd" stroke-width="2.5" fill="none" stroke-linecap="round"/><g fill="#ffffff30" stroke="#5a3a2a" stroke-width="1.6"><rect x="-15" y="-182" width="12" height="7" rx="3"/><rect x="3" y="-182" width="12" height="7" rx="3"/></g></g><!-- @einde ditty -->
+  </g></g>
+  <g id="za-roelof"><g transform="translate(1120 830)">
+    <!-- @personage roelof --><g transform="translate(0 0) scale(1.4 1.4)"><defs><linearGradient id="zaRKiel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5582c0"/><stop offset="1" stop-color="#24467a"/></linearGradient></defs><path d="M-18 -76 L-17 -4 L-5 -4 L-6 -76Z M18 -76 L17 -4 L5 -4 L6 -76Z" fill="#3b3f4a" stroke="#00000030" stroke-width="1"/><path d="M-21 -1 C-21 -9 -6 -10 -4 -6 L-4 0 Z M21 -1 C21 -9 6 -10 4 -6 L4 0 Z" fill="#c99b4a"/><path d="M-24 0 C-26 -10 -8 -12 -3 -6 L-3 0Z M24 0 C26 -10 8 -12 3 -6 L3 0Z" fill="#d8ac58" stroke="#9a7230" stroke-width="1.4"/><path d="M-32 -74 C-34 -110 -30 -132 -18 -140 C-8 -144 8 -144 18 -140 C30 -132 34 -110 32 -74 L36 -66 L-36 -66Z" fill="url(#zaRKiel)" stroke="#00000030" stroke-width="1.2"/><path d="M-6 -142 L0 -128 L6 -142" stroke="#f3efe6" stroke-width="3" fill="none"/><path d="M0 -128 V-80" stroke="#24467a" stroke-width="1.6"/><g fill="#e8e2d2"><circle cx="0" cy="-118" r="1.8"/><circle cx="0" cy="-104" r="1.8"/><circle cx="0" cy="-90" r="1.8"/></g><rect x="12" y="-124" width="13" height="12" rx="2" fill="#24467a"/><path d="M15 -126 v-8 M19 -126 v-6" stroke="#d6a640" stroke-width="2"/><path d="M-34 -80 Q0 -72 34 -80 L34 -72 Q0 -64 -34 -72Z" fill="#7a4a26"/><rect x="-5" y="-80" width="10" height="8" fill="none" stroke="#d6a640" stroke-width="2"/><path d="M-30 -74 l-4 24 l12 0 l2 -22Z" fill="#8a5a32"/><path d="M-27 -66 l-2 -14 M-23 -66 l1 -16" stroke="#9aa0a6" stroke-width="2.4"/><path d="M-28 -132 C-40 -112 -40 -92 -36 -76" stroke="url(#zaRKiel)" stroke-width="13" fill="none" stroke-linecap="round"/><ellipse cx="-36" cy="-70" rx="6.5" ry="7.2" fill="#e9b48c" stroke="#c48a64" stroke-width="0.91"/><path d="M-37.3 -75.8 q5.9 -0.7 5.9 4.5" stroke="#c48a64" stroke-width="0.91" fill="none" opacity=".6"/><path d="M28 -132 C40 -112 42 -96 40 -80" stroke="url(#zaRKiel)" stroke-width="13" fill="none" stroke-linecap="round"/><ellipse cx="40" cy="-74" rx="6.5" ry="7.2" fill="#e9b48c" stroke="#c48a64" stroke-width="0.91"/><path d="M38.7 -79.8 q5.9 -0.7 5.9 4.5" stroke="#c48a64" stroke-width="0.91" fill="none" opacity=".6"/><path d="M33 -92 l3 18 h10 l3 -18z" fill="#f4d58a" opacity=".85" stroke="#fff" stroke-width="1"/><path d="M33 -92 h16" stroke="#fffbe8" stroke-width="3"/><rect x="-6" y="-152" width="12" height="12" fill="#c48a64"/><defs><radialGradient id="zaRSk" cx="0.42" cy="0.35" r="0.8"><stop offset="0" stop-color="#e9b48c"/><stop offset="1" stop-color="#c48a64"/></radialGradient></defs><ellipse cx="-18.1" cy="-166.5" rx="3.8" ry="4.9" fill="#e9b48c" stroke="#c48a64" stroke-width="0.95"/><ellipse cx="18.1" cy="-166.5" rx="3.8" ry="4.9" fill="#e9b48c" stroke="#c48a64" stroke-width="0.95"/><ellipse cx="0" cy="-168" rx="19" ry="20.1" fill="url(#zaRSk)" stroke="#c48a64" stroke-width="0.95"/><ellipse cx="-6.8" cy="-168.4" rx="2.09" ry="2.85" fill="#2a1b14"/><circle cx="-6.1" cy="-169.3" r="0.85" fill="#fff"/><path d="M-9.9 -173.5 q3.0 -1.9 6.1 0.4" stroke="#2a1b14" stroke-width="1.52" fill="none" stroke-linecap="round"/><ellipse cx="6.8" cy="-168.4" rx="2.09" ry="2.85" fill="#2a1b14"/><circle cx="7.6" cy="-169.3" r="0.85" fill="#fff"/><path d="M3.8 -173.5 q3.0 -1.9 6.1 0.4" stroke="#2a1b14" stroke-width="1.52" fill="none" stroke-linecap="round"/><ellipse cx="-10.5" cy="-162.3" rx="3.2" ry="2.1" fill="#e48a76" opacity=".55"/><ellipse cx="10.5" cy="-162.3" rx="3.2" ry="2.1" fill="#e48a76" opacity=".55"/><ellipse cx="0" cy="-164.2" rx="2.7" ry="2.1" fill="#c48a64" opacity=".7"/><circle cx="-0.8" cy="-165.0" r="0.76" fill="#fff" opacity=".6"/><path d="M-5.7 -158.9 q5.7 4.9 11.4 0" stroke="#8a3a2a" stroke-width="1.33" fill="none" stroke-linecap="round"/><path d="M-19 -170 C-22 -192 -6 -194 0 -191 C8 -194 22 -190 19 -170 C16 -180 14 -184 6 -184 C0 -183 -8 -184 -14 -182 C-17 -178 -18 -174 -19 -170Z" fill="#b9b5ad" stroke="#9a968e" stroke-width="1"/><path d="M-19 -168 C-21 -160 -20 -156 -18 -152 M19 -168 C21 -160 20 -156 18 -152" stroke="#b9b5ad" stroke-width="5" fill="none" stroke-linecap="round"/></g><!-- @einde roelof -->
+  </g></g>
+
+  <!-- de foto van 1921, aan de muur (na het einde) -->
+  <g id="za-foto">
+    <rect x="890" y="250" width="200" height="140" fill="#3a2a1e" stroke="#c9a24a" stroke-width="5" />
+    <rect x="902" y="262" width="176" height="116" fill="#d9c8a0" />
+    <path d="M902 340 h176 v38 h-176z" fill="#b8a47a" /><path d="M930 340 v-40 l30 -20 l30 20 v40z" fill="#8a7a5a" />
+    <g fill="#5a4a36"><circle cx="1010" cy="322" r="5" /><rect x="1006" y="327" width="8" height="18" /><circle cx="1030" cy="322" r="5" /><rect x="1026" y="327" width="8" height="18" /><path d="M1040 345 c0 -16 26 -18 30 -6 l6 -8 l4 4 l-4 10 v12 h-4 v-6 h-24 v6 h-4z" /></g>
+  </g>
+
+  <!-- donker zolang de feestverlichting niet brandt -->
+  <rect id="za-dark" width="1600" height="900" fill="#0a0814" opacity=".5" pointer-events="none" />
+  <rect width="1600" height="900" fill="url(#zaVign)" pointer-events="none" />
+
+  <g class="hits">
+    <rect class="hit" data-hs="lampjes" data-label="De feestverlichting" x="0" y="176" width="1160" height="60" fill="transparent" />
+    <rect class="hit" data-hs="koeien" data-label="Bordjes met namen op de balk" x="196" y="136" width="650" height="34" fill="transparent" />
+    <rect class="hit" data-hs="stalraam" data-label="Een klein stalraam" x="216" y="226" width="118" height="88" fill="transparent" />
+    <rect class="hit" data-hs="tuindeur" data-label="De glazen deuren naar de tuin" x="1176" y="230" width="210" height="430" fill="transparent" />
+    <rect class="hit" data-hs="koffie" data-label="Het koffieapparaat" x="46" y="416" width="80" height="80" fill="transparent" />
+    <rect class="hit" data-hs="gastenboek" data-label="Het gastenboek" x="226" y="460" width="84" height="34" fill="transparent" />
+    <rect class="hit" data-hs="tafel" data-label="De feesttafel" x="340" y="610" width="680" height="100" fill="transparent" />
+    <rect class="hit" data-hs="pool" data-label="De pooltafel" x="1030" y="640" width="380" height="110" fill="transparent" />
+    <rect class="hit" data-hs="grup" data-label="Een glazen plaat in de vloer" x="540" y="786" width="520" height="90" fill="transparent" />
+    <rect class="hit" data-hs="gasten" data-label="De gasten" x="380" y="430" width="420" height="200" fill="transparent" />
+    <rect class="hit" data-hs="ditty" data-label="Ditty" x="270" y="560" width="120" height="240" fill="transparent" />
+    <rect class="hit" data-hs="roelof" data-label="Roelof" x="1060" y="580" width="120" height="250" fill="transparent" />
+    <rect class="hit" id="hit-zapaardje" data-hs="paardje" data-label="Een houten hobbelpaardje" x="116" y="456" width="40" height="36" fill="transparent" />
+    <rect class="hit" id="hit-foto" data-hs="foto" data-label="De foto uit 1921" x="886" y="246" width="208" height="148" fill="transparent" />
+  </g>
+</svg>

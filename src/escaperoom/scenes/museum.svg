@@ -1,0 +1,260 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="scene" id="sc-museum" viewBox="0 0 1600 900"
+  preserveAspectRatio="xMidYMid slice" aria-label="Het boerenleven-museum van Roelof in de andere schuur">
+  <defs>
+    <pattern id="muReed" width="40" height="14" patternUnits="userSpaceOnUse">
+      <rect width="40" height="14" fill="#8a7050" />
+      <path d="M0 3 H40 M0 7 H40 M0 11 H40" stroke="#6e5638" stroke-width="1.6" />
+      <path d="M8 0 v14 M28 0 v14" stroke="#a88a62" stroke-width="1" opacity=".5" />
+    </pattern>
+    <pattern id="muGrid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M0 0 H26 M0 0 V26" stroke="#9aa0a6" stroke-width="1.2" fill="none" />
+    </pattern>
+    <linearGradient id="muFloor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b6bcc2" />
+      <stop offset="1" stop-color="#8e959c" />
+    </linearGradient>
+    <linearGradient id="muBeam" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8a6e4e" />
+      <stop offset=".5" stop-color="#b09070" />
+      <stop offset="1" stop-color="#76593c" />
+    </linearGradient>
+    <linearGradient id="muRed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e2343a" />
+      <stop offset="1" stop-color="#a81c22" />
+    </linearGradient>
+    <linearGradient id="muBarrel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a86a3a" />
+      <stop offset=".5" stop-color="#d49a62" />
+      <stop offset="1" stop-color="#94582c" />
+    </linearGradient>
+    <linearGradient id="muStraw" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8cf7a" />
+      <stop offset="1" stop-color="#c4a24a" />
+    </linearGradient>
+    <radialGradient id="muVign" cx=".5" cy=".45" r=".78">
+      <stop offset=".6" stop-color="#000" stop-opacity="0" />
+      <stop offset="1" stop-color="#1a1208" stop-opacity=".5" />
+    </radialGradient>
+  </defs>
+
+  <!-- witte wanden en het rieten dak met de sporen eronder -->
+  <rect width="1600" height="900" fill="#eceae4" />
+  <path d="M0 0 H1600 V230 L1200 300 H400 L0 230Z" fill="url(#muReed)" />
+  <g stroke="url(#muBeam)" stroke-width="22">
+    <path d="M60 0 L180 270 M380 0 L420 300 M800 0 L800 300 M1220 0 L1180 300 M1540 0 L1420 270" />
+  </g>
+  <path d="M0 230 L400 300 H1200 L1600 230" stroke="#6e5638" stroke-width="10" fill="none" />
+  <rect x="0" y="296" width="1600" height="26" fill="#8a6e4e" />
+  <!-- de grijze betonvloer -->
+  <path d="M0 720 H1600 V900 H0Z" fill="url(#muFloor)" />
+  <path d="M0 720 H1600" stroke="#7e858c" stroke-width="2" />
+  <g stroke="#9ea4aa" stroke-width="2" opacity=".6"><path d="M400 720 L300 900 M1000 720 L1080 900 M0 800 H1600" /></g>
+
+  <!-- een zware stijl met de rode katrollen (zoals in het echte museum) -->
+  <g id="mu-paal">
+    <rect x="1320" y="300" width="48" height="420" fill="url(#muBeam)" />
+    <rect x="1290" y="360" width="110" height="20" fill="#9a7c58" />
+    <g id="mu-katrollen" class="mu-sway">
+      <path d="M1344 380 V420" stroke="#c9a46a" stroke-width="4" />
+      <rect x="1330" y="420" width="28" height="44" rx="12" fill="#c4302b" stroke="#7a1a16" stroke-width="2" /><circle cx="1344" cy="442" r="6" fill="#7a1a16" />
+      <path d="M1344 464 q-8 12 0 20" stroke="#5a5f66" stroke-width="4" fill="none" />
+      <path d="M1344 484 V540" stroke="#c9a46a" stroke-width="4" />
+      <rect x="1330" y="540" width="28" height="44" rx="12" fill="#c4302b" stroke="#7a1a16" stroke-width="2" /><circle cx="1344" cy="562" r="6" fill="#7a1a16" />
+    </g>
+    <circle cx="1344" cy="640" r="26" fill="none" stroke="#c9a46a" stroke-width="7" />
+    <circle cx="1344" cy="640" r="16" fill="none" stroke="#b8925a" stroke-width="6" />
+  </g>
+
+  <!-- de gereedschapswand: draadgaas met spaden, vorken, een zeis -->
+  <g id="mu-wand">
+    <rect x="430" y="340" width="520" height="250" fill="url(#muGrid)" />
+    <g stroke-linecap="round">
+      <path d="M460 350 L470 580" stroke="#8a6440" stroke-width="7" /><path d="M462 580 l18 -50 h-10 l-14 52z" fill="#2a2a2a" />
+      <path d="M510 345 L516 590" stroke="#a07a50" stroke-width="7" /><path d="M500 520 h32 l-4 50 h-24z" fill="#3a3a3a" />
+      <path d="M560 340 L565 560" stroke="#8a6440" stroke-width="7" /><path d="M548 560 l4 34 M565 560 v36 M582 560 l-4 34" stroke="#3a3a3a" stroke-width="4" />
+      <path d="M610 350 L612 580" stroke="#a07a50" stroke-width="7" /><path d="M598 540 l14 -10 l14 10 v38 h-28z" fill="#2a2a2a" />
+      <path d="M660 338 L680 590" stroke="#8a6440" stroke-width="7" /><path d="M672 346 C720 340 760 360 790 400" stroke="#4a4a4a" stroke-width="6" fill="none" />
+      <path d="M720 350 L722 570" stroke="#a07a50" stroke-width="7" /><path d="M706 570 q4 -30 16 -32 q12 2 16 32" stroke="#3a3a3a" stroke-width="4" fill="none" />
+      <path d="M770 344 L774 580" stroke="#8a6440" stroke-width="7" /><path d="M760 580 l6 20 M774 580 v22 M788 580 l-6 20" stroke="#3a3a3a" stroke-width="4" />
+      <path d="M820 340 L824 590" stroke="#a07a50" stroke-width="7" /><path d="M812 540 h24 l-2 46 h-20z" fill="#3a3a3a" />
+      <path d="M870 346 L876 580" stroke="#8a6440" stroke-width="7" /><path d="M856 580 l6 24 M870 580 l2 26 M884 580 l-2 24 M898 580 l-6 22" stroke="#3a3a3a" stroke-width="3" />
+      <path d="M920 350 L924 570" stroke="#a07a50" stroke-width="7" />
+    </g>
+    <g fill="#f6f2e6" stroke="#9aa0a6"><rect x="520" y="440" width="22" height="12" /><rect x="700" y="470" width="22" height="12" /><rect x="860" y="430" width="22" height="12" /></g>
+  </g>
+  <!-- een schoolplaat aan de muur -->
+  <g id="mu-plaat">
+    <rect x="980" y="340" width="190" height="130" fill="#c9a24a" stroke="#6a4a2a" stroke-width="5" />
+    <rect x="990" y="350" width="170" height="110" fill="#d8e6b0" />
+    <rect x="990" y="350" width="170" height="44" fill="#a8cce0" />
+    <path d="M1100 394 l20 -24 l26 24z" fill="#b4513a" /><rect x="1104" y="394" width="38" height="24" fill="#c46a4a" />
+    <g><ellipse cx="1030" cy="420" rx="22" ry="12" fill="#f4f2ec" /><circle cx="1022" cy="416" r="5" fill="#2a2a2a" /><circle cx="1036" cy="422" r="4" fill="#2a2a2a" /><path d="M1012 428 v10 M1046 428 v10" stroke="#2a2a2a" stroke-width="3" /><ellipse cx="1054" cy="412" rx="7" ry="5" fill="#2a2a2a" /></g>
+    <g><ellipse cx="1080" cy="436" rx="12" ry="8" fill="#eee" /><circle cx="1090" cy="432" r="4" fill="#eee" /></g>
+  </g>
+  <!-- het spreukenbord met Groninger wijsheden -->
+  <g id="mu-spreuk">
+    <rect x="1190" y="350" width="110" height="140" fill="#f4eee0" stroke="#3a6a9a" stroke-width="6" />
+    <g fill="#3a6a9a" font-family="Caveat, cursive" font-size="17" text-anchor="middle"><text x="1245" y="378">Nait</text><text x="1245" y="398">soez'n,</text><text x="1245" y="422">moi</text><text x="1245" y="442">doun</text></g>
+    <path d="M1206 460 q39 14 78 0" stroke="#3a6a9a" stroke-width="3" fill="none" />
+  </g>
+
+  <!-- de balenlift: een houten lopende band, schuin omhoog naar de zolder -->
+  <g id="mu-lift">
+    <path d="M200 640 L520 300 L556 316 L240 660Z" fill="#c9a06a" stroke="#7a5a30" stroke-width="3" />
+    <g stroke="#9a7442" stroke-width="2"><path d="M236 650 L540 310 M216 646 L526 304" /></g>
+    <path d="M220 660 L260 600 L280 700 M300 560 L340 690" stroke="#3a5a8a" stroke-width="6" />
+    <circle cx="246" cy="700" r="20" fill="#2a2a2a" /><circle cx="246" cy="700" r="8" fill="#c4302b" />
+    <g id="mu-bale" class="mu-bale"><rect x="-30" y="-22" width="60" height="38" rx="3" fill="url(#muStraw)" stroke="#a8862e" stroke-width="2" transform="translate(300 560) rotate(-47)" /></g>
+    <rect x="400" y="400" width="54" height="36" rx="3" fill="url(#muStraw)" stroke="#a8862e" stroke-width="2" transform="rotate(-47 427 418)" />
+  </g>
+  <!-- strobalen opgestapeld -->
+  <g id="mu-balen">
+    <rect x="560" y="600" width="110" height="60" fill="url(#muStraw)" stroke="#a8862e" stroke-width="2" />
+    <rect x="670" y="600" width="110" height="60" fill="url(#muStraw)" stroke="#a8862e" stroke-width="2" />
+    <rect x="615" y="540" width="110" height="60" fill="url(#muStraw)" stroke="#a8862e" stroke-width="2" />
+    <g stroke="#b89a40" stroke-width="2"><path d="M570 620 h90 M680 620 h90 M625 560 h90" /></g>
+  </g>
+
+  <!-- de witte tafel met het kistje van Thedema en de bascule -->
+  <g id="mu-tafel">
+    <rect x="860" y="600" width="400" height="18" fill="#f6f4ee" stroke="#c9c5bb" stroke-width="2" />
+    <path d="M876 618 V760 M1244 618 V760" stroke="#f6f4ee" stroke-width="16" />
+    <path d="M876 618 V760 M1244 618 V760" stroke="#c9c5bb" stroke-width="2" fill="none" />
+  </g>
+  <g id="mu-kistje">
+    <rect x="1040" y="548" width="110" height="52" rx="4" fill="#6a4426" stroke="#3a2412" stroke-width="3" />
+    <path d="M1040 548 Q1095 516 1150 548" fill="#7a5030" stroke="#3a2412" stroke-width="3" />
+    <path d="M1040 570 h110 M1062 548 v52 M1128 548 v52" stroke="#c9a24a" stroke-width="3" />
+    <rect id="mu-slot" x="1086" y="560" width="18" height="22" rx="2" fill="#c9a24a" stroke="#8a6a20" stroke-width="2" />
+    <circle cx="1095" cy="569" r="3" fill="#3a2412" />
+  </g>
+  <g id="mu-kistopen">
+    <rect x="1040" y="548" width="110" height="52" rx="4" fill="#6a4426" stroke="#3a2412" stroke-width="3" />
+    <path d="M1040 548 L1052 500 H1162 L1150 548" fill="#7a5030" stroke="#3a2412" stroke-width="3" />
+    <path d="M1048 552 h94" stroke="#1a0e06" stroke-width="8" />
+    <g id="mu-letters" font-family="Fredoka, sans-serif" font-weight="700" font-size="16" fill="#f6e2a0" text-anchor="middle"></g>
+  </g>
+  <!-- de decimaalbascule: één kilo op het schaaltje houdt tien kilo op de brug in evenwicht -->
+  <g id="mu-bascule">
+    <rect x="880" y="584" width="140" height="16" fill="#5a6a4a" stroke="#2a3a2a" stroke-width="2" />
+    <path d="M892 584 V520 M1008 584 V500" stroke="#3a4a3a" stroke-width="6" />
+    <path d="M892 520 L1008 500" stroke="#3a4a3a" stroke-width="5" />
+    <path d="M996 500 v16 M980 518 h32" stroke="#3a4a3a" stroke-width="3" />
+    <rect x="980" y="514" width="32" height="6" fill="#7a8a6a" />
+    <g fill="#2a2a2a"><rect x="986" y="506" width="8" height="8" /><rect x="998" y="508" width="6" height="6" /></g>
+    <g fill="#b8925a" stroke="#7a5a30"><path d="M900 584 c-6 -26 50 -30 56 0z" /></g>
+    <text x="928" y="574" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#3a2614">mud</text>
+  </g>
+
+  <!-- karntonnen, melkbussen en een juk -->
+  <g id="mu-melk">
+    <g fill="#8a5a3a" stroke="#4a2a1a" stroke-width="2">
+      <path d="M1400 560 h40 l6 20 v110 h-52 v-110z" fill="#9a4a2e" />
+      <path d="M1450 570 h40 l6 20 v100 h-52 v-100z" fill="#c9b06a" />
+      <path d="M1500 560 h40 l6 20 v110 h-52 v-110z" fill="#6a3a2a" />
+      <path d="M1540 576 h40 l6 20 v94 h-52 v-94z" fill="#9aa0a6" />
+    </g>
+    <g font-family="IBM Plex Mono, monospace" font-size="12" fill="#f6efe2" text-anchor="middle"><text x="1420" y="640">756</text><text x="1520" y="640">517</text></g>
+  </g>
+  <g id="mu-juk" class="mu-sway">
+    <path d="M1400 300 L1420 360 M1560 300 L1540 360" stroke="#c9a46a" stroke-width="4" />
+    <path d="M1400 362 C1440 352 1460 376 1480 368 C1500 376 1520 352 1560 362 L1560 376 C1520 366 1500 390 1480 382 C1460 390 1440 366 1400 376Z" fill="#2f8a7a" stroke="#1a5a4a" stroke-width="2" />
+    <path d="M1460 372 C1470 380 1490 380 1500 372" stroke="#c4302b" stroke-width="7" fill="none" />
+    <path d="M1416 376 V470 M1544 376 V470" stroke="#5a5f66" stroke-width="2" />
+    <path d="M1396 470 h40 l-6 44 h-28z M1524 470 h40 l-6 44 h-28z" fill="#a9b0b6" stroke="#6a7076" stroke-width="2" />
+  </g>
+  <g id="mu-karn">
+    <path d="M1150 860 L1162 720 H1238 L1250 860Z" fill="url(#muBarrel)" stroke="#5a3418" stroke-width="3" />
+    <g stroke="#3a3f46" stroke-width="5"><path d="M1160 736 H1240 M1154 800 H1246 M1151 850 H1249" /></g>
+    <rect x="1156" y="712" width="88" height="12" rx="4" fill="#c49060" stroke="#5a3418" stroke-width="2" />
+    <path id="mu-stamper" class="mu-stamp" d="M1200 712 V600" stroke="#c49060" stroke-width="9" stroke-linecap="round" />
+    <path d="M1188 602 h24" stroke="#c49060" stroke-width="7" stroke-linecap="round" />
+    <g transform="translate(1340 860)">
+      <path d="M-62 0 L-54 -110 H54 L62 0Z" fill="url(#muBarrel)" stroke="#5a3418" stroke-width="3" />
+      <g stroke="#3a3f46" stroke-width="5"><path d="M-55 -96 H55 M-58 -50 H58 M-61 -10 H61" /></g>
+      <rect x="-56" y="-120" width="112" height="14" rx="4" fill="#c49060" stroke="#5a3418" stroke-width="2" />
+      <path d="M0 -120 V-170 M-30 -150 h60" stroke="#3a3f46" stroke-width="6" />
+      <circle cx="0" cy="-150" r="18" fill="none" stroke="#3a3f46" stroke-width="5" />
+      <path d="M18 -150 h26 v18" stroke="#3a3f46" stroke-width="5" fill="none" /><rect x="38" y="-134" width="12" height="20" rx="4" fill="#c49060" />
+    </g>
+  </g>
+
+  <!-- de rode trekker met de crèmekleurige wielen -->
+  <g id="mu-trekker">
+    <g id="mu-trekbody" class="mu-trek">
+      <path d="M40 600 h300 v-40 l-10 -50 h-90 v-30 h-200z" fill="url(#muRed)" stroke="#7a1a16" stroke-width="3" />
+      <path d="M40 520 h200 v80 h-200z" fill="url(#muRed)" stroke="#7a1a16" stroke-width="3" />
+      <g fill="#7a1a16"><rect x="44" y="532" width="8" height="10" /><rect x="44" y="548" width="8" height="10" /><rect x="44" y="564" width="8" height="10" /><rect x="44" y="580" width="8" height="10" /></g>
+      <rect x="100" y="534" width="70" height="16" rx="3" fill="#dfe4e8" stroke="#8a9096" />
+      <text x="135" y="547" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="600" fill="#3a3f46">D-326</text>
+      <rect x="180" y="560" width="80" height="40" fill="#8a1a1e" /><path d="M190 566 h20 v20 h-20z M220 570 h24 v16 h-24z" fill="#5a1214" />
+      <path d="M146 520 V440" stroke="#1f1f22" stroke-width="12" stroke-linecap="round" />
+      <path d="M290 510 L276 470 M262 470 h30" stroke="#1f1f22" stroke-width="5" stroke-linecap="round" />
+      <path d="M300 480 C300 452 360 452 360 480" stroke="#1f1f22" stroke-width="6" fill="none" />
+      <g id="mu-puf" class="mu-puf" fill="#9aa0a6" opacity="0"><circle cx="146" cy="424" r="10" /><circle cx="154" cy="400" r="14" /></g>
+    </g>
+    <circle cx="90" cy="680" r="46" fill="#1f1f22" /><circle cx="90" cy="680" r="28" fill="#efe6c8" /><circle cx="90" cy="680" r="8" fill="#c4302b" />
+    <g class="mu-wheel"><circle cx="300" cy="650" r="84" fill="#1f1f22" />
+      <g stroke="#2a2a2e" stroke-width="10"><path d="M300 566 v18 M300 716 v18 M216 650 h18 M366 650 h18 M241 591 l12 12 M347 697 l12 12 M359 591 l-12 12 M253 697 l-12 12" /></g>
+      <circle cx="300" cy="650" r="54" fill="#efe6c8" stroke="#c9bd98" stroke-width="3" /><circle cx="300" cy="650" r="14" fill="#c4302b" /></g>
+  </g>
+
+  <!-- de ladder naar het platte dak -->
+  <g id="mu-ladder">
+    <path d="M760 300 V660 M820 300 V660" stroke="#8a6440" stroke-width="10" />
+    <path d="M760 330 h60 M760 370 h60 M760 410 h60 M760 450 h60 M760 490 h60 M760 530 h60 M760 570 h60 M760 610 h60 M760 650 h60" stroke="#a07a50" stroke-width="7" />
+    <rect x="740" y="260" width="100" height="40" fill="#5a4a3a" /><rect x="750" y="266" width="80" height="30" fill="#b8d6ec" />
+  </g>
+
+  <!-- de groene strohakselaar met zijn grote vliegwiel (zoals in het echte museum) -->
+  <g id="mu-haksel">
+    <path d="M940 880 L980 760 L1010 760 L1040 880 M1060 880 L1030 770" stroke="#6ac43a" stroke-width="12" stroke-linecap="round" fill="none" />
+    <rect x="960" y="740" width="110" height="34" rx="4" fill="#7a5030" stroke="#4a2a12" stroke-width="2" />
+    <g id="mu-vlieg" class="mu-vlieg">
+      <circle cx="1010" cy="740" r="72" fill="none" stroke="#7ad13e" stroke-width="12" />
+      <circle cx="1010" cy="740" r="72" fill="none" stroke="#4a8a22" stroke-width="2" />
+      <path d="M1010 740 L1050 690 M1010 740 L960 770" stroke="#7ad13e" stroke-width="10" />
+      <path d="M1048 692 l26 -10" stroke="#c49060" stroke-width="10" stroke-linecap="round" />
+      <path d="M1010 740 c20 -40 60 -40 70 -20 c-20 0 -40 10 -70 20z" fill="#2a2a2a" />
+      <circle cx="1010" cy="740" r="14" fill="#5aa82e" stroke="#2a5a12" stroke-width="2" />
+    </g>
+    <rect x="1050" y="790" width="40" height="22" rx="2" fill="#f6f2e6" stroke="#9aa0a6" transform="rotate(8 1070 800)" />
+    <text x="1070" y="805" text-anchor="middle" font-family="Caveat, cursive" font-size="10" fill="#2a2a2a" transform="rotate(8 1070 800)">hakselaar</text>
+  </g>
+
+  <!-- Roelof -->
+  <g id="mu-roelof"><g transform="translate(560 830)">
+    <!-- @personage roelof --><g transform="translate(0 0) scale(1.35 1.35)"><defs><linearGradient id="muRKiel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5582c0"/><stop offset="1" stop-color="#24467a"/></linearGradient></defs><path d="M-18 -76 L-17 -4 L-5 -4 L-6 -76Z M18 -76 L17 -4 L5 -4 L6 -76Z" fill="#3b3f4a" stroke="#00000030" stroke-width="1"/><path d="M-21 -1 C-21 -9 -6 -10 -4 -6 L-4 0 Z M21 -1 C21 -9 6 -10 4 -6 L4 0 Z" fill="#c99b4a"/><path d="M-24 0 C-26 -10 -8 -12 -3 -6 L-3 0Z M24 0 C26 -10 8 -12 3 -6 L3 0Z" fill="#d8ac58" stroke="#9a7230" stroke-width="1.4"/><path d="M-32 -74 C-34 -110 -30 -132 -18 -140 C-8 -144 8 -144 18 -140 C30 -132 34 -110 32 -74 L36 -66 L-36 -66Z" fill="url(#muRKiel)" stroke="#00000030" stroke-width="1.2"/><path d="M-6 -142 L0 -128 L6 -142" stroke="#f3efe6" stroke-width="3" fill="none"/><path d="M0 -128 V-80" stroke="#24467a" stroke-width="1.6"/><g fill="#e8e2d2"><circle cx="0" cy="-118" r="1.8"/><circle cx="0" cy="-104" r="1.8"/><circle cx="0" cy="-90" r="1.8"/></g><rect x="12" y="-124" width="13" height="12" rx="2" fill="#24467a"/><path d="M15 -126 v-8 M19 -126 v-6" stroke="#d6a640" stroke-width="2"/><path d="M-34 -80 Q0 -72 34 -80 L34 -72 Q0 -64 -34 -72Z" fill="#7a4a26"/><rect x="-5" y="-80" width="10" height="8" fill="none" stroke="#d6a640" stroke-width="2"/><path d="M-30 -74 l-4 24 l12 0 l2 -22Z" fill="#8a5a32"/><path d="M-27 -66 l-2 -14 M-23 -66 l1 -16" stroke="#9aa0a6" stroke-width="2.4"/><path d="M-28 -132 C-40 -112 -40 -92 -36 -76" stroke="url(#muRKiel)" stroke-width="13" fill="none" stroke-linecap="round"/><ellipse cx="-36" cy="-70" rx="6.5" ry="7.2" fill="#e9b48c" stroke="#c48a64" stroke-width="0.91"/><path d="M-37.3 -75.8 q5.9 -0.7 5.9 4.5" stroke="#c48a64" stroke-width="0.91" fill="none" opacity=".6"/><path d="M28 -132 C40 -112 42 -96 40 -80" stroke="url(#muRKiel)" stroke-width="13" fill="none" stroke-linecap="round"/><ellipse cx="40" cy="-74" rx="6.5" ry="7.2" fill="#e9b48c" stroke="#c48a64" stroke-width="0.91"/><path d="M38.7 -79.8 q5.9 -0.7 5.9 4.5" stroke="#c48a64" stroke-width="0.91" fill="none" opacity=".6"/><rect x="-6" y="-152" width="12" height="12" fill="#c48a64"/><defs><radialGradient id="muRSk" cx="0.42" cy="0.35" r="0.8"><stop offset="0" stop-color="#e9b48c"/><stop offset="1" stop-color="#c48a64"/></radialGradient></defs><ellipse cx="-18.1" cy="-166.5" rx="3.8" ry="4.9" fill="#e9b48c" stroke="#c48a64" stroke-width="0.95"/><ellipse cx="18.1" cy="-166.5" rx="3.8" ry="4.9" fill="#e9b48c" stroke="#c48a64" stroke-width="0.95"/><ellipse cx="0" cy="-168" rx="19" ry="20.1" fill="url(#muRSk)" stroke="#c48a64" stroke-width="0.95"/><ellipse cx="-6.8" cy="-168.4" rx="2.09" ry="2.85" fill="#2a1b14"/><circle cx="-6.1" cy="-169.3" r="0.85" fill="#fff"/><path d="M-9.9 -173.5 q3.0 -1.9 6.1 0.4" stroke="#2a1b14" stroke-width="1.52" fill="none" stroke-linecap="round"/><ellipse cx="6.8" cy="-168.4" rx="2.09" ry="2.85" fill="#2a1b14"/><circle cx="7.6" cy="-169.3" r="0.85" fill="#fff"/><path d="M3.8 -173.5 q3.0 -1.9 6.1 0.4" stroke="#2a1b14" stroke-width="1.52" fill="none" stroke-linecap="round"/><ellipse cx="-10.5" cy="-162.3" rx="3.2" ry="2.1" fill="#e48a76" opacity=".55"/><ellipse cx="10.5" cy="-162.3" rx="3.2" ry="2.1" fill="#e48a76" opacity=".55"/><ellipse cx="0" cy="-164.2" rx="2.7" ry="2.1" fill="#c48a64" opacity=".7"/><circle cx="-0.8" cy="-165.0" r="0.76" fill="#fff" opacity=".6"/><path d="M-5.7 -158.9 q5.7 4.9 11.4 0" stroke="#8a3a2a" stroke-width="1.33" fill="none" stroke-linecap="round"/><path d="M-19 -170 C-22 -192 -6 -194 0 -191 C8 -194 22 -190 19 -170 C16 -180 14 -184 6 -184 C0 -183 -8 -184 -14 -182 C-17 -178 -18 -174 -19 -170Z" fill="#b9b5ad" stroke="#9a968e" stroke-width="1"/><path d="M-19 -168 C-21 -160 -20 -156 -18 -152 M19 -168 C21 -160 20 -156 18 -152" stroke="#b9b5ad" stroke-width="5" fill="none" stroke-linecap="round"/></g><!-- @einde roelof -->
+  </g></g>
+
+  <!-- het hobbelpaardje (de gratis hint), op de strobalen -->
+  <g id="mu-paardje" transform="translate(670 540) scale(.3)" fill="#d9ad6e" stroke="#7a4a20" stroke-width="6">
+    <path d="M-56 -6 Q0 16 56 -6" fill="none" stroke-width="9" />
+    <path d="M-30 -44 L-38 0 M-16 -44 L-20 4 M16 -44 L20 4 M30 -44 L38 0" stroke-width="9" />
+    <path d="M-40 -60 C-40 -74 30 -76 34 -60 C36 -48 28 -40 0 -40 C-30 -40 -40 -46 -40 -60Z" />
+    <path d="M24 -64 C30 -86 38 -100 50 -104 C62 -106 70 -98 68 -90 C66 -84 58 -84 52 -84 C48 -76 44 -66 38 -58Z" />
+    <circle cx="56" cy="-96" r="3" fill="#2a1a0c" stroke="none" /><path d="M-10 -66 h22 v6 h-22z" fill="#c4302b" stroke="none" />
+  </g>
+
+  <rect width="1600" height="900" fill="url(#muVign)" pointer-events="none" />
+
+  <g class="hits">
+    <rect class="hit" data-hs="trekker" data-label="Een rode trekker" x="30" y="430" width="370" height="310" fill="transparent" />
+    <rect class="hit" data-hs="lift" data-label="De balenlift" x="200" y="300" width="360" height="300" fill="transparent" />
+    <rect class="hit" data-hs="wand" data-label="De gereedschapswand" x="430" y="340" width="300" height="250" fill="transparent" />
+    <rect class="hit" data-hs="muladder" data-label="De ladder naar het platte dak" x="740" y="260" width="100" height="400" fill="transparent" />
+    <rect class="hit" data-hs="wand" data-label="De gereedschapswand" x="840" y="340" width="110" height="160" fill="transparent" />
+    <rect class="hit" data-hs="plaat" data-label="Een oude schoolplaat" x="976" y="336" width="198" height="138" fill="transparent" />
+    <rect class="hit" data-hs="spreuk" data-label="Een spreukenbord" x="1186" y="346" width="118" height="148" fill="transparent" />
+    <rect class="hit" data-hs="bascule" data-label="De bascule" x="876" y="494" width="150" height="110" fill="transparent" />
+    <rect class="hit" data-hs="kistje" data-label="Het kistje van Thedema" x="1036" y="500" width="130" height="104" fill="transparent" />
+    <rect class="hit" data-hs="katrollen" data-label="Rode katrollen aan een paal" x="1316" y="380" width="56" height="300" fill="transparent" />
+    <rect class="hit" data-hs="juk" data-label="Een juk met emmers" x="1390" y="296" width="180" height="222" fill="transparent" />
+    <rect class="hit" data-hs="bussen" data-label="Melkbussen" x="1394" y="556" width="200" height="140" fill="transparent" />
+    <rect class="hit" data-hs="karn" data-label="De karntonnen" x="1148" y="596" width="270" height="270" fill="transparent" />
+    <rect class="hit" data-hs="balen" data-label="Strobalen" x="560" y="560" width="220" height="100" fill="transparent" />
+    <rect class="hit" id="hit-mupaardje" data-hs="paardje" data-label="Een houten hobbelpaardje" x="650" y="500" width="44" height="44" fill="transparent" />
+    <rect class="hit" data-hs="haksel" data-label="Een groene strohakselaar" x="930" y="660" width="170" height="220" fill="transparent" />
+    <rect class="hit" data-hs="roelof" data-label="Roelof" x="510" y="600" width="110" height="240" fill="transparent" />
+  </g>
+</svg>

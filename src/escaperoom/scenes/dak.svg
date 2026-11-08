@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="scene" id="sc-dak" viewBox="0 0 1600 900"
+  preserveAspectRatio="xMidYMid slice" aria-label="Het platte dak tussen de twee schuren, met uitzicht over het Groninger land">
+  <defs>
+    <linearGradient id="dkSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5f9ad2" />
+      <stop offset=".7" stop-color="#b8d8ec" />
+      <stop offset="1" stop-color="#e8f0e8" />
+    </linearGradient>
+    <linearGradient id="dkRoof" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a4a50" />
+      <stop offset="1" stop-color="#2e2e34" />
+    </linearGradient>
+    <pattern id="dkTiles" width="34" height="22" patternUnits="userSpaceOnUse">
+      <rect width="34" height="22" fill="#8a3a28" />
+      <path d="M0 21 H34 M17 0 V21" stroke="#6a2a1c" stroke-width="2" />
+      <path d="M2 4 q7 -3 13 0" stroke="#a24a34" stroke-width="2" fill="none" />
+    </pattern>
+    <pattern id="dkReed" width="30" height="12" patternUnits="userSpaceOnUse">
+      <rect width="30" height="12" fill="#6a5a3a" />
+      <path d="M0 3 l30 -2 M0 8 l30 -2" stroke="#8a7650" stroke-width="2" />
+    </pattern>
+    <radialGradient id="dkVign" cx=".5" cy=".45" r=".8">
+      <stop offset=".62" stop-color="#000" stop-opacity="0" />
+      <stop offset="1" stop-color="#0a1420" stop-opacity=".4" />
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#dkSky)" />
+  <g class="dk-clouds" fill="#fff" opacity=".9">
+    <g class="dk-cloud"><ellipse cx="300" cy="120" rx="120" ry="28" /><ellipse cx="360" cy="100" rx="70" ry="30" /></g>
+    <g class="dk-cloud b"><ellipse cx="1100" cy="80" rx="140" ry="26" /><ellipse cx="1170" cy="64" rx="70" ry="28" /></g>
+    <g class="dk-cloud c"><ellipse cx="760" cy="180" rx="90" ry="18" /></g>
+  </g>
+  <!-- een leeuwerik -->
+  <g transform="translate(700 90)"><g class="dk-lark" fill="#4a3a2a"><path d="M0 0 q8 -6 16 0 q8 -6 16 0 q-8 2 -16 2 q-8 0 -16 -2z" /></g></g>
+
+  <!-- de horizon: weilanden, akkers, bomen, kerktorens en een molen -->
+  <path d="M0 400 H1600 V900 H0Z" fill="#9cc06a" />
+  <!-- de stad Groningen met de Martinitoren, in het zuiden -->
+  <g id="dk-stad" fill="#7c8a9a" opacity=".8">
+    <rect x="980" y="370" width="120" height="30" /><rect x="1020" y="356" width="40" height="44" />
+    <rect x="1058" y="292" width="14" height="108" /><rect x="1054" y="320" width="22" height="6" /><rect x="1056" y="290" width="18" height="12" />
+    <path d="M1058 292 l7 -26 l7 26z" />
+    <rect x="1120" y="380" width="60" height="20" /><rect x="900" y="384" width="70" height="16" />
+  </g>
+  <!-- een scheve toren in de verte -->
+  <g id="dk-scheef" fill="#8a7a6a" opacity=".85" transform="rotate(4 230 400)">
+    <rect x="220" y="330" width="22" height="70" /><path d="M218 330 l13 -22 l13 22z" fill="#5a5a62" />
+    <rect x="160" y="370" width="70" height="30" fill="#9a8a7a" /><path d="M160 370 l35 -20 l35 20z" fill="#7a3a2a" />
+  </g>
+  <!-- een molen -->
+  <g id="dk-molen">
+    <path d="M520 400 L530 340 h20 L560 400z" fill="#4a4036" />
+    <g class="dk-wieken" transform="translate(540 340)"><g stroke="#3a3a3a" stroke-width="4"><path d="M0 0 L0 -40 M0 0 L40 0 M0 0 L0 40 M0 0 L-40 0" /></g><g fill="#e9e2d2" opacity=".85"><rect x="2" y="-38" width="8" height="30" /><rect x="8" y="2" width="30" height="8" /><rect x="-10" y="8" width="8" height="30" /><rect x="-38" y="-10" width="30" height="8" /></g></g>
+  </g>
+  <g fill="#5e8a46"><ellipse cx="80" cy="396" rx="70" ry="18" /><ellipse cx="420" cy="398" rx="60" ry="14" /><ellipse cx="760" cy="398" rx="80" ry="14" /><ellipse cx="1330" cy="396" rx="90" ry="16" /><ellipse cx="1520" cy="398" rx="60" ry="12" /></g>
+  <!-- de drie akkers van Harm: A, B en C -->
+  <g id="dk-akkers">
+    <path d="M0 420 L560 420 L420 560 L0 560Z" fill="#c9b06a" />
+    <path d="M560 420 L1060 420 L1100 560 L420 560Z" fill="#7aa04a" />
+    <path d="M1060 420 L1600 420 L1600 560 L1100 560Z" fill="#a8743a" />
+    <g stroke="#b09a50" stroke-width="2" opacity=".7"><path d="M0 450 L530 450 M0 490 L490 490 M0 530 L450 530" /></g>
+    <g stroke="#5e8a36" stroke-width="3" opacity=".7"><path d="M600 440 L1070 440 M560 470 L1080 470 M510 500 L1088 500 M470 530 L1094 530" /></g>
+    <g stroke="#8a5a2a" stroke-width="3" opacity=".7"><path d="M1080 440 L1600 440 M1086 470 L1600 470 M1090 500 L1600 500 M1096 530 L1600 530" /></g>
+    <g font-family="Fredoka, sans-serif" font-weight="700" font-size="26" fill="#fff" stroke="#3a2a14" stroke-width="4" paint-order="stroke" text-anchor="middle">
+      <text x="340" y="500">A</text><text x="760" y="500">B</text><text x="1220" y="500">C</text>
+    </g>
+  </g>
+  <!-- de ree in de wei -->
+  <g id="dk-ree" class="dk-ree"><g transform="translate(860 552)">
+    <!-- @personage ree --><g transform="translate(0 0) scale(0.22 0.22)"><path d="M-32 -50 L-36 -18 L-34 0 M-24 -48 L-22 -18 L-26 0 M24 -50 L26 -20 L24 0 M32 -50 L36 -20 L34 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-42 -62 C-44 -76 -24 -82 0 -80 C22 -80 36 -74 40 -62 C42 -50 32 -44 0 -44 C-28 -44 -42 -48 -42 -62Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.4"/><path d="M-30 -50 C-10 -46 14 -46 30 -50" stroke="#e8d2b4" stroke-width="5" fill="none" opacity=".7"/><ellipse cx="-42" cy="-64" rx="7" ry="9" fill="#f6efe4"/><g transform="rotate(48 40 -58)"><path d="M30 -58 C34 -72 38 -84 46 -92 L58 -86 C52 -78 48 -66 44 -54Z" fill="#a8714a"/><path d="M44 -94 C50 -100 62 -100 70 -94 C76 -90 78 -84 74 -82 C66 -80 58 -82 52 -80 C46 -82 42 -88 44 -94Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.4"/><ellipse cx="75" cy="-84" rx="3" ry="2.4" fill="#2a1a10"/><circle cx="58" cy="-92" r="2.6" fill="#1a100a"/><circle cx="59" cy="-93" r=".8" fill="#fff"/><path d="M46 -96 C40 -110 44 -114 50 -106Z M52 -98 C52 -114 58 -114 58 -102Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.2"/><path d="M47 -104 C45 -108 46 -110 48 -106" stroke="#e8b8a0" stroke-width="2"/></g></g><g transform="translate(60 4) scale(-0.2 0.2)"><path d="M-32 -50 L-36 -18 L-34 0 M-24 -48 L-22 -18 L-26 0 M24 -50 L26 -20 L24 0 M32 -50 L36 -20 L34 0" stroke="#7a4e30" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-42 -62 C-44 -76 -24 -82 0 -80 C22 -80 36 -74 40 -62 C42 -50 32 -44 0 -44 C-28 -44 -42 -48 -42 -62Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.4"/><path d="M-30 -50 C-10 -46 14 -46 30 -50" stroke="#e8d2b4" stroke-width="5" fill="none" opacity=".7"/><ellipse cx="-42" cy="-64" rx="7" ry="9" fill="#f6efe4"/><g><path d="M30 -58 C34 -72 38 -84 46 -92 L58 -86 C52 -78 48 -66 44 -54Z" fill="#a8714a"/><path d="M44 -94 C50 -100 62 -100 70 -94 C76 -90 78 -84 74 -82 C66 -80 58 -82 52 -80 C46 -82 42 -88 44 -94Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.4"/><ellipse cx="75" cy="-84" rx="3" ry="2.4" fill="#2a1a10"/><circle cx="58" cy="-92" r="2.6" fill="#1a100a"/><circle cx="59" cy="-93" r=".8" fill="#fff"/><path d="M46 -96 C40 -110 44 -114 50 -106Z M52 -98 C52 -114 58 -114 58 -102Z" fill="#a8714a" stroke="#7a4e30" stroke-width="1.2"/><path d="M47 -104 C45 -108 46 -110 48 -106" stroke="#e8b8a0" stroke-width="2"/></g></g><!-- @einde ree -->
+  </g></g>
+  <path d="M0 560 H1600" stroke="#5e7a3a" stroke-width="6" />
+
+  <!-- links het dak van de schuur met de zaal, rechts het rieten dak van het museum -->
+  <path d="M0 140 L300 600 L0 600Z" fill="url(#dkTiles)" />
+  <path d="M0 140 L300 600" stroke="#5a2418" stroke-width="8" />
+  <path d="M1600 120 L1270 600 L1600 600Z" fill="url(#dkReed)" />
+  <path d="M1600 120 L1270 600" stroke="#4a3a24" stroke-width="10" />
+  <!-- het platte dak, met grind -->
+  <path d="M0 600 H1600 V900 H0Z" fill="url(#dkRoof)" />
+  <g fill="#6a6a70" opacity=".6"><circle cx="300" cy="700" r="3" /><circle cx="520" cy="760" r="4" /><circle cx="900" cy="680" r="3" /><circle cx="1200" cy="800" r="4" /><circle cx="700" cy="850" r="3" /><circle cx="1400" cy="700" r="3" /><circle cx="150" cy="820" r="4" /></g>
+  <path d="M0 600 H1600" stroke="#7a7a80" stroke-width="12" />
+  <!-- het luik naar de zaal, en de ladder uit het museum -->
+  <g id="dk-luik">
+    <path d="M300 760 h200 l30 70 h-260z" fill="#5a4a3a" stroke="#2a2018" stroke-width="3" />
+    <path d="M310 770 h180 l22 52 h-224z" fill="#7a6248" />
+    <circle cx="400" cy="800" r="8" fill="none" stroke="#2a2a2a" stroke-width="4" />
+    <text x="400" y="752" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="600" font-size="16" fill="#e9e2d2">ZAAL</text>
+  </g>
+  <g id="dk-gat">
+    <path d="M1080 760 h170 l20 60 h-210z" fill="#1a1612" />
+    <path d="M1110 820 L1120 740 M1220 820 L1210 740" stroke="#8a6440" stroke-width="10" />
+    <path d="M1116 770 h98 M1113 800 h104" stroke="#a07a50" stroke-width="7" />
+  </g>
+  <!-- de verrekijker van Roelof op een statief -->
+  <g id="dk-kijker">
+    <path d="M760 820 L800 700 L840 820 M800 700 V830" stroke="#3a3a3a" stroke-width="5" fill="none" />
+    <g transform="rotate(-12 800 690)"><rect x="770" y="676" width="64" height="24" rx="8" fill="#2a2a2e" /><circle cx="836" cy="688" r="12" fill="#5a7a9a" stroke="#2a2a2e" stroke-width="3" /></g>
+  </g>
+  <!-- Harms akkerkaart, bij de akkers (verschijnt als je hem hebt neergelegd) -->
+
+  <!-- het hobbelpaardje -->
+
+  <rect width="1600" height="900" fill="url(#dkVign)" pointer-events="none" />
+
+  <g class="hits">
+    <rect class="hit" data-hs="akkers" data-label="De akkers in de verte" x="0" y="420" width="1600" height="130" fill="transparent" />
+    <rect class="hit" data-hs="stad" data-label="De stad in de verte" x="890" y="260" width="300" height="140" fill="transparent" />
+    <rect class="hit" data-hs="scheef" data-label="Een scheve toren" x="150" y="300" width="110" height="100" fill="transparent" />
+    <rect class="hit" data-hs="molen" data-label="Een molen" x="490" y="290" width="100" height="112" fill="transparent" />
+    <rect class="hit" data-hs="dkree" data-label="Een ree in de wei" x="820" y="510" width="80" height="44" fill="transparent" />
+    <rect class="hit" data-hs="kijker" data-label="Een verrekijker op een statief" x="756" y="660" width="100" height="170" fill="transparent" />
+    <rect class="hit" data-hs="naarzaal" data-label="Het luik naar de zaal" x="270" y="740" width="270" height="94" fill="transparent" />
+    <rect class="hit" data-hs="naarmuseum" data-label="De ladder naar het museum" x="1060" y="740" width="210" height="84" fill="transparent" />
+    <rect class="hit" data-hs="dakpannen" data-label="Het dak van de zaal" x="0" y="140" width="220" height="440" fill="transparent" />
+    <rect class="hit" data-hs="riet" data-label="Het rieten dak van het museum" x="1380" y="140" width="220" height="440" fill="transparent" />
+    <rect class="hit" data-hs="leeuwerik" data-label="Een vogeltje hoog in de lucht" x="560" y="40" width="300" height="120" fill="transparent" />
+  </g>
+</svg>
