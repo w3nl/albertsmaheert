@@ -180,25 +180,66 @@
   </g>
 
   <!-- de rode trekker met de crèmekleurige wielen -->
+  <!-- de rode International D-326 met crèmekleurige velgen, door Roelof zelf opgeknapt (naar de foto's van het museum) -->
   <g id="mu-trekker">
+    <defs>
+      <linearGradient id="muHood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ee4a4e"/><stop offset=".35" stop-color="#d42a30"/><stop offset="1" stop-color="#9a161c"/></linearGradient>
+      <linearGradient id="muFender" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e83a40"/><stop offset="1" stop-color="#a01a20"/></linearGradient>
+      <linearGradient id="muChrome" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset=".5" stop-color="#b8bec4"/><stop offset="1" stop-color="#e2e6ea"/></linearGradient>
+    </defs>
+    <!-- de vooras: een steun van het chassis naar het voorwiel -->
+    <path d="M90 612 L94 686 M106 612 L102 686" stroke="#8e161c" stroke-width="8" stroke-linecap="round" />
+    <!-- de achteras en de trekhaak -->
+    <path d="M380 612 h30 v14 h-30z" fill="#7a1a16" />
+    <circle cx="98" cy="686" r="45.5" fill="#1c1c1f"/><polygon points="138.9,683.1 148.0,685.0 147.6,692.0 138.9,688.9" fill="#26262a"/><polygon points="137.4,697.3 145.3,702.2 142.6,708.6 135.5,702.7" fill="#26262a"/><polygon points="131.2,710.1 136.9,717.4 132.2,722.5 127.5,714.5" fill="#26262a"/><polygon points="120.9,720.0 123.9,728.8 117.6,732.0 116.0,722.9" fill="#26262a"/><polygon points="107.9,725.8 107.7,735.1 100.7,735.9 102.3,726.8" fill="#26262a"/><polygon points="93.7,726.8 90.3,735.4 83.5,733.8 88.1,725.8" fill="#26262a"/><polygon points="80.0,722.9 73.9,729.8 68.0,726.0 75.1,720.0" fill="#26262a"/><polygon points="68.5,714.5 60.3,718.9 56.1,713.3 64.8,710.1" fill="#26262a"/><polygon points="60.5,702.7 51.4,704.0 49.3,697.4 58.6,697.3" fill="#26262a"/><polygon points="57.1,688.9 48.0,687.0 48.4,680.0 57.1,683.1" fill="#26262a"/><polygon points="58.6,674.7 50.7,669.8 53.4,663.4 60.5,669.3" fill="#26262a"/><polygon points="64.8,661.9 59.1,654.6 63.8,649.5 68.5,657.5" fill="#26262a"/><polygon points="75.1,652.0 72.1,643.2 78.4,640.0 80.0,649.1" fill="#26262a"/><polygon points="88.1,646.2 88.3,636.9 95.3,636.1 93.7,645.2" fill="#26262a"/><polygon points="102.3,645.2 105.7,636.6 112.5,638.2 107.9,646.2" fill="#26262a"/><polygon points="116.0,649.1 122.1,642.2 128.0,646.0 120.9,652.0" fill="#26262a"/><polygon points="127.5,657.5 135.7,653.1 139.9,658.7 131.2,661.9" fill="#26262a"/><polygon points="135.5,669.3 144.6,668.0 146.7,674.6 137.4,674.7" fill="#26262a"/><circle cx="98" cy="686" r="39" fill="none" stroke="#3a3a40" stroke-width="2"/><circle cx="98" cy="686" r="32" fill="#efe6c8" stroke="#c9bd98" stroke-width="2.5"/><circle cx="98" cy="686" r="22" fill="#e9dfbf" stroke="#c9bd98" stroke-width="2"/><circle cx="115.0" cy="686.0" r="2.6" fill="#a81c22"/><circle cx="106.5" cy="700.7" r="2.6" fill="#a81c22"/><circle cx="89.5" cy="700.7" r="2.6" fill="#a81c22"/><circle cx="81.0" cy="686.0" r="2.6" fill="#a81c22"/><circle cx="89.5" cy="671.3" r="2.6" fill="#a81c22"/><circle cx="106.5" cy="671.3" r="2.6" fill="#a81c22"/><circle cx="98" cy="686" r="10" fill="#c4302b" stroke="#7a1a16" stroke-width="2"/><circle cx="96" cy="683" r="3" fill="#e8686c"/>
     <g id="mu-trekbody" class="mu-trek">
-      <path d="M40 600 h300 v-40 l-10 -50 h-90 v-30 h-200z" fill="url(#muRed)" stroke="#7a1a16" stroke-width="3" />
-      <path d="M40 520 h200 v80 h-200z" fill="url(#muRed)" stroke="#7a1a16" stroke-width="3" />
-      <g fill="#7a1a16"><rect x="44" y="532" width="8" height="10" /><rect x="44" y="548" width="8" height="10" /><rect x="44" y="564" width="8" height="10" /><rect x="44" y="580" width="8" height="10" /></g>
-      <rect x="64" y="526" width="136" height="16" rx="3" fill="#dfe4e8" stroke="#8a9096" />
-      <text x="132" y="538.5" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="600" fill="#3a3f46" letter-spacing="1.5">INTERNATIONAL</text>
-      <rect x="110" y="550" width="46" height="14" rx="2" fill="#efe6c8" stroke="#8a9096" />
-      <text x="133" y="561" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="600" fill="#3a3f46">D-326</text>
-      <rect x="180" y="560" width="80" height="40" fill="#8a1a1e" /><path d="M190 566 h20 v20 h-20z M220 570 h24 v16 h-24z" fill="#5a1214" />
-      <path d="M146 520 V440" stroke="#1f1f22" stroke-width="12" stroke-linecap="round" />
-      <path d="M290 510 L276 470 M262 470 h30" stroke="#1f1f22" stroke-width="5" stroke-linecap="round" />
-      <path d="M300 480 C300 452 360 452 360 480" stroke="#1f1f22" stroke-width="6" fill="none" />
-      <g id="mu-puf" class="mu-puf" fill="#9aa0a6" opacity="0"><circle cx="146" cy="424" r="10" /><circle cx="154" cy="400" r="14" /></g>
+      <!-- het chassis en het motorblok onder de kap -->
+      <path d="M60 602 H300 V626 H60Z" fill="#8e161c" />
+      <path d="M84 556 H256 V608 H84Z" fill="#a81c22" stroke="#6a1014" stroke-width="2" />
+      <g fill="#8e161c" stroke="#5a0e10" stroke-width="1.5">
+        <rect x="96" y="562" width="44" height="26" rx="3" /><path d="M102 562 v26 M110 562 v26 M118 562 v26 M126 562 v26 M134 562 v26" />
+        <rect x="150" y="566" width="30" height="22" rx="4" /><circle cx="196" cy="580" r="11" /><circle cx="196" cy="580" r="4" fill="#5a0e10" />
+        <rect x="214" y="562" width="34" height="40" rx="5" fill="#2a2a2e" />
+      </g>
+      <path d="M150 596 h70" stroke="#c9ccd0" stroke-width="5" stroke-linecap="round" />
+      <path d="M142 590 q10 -14 24 -6 M184 588 v14" stroke="#2a2a2e" stroke-width="4" fill="none" stroke-linecap="round" />
+      <!-- de motorkap: smal en rond, met de grille vooraan -->
+      <path d="M58 600 V532 Q58 506 84 504 H252 Q266 504 268 518 L272 560 H258 V556 H84 V600Z" fill="url(#muHood)" stroke="#7a1a16" stroke-width="2.5" />
+      <path d="M86 510 H250" stroke="#ff8a8e" stroke-width="3" opacity=".55" stroke-linecap="round" />
+      <path d="M44 526 Q44 508 62 506 V600 H44Z" fill="#c4262c" stroke="#7a1a16" stroke-width="2" />
+      <g stroke="#5a0e10" stroke-width="3" stroke-linecap="round"><path d="M48 520 h10 M47 532 h11 M46 544 h12 M46 556 h12 M46 568 h12 M46 580 h12 M46 592 h12" /></g>
+      <!-- de koplamp opzij van de grille -->
+      <circle cx="40" cy="552" r="14" fill="#1a1a1e" /><circle cx="36" cy="552" r="9" fill="url(#muChrome)" /><circle cx="33" cy="549" r="3" fill="#fff" />
+      <!-- de chromen naamstrip en het typeplaatje -->
+      <rect x="94" y="522" width="132" height="13" rx="3" fill="url(#muChrome)" stroke="#8a9096" stroke-width="1" />
+      <text x="160" y="532" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" font-weight="600" fill="#2a3036" letter-spacing="1.6">INTERNATIONAL</text>
+      <rect x="168" y="540" width="40" height="12" rx="2" fill="#efe6c8" stroke="#8a9096" stroke-width="1" />
+      <text x="188" y="549.5" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" font-weight="600" fill="#2a3036">D-326</text>
+      <path d="M238 528 l8 8 M242 524 l8 8" stroke="#2a2a2e" stroke-width="3" stroke-linecap="round" />
+      <!-- de uitlaat en de luchtinlaat met zijn kapje -->
+      <path d="M150 504 V438" stroke="#1f1f22" stroke-width="10" stroke-linecap="round" />
+      <rect x="143" y="452" width="14" height="34" rx="6" fill="#2a2a2e" />
+      <path d="M184 504 V476" stroke="#1f1f22" stroke-width="9" />
+      <path d="M176 478 Q184 464 192 478Z" fill="#1f1f22" />
+      <circle cx="226" cy="503" r="6" fill="url(#muChrome)" />
+      <g id="mu-puf" class="mu-puf" fill="#9aa0a6" opacity="0"><circle cx="150" cy="424" r="10" /><circle cx="158" cy="400" r="14" /></g>
+      <!-- het dashboard, de stuurkolom en het stuur -->
+      <path d="M262 518 L300 478" stroke="#2a2a2e" stroke-width="7" stroke-linecap="round" />
+      <ellipse cx="304" cy="472" rx="26" ry="6" fill="none" stroke="#1f1f22" stroke-width="5" transform="rotate(-22 304 472)" />
+      <circle cx="300" cy="476" r="3" fill="#1f1f22" />
+      <!-- het grote ronde spatbord over het achterwiel -->
+      <path d="M210 560 Q214 520 260 512 Q330 504 360 520 Q392 536 398 580 L398 596 L384 596 Q380 544 330 534 Q262 526 238 560Z" fill="url(#muFender)" stroke="#7a1a16" stroke-width="2.5" />
+      <path d="M262 520 Q330 512 372 540" stroke="#ff8a8e" stroke-width="3" fill="none" opacity=".5" />
+      <rect x="386" y="568" width="10" height="16" rx="3" fill="#f2a23a" stroke="#8a5a1a" />
+      <!-- het kuipstoeltje op zijn veer, met de beugel -->
+      <path d="M332 520 V500" stroke="#2a2a2e" stroke-width="6" />
+      <path d="M312 488 Q334 504 358 486 L362 494 Q334 514 308 494Z" fill="#1f1f22" />
+      <path d="M310 488 Q334 498 356 482" stroke="#4a4a50" stroke-width="2" fill="none" />
+      <path d="M352 486 Q366 462 382 470" stroke="#1f1f22" stroke-width="7" fill="none" stroke-linecap="round" />
+      <!-- de opstap -->
+      <path d="M226 596 h-10 v24 h22" stroke="#c4302b" stroke-width="5" fill="none" />
     </g>
-    <circle cx="90" cy="680" r="46" fill="#1f1f22" /><circle cx="90" cy="680" r="28" fill="#efe6c8" /><circle cx="90" cy="680" r="8" fill="#c4302b" />
-    <g class="mu-wheel"><circle cx="300" cy="650" r="84" fill="#1f1f22" />
-      <g stroke="#2a2a2e" stroke-width="10"><path d="M300 566 v18 M300 716 v18 M216 650 h18 M366 650 h18 M241 591 l12 12 M347 697 l12 12 M359 591 l-12 12 M253 697 l-12 12" /></g>
-      <circle cx="300" cy="650" r="54" fill="#efe6c8" stroke="#c9bd98" stroke-width="3" /><circle cx="300" cy="650" r="14" fill="#c4302b" /></g>
+    <g class="mu-wheel"><circle cx="305" cy="640" r="83.0" fill="#1c1c1f"/><polygon points="378.8,634.1 397.0,637.2 396.2,651.9 378.8,645.9" fill="#26262a"/><polygon points="377.4,655.1 394.0,663.3 389.2,677.1 374.1,666.5" fill="#26262a"/><polygon points="370.3,674.9 383.9,687.4 375.3,699.4 363.9,684.9" fill="#26262a"/><polygon points="357.8,691.9 367.3,707.7 355.7,716.8 348.8,699.6" fill="#26262a"/><polygon points="341.0,704.6 345.7,722.5 332.0,727.9 330.3,709.6" fill="#26262a"/><polygon points="321.4,712.2 320.8,730.6 306.2,732.0 309.6,713.9" fill="#26262a"/><polygon points="300.4,713.9 294.6,731.4 280.2,728.6 288.6,712.2" fill="#26262a"/><polygon points="279.7,709.6 269.3,724.8 256.3,718.0 269.0,704.6" fill="#26262a"/><polygon points="261.2,699.6 246.9,711.3 236.2,701.1 252.2,691.9" fill="#26262a"/><polygon points="246.1,684.9 229.1,692.0 221.8,679.3 239.7,674.9" fill="#26262a"/><polygon points="235.9,666.5 217.5,668.6 214.1,654.3 232.6,655.1" fill="#26262a"/><polygon points="231.2,645.9 213.0,642.8 213.8,628.1 231.2,634.1" fill="#26262a"/><polygon points="232.6,624.9 216.0,616.7 220.8,602.9 235.9,613.5" fill="#26262a"/><polygon points="239.7,605.1 226.1,592.6 234.7,580.6 246.1,595.1" fill="#26262a"/><polygon points="252.2,588.1 242.7,572.3 254.3,563.2 261.2,580.4" fill="#26262a"/><polygon points="269.0,575.4 264.3,557.5 278.0,552.1 279.7,570.4" fill="#26262a"/><polygon points="288.6,567.8 289.2,549.4 303.8,548.0 300.4,566.1" fill="#26262a"/><polygon points="309.6,566.1 315.4,548.6 329.8,551.4 321.4,567.8" fill="#26262a"/><polygon points="330.3,570.4 340.7,555.2 353.7,562.0 341.0,575.4" fill="#26262a"/><polygon points="348.8,580.4 363.1,568.7 373.8,578.9 357.8,588.1" fill="#26262a"/><polygon points="363.9,595.1 380.9,588.0 388.2,600.7 370.3,605.1" fill="#26262a"/><polygon points="374.1,613.5 392.5,611.4 395.9,625.7 377.4,624.9" fill="#26262a"/><circle cx="305" cy="640" r="72" fill="none" stroke="#3a3a40" stroke-width="2"/><circle cx="305" cy="640" r="62" fill="#efe6c8" stroke="#c9bd98" stroke-width="3"/><circle cx="305" cy="640" r="56" fill="none" stroke="#d9cea8" stroke-width="3"/><polygon points="305.0,600.0 322.6,615.7 343.0,627.6 333.5,649.3 328.5,672.4 305.0,670.0 281.5,672.4 276.5,649.3 267.0,627.6 287.4,615.7" fill="#e9dfbf" stroke="#b8ac86" stroke-width="2" stroke-linejoin="round"/><circle cx="339.0" cy="640.0" r="3.4" fill="#d8d0b4"/><circle cx="315.5" cy="672.3" r="3.4" fill="#d8d0b4"/><circle cx="277.5" cy="660.0" r="3.4" fill="#d8d0b4"/><circle cx="277.5" cy="620.0" r="3.4" fill="#d8d0b4"/><circle cx="315.5" cy="607.7" r="3.4" fill="#d8d0b4"/><circle cx="305" cy="640" r="17" fill="#c4302b" stroke="#7a1a16" stroke-width="2"/><circle cx="316.0" cy="640.0" r="2.2" fill="#7a1a16"/><circle cx="312.8" cy="647.8" r="2.2" fill="#7a1a16"/><circle cx="305.0" cy="651.0" r="2.2" fill="#7a1a16"/><circle cx="297.2" cy="647.8" r="2.2" fill="#7a1a16"/><circle cx="294.0" cy="640.0" r="2.2" fill="#7a1a16"/><circle cx="297.2" cy="632.2" r="2.2" fill="#7a1a16"/><circle cx="305.0" cy="629.0" r="2.2" fill="#7a1a16"/><circle cx="312.8" cy="632.2" r="2.2" fill="#7a1a16"/><circle cx="305" cy="640" r="5" fill="#8e161c"/></g>
   </g>
 
   <!-- de ladder naar het platte dak -->
