@@ -48,7 +48,7 @@ Object.assign(H, {
   alma(){ toKamer('alma'); },
   folkerda(){ toKamer('folkerda'); },
   luik(){
-    if(S.f.katrol) return say(["Door het oude hooiluik kijk je over de tuin en de weilanden. Heel in de verte: de Martinitoren.", "Hier ging vroeger het hooi naar binnen, met de katrol aan de hijsbalk."]);
+    if(S.f.katrol) return say(["Door het oude hooiluik kijk je over de tuin en de weilanden naar de stad Groningen. De Martinitoren staat hemelsbreed maar 7,5 kilometer weg.", "Hier ging vroeger het hooi naar binnen, met de katrol aan de hijsbalk."]);
     say([['roelof', "Hé, daarboven! Kun je me even helpen?"],
          ['roelof', "Mijn gereedschapskist moet naar boven, en de trap is te smal. Hij weegt 40 kilo. We doen het zoals vroeger met het hooi: met de katrol!"]], () => openKatrol());
   },
@@ -61,6 +61,9 @@ Object.assign(H, {
   ankerbalk(){ say("De ankerbalk, dik als een boomstam. Er zitten houten pennen in, geen spijkers. Zo bouwden ze vroeger."); },
   nest(){ beep(3200, .04); setTimeout(() => beep(3600, .04), 80); gag('#zl-nest', 'peep', 900); say("Een zwaluwnest onder de balk. Twee kopjes piepen: tjiep tjiep! Ze wonen hier al langer dan de gasten."); },
   vork(){ say(["Een oude hooivork met drie tanden. Roelof heeft hem laten hangen, als herinnering.", "Of als kapstok. Dat weet je bij Roelof nooit."]); },
+  folders(){ say(["Een koelkastje voor de gasten, met koude drankjes. Bovenop een rek vol folders: fietsroutes, musea, de borgen, de scheve toren van Bedum.", "Je pakt de folder van de B&B."], () => openFolder()); },
+  quiltzl(){ say("Een quilt met rode en groene lapjes, met de hand gemaakt. Ditty houdt van mooie dingen aan de muur."); },
+  luchter(){ gag('#km-luchter', 'tinkle', 1500); beep(2400, .05, 'sine', .03); setTimeout(() => beep(2800, .05, 'sine', .03), 90); say("Een kroonluchter met glazen kraaltjes. Tingeling! Ze vangen het licht van de lampjes."); },
   baal(){ say("Een baal stro, als bankje. Het prikt een beetje."); },
   zlkist(){ say("Roelofs rode gereedschapskist. Hamer, schroevendraaiers, behanglijm, en een pakje stroopwafels."); },
   roelof(h){
@@ -104,14 +107,14 @@ Object.assign(H, {
     say("Twee extra lange boxsprings tegen elkaar, met een geruit dekbed. Ditty heeft ze strak opgemaakt.");
   },
   prenten(){ openPrenten(); },
-  dakraam(){ S.ach.martini = true; save(); say(["Door het dakraam kijk je naar het zuiden: de tuin, de weilanden, en heel in de verte de Martinitoren.", "Alle kamers op de hooizolder liggen aan de zuidkant. Zon de hele dag!"]); },
+  dakraam(){ S.ach.martini = true; save(); say(["Door het dakraam kijk je naar het zuiden, naar de stad Groningen: de tuin, de weilanden, 4 kilometer verderop de eerste huizen van de stad, en 7,5 kilometer weg de Martinitoren.", "Alle kamers op de hooizolder liggen aan de zuidkant. Zon de hele dag!"]); },
   kmlamp(){ say("Een nachtlampje met een donkere kap. Knip, knip."); },
   kmrieten(){ beep(180, .2, 'triangle', .03); say("Een rieten stoel bij het raam. Kraak. Hier zou je een boek kunnen lezen. Of de reeën tellen."); },
   ditty(){
     if(S.scene === 'kamer'){
       S.f.koffie = (S.f.koffie || 0) + 1; save();
       if(S.f.koffie >= 3){ S.ach.koffie = true; save(); return say([['ditty', "Nog een kopje? Dat is je derde! Je bent nu echt een Groninger: koffie, koffie, en dan nog een bakje."]]); }
-      if(!S.f.prenten) return say([['ditty', "Kopje koffie? Ik zet net een verse pot."], ['ditty', "Kijk eens, Roelof heeft de drie prenten van de muur gehaald om de lijstjes te poetsen. En nu weet hij niet meer welke waar hing! Mannen…"]]);
+      if(!S.f.prenten) return say([['ditty', "Kopje koffie? Ik zet net een verse pot."], ['ditty', "Kijk eens, Roelof heeft de drie prenten van de muur gehaald om de lijstjes te poetsen. En nu weet hij niet meer welke waar hing! Mannen…"], ['ditty', "Ik was vroeger juf, dus ik heb er een kaartje bij geschreven. Lees goed, dan kom je er wel uit."]]);
       return say([['ditty', "Kopje koffie? Het ontbijt was toch lekker? Het brood komt van de bakker in Bedum, en de eitjes van de buren."]]);
     }
   }

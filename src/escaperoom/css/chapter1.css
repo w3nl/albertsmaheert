@@ -54,3 +54,9 @@
 @keyframes psGlow{0%,100%{opacity:.8}50%{opacity:1}}
 #ps-torchglow{animation:psGlow 1.8s ease-in-out infinite}
 .ps-ree{animation:efGraze 9s ease-in-out infinite;transform-box:fill-box;transform-origin:80% 80%}
+@keyframes efFlag{0%,100%{transform:translate(800px,470px) skewY(0) scaleX(1)}50%{transform:translate(800px,470px) skewY(4deg) scaleX(.92)}}
+.ef-flag{animation:efFlag 2.2s ease-in-out infinite}
+@keyframes efMek{0%,100%{transform:translateY(0)}30%{transform:translateY(-8px)}60%{transform:translateY(0)}80%{transform:translateY(-4px)}}
+#ef-geiten.mek g g{animation:efMek .5s ease-out 2}
+@keyframes efGoat{0%,70%,100%{transform:rotate(0)}80%,90%{transform:rotate(28deg)}}
+.ef-goathead{transform-box:fill-box;transform-origin:0% 100%;animation:efGoat 5s ease-in-out infinite}

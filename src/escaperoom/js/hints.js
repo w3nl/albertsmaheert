@@ -21,7 +21,7 @@ const HINTS = {
   bascule: ["\"Waar één kilo er tien weegt\": de bascule op de tafel.", "Leg 5 en 2 kilo op het schaaltje (7 kilo). Dat houdt 70 kilo in evenwicht: een mud aardappelen weegt 70 kilo."],
   karn: ["\"Waar de melk boter wordt\": de karntonnen.", "Melken, een nacht laten staan, de room afscheppen, karnen, de karnemelk eruit, kneden en zouten."],
   spreuk: ["\"Waar de Grunneger zegt wat hij denkt\": het spreukenbord naast de schoolplaat.", "Moi = hallo en dag; Nait soez'n, moi doun = niet zeuren, gewoon doen; Kop d'r veur = zet door; Wicht = meisje."],
-  akkers: ["\"Op het land, waar elk jaar iets anders groeit\": klim met de ladder naar het platte dak en bekijk de akkers met Harms kaart.", "1922: A graan, B aardappels, C suikerbieten. 1923: A suikerbieten, B graan, C aardappels."],
+  akkers: ["\"Op het land, waar elk jaar iets anders groeit\": klim met de ladder naar het platte dak en bekijk de akkers met Harms kaart.", "1922: A graan, B kool, C suikerbieten. 1923: A suikerbieten, B graan, C kool."],
   woord: ["Je hebt alle vier de letters: G, R, U en P. Klik op het kistje.", "Het woord is GRUP: de mestgoot achter de koeien in de koestal."],
   /* hoofdstuk 4 */
   lampjes: ["De feestverlichting doet het niet: de lampjes zitten in serie. Klik op de slinger en meet met Roelofs tester.", "Meet steeds in het midden (tot 8, dan 12, dan 10, dan 11). Lampje 11 is stuk: vervang het."],

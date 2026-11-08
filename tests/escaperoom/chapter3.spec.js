@@ -41,10 +41,10 @@ test('hoofdstuk 3: het kistje, vier letters en het woord GRUP', async ({ page })
   await useSlot(page, 'Akkerkaart');
   await hs(page, 'akkers');
   const put = async (k, v) => page.locator(`select[data-k="${k}"]`).selectOption(v);
-  for (const [k, v] of [['19220', 'b'], ['19221', 'g'], ['19222', 'a'], ['19230', 'g'], ['19231', 'a'], ['19232', 'b']]) await put(k, v);
+  for (const [k, v] of [['19220', 'b'], ['19221', 'g'], ['19222', 'k'], ['19230', 'g'], ['19231', 'k'], ['19232', 'b']]) await put(k, v);
   await page.locator('#ak-ok').click();
   await expect(page.locator('#ak-fb')).toContainText('graan');
-  for (const [k, v] of [['19220', 'g'], ['19221', 'a'], ['19222', 'b'], ['19230', 'b'], ['19231', 'g'], ['19232', 'a']]) await put(k, v);
+  for (const [k, v] of [['19220', 'g'], ['19221', 'k'], ['19222', 'b'], ['19230', 'b'], ['19231', 'g'], ['19232', 'k']]) await put(k, v);
   await page.locator('#ak-ok').click();
   await waitModalClosed(page);
 

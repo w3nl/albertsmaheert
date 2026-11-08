@@ -32,7 +32,7 @@ test('hoofdstuk 1: van het erf naar de brief van Harm in de Paardenstal', async 
   // naar binnen
   await useSlot(page, 'Sleutel Paardenstal');
   await hs(page, 'stal'); await skip(page);
-  await expect(page.locator('#sc-stal')).toHaveClass(/\bon\b/);
+  await expect(page.locator('#sc-stal')).toHaveClass(/(^|\s)on(\s|$)/);
   await page.waitForTimeout(400);
 
   // het hoefijzer, open kant boven

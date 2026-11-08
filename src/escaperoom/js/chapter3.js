@@ -23,7 +23,7 @@ const H2 = { roelof: H.roelof, paardje: H.paardje };
 Object.assign(H, {
   roelof(h){
     if(S.scene !== 'museum') return H2.roelof(h);
-    if(!S.f.kistOpen) return say([['roelof', "Welkom in mijn museum! Alles wat hier staat, is ooit gebruikt op een boerderij hier in de buurt. Veel ervan op deze boerderij."], ['roelof', "En daar, op de witte tafel: het kistje van Thedema. Probeer de sleutel maar!"]]);
+    if(!S.f.kistOpen) return say([['roelof', "Welkom in mijn museum! Alles wat hier staat, is ooit gebruikt op een boerderij hier in de buurt. De trekkers en de meeste machines heb ik zelf weer opgeknapt."], ['roelof', "En daar, op de witte tafel: het kistje van Thedema. Probeer de sleutel maar!"]]);
     const left = LETTERS.filter(([k]) => !S.f[k]).length;
     if(left) return say([['roelof', tx('Nog {n} letters te gaan. Harm kende het boerenleven, en ik ook: vraag maar raak!', { n: left })]]);
     say([['roelof', "Alle vier! Leg ze in het kistje. Wat voor woord is het?"]]);
@@ -39,12 +39,13 @@ Object.assign(H, {
   trekker(){
     S.f.tractor = !S.f.tractor; save(); applyVisuals();
     if(S.f.tractor){ S.ach.tractor = true; save(); beep(80, .4, 'sawtooth', .05); setTimeout(() => beep(90, .3, 'sawtooth', .05), 300);
-      return say([['roelof', "Hoor je dat? Tuf, tuf, tuf! Een echte oude dieseltrekker. Ik heb hem zelf weer opgeknapt."], "De hele schuur trilt een beetje mee."]); }
+      return say([['roelof', "Hoor je dat? Tuf, tuf, tuf! Een International D-326. Die heb ik zelf weer helemaal opgeknapt, net als de 633 en de Hydro 84."],
+        ['roelof', "De 633 heb ik nu al veertig jaar. En de meeste machines hier in het museum heb ik ook zelf weer netjes gemaakt: schuren, lakken, bouten erin."], "De hele schuur trilt een beetje mee."]); }
     say("Je zet de trekker weer uit. Pfff. Stilte.");
   },
   lift(){ gag('#mu-bale', 'lift', 3000); beep(200, .1, 'triangle', .03); say(["Een balenlift: een lopende band van hout, schuin omhoog. Zo gingen de balen hooi en stro naar de zolder.", "Vroeger tilde je alles met de hand, of met de katrol."]); },
   wand(){ say(["Een hele wand oud gereedschap: spaden, rieken, een zeis, een hooivork, een schoffel.", "Elk ding heeft een kaartje met zijn naam. Roelof weet van elk stuk wie ermee werkte."]); },
-  plaat(){ say("Een oude schoolplaat: koeien, schapen en een boerderij. Daar leerden kinderen vroeger van in de klas."); },
+  plaat(){ say(["Een oude schoolplaat: koeien, schapen en een boerderij. Daar leerden kinderen vroeger van in de klas.", ['roelof', "Ditty was vroeger juf op een basisschool. Zulke platen hingen in haar klas ook nog. Vraag maar, ze kan er alles over vertellen."]]); },
   katrollen(){ say("Rode katrollen aan de paal. Weet je nog, op de hooizolder? Twee touwen, de halve kracht."); },
   juk(){ say(["Een juk: een gebogen stuk hout over je schouders, met aan elke kant een emmer.", "Zo droeg je twee volle emmers melk tegelijk, zonder dat je rug knakte."]); },
   bussen(){ say(["Melkbussen, met nummers erop. Elke boer had zijn eigen nummer.", "De melkrijder haalde de bussen op en bracht ze naar de zuivelfabriek. Lege bussen kwamen terug."]); },
@@ -63,7 +64,7 @@ Object.assign(H, {
     if(!has('kaart')) return say("Drie akkers in de verte: A, B en C. Je ziet strepen van ploegen in de grond.");
     openAkkers();
   },
-  stad(){ S.ach.martini = true; save(); say(["De stad Groningen, met de Martinitoren erboven uit. De Groningers noemen hem d'Olle Grieze: de oude grijze.", "Ongeveer 8 kilometer hiervandaan. Je kunt er zo naartoe fietsen."]); },
+  stad(){ S.ach.martini = true; save(); say(["De stad Groningen, met de Martinitoren erboven uit. De Groningers noemen hem d'Olle Grieze: de oude grijze.", "De rand van de stad ligt hemelsbreed maar 4 kilometer hiervandaan, de Martinitoren 7,5 kilometer. Je kunt er zo naartoe fietsen."]); },
   scheef(){ S.ach.scheef = true; save(); say(["Een scheve kerktoren, net boven de bomen uit. Dat is de toren van de Walfriduskerk in Bedum.", "Volgens de folder van de B&B de scheefste toren van Europa. Toch staat hij er al eeuwen."]); },
   molen(){ gag('#dk-molen', 'fast', 3000); say("Een molen in de verte. De wieken draaien rustig in de wind."); },
   dkree(){ S.ach.ree = true; save(); say("Twee reeën in de wei, vlak bij de akkers. Ze grazen gewoon door."); },
@@ -172,15 +173,15 @@ function openSpreuk(){
 }
 
 /* ---------- puzzel: de akkers (vruchtwisseling: elk jaar iets anders op het land) ---------- */
-const CROPS = { a: 'aardappels', b: 'suikerbieten', g: 'graan' };
-const AKKER_OK = { '1922': 'gab', '1923': 'bga' };
+const CROPS = { k: 'kool', b: 'suikerbieten', g: 'graan' };
+const AKKER_OK = { '1922': 'gkb', '1923': 'bgk' };
 function openAkkers(){
   const pick = S.akr || {};
   const sel = (y, i) => `<select data-k="${y}${i}" aria-label="${tx('Akker {a} in {y}', { a: 'ABC'[i], y })}"><option value="">?</option>${Object.entries(CROPS).map(([k, n]) => `<option value="${k}" ${pick[y + i] === k ? 'selected' : ''}>${n}</option>`).join('')}</select>`;
   openModal('Harms akkerkaart', 'Op het platte dak · de akkers A, B en C', `
-    <div class="note-paper old" style="font-size:18px">Elk jaar iets anders op elke akker, en elk gewas één keer per jaar. Nooit twee jaar hetzelfde op dezelfde grond: dan wordt de grond moe en komen er ziektes, zoals aaltjes in de aardappels. En na de aardappels altijd graan.</div>
+    <div class="note-paper old" style="font-size:18px">Elk jaar iets anders op elke akker, en elk gewas één keer per jaar. Nooit twee jaar hetzelfde op dezelfde grond: dan wordt de grond moe en komen er ziektes, zoals knolvoet in de kool. En na de kool altijd graan.</div>
     <table class="scores" style="margin-top:10px"><thead><tr><th></th><th>Akker A</th><th>Akker B</th><th>Akker C</th></tr></thead><tbody>
-      <tr><td><b>1921</b></td><td>aardappels</td><td>suikerbieten</td><td>graan</td></tr>
+      <tr><td><b>1921</b></td><td>kool</td><td>suikerbieten</td><td>graan</td></tr>
       <tr><td><b>1922</b></td><td>${sel('1922', 0)}</td><td>${sel('1922', 1)}</td><td>${sel('1922', 2)}</td></tr>
       <tr><td><b>1923</b></td><td>${sel('1923', 0)}</td><td>${sel('1923', 1)}</td><td>${sel('1923', 2)}</td></tr>
     </tbody></table>
@@ -190,13 +191,13 @@ function openAkkers(){
     body.querySelector('#ak-ok').onclick = () => {
       const row = y => [0, 1, 2].map(i => pick[y + i] || '').join('');
       const r2 = row('1922'), r3 = row('1923');
-      if(r2 === AKKER_OK['1922'] && r3 === AKKER_OK['1923']){ S.f.akkers = true; save(); fb('#ak-fb', 'Een goed plan! Drie jaar, drie gewassen, en de grond blijft gezond.', 'good'); return solved(() => { applyVisuals(); say(["Achter op de kaart, naast 1923, heeft Harm iets geschreven: een dikke letter U.", "Vruchtwisseling: elk jaar iets anders. Boeren doen het nog steeds."]); }, 1800); }
+      if(r2 === AKKER_OK['1922'] && r3 === AKKER_OK['1923']){ S.f.akkers = true; save(); fb('#ak-fb', 'Een goed plan! Drie jaar, drie gewassen, en de grond blijft gezond.', 'good'); return solved(() => { applyVisuals(); say(["Achter op de kaart, naast 1923, heeft Harm iets geschreven: een dikke letter U.", "Vruchtwisseling: elk jaar iets anders. Boeren doen het nog steeds.", ['roelof', "Kool, graan en suikerbieten: dat verbouwde ik zelf ook, witte en rode kool. Net als Harm. En vroeger hadden we ook koeien en schapen."]]); }, 1800); }
       nope();
       const all = r2 + r3;
       fb('#ak-fb', all.length < 6 ? 'Vul alle zes de vakjes in.'
-        : !(new Set(r2).size === 3 && new Set(r3).size === 3) ? 'Elk jaar moet elk gewas één keer: aardappels, suikerbieten en graan.'
-        : [0, 1, 2].some(i => r2[i] === 'abg'[i] || r3[i] === r2[i] || r3[i] === 'abg'[i]) ? 'Op een akker staat hetzelfde gewas twee keer. Dan wordt de grond moe.'
-        : 'Na de aardappels moet er graan komen. Waar stonden in 1921 de aardappels?', 'bad');
+        : !(new Set(r2).size === 3 && new Set(r3).size === 3) ? 'Elk jaar moet elk gewas één keer: kool, suikerbieten en graan.'
+        : [0, 1, 2].some(i => r2[i] === 'kbg'[i] || r3[i] === r2[i] || r3[i] === 'kbg'[i]) ? 'Op een akker staat hetzelfde gewas twee keer. Dan wordt de grond moe.'
+        : 'Na de kool moet er graan komen. Waar stond in 1921 de kool?', 'bad');
     };
   });
 }
@@ -225,7 +226,7 @@ function openWoord(){
 function intro3(){
   give('oudesleutel');
   say([['sys', "Zaterdagmiddag. Roelof neemt je mee naar de andere schuur, aan de overkant van het platte dak."],
-       ['roelof', "Dit is mijn museum: het boerenleven van vroeger. Trekkers, karntonnen, melkbussen, alles wat ik kon vinden."],
+       ['roelof', "Dit is mijn museum: het boerenleven van vroeger. Mijn International-trekkers, karntonnen, melkbussen: alles wat ik kon vinden, en het meeste heb ik zelf weer opgeknapt."],
        ['roelof', "En dit is het kistje uit de borg Thedema. Gevonden in 2012, toen we de hooizolder verbouwden. Nu hebben we eindelijk de sleutel!"]], () => { S.f.introDone = true; save(); });
 }
 function win3(){

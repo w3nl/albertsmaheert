@@ -38,7 +38,9 @@ async function hs(page, id) {
 /** Naar een andere kamer (go() heeft een korte overgang). */
 async function walk(page, id, scene) {
   await hs(page, id);
-  await expect(page.locator('#sc-' + scene)).toHaveClass(/\bon\b/);
+  // exact de klasse "on": /\bon\b/ zou ook "za-on" (de zaal met brandende lampjes) herkennen
+  await expect(page.locator('#sc-' + scene)).toHaveClass(/(^|\s)on(\s|$)/);
+  await expect(page.locator('#fade')).not.toHaveClass(/(^|\s)on(\s|$)/);
   await page.waitForTimeout(150);
 }
 

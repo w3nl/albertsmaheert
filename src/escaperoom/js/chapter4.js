@@ -53,13 +53,13 @@ Object.assign(H, {
     S.f.koffie = (S.f.koffie || 0) + 1; save();
     if(S.f.koffie >= 3){ S.ach.koffie = true; save(); }
     if(S.f.out4) return say([['ditty', "Wat een avond! Je bent altijd welkom, hoor. Kom gauw echt logeren. Dan zet ik de koffie klaar."]]);
-    if(!S.f.tafel) return say([['ditty', "Help je even met de tafelschikking? Ik heb een lijstje gemaakt, maar het klopt nog niet."]], () => openTafel());
+    if(!S.f.tafel) return say([['ditty', "Help je even met de tafelschikking? Ik heb een lijstje gemaakt, net als vroeger in de klas. Toen ik nog juf was, zette ik ook altijd de kinderen die te veel kletsten niet naast elkaar."]], () => openTafel());
     say([['ditty', "Kopje koffie? Of een glaasje? Het is feest!"]]);
   },
   lampjes(){ if(S.f.lampjes) return say("De lampjes branden in alle kleuren. Gezellig!"); openLampjes(); },
   tafel(){ if(S.f.tafel) return say("De tafel is gedekt en iedereen zit goed. Behalve buurman Jan, die staat steeds op voor een praatje."); openTafel(); },
   gasten(){ say(S.f.tafel ? [['gast', "Proost! Wat een mooie zaal, hè? Hier stonden vroeger de koeien!"]] : [['gast', "Waar moeten we zitten? Ditty is nog aan het puzzelen."]]); },
-  koeien(){ say(["Bordjes met koeiennamen: Klaske, Bertha, Trijntje, Grietje, Dina.", "Hier stond elke koe op haar eigen plek, met haar naam erboven. Net als de paarden in de Paardenstal."]); },
+  koeien(){ say(["Bordjes met koeiennamen: Klaske, Bertha, Trijntje, Grietje, Dina.", "Hier stond elke koe op haar eigen plek, met haar naam erboven. Net als de paarden in de Paardenstal.", ['roelof', "Koeien en schapen hadden we hier vroeger. Later werd het akkerbouw: kool, graan en suikerbieten."]]); },
   stalraam(){ say("Een klein stalraampje met ijzeren roeden. Buiten is het donker; de eerste sterren komen op."); },
   tuindeur(){ go('tuin'); },
   koffie(){ S.f.koffie = (S.f.koffie || 0) + 1; save(); beep(300, .3, 'sawtooth', .02); if(S.f.koffie >= 3){ S.ach.koffie = true; save(); } say("Het koffieapparaat pruttelt. Een kop koffie, met een koekje erbij. In Groningen hoort dat zo."); },

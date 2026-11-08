@@ -77,27 +77,55 @@ def legs(color, shoes, w=11, h=78, gap=7):
 
 
 # ---------------------------------------------------------------- Roelof
-def roelof(p, tool='hamer', arm_id=None):
-    """Roelof: doet de klusjes en het museum. Grijs kort haar, een blauwe boerenkiel, een gereedschapsriem, klompen.
-    Staand, ongeveer 175 eenheden hoog (voeten op 0)."""
+def glasses(cx, cy, r, color, round_=True):
+    """Een bril over de ogen van face() (zelfde maten)."""
+    ex, ey = r * .36, cy - r * .02
+    w, h = r * .34, r * .3
+    shape = (lambda x: f'<rect x="{x - w:.1f}" y="{ey - h:.1f}" width="{2 * w:.1f}" height="{2 * h:.1f}" rx="{h * (1 if round_ else .5):.1f}"/>')
+    return (f'<g fill="#ffffff22" stroke="{color}" stroke-width="{r * .08:.2f}">{shape(cx - ex)}{shape(cx + ex)}</g>'
+            f'<path d="M{cx - ex + w:.1f} {ey:.1f} q{ex - w:.1f} {-r * .08:.1f} {2 * (ex - w):.1f} 0 M{cx - ex - w:.1f} {ey:.1f} l{-r * .5:.1f} {-r * .05:.1f} M{cx + ex + w:.1f} {ey:.1f} l{r * .5:.1f} {-r * .05:.1f}" stroke="{color}" stroke-width="{r * .07:.2f}" fill="none"/>')
+
+
+# ---------------------------------------------------------------- Roelof
+def roelof(p, tool='hamer', arm_id=None, outfit=None):
+    """Roelof: doet de klusjes en het museum. Kaal bovenop met een grijze rand, een donkere ronde bril, een gebruind
+    gezicht. Bij het klussen een groene overall en klompen; op het feest (tool='glas') een blauw overhemd met print en een
+    beige broek. Staand, ongeveer 175 eenheden hoog (voeten op 0)."""
     s, sd, _ = SKIN['zon']
-    kiel, kiel_d = '#3d6aa8', '#24467a'
-    hair = '#b9b5ad'
-    g = [f'<defs>{grad(p + "Kiel", "#5582c0", kiel_d, 0, 0, 1, 1)}</defs>']
-    g.append(legs('#3b3f4a', '#c99b4a', 12, 76, 6))
-    # klompen: geel hout
-    g.append('<path d="M-24 0 C-26 -10 -8 -12 -3 -6 L-3 0Z M24 0 C26 -10 8 -12 3 -6 L3 0Z" fill="#d8ac58" stroke="#9a7230" stroke-width="1.4"/>')
-    # de kiel
-    g.append(f'<path d="M-32 -74 C-34 -110 -30 -132 -18 -140 C-8 -144 8 -144 18 -140 C30 -132 34 -110 32 -74 L36 -66 L-36 -66Z" fill="url(#{p}Kiel)" stroke="#00000030" stroke-width="1.2"/>'
-             f'<path d="M-6 -142 L0 -128 L6 -142" stroke="#f3efe6" stroke-width="3" fill="none"/>'
-             f'<path d="M0 -128 V-80" stroke="{kiel_d}" stroke-width="1.6"/><g fill="#e8e2d2"><circle cx="0" cy="-118" r="1.8"/><circle cx="0" cy="-104" r="1.8"/><circle cx="0" cy="-90" r="1.8"/></g>'
-             f'<rect x="12" y="-124" width="13" height="12" rx="2" fill="{kiel_d}"/><path d="M15 -126 v-8 M19 -126 v-6" stroke="#d6a640" stroke-width="2"/>')
-    # gereedschapsriem
-    g.append(f'<path d="M-34 -80 Q0 -72 34 -80 L34 -72 Q0 -64 -34 -72Z" fill="#7a4a26"/><rect x="-5" y="-80" width="10" height="8" fill="none" stroke="#d6a640" stroke-width="2"/>'
-             f'<path d="M-30 -74 l-4 24 l12 0 l2 -22Z" fill="#8a5a32"/><path d="M-27 -66 l-2 -14 M-23 -66 l1 -16" stroke="#9aa0a6" stroke-width="2.4"/>')
+    feest = (outfit or ('feest' if tool == 'glas' else 'overall')) == 'feest'
+    hair = '#d4d2cc'
+    if feest:
+        top, top_d, top_l = '#5a7ac0', '#34508a', '#8aa4dc'
+        g = [f'<defs>{grad(p + "Kiel", top_l, top_d, 0, 0, 1, 1)}<pattern id="{p}Print" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="url(#{p}Kiel)"/>'
+             f'<path d="M0 10 a5 5 0 0 1 10 0" fill="#c9a24a" opacity=".55"/><path d="M5 5 a5 5 0 0 1 10 0 M-5 5 a5 5 0 0 1 10 0" fill="#22305a" opacity=".55"/></pattern></defs>']
+        fill = f'url(#{p}Print)'
+        g.append(legs('#cfc4ac', '#6a4428', 12, 76, 6))
+        g.append('<path d="M-24 0 C-26 -9 -8 -11 -3 -6 L-3 0Z M24 0 C26 -9 8 -11 3 -6 L3 0Z" fill="#6a4428"/>')
+        g.append(f'<path d="M-32 -74 C-34 -110 -30 -132 -18 -140 C-8 -144 8 -144 18 -140 C30 -132 34 -110 32 -74Z" fill="{fill}" stroke="#00000030" stroke-width="1.2"/>'
+                 f'<path d="M-9 -142 L0 -130 L9 -142 L4 -146 L0 -138 L-4 -146Z" fill="{fill}" stroke="#22305a" stroke-width="1"/>'
+                 f'<path d="M0 -130 V-78" stroke="{top_d}" stroke-width="1.4"/>'
+                 f'<path d="M-33 -78 Q0 -70 33 -78 L33 -72 Q0 -64 -33 -72Z" fill="#7a4a26"/><rect x="-5" y="-78" width="10" height="7" fill="none" stroke="#c9a24a" stroke-width="1.6"/>')
+        sleeve = 9
+    else:
+        top, top_d = '#2e6a5a', '#1a443a'
+        g = [f'<defs>{grad(p + "Kiel", "#3e8a74", top_d, 0, 0, 1, 1)}</defs>']
+        fill = f'url(#{p}Kiel)'
+        g.append(legs(top, '#2a2420', 12, 76, 6))
+        g.append('<path d="M-24 0 C-26 -10 -8 -12 -3 -6 L-3 0Z M24 0 C26 -10 8 -12 3 -6 L3 0Z" fill="#2a2420"/>')
+        # de groene overall, met een rits en een borstzakje
+        g.append(f'<path d="M-32 -66 C-34 -110 -30 -132 -18 -140 C-8 -144 8 -144 18 -140 C30 -132 34 -110 32 -66Z" fill="{fill}" stroke="#00000030" stroke-width="1.2"/>'
+                 f'<path d="M-8 -143 L0 -132 L8 -143" stroke="{top_d}" stroke-width="3" fill="none"/>'
+                 f'<path d="M0 -132 V-70" stroke="#c9a24a" stroke-width="1.6"/>'
+                 f'<rect x="10" y="-126" width="14" height="12" rx="2" fill="{top_d}"/><path d="M14 -128 v-8 M18 -128 v-6" stroke="#c9a24a" stroke-width="2"/>'
+                 f'<path d="M-30 -78 h60" stroke="{top_d}" stroke-width="3"/>')
+        sleeve = 13
     # armen
-    g.append(f'<path d="M-28 -132 C-40 -112 -40 -92 -36 -76" stroke="url(#{p}Kiel)" stroke-width="13" fill="none" stroke-linecap="round"/>' + hand(-36, -70, 6.5, s, sd))
-    arm = (f'<path d="M28 -132 C40 -112 42 -96 40 -80" stroke="url(#{p}Kiel)" stroke-width="13" fill="none" stroke-linecap="round"/>' + hand(40, -74, 6.5, s, sd))
+    g.append(f'<path d="M-28 -132 C-40 -112 -40 -92 -36 -76" stroke="{fill}" stroke-width="{sleeve + 4}" fill="none" stroke-linecap="round"/>'
+             + (f'<path d="M-37 -104 C-40 -92 -38 -82 -36 -76" stroke="{s}" stroke-width="9" fill="none" stroke-linecap="round"/>' if feest else '')
+             + hand(-36, -70, 6.5, s, sd))
+    arm = (f'<path d="M28 -132 C40 -112 42 -96 40 -80" stroke="{fill}" stroke-width="{sleeve + 4}" fill="none" stroke-linecap="round"/>'
+           + (f'<path d="M40 -104 C42 -94 41 -86 40 -80" stroke="{s}" stroke-width="9" fill="none" stroke-linecap="round"/>' if feest else '')
+           + hand(40, -74, 6.5, s, sd))
     if tool == 'hamer':
         arm += '<path d="M41 -74 L58 -100" stroke="#8a5a32" stroke-width="4.5" stroke-linecap="round"/><path d="M50 -108 L66 -94" stroke="#6f767e" stroke-width="8" stroke-linecap="round"/>'
     elif tool == 'sleutel':
@@ -106,47 +134,53 @@ def roelof(p, tool='hamer', arm_id=None):
         arm += '<path d="M33 -92 l3 18 h10 l3 -18z" fill="#f4d58a" opacity=".85" stroke="#fff" stroke-width="1"/><path d="M33 -92 h16" stroke="#fffbe8" stroke-width="3"/>'
     g.append(f'<g id="{arm_id}">{arm}</g>' if arm_id else arm)
     g.append(f'<rect x="-6" y="-152" width="12" height="12" fill="{sd}"/>')
-    g.append(face(p, 0, -168, 19, 'zon'))
-    # grijs kort haar, iets terugwijkend, en grijze wenkbrauwen
-    g.append(f'<path d="M-19 -170 C-22 -192 -6 -194 0 -191 C8 -194 22 -190 19 -170 C16 -180 14 -184 6 -184 C0 -183 -8 -184 -14 -182 C-17 -178 -18 -174 -19 -170Z" fill="{hair}" stroke="#9a968e" stroke-width="1"/>'
-             f'<path d="M-19 -168 C-21 -160 -20 -156 -18 -152 M19 -168 C21 -160 20 -156 18 -152" stroke="{hair}" stroke-width="5" fill="none" stroke-linecap="round"/>')
+    # een wat langer, gebruind hoofd, kaal bovenop
+    g.append(face(p, 0, -169, 19, 'zon', brows='#9a968e'))
+    g.append(f'<ellipse cx="-4" cy="-184" rx="8" ry="4" fill="#fff" opacity=".22"/>')
+    # een grijze rand haar aan de zijkant en achter de oren
+    g.append(f'<path d="M-17.5 -182 C-20 -176 -20.5 -170 -19.5 -164 M17.5 -182 C20 -176 20.5 -170 19.5 -164" stroke="{hair}" stroke-width="4.5" fill="none" stroke-linecap="round"/>')
+    g.append(glasses(0, -169, 19, '#2a2420'))
     return ''.join(g)
 
 
 # ---------------------------------------------------------------- Ditty
 def ditty(p, hold='koffie'):
-    """Ditty: doet de B&B. Halflang blond-grijs haar, een vest, een schort met bloemetjes. Staand, ~168 eenheden hoog."""
+    """Ditty: doet de B&B. Kort grijs haar, een rode bril, een taupe blouse met witte bloemen, een lichte broek en een
+    gouden kettinkje. Staand, ~168 eenheden hoog."""
     s, sd, _ = SKIN['roze']
-    hair, hair_l = '#d6c29a', '#efe0bd'
-    vest, vest_d = '#8a5a8e', '#5e3a64'
-    g = [f'<defs>{grad(p + "Vest", "#a674aa", vest_d, 0, 0, 1, 1)}</defs>']
-    # haar achter het hoofd
-    g.append(f'<path d="M-22 -168 C-28 -146 -26 -132 -20 -124 L20 -124 C26 -132 28 -146 22 -168Z" fill="{hair}"/>')
-    g.append(legs('#3a4664', '#5a3a2a', 10, 64, 6))
-    # rok en vest
-    g.append(f'<path d="M-30 -66 L-24 -100 L24 -100 L30 -66Z" fill="#4a5a7a"/>'
-             f'<path d="M-28 -98 C-31 -114 -28 -128 -16 -134 C-8 -137 8 -137 16 -134 C28 -128 31 -114 28 -98Z" fill="url(#{p}Vest)" stroke="#00000030" stroke-width="1.2"/>')
-    # schort met bloemetjes
-    g.append(f'<path d="M-18 -126 h36 v18 C22 -96 24 -80 26 -64 L-26 -64 C-24 -80 -22 -96 -18 -108Z" fill="#f6efe2" stroke="#d9cbb2" stroke-width="1.2"/>'
-             f'<path d="M-22 -108 h44" stroke="#c94a5a" stroke-width="3"/>'
-             + ''.join(f'<g transform="translate({x} {y})"><circle r="3" fill="#e2687a"/><circle r="1.2" fill="#f6d04d"/></g>' for x, y in [(-12, -92), (6, -86), (-4, -76), (14, -72), (-16, -72), (10, -100)])
-             + '<path d="M-6 -126 L0 -134 L6 -126" stroke="#d9cbb2" stroke-width="2" fill="none"/>')
+    hair, hair_l = '#cfccc6', '#eeece8'
+    top, top_d = '#b8aa98', '#8e8070'
+    g = [f'<defs>{grad(p + "Vest", "#cbbeac", top_d, 0, 0, 1, 1)}</defs>']
+    g.append(legs('#e4dfd4', '#8a6a4a', 11, 64, 6).replace('stroke="#00000030"', 'stroke="#bdb6a6"'))
+    # de blouse, wijd, met een riem
+    g.append(f'<path d="M-30 -60 C-33 -100 -30 -126 -16 -134 C-8 -137 8 -137 16 -134 C30 -126 33 -100 30 -60Z" fill="url(#{p}Vest)" stroke="#00000026" stroke-width="1.2"/>'
+             f'<path d="M-8 -136 L0 -122 L8 -136" stroke="{top_d}" stroke-width="2" fill="{s}"/>'
+             f'<path d="M-28 -76 Q0 -70 28 -76 L28 -70 Q0 -64 -28 -70Z" fill="#d9c9a4"/><circle cx="6" cy="-71" r="4" fill="#c9a26a"/>')
+    # witte bloemen geborduurd op de schouders
+    for sx in (-1, 1):
+        x = sx * 16
+        g.append(f'<g fill="none" stroke="#f6f2ea" stroke-width="1.3" opacity=".9"><path d="M{x} -126 c{sx * 4} -4 {sx * 8} 0 {sx * 4} 4 c{sx * -4} 4 {sx * -8} 0 {sx * -4} -4z"/>'
+                 f'<path d="M{x} -126 c{sx * -4} 4 {sx * -2} 8 {sx * 2} 8"/><path d="M{x + sx * 2} -118 q{sx * 4} 6 {sx * 2} 12"/></g>')
+    # gouden kettinkje
+    g.append(f'<path d="M-9 -134 Q0 -118 9 -134" stroke="#d6a640" stroke-width="1.4" fill="none"/>')
     # armen
-    g.append(f'<path d="M-24 -126 C-36 -110 -36 -94 -28 -84" stroke="url(#{p}Vest)" stroke-width="11" fill="none" stroke-linecap="round"/>' + hand(-27, -80, 6, s, sd))
+    g.append(f'<path d="M-24 -126 C-36 -110 -36 -94 -28 -84" stroke="url(#{p}Vest)" stroke-width="13" fill="none" stroke-linecap="round"/>' + hand(-27, -80, 6, s, sd))
     if hold == 'koffie':
-        g.append(f'<path d="M24 -126 C34 -112 30 -100 20 -96" stroke="url(#{p}Vest)" stroke-width="11" fill="none" stroke-linecap="round"/>'
+        g.append(f'<path d="M24 -126 C34 -112 30 -100 20 -96" stroke="url(#{p}Vest)" stroke-width="13" fill="none" stroke-linecap="round"/>'
                  '<g><path d="M12 -114 h20 l-2 24 h-16z" fill="#f2efe8" stroke="#9a948a" stroke-width="1.4"/><path d="M32 -108 q8 2 6 10 q-2 6 -8 4" stroke="#9a948a" stroke-width="2.4" fill="none"/>'
                  '<path d="M12 -114 l-6 -4 M14 -114 h16" stroke="#9a948a" stroke-width="2"/><path d="M16 -102 q6 -3 10 0" stroke="#6a8ec4" stroke-width="2" fill="none"/></g>'
                  + hand(20, -96, 6, s, sd))
     else:
-        g.append(f'<path d="M24 -126 C36 -110 36 -94 28 -84" stroke="url(#{p}Vest)" stroke-width="11" fill="none" stroke-linecap="round"/>' + hand(27, -80, 6, s, sd))
+        g.append(f'<path d="M24 -126 C36 -110 36 -94 28 -84" stroke="url(#{p}Vest)" stroke-width="13" fill="none" stroke-linecap="round"/>' + hand(27, -80, 6, s, sd))
     g.append(f'<rect x="-5" y="-146" width="10" height="12" fill="{sd}"/>')
-    g.append(face(p, 0, -160, 18, 'roze'))
-    # halflang haar met een lok opzij, en een bril in het haar
-    g.append(f'<path d="M-20 -158 C-24 -184 -4 -186 4 -182 C16 -186 24 -176 20 -156 C16 -168 8 -172 -2 -174 C-8 -168 -14 -166 -20 -158Z" fill="{hair}"/>'
-             f'<path d="M-20 -160 C-25 -146 -23 -136 -18 -128 M20 -160 C25 -146 23 -136 18 -128" stroke="{hair}" stroke-width="7" fill="none" stroke-linecap="round"/>'
-             f'<path d="M-6 -180 C2 -183 10 -180 14 -172" stroke="{hair_l}" stroke-width="2.5" fill="none" stroke-linecap="round"/>'
-             f'<g fill="#ffffff30" stroke="#5a3a2a" stroke-width="1.6"><rect x="-15" y="-182" width="12" height="7" rx="3"/><rect x="3" y="-182" width="12" height="7" rx="3"/></g>')
+    g.append(face(p, 0, -160, 18, 'roze', brows='#8a8680'))
+    # kort grijs haar, een beetje opgewaaid, met oorbellen
+    g.append(f'<path d="M-19 -162 C-23 -182 -8 -188 2 -185 C14 -188 23 -180 19 -162 C17 -170 13 -174 6 -175 C2 -172 -4 -172 -8 -174 C-13 -172 -17 -168 -19 -162Z" fill="{hair}"/>'
+             f'<path d="M-2 -184 q3 -5 8 -4 M6 -185 q4 -3 8 -1" stroke="{hair}" stroke-width="3.5" stroke-linecap="round" fill="none"/>'
+             f'<path d="M-6 -182 C2 -185 10 -182 14 -176" stroke="{hair_l}" stroke-width="2.2" fill="none" stroke-linecap="round"/>'
+             f'<path d="M-19 -164 C-20.5 -159 -20 -156 -18.5 -154 M19 -164 C20.5 -159 20 -156 18.5 -154" stroke="{hair}" stroke-width="3.5" fill="none" stroke-linecap="round"/>'
+             f'<circle cx="-17" cy="-150" r="1.6" fill="#d6a640"/><circle cx="17" cy="-150" r="1.6" fill="#d6a640"/>')
+    g.append(glasses(0, -160, 18, '#9a1e2a', round_=False))
     return ''.join(g)
 
 
@@ -254,7 +288,7 @@ def harm(p):
 
 
 PORTRAITS = {
-    'roelof': ('Roelof', ('#3d6aa8', '#14243e'), lambda: roelof('pR', tool=None), 60, 286, 1.45),
+    'roelof': ('Roelof', ('#2e6a5a', '#0e2a22'), lambda: roelof('pR', tool=None), 60, 288, 1.45),
     'ditty': ('Ditty', ('#8a5a8e', '#2e1a30'), lambda: ditty('pD', hold=None), 60, 300, 1.5),
     'you': ('Jij, de gast', ('#2f8a7a', '#0e2e28'), lambda: you('pY'), 58, 82, 1.1),
     'harm': ('Harm, de knecht (1921)', ('#a89070', '#3e3226'), lambda: harm('pH'), 60, 80, 1.15),

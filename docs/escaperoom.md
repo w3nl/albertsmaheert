@@ -16,7 +16,7 @@ Een point-and-click escaperoom in de browser, over en op de echte boerderij: B&B
 ## Hoe het in de site zit
 
 - Alles van het spel staat in `src/escaperoom/`. `eleventy.config.cjs` **negeert** die map als template en **kopieert** hem ongewijzigd naar `_site/escaperoom/` (anders zou Nunjucks de HTML aanraken). De CI-workflow controleert met `diff` dat de kopie gelijk is.
-- De homepage (`src/index.html`, en `src/en/index.html` in het Engels) heeft een blok dat naar het spel linkt. Dat blok staat in de HTML, niet in `homepage.json` (die tekst is van de CMS).
+- De homepage (`src/index.html`, en `src/en/index.html` in het Engels) heeft een blok dat naar het spel linkt. **Dat blok is nog verborgen** (`hidden`), en het spel heeft `noindex`, tot Ditty en Roelof akkoord zijn. Haal dan `hidden` uit beide homepages en de `robots`-regel uit `src/escaperoom/index.html`. Dat blok staat in de HTML, niet in `homepage.json` (die tekst is van de CMS).
 - `tests/escaperoom/` (Playwright), `playwright.config.cjs`, `tools/escaperoom/personages.py` en dit bestand worden niet gepubliceerd.
 
 ```bash
@@ -45,12 +45,13 @@ npm run validate                # de hele site bouwen
 ### Personages
 
 - `tools/escaperoom/personages.py` tekent Roelof (blauwe boerenkiel, klompen, gereedschapsriem), Ditty (vest en schort met bloemetjes), de gasten, het hobbelpaardje, de ree en de portretten. In de kamers staan ze tussen `<!-- @personage naam -->` en `<!-- @einde naam -->`; pas die stukken niet met de hand aan, maar verander het script en draai `python3 tools/escaperoom/personages.py`.
-- **Ditty en Roelof zijn echt.** Houd ze vriendelijk en herkenbaar: Ditty doet de B&B (koffie, bloemen, ontbijt, "Moi!"), Roelof doet de klusjes en het museum (weet alles van oude dingen, legt zijn gereedschap overal neer). Pas hun uiterlijk aan in het script als het niet lijkt.
+- **Ditty en Roelof zijn echt** en getekend naar foto's. Ditty: kort grijs haar, een rode bril, een taupe blouse met witte bloemen, een lichte broek, een gouden kettinkje; zij doet de B&B (koffie, bloemen, ontbijt, "Moi!") en was vroeger juf op een basisschool (de schoolplaat, de tafelschikking, het kaartje bij de prenten). Roelof: kaal met een grijze rand, een donkere ronde bril; bij het klussen een groene overall, op het feest (`tool='glas'`) een blauw overhemd met print en een beige broek. Hij doet de klusjes en het museum, en knapte de International-trekkers (D-326, 633, Hydro 84) en de meeste machines zelf op.
+- Wat klopt over de boerderij: Roelof verbouwde kool (wit en rood), graan en suikerbieten; vroeger waren er koeien en schapen, de laatste jaren geitjes in het veld voor de boerderij. Vanuit de kamers kijk je naar de stad Groningen: de rand van de stad ligt hemelsbreed 4 km weg, de Martinitoren 7,5 km.
 - **Harm is verzonnen**, net als het kistje, de brieven, de schat, tante Grietje, buurman Jan en neef Sjoerd.
 
 ### Waar in de echte boerderij op gebaseerd
 
-De kamers en hun ligging (Paardenstal beneden met ramen op het oosten; Thedema, Alma en Folkerda op de hooizolder aan de zuidkant met gebinten en uitzicht op de Martinitoren), extra lange boxsprings, de eetzaal, de zaal in de vroegere koestal, de recreatiezaal met pooltafel, de tuin op het zuiden met trampoline, schommels en reeën, de welkomswagen met krijtbord en rode ballonnen, de borgprenten, de knooppuntenroute en de scheve toren van Bedum komen van de site en de foto's. Het museum is getekend naar foto's van het echte museum: rode trekkers met crèmekleurige wielen, de balenlift, de gereedschapswand, karntonnen, melkbussen, het juk, de rode katrollen, de schoolplaat en de groene strohakselaar.
+De kamers en hun ligging (Paardenstal beneden met ramen op het oosten; Thedema, Alma en Folkerda op de hooizolder aan de zuidkant met gebinten en uitzicht op de Martinitoren), extra lange boxsprings, de eetzaal, de zaal in de vroegere koestal, de recreatiezaal met pooltafel, de tuin op het zuiden met trampoline, schommels en reeën, de welkomswagen met krijtbord en rode ballonnen, het B&B-bord aan de weg met de Groninger vlag, de overloop met koelkastje, folders en quilt, de kroonluchters, de zaal (vurenhouten wanden, donkere balken met dakramen, grijze betonvloer, donkere tafels met rode en zwarte stoelen, palen op gemetselde voeten, de bar met krukken, de zithoek met kachel en de witte buffetkast), de borgprenten, de knooppuntenroute en de scheve toren van Bedum komen van de site en de foto's. Het museum is getekend naar foto's van het echte museum: een rode International-trekker met crèmekleurige wielen (Roelof heeft de D-326, de 633 en de Hydro 84 zelf opgeknapt; de 633 heeft hij al veertig jaar), de balenlift, de gereedschapswand, karntonnen, melkbussen, het juk, de rode katrollen, de schoolplaat en de groene strohakselaar.
 
 ## Oplossingen (spoilers)
 
@@ -83,7 +84,7 @@ Hoofdstuk 3, zaterdagmiddag (museum en platte dak):
 | Decimaalbascule (1 kg houdt 10 kg in evenwicht) | **5 + 2 kg** op het schaaltje; een mud aardappelen weegt **70 kg** → **G** | `bascule` |
 | Karnton (van melk naar boter) | Melken, nacht laten staan, room afscheppen, karnen, karnemelk eruit, kneden en zouten → **R** | `karn` |
 | Spreukenbord (Gronings) | Moi = hallo en dag; Nait soez'n, moi doun = niet zeuren, gewoon doen; Kop d'r veur = zet door; Wicht = meisje → **P** | `spreuk` |
-| Akkers (vruchtwisseling) | Dak, kaart op de akkers: 1922 **A graan, B aardappels, C suikerbieten**; 1923 **A suikerbieten, B graan, C aardappels** → **U** | `akkers` |
+| Akkers (vruchtwisseling) | Dak, kaart op de akkers (kool, graan en suikerbieten: wat Roelof zelf verbouwde): 1922 **A graan, B kool, C suikerbieten**; 1923 **A suikerbieten, B graan, C kool** → **U** | `akkers` |
 | Het woord | Kistje: **GRUP** (de mestgoot in de koestal) | `out3` |
 
 Hoofdstuk 4, zaterdagavond (zaal en tuin):
