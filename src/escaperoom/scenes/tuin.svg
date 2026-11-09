@@ -50,6 +50,10 @@
 
   <!-- het gazon -->
   <path d="M0 500 H1600 V900 H0Z" fill="url(#tnLawn)" />
+  <g id="tn-haag" aria-label="Lage groene haag langs de achterrand van de tuin">
+    <path d="M420 516 Q430 492 452 492 Q464 466 490 481 Q509 461 532 483 Q552 470 572 490 Q600 464 626 484 Q650 460 675 484 Q700 468 722 490 Q752 466 780 486 Q805 464 832 486 Q856 468 880 490 Q910 464 936 484 Q962 460 989 484 Q1013 466 1038 488 Q1062 468 1084 492 Q1110 472 1138 490 L1150 522 H420Z" fill="#29492c" stroke="#1c3522" stroke-width="3" />
+    <path d="M438 501 Q462 484 483 498 M518 498 Q543 481 565 499 M613 498 Q638 480 660 496 M704 501 Q731 481 755 498 M802 498 Q825 481 849 499 M895 500 Q920 480 946 497 M982 499 Q1005 482 1028 500 M1060 502 Q1082 486 1110 500" fill="none" stroke="#527443" stroke-width="4" stroke-linecap="round" opacity=".8" />
+  </g>
 
   <!-- de schommels -->
   <g id="tn-schommel">
@@ -88,17 +92,52 @@
     <path d="M0 640 Q120 600 220 660 V720 H0Z" fill="#2e4a26" />
     <g><circle cx="40" cy="630" r="8" fill="#c86aa8" /><circle cx="80" cy="620" r="7" fill="#e8a040" /><circle cx="120" cy="628" r="8" fill="#c86aa8" /><circle cx="160" cy="640" r="7" fill="#9a8ad0" /><circle cx="60" cy="650" r="6" fill="#f6efe2" /><circle cx="190" cy="656" r="7" fill="#e8a040" /></g>
   </g>
+  <g id="tn-wildflowers" aria-label="Wilde bloemen langs de terrasrand">
+    <path d="M212 712 Q300 690 520 712" fill="none" stroke="#74694f" stroke-width="8" />
+    <g fill="none" stroke="#47713a" stroke-width="3" stroke-linecap="round">
+      <path d="M246 708 Q242 678 250 652 M280 706 Q286 680 278 665 M322 709 Q318 680 330 646 M365 708 Q372 680 366 662 M410 710 Q404 676 418 650 M460 710 Q468 682 462 666 M500 712 Q494 686 508 658" />
+      <path d="M248 683 l-12 -7 M282 690 l12 -8 M326 680 l-13 -8 M368 687 l13 -9 M413 681 l-13 -9 M465 692 l13 -8 M505 686 l-12 -8" />
+    </g>
+    <g fill="#f0c84b"><circle cx="250" cy="650" r="6" /><circle cx="250" cy="650" r="2" fill="#704f24" /><circle cx="330" cy="644" r="7" /><circle cx="330" cy="644" r="2" fill="#704f24" /></g>
+    <g fill="#8574b7"><circle cx="278" cy="662" r="4" /><circle cx="270" cy="658" r="3" /><circle cx="286" cy="657" r="3" /><circle cx="366" cy="659" r="4" /><circle cx="358" cy="655" r="3" /><circle cx="374" cy="654" r="3" /></g>
+    <g fill="#e26855"><circle cx="418" cy="648" r="6" /><circle cx="418" cy="648" r="2" fill="#f6e8c8" /></g>
+    <g fill="#7e9fdb"><circle cx="462" cy="663" r="4" /><circle cx="454" cy="659" r="3" /><circle cx="470" cy="658" r="3" /><circle cx="508" cy="655" r="4" /><circle cx="500" cy="651" r="3" /><circle cx="516" cy="650" r="3" /></g>
+  </g>
   <!-- het terras met de muur van de zaal en de glazen deur -->
   <g id="tn-terras">
     <path d="M0 720 H520 L600 900 H0Z" fill="url(#tnTiles)" />
     <rect x="0" y="380" width="120" height="340" fill="url(#tnBrick)" />
     <rect x="20" y="460" width="80" height="260" fill="#f2d48a" opacity=".9" stroke="#e9e2d2" stroke-width="6" />
     <circle cx="60" cy="560" r="80" fill="url(#tnGlow)" />
-    <g><rect x="200" y="740" width="120" height="10" fill="#8a6440" /><path d="M210 750 v50 M310 750 v50" stroke="#8a6440" stroke-width="6" /><path d="M360 770 h40 v-60 h-10 v50 h-30z" fill="#3a3a52" /></g>
+    <g id="tn-terras-tafel">
+      <path class="tn-table-leg" d="M188 734 L185 812" stroke="#785638" stroke-width="6" stroke-linecap="round" />
+      <path class="tn-table-leg" d="M269 734 L273 812" stroke="#785638" stroke-width="6" stroke-linecap="round" />
+      <path class="tn-table-leg" d="M213 747 L210 822" stroke="#785638" stroke-width="6" stroke-linecap="round" />
+      <path class="tn-table-leg" d="M296 747 L300 822" stroke="#785638" stroke-width="6" stroke-linecap="round" />
+      <path d="M208 788 H295 M210 776 H291" stroke="#9b7652" stroke-width="4" />
+      <path d="M184 730 L270 730 L298 743 L212 743Z" fill="#c49a68" stroke="#68492e" stroke-width="2.5" />
+      <path d="M212 743 H298 V753 H212Z" fill="#8f6947" stroke="#68492e" stroke-width="2" />
+      <path d="M184 730 L212 743 V753 L184 740Z" fill="#a77c51" stroke="#68492e" stroke-width="2" />
+      <path d="M270 730 L298 743 V753 L273 741Z" fill="#9a714c" stroke="#68492e" stroke-width="2" />
+      <path d="M194 735 L267 735 M215 748 H292" stroke="#d7b58b" stroke-width="1.5" opacity=".8" />
+      <path d="M224 730 Q226 720 238 720 H252 Q262 720 263 730Z" fill="#b45b43" stroke="#6e392d" stroke-width="2" />
+      <path d="M231 720 Q226 709 219 706 M239 720 Q238 708 244 701 M248 720 Q256 712 261 709" stroke="#47713a" stroke-width="2.5" fill="none" stroke-linecap="round" />
+      <circle cx="219" cy="704" r="3.5" fill="#e26855" /><circle cx="244" cy="699" r="3.5" fill="#f0c84b" /><circle cx="262" cy="707" r="3.5" fill="#8574b7" />
+    </g>
+    <g id="tn-terras-stoel">
+      <path class="tn-chair-leg" d="M356 708 L354 820" stroke="#263e56" stroke-width="5" stroke-linecap="round" />
+      <path class="tn-chair-leg" d="M405 708 L408 820" stroke="#263e56" stroke-width="5" stroke-linecap="round" />
+      <path class="tn-chair-leg" d="M360 767 L357 824" stroke="#263e56" stroke-width="5" stroke-linecap="round" />
+      <path class="tn-chair-leg" d="M401 767 L404 824" stroke="#263e56" stroke-width="5" stroke-linecap="round" />
+      <path d="M356 708 H405 V758 H356Z" fill="#263e56" stroke="#172b3d" stroke-width="3" />
+      <path d="M362 716 H399 M361 728 H400 M360 740 H401" stroke="#7890a0" stroke-width="3" stroke-linecap="round" />
+      <path d="M358 758 H403 L398 776 H362Z" fill="#355672" stroke="#172b3d" stroke-width="3" />
+      <path d="M363 763 H398 M354 800 H408 M357 784 H405" stroke="#4d6c82" stroke-width="3" />
+    </g>
   </g>
 
   <!-- een haas die heen en weer huppelt -->
-  <g id="tn-haas"><g class="ree-walk" style="--walk:-240px;--dir:-1;--walkt:16s"><g class="haas-hop"><g transform="translate(520 650)">
+  <g id="tn-haas"><g class="ree-walk" style="--walk:-240px;--dir:-1;--walkt:16s"><g class="haas-hop"><g transform="translate(500 690)">
     <!-- @personage haas --><g transform="translate(0 0) scale(0.8 0.8)"><path d="M-30 -2 C-34 -14 -22 -18 -8 -14 L-4 -2Z" fill="#6a5034"/><path d="M-36 -26 C-40 -44 -10 -50 10 -40 C22 -34 24 -22 16 -14 C4 -6 -26 -6 -36 -26Z" fill="#9a7a56" stroke="#6a5034" stroke-width="1.4"/><circle cx="-38" cy="-30" r="6" fill="#f6efe4"/><path d="M12 -16 L18 -2 M6 -16 L8 -2" stroke="#6a5034" stroke-width="4" stroke-linecap="round"/><path d="M10 -38 C14 -50 30 -52 34 -42 C36 -34 28 -30 20 -32Z" fill="#9a7a56" stroke="#6a5034" stroke-width="1.4"/><path d="M14 -46 C8 -70 14 -78 20 -60Z M20 -46 C20 -72 28 -78 28 -58Z" fill="#9a7a56" stroke="#6a5034" stroke-width="1.4"/><path d="M10 -66 C10 -72 13 -76 15 -70 M21 -68 C22 -74 26 -76 27 -70" stroke="#1a1410" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="26" cy="-42" r="2.6" fill="#1a100a"/><circle cx="27" cy="-43" r=".8" fill="#fff"/><circle cx="34" cy="-38" r="1.6" fill="#3a2418"/></g><!-- @einde haas -->
   </g></g></g></g>
 
@@ -131,7 +170,7 @@
     <rect class="hit" data-hs="egel" data-label="Een egel in het gras" x="760" y="820" width="260" height="60" fill="transparent" />
     <rect class="hit" data-hs="maan" data-label="De maan" x="1250" y="130" width="100" height="100" fill="transparent" />
     <rect class="hit" data-hs="stad2" data-label="De lichtjes van Groningen en de Martinitoren" x="1060" y="360" width="180" height="110" fill="transparent" />
-    <rect class="hit" data-hs="border" data-label="De bloemenborder" x="0" y="600" width="220" height="80" fill="transparent" />
+    <rect class="hit" data-hs="border" data-label="De bloemenborder" x="108" y="600" width="112" height="80" fill="transparent" />
     <rect class="hit" data-hs="bomen" data-label="Fruitbomen met lampjes" x="170" y="180" width="300" height="200" fill="transparent" />
   </g>
 </svg>

@@ -1,6 +1,32 @@
 const { test, expect } = require('@playwright/test');
 const { startChapter, hs, walk, skip, useSlot, waitModalClosed, expectWin } = require('./helpers');
 
+test('de tuin heeft een haag en wilde bloemen langs het terras', async ({ page }) => {
+  await startChapter(page, 4);
+  await page.evaluate(() => { S.scene = 'tuin'; applyVisuals(); });
+  await expect(page.locator('#tn-haag')).toBeVisible();
+  await expect(page.locator('#tn-wildflowers')).toBeVisible();
+  await expect(page.locator('#tn-terras-tafel')).toBeVisible();
+  await expect(page.locator('#tn-terras-stoel')).toBeVisible();
+  await expect(page.locator('.tn-table-leg')).toHaveCount(4);
+  await expect(page.locator('.tn-chair-leg')).toHaveCount(4);
+  const behindFlowers = await page.evaluate(() => !!(document.querySelector('#tn-haas').compareDocumentPosition(document.querySelector('#tn-wildflowers')) & Node.DOCUMENT_POSITION_FOLLOWING));
+  expect(behindFlowers).toBe(true);
+  await expect(page.locator('#tn-haas g[transform^="translate"]').first()).toHaveAttribute('transform', 'translate(500 690)');
+});
+
+test('de bloemenborder-hotspot overlapt de tuindeur niet', async ({ page }) => {
+  await startChapter(page, 4);
+  await page.evaluate(() => { S.scene = 'tuin'; applyVisuals(); });
+  const [door, border] = await page.evaluate(() => [
+    ...['naarbinnen', 'border'].map(name => {
+      const { x, y, width, height } = document.querySelector(`#sc-tuin [data-hs="${name}"]`).getBBox();
+      return { x, y, width, height };
+    })
+  ]);
+  expect(border.x).toBeGreaterThanOrEqual(door.x + door.width);
+});
+
 test('hoofdstuk 4: lampjes, tafelschikking, pool, sporen en de schat onder de grup', async ({ page }) => {
   await startChapter(page, 4);
   await expect(page.locator('#chap')).toHaveText('Hoofdstuk 4 · Feest in de zaal');
@@ -16,6 +42,10 @@ test('hoofdstuk 4: lampjes, tafelschikking, pool, sporen en de schat onder de gr
   // de tafel
   await hs(page, 'tafel');
   const sel = page.locator('#m-body select');
+  const optionOrders = await sel.evaluateAll(selects => selects.map(select => [...select.options].slice(1).map(option => option.value)));
+  const expectedGuests = ['Buurman Jan', 'Ditty', 'Jij', 'Roelof', 'Tante Grietje'];
+  for (const order of optionOrders) expect([...order].sort()).toEqual(expectedGuests);
+  expect(new Set(optionOrders.map(order => order.join('|'))).size).toBe(5);
   const seats = async names => { for (let i = 0; i < 5; i++) await sel.nth(i).selectOption(names[i]); await page.locator('#tf-ok').click(); };
   await seats(['Ditty', 'Roelof', 'Tante Grietje', 'Jij', 'Buurman Jan']);
   await expect(page.locator('#tf-fb')).toContainText('Regel 5');

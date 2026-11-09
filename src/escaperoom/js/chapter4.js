@@ -35,6 +35,8 @@ function applyZaal(){
   vis('#za-paardje', !f.paardjeTaken); vis('#hit-zapaardje', !f.paardjeTaken);
 }
 function applyTuin(){
+  const scene = $('#sc-tuin'), hare = $('#tn-haas'), flowers = $('#tn-border');
+  if(scene && hare && flowers && (flowers.compareDocumentPosition(hare) & Node.DOCUMENT_POSITION_FOLLOWING)) scene.insertBefore(hare, flowers);
   vis('#tn-koevoet', !!S.f.sporen && !S.f.koevoetTaken); vis('#hit-koevoet', !!S.f.sporen && !S.f.koevoetTaken);
 }
 
@@ -148,6 +150,13 @@ function gereedschap(){
 
 /* ---------- puzzel 2: de tafelschikking (logisch redeneren) ---------- */
 const GUESTS = ['Ditty', 'Roelof', 'Jij', 'Tante Grietje', 'Buurman Jan'];
+const GUEST_OPTIONS = [
+  ['Roelof', 'Jij', 'Tante Grietje', 'Buurman Jan', 'Ditty'],
+  ['Tante Grietje', 'Buurman Jan', 'Roelof', 'Ditty', 'Jij'],
+  ['Buurman Jan', 'Tante Grietje', 'Ditty', 'Jij', 'Roelof'],
+  ['Jij', 'Ditty', 'Buurman Jan', 'Tante Grietje', 'Roelof'],
+  ['Ditty', 'Roelof', 'Jij', 'Buurman Jan', 'Tante Grietje']
+];
 function openTafel(){
   const pick = S.tfl || {};
   openModal('De tafelschikking', 'Vijf stoelen op een rij · stoel 1 is bij de keuken', `
@@ -159,7 +168,7 @@ function openTafel(){
       5. Maar tante Grietje niet naast Roelof: zijn verhalen zijn haar te lang.<br>
       6. Onze gast zit niet aan het eind van de rij.</div>
     <div class="opts" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr))">${[0, 1, 2, 3, 4].map(i => `
-      <label class="opt"><b>${tx('Stoel {n}', { n: i + 1 })}</b><select data-i="${i}" aria-label="${tx('Wie zit op stoel {n}', { n: i + 1 })}"><option value="">?</option>${GUESTS.map(g => `<option ${pick[i] === g ? 'selected' : ''}>${g}</option>`).join('')}</select></label>`).join('')}</div>
+      <label class="opt"><b>${tx('Stoel {n}', { n: i + 1 })}</b><select data-i="${i}" aria-label="${tx('Wie zit op stoel {n}', { n: i + 1 })}"><option value="">?</option>${GUEST_OPTIONS[i].map(g => `<option ${pick[i] === g ? 'selected' : ''}>${g}</option>`).join('')}</select></label>`).join('')}</div>
     <button type="button" class="btn" id="tf-ok" style="margin-top:12px">Aan tafel!</button>
     <div class="feedback" id="tf-fb"></div>`, body => {
     body.querySelectorAll('select').forEach(s => s.onchange = () => { pick[s.dataset.i] = s.value; S.tfl = pick; save(); });
