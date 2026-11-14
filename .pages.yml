@@ -1,22 +1,76 @@
 media:
-	input: src/assets/images
-	output: /assets/images
-	rename: safe
+  input: src/assets/images
+  output: /assets/images
+  rename: safe
 content:
-	- name: homepage
-		label: Homepage
-		type: file
-		path: src/_data/homepage.json
-		fields:
-			- name: intro
-				label: Introduction
-				type: text
-			- name: history
-				label: About the farm
-				type: text
-			- name: apartments
-				label: Apartments and facilities
-				type: text
-			- name: surroundings
-				label: Local area
-				type: text
+  - name: homepage
+    label: Homepage
+    type: file
+    path: src/_data/homepage.json
+    fields:
+      - name: intro
+        label: Introduction
+        type: text
+      - name: history
+        label: About the farm
+        type: text
+      - name: apartments
+        label: Apartments and facilities
+        type: text
+      - name: surroundings
+        label: Local area
+        type: text
+  - name: museum
+    label: Museum
+    type: file
+    path: src/_data/museum.json
+    fields:
+      - name: title
+        label: Titel van de pagina
+        type: string
+      - name: intro
+        label: Inleiding (witregel tussen alinea's)
+        type: text
+      - name: heroImage
+        label: Grote foto bovenaan
+        type: image
+      - name: heroAlt
+        label: Korte beschrijving van de grote foto
+        type: string
+      - name: sections
+        label: Onderdelen (tekst met foto)
+        type: object
+        list: true
+        fields:
+          - name: heading
+            label: Kop
+            type: string
+          - name: text
+            label: Tekst
+            type: text
+          - name: image
+            label: Foto
+            type: image
+          - name: alt
+            label: Korte beschrijving van de foto
+            type: string
+      - name: galleryTitle
+        label: Kop boven de fotogalerij
+        type: string
+      - name: gallery
+        label: Fotogalerij
+        type: object
+        list: true
+        fields:
+          - name: image
+            label: Foto
+            type: image
+          - name: caption
+            label: Onderschrift
+            type: string
+      - name: visitTitle
+        label: Kop van het blok "bezoeken"
+        type: string
+      - name: visitText
+        label: Praktische informatie
+        type: text

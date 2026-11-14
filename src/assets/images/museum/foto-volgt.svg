@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Foto volgt">
+  <rect width="1200" height="800" fill="#efe7da"/>
+  <rect x="24" y="24" width="1152" height="752" fill="none" stroke="#bf9958" stroke-width="4" stroke-dasharray="18 14"/>
+  <g transform="translate(600 360)" fill="none" stroke="#bf9958" stroke-width="10" stroke-linejoin="round">
+    <rect x="-110" y="-70" width="220" height="150" rx="16"/>
+    <path d="M-50 -70 l20 -32 h60 l20 32"/>
+    <circle cx="0" cy="5" r="44"/>
+  </g>
+  <text x="600" y="540" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="44" fill="#8a6d3b">Foto volgt</text>
+</svg>

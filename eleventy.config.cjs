@@ -11,6 +11,16 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy(`src/${file}`);
   }
 
+  // Split CMS text into paragraphs on blank lines.
+  eleventyConfig.addFilter("paragraphs", (text) =>
+    String(text || "").split(/\r?\n\s*\r?\n/).map((part) => part.trim()).filter(Boolean)
+  );
+
+  // Pages CMS stores images as "/assets/images/...". Make them relative to a page one folder deep.
+  eleventyConfig.addFilter("relativeAsset", (path, prefix = "../") =>
+    path ? prefix + String(path).replace(/^\/+/, "") : ""
+  );
+
   return {
     dir: {
       input: "src",
