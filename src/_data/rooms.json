@@ -1,6 +1,6 @@
 [
-  { "slug": "thedema", "name": "Thedema", "image": "assets/images/2026/11/slaapkamer-700x480.jpg", "occupancy": "2", "size": "28 m²", "price": "€118,50" },
-  { "slug": "alma", "name": "Alma", "image": "assets/images/2016/04/Wolddijk-serie-3-13-van-29-700x480.jpg", "occupancy": "2", "size": "26 m²", "price": "€118,50" },
-  { "slug": "folkerda", "name": "Folkerda", "image": "assets/images/2016/04/Wolddijk-serie-3-5-van-29-700x480.jpg", "occupancy": "2", "size": "27 m²", "price": "€118,50" },
-  { "slug": "paardenstal", "name": "Paardenstal", "image": "assets/images/2023/02/IMG_1151-700x480.jpg", "occupancy": "2", "size": "20 m²", "price": "€118,50" }
+  {"slug": "thedema", "name": "Thedema", "image": "assets/images/2026/11/slaapkamer-700x480.jpg", "occupancy": "2", "size": "28 m²"},
+  {"slug": "alma", "name": "Alma", "image": "assets/images/2016/04/Wolddijk-serie-3-13-van-29-700x480.jpg", "occupancy": "2", "size": "26 m²"},
+  {"slug": "folkerda", "name": "Folkerda", "image": "assets/images/2016/04/Wolddijk-serie-3-5-van-29-700x480.jpg", "occupancy": "2", "size": "27 m²"},
+  {"slug": "paardenstal", "name": "Paardenstal", "image": "assets/images/2023/02/IMG_1151-700x480.jpg", "occupancy": "2", "size": "20 m²"}
 ]

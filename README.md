@@ -12,6 +12,10 @@ Each save updates the JSON file in GitHub. A push to `main` builds the static si
 
 Use the Node.js version in `.nvmrc`, then run `npm ci` and `npm run validate`. The generated site is in `_site/`; don't edit generated files.
 
+## Room price
+
+The price per night is set in `src/_data/price.js`, as a list of amounts with the date each one starts. The site shows the price that applies on the day it is built (Dutch time). The deploy workflow also runs just after midnight on 1 January, so a price that starts on 1 January appears on time. Preview a future price locally with `PRICE_DATE=2027-01-01 npx eleventy`.
+
 ## Cloudflare cache
 
 After a successful GitHub Pages deployment, the workflow purges the Cloudflare zone's entire cache, including HTML and assets. Cloudflare fetches fresh content on subsequent requests; the purge does not prewarm the cache.
