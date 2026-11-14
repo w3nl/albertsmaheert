@@ -1,0 +1,29 @@
+{#- Sidebar block on a room detail page: the other rooms as cards. Set currentRoom (slug) before including. -#}
+<style>
+  .sidebar ul.other-rooms { margin: 0; padding: 0; }
+  .sidebar .other-rooms li.other-room { list-style: none; list-style-image: none; margin: 0 0 30px; padding: 0 0 30px; border-bottom: #e8e8e8 1px solid; }
+  .sidebar .other-rooms li.other-room:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .other-room .accommodation-thumb { display: block; margin: 0 0 14px; aspect-ratio: 700 / 480; object-fit: cover; transition: opacity .3s ease; }
+  .other-room a:hover .accommodation-thumb, .other-room a:focus .accommodation-thumb { opacity: .85; }
+  .other-room .title-style1 { font-size: 18px; margin: 0 0 14px; }
+  .sidebar .other-room .no-style-list { margin: 0 0 16px; padding: 0; }
+  .sidebar .other-room .no-style-list li { list-style: none; list-style-image: none; margin: 0 0 4px; padding: 0; border: none; }
+  .other-room .button1 { float: none; display: inline-block; }
+</style>
+<div class="widget clearfix">
+  <h4 class="title-style3">Andere kamers<span class="title-block"></span></h4>
+  <ul class="other-rooms">
+    {%- for room in rooms %}{% if room.slug != currentRoom %}
+    <li class="other-room">
+      <a href="../{{ room.slug }}/index.html" title="{{ room.name }}"><img src="../../{{ room.image }}" alt="{{ room.name }}" class="accommodation-thumb" loading="lazy" /></a>
+      <h3 class="title-style1"><a href="../{{ room.slug }}/index.html">{{ room.name }}</a><span class="title-block"></span></h3>
+      <ul class="no-style-list">
+        <li><strong>Bezetting:</strong> {{ room.occupancy }}</li>
+        <li><strong>Grootte:</strong> {{ room.size }}</li>
+        <li><strong>Prijs:</strong> {{ room.price }}</li>
+      </ul>
+      <a href="../{{ room.slug }}/index.html" class="button1">Bekijk {{ room.name }}</a>
+    </li>
+    {%- endif %}{% endfor %}
+  </ul>
+</div>
