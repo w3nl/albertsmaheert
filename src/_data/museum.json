@@ -1,0 +1,37 @@
+{
+  "title": "Museum",
+  "intro": "[Korte inleiding over het museum. Bijvoorbeeld: wat er te zien is, hoe het museum is ontstaan en wie het heeft opgebouwd.]\n\n[Eventueel een tweede alinea. Laat een witregel tussen alinea's.]",
+  "heroImage": "/assets/images/museum/foto-volgt.svg",
+  "heroAlt": "",
+  "sections": [
+    {
+      "heading": "[Kop van het eerste onderdeel, bijvoorbeeld: De trekkers]",
+      "text": "[Tekst over dit onderdeel.]",
+      "image": "/assets/images/museum/foto-volgt.svg",
+      "alt": ""
+    },
+    {
+      "heading": "[Kop van het tweede onderdeel, bijvoorbeeld: Gereedschap en werktuigen]",
+      "text": "[Tekst over dit onderdeel.]",
+      "image": "/assets/images/museum/foto-volgt.svg",
+      "alt": ""
+    },
+    {
+      "heading": "[Kop van het derde onderdeel, bijvoorbeeld: Melk en zuivel]",
+      "text": "[Tekst over dit onderdeel.]",
+      "image": "/assets/images/museum/foto-volgt.svg",
+      "alt": ""
+    }
+  ],
+  "galleryTitle": "Foto's",
+  "gallery": [
+    { "image": "/assets/images/museum/foto-volgt.svg", "caption": "" },
+    { "image": "/assets/images/museum/foto-volgt.svg", "caption": "" },
+    { "image": "/assets/images/museum/foto-volgt.svg", "caption": "" },
+    { "image": "/assets/images/museum/foto-volgt.svg", "caption": "" },
+    { "image": "/assets/images/museum/foto-volgt.svg", "caption": "" },
+    { "image": "/assets/images/museum/foto-volgt.svg", "caption": "" }
+  ],
+  "visitTitle": "Het museum bezoeken",
+  "visitText": "[Praktische informatie: wanneer het museum open is, of je een afspraak moet maken en of er entree is.]"
+}

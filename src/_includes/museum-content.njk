@@ -1,0 +1,94 @@
+{%- macro tekst(value) -%}
+{%- for p in value | paragraphs %}
+<p>{{ p | escape | nl2br | safe }}</p>
+{%- endfor -%}
+{%- endmacro -%}
+<style>
+  .museum { padding-bottom: 20px; }
+  .museum img { display: block; width: 100%; height: auto; }
+  .museum-hero { margin: 0 0 40px; }
+  .museum-hero img { aspect-ratio: 16 / 7; object-fit: cover; }
+  .museum-intro { max-width: 720px; margin: 0 auto 60px; text-align: center; font-size: 16px; line-height: 1.8; }
+  .museum-intro p:first-child { font-family: 'Merriweather', Georgia, serif; font-size: 19px; line-height: 1.7; color: #1c1c1c; }
+  .museum-section { display: flex; align-items: center; gap: 48px; margin: 0 0 60px; }
+  .museum-section:nth-of-type(even) { flex-direction: row-reverse; }
+  .museum-section-image, .museum-section-text { flex: 1 1 0; min-width: 0; }
+  .museum-section-image img { aspect-ratio: 3 / 2; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,.12); }
+  .museum .title-style1 { font-size: 22px; }
+  .museum-section-text p { line-height: 1.8; }
+  .museum-gallery-title { margin-top: 20px; }
+  .page-content .museum-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 0 60px; padding: 0; list-style: none; }
+  .page-content .museum-gallery li { margin: 0; padding: 0; list-style: none; list-style-image: none; }
+  .museum-gallery figure { margin: 0; }
+  .museum-gallery a { display: block; overflow: hidden; }
+  .museum-gallery img { aspect-ratio: 1 / 1; object-fit: cover; transition: transform .4s ease; }
+  .museum-gallery a:hover img, .museum-gallery a:focus img { transform: scale(1.05); }
+  .museum-gallery figcaption { font-size: 13px; color: #777; padding: 6px 2px 0; }
+  .museum-visit { border-top: 5px solid #bf9958; background: #f7f3ec; padding: 36px 40px; display: flex; align-items: center; gap: 32px; }
+  .museum-visit-text { flex: 1 1 auto; }
+  .museum-visit-text p:last-child { margin-bottom: 0; }
+  .museum-visit .button2 { flex: 0 0 auto; }
+  @media only screen and (max-width: 767px) {
+    .museum-section, .museum-section:nth-of-type(even) { flex-direction: column; gap: 20px; margin-bottom: 40px; }
+    .museum-section-image, .museum-section-text { flex: none; width: 100%; }
+    .museum-hero img { aspect-ratio: 4 / 3; }
+    .museum-intro { text-align: left; margin-bottom: 40px; }
+    .page-content .museum-gallery { grid-template-columns: repeat(2, 1fr); }
+    .museum-visit { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
+  }
+</style>
+
+<div class="museum">
+
+  {%- if museum.heroImage %}
+  <div class="museum-hero">
+    <img src="{{ museum.heroImage | relativeAsset }}" alt="{{ museum.heroAlt }}" />
+  </div>
+  {%- endif %}
+
+  {%- if museum.intro %}
+  <div class="museum-intro">{{ tekst(museum.intro) }}
+  </div>
+  {%- endif %}
+
+  {%- for section in museum.sections %}
+  <section class="museum-section">
+    {%- if section.image %}
+    <div class="museum-section-image">
+      <a href="{{ section.image | relativeAsset }}" rel="prettyPhoto[museum]" title="{{ section.heading }}"><img src="{{ section.image | relativeAsset }}" alt="{{ section.alt }}" loading="lazy" /></a>
+    </div>
+    {%- endif %}
+    <div class="museum-section-text">
+      {%- if section.heading %}
+      <h3 class="title-style1">{{ section.heading }}<span class="title-block"></span></h3>
+      {%- endif %}
+      {{ tekst(section.text) }}
+    </div>
+  </section>
+  {%- endfor %}
+
+  {%- if museum.gallery and museum.gallery.length %}
+  <h3 class="title-style1 museum-gallery-title">{{ museum.galleryTitle or "Foto's" }}<span class="title-block"></span></h3>
+  <ul class="museum-gallery">
+    {%- for photo in museum.gallery %}{% if photo.image %}
+    <li>
+      <figure>
+        <a href="{{ photo.image | relativeAsset }}" rel="prettyPhoto[museum]" title="{{ photo.caption }}"><img src="{{ photo.image | relativeAsset }}" alt="{{ photo.caption }}" loading="lazy" /></a>
+        {%- if photo.caption %}<figcaption>{{ photo.caption }}</figcaption>{% endif %}
+      </figure>
+    </li>
+    {%- endif %}{% endfor %}
+  </ul>
+  {%- endif %}
+
+  {%- if museum.visitText %}
+  <div class="museum-visit">
+    <div class="museum-visit-text">
+      <h3 class="title-style1">{{ museum.visitTitle or "Het museum bezoeken" }}<span class="title-block"></span></h3>
+      {{ tekst(museum.visitText) }}
+    </div>
+    <a class="button2" href="../contact/index.html">Neem contact op</a>
+  </div>
+  {%- endif %}
+
+</div>
