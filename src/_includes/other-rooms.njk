@@ -1,0 +1,34 @@
+{#- Sidebar block on a room detail page: the other rooms as cards. Set currentRoom (slug) before including. -#}
+<style>
+  .sidebar ul.other-rooms { margin: 0; padding: 0; }
+  .sidebar .other-rooms li.other-room { list-style: none; list-style-image: none; display: grid; grid-template-columns: 100px 1fr; gap: 0 16px; align-items: start; margin: 0 0 20px; padding: 0 0 20px; border-bottom: #e8e8e8 1px solid; line-height: 1.3; }
+  .sidebar .other-rooms li.other-room:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .other-room-image { display: block; }
+  .other-room .accommodation-thumb { display: block; width: 100px; height: 100px; margin: 0; object-fit: cover; transition: opacity .3s ease; }
+  .other-room-image:hover .accommodation-thumb, .other-room-image:focus .accommodation-thumb { opacity: .85; }
+  .other-room-text { min-width: 0; }
+  .other-room .title-style1 { font-size: 16px; margin: 0 0 8px; padding: 0 0 6px; border-bottom: none; }
+  .other-room .title-style1 .title-block { width: 32px; height: 2px; bottom: -2px; }
+  .sidebar .other-room .no-style-list { margin: 0 0 10px; padding: 0; font-size: 13px; }
+  .sidebar .other-room .no-style-list li { list-style: none; list-style-image: none; margin: 0 0 2px; padding: 0; border: none; }
+  .other-room .button1 { float: none; display: inline-block; padding: 7px 10px; font-size: 11px; }
+</style>
+<div class="widget clearfix">
+  <h4 class="title-style3">Andere kamers<span class="title-block"></span></h4>
+  <ul class="other-rooms">
+    {%- for room in rooms %}{% if room.slug != currentRoom %}
+    <li class="other-room">
+      <a class="other-room-image" href="../{{ room.slug }}/index.html" title="{{ room.name }}"><img src="../../{{ room.image }}" alt="{{ room.name }}" class="accommodation-thumb" loading="lazy" /></a>
+      <div class="other-room-text">
+        <h3 class="title-style1"><a href="../{{ room.slug }}/index.html">{{ room.name }}</a><span class="title-block"></span></h3>
+        <ul class="no-style-list">
+          <li><strong>Bezetting:</strong> {{ room.occupancy }}</li>
+          <li><strong>Grootte:</strong> {{ room.size }}</li>
+          <li><strong>Prijs:</strong> {{ price.current }}</li>
+        </ul>
+        <a href="../{{ room.slug }}/index.html" class="button1">Bekijk kamer</a>
+      </div>
+    </li>
+    {%- endif %}{% endfor %}
+  </ul>
+</div>
