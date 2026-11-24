@@ -28,8 +28,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      HAS_KEY: ${{ secrets.ESCAPEROOM_KEYSTORE_BASE64 != '' }}
-      ESCAPEROOM_KEY_ALIAS: ${{ vars.ESCAPEROOM_KEY_ALIAS || 'albertsmaheert' }}
+      HAS_KEY: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' }}
+      ANDROID_KEY_ALIAS: ${{ vars.ANDROID_KEY_ALIAS || 'albertsmaheert' }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -53,19 +53,19 @@ jobs:
       - name: Vaste sleutel (optioneel, zodat een nieuwe versie over de oude heen installeert)
         if: env.HAS_KEY == 'true'
         env:
-          KEYSTORE: ${{ secrets.ESCAPEROOM_KEYSTORE_BASE64 }}
-          ESCAPEROOM_KEYSTORE_PASSWORD: ${{ secrets.ESCAPEROOM_KEYSTORE_PASSWORD }}
+          KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
         run: |
           # verdraagt regeleinden en spaties in de geplakte tekst
           printf '%s' "$KEYSTORE" | tr -d ' \r\n\t' | python3 -c 'import base64,sys; sys.stdout.buffer.write(base64.b64decode(sys.stdin.read()))' > apps/escaperoom/android/keystore.jks
-          if ! keytool -list -keystore apps/escaperoom/android/keystore.jks -storepass "$ESCAPEROOM_KEYSTORE_PASSWORD" -alias "$ESCAPEROOM_KEY_ALIAS" > /dev/null 2>&1; then
-            echo "::error::De sleutel gaat niet open: controleer ESCAPEROOM_KEYSTORE_BASE64, ESCAPEROOM_KEYSTORE_PASSWORD en de alias ($ESCAPEROOM_KEY_ALIAS). Zie docs/escaperoom-apps.md."
+          if ! keytool -list -keystore apps/escaperoom/android/keystore.jks -storepass "$ANDROID_KEYSTORE_PASSWORD" -alias "$ANDROID_KEY_ALIAS" > /dev/null 2>&1; then
+            echo "::error::De sleutel gaat niet open: controleer ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD en de alias ($ANDROID_KEY_ALIAS). Zie docs/escaperoom-sleutels.md."
             exit 1
           fi
 
       - name: Bouw de app
         env:
-          ESCAPEROOM_KEYSTORE_PASSWORD: ${{ secrets.ESCAPEROOM_KEYSTORE_PASSWORD }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
         run: |
           gradle -p apps/escaperoom/android assembleDebug --no-daemon
           cp apps/escaperoom/android/app/build/outputs/apk/debug/app-debug.apk albertsmaheert.apk
@@ -74,7 +74,7 @@ jobs:
       # maar bewaren we hem niet: Google Play neemt geen onondertekende bundel aan.
       - name: Bouw de bundel voor Google Play (.aab)
         env:
-          ESCAPEROOM_KEYSTORE_PASSWORD: ${{ secrets.ESCAPEROOM_KEYSTORE_PASSWORD }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
         run: |
           gradle -p apps/escaperoom/android bundleRelease --no-daemon
           if [ "$HAS_KEY" = "true" ]; then cp apps/escaperoom/android/app/build/outputs/bundle/release/app-release.aab albertsmaheert.aab; fi
@@ -91,10 +91,10 @@ jobs:
       - name: Versleutel de bundel voor Google Play
         if: env.HAS_KEY == 'true'
         env:
-          ESCAPEROOM_KEYSTORE_PASSWORD: ${{ secrets.ESCAPEROOM_KEYSTORE_PASSWORD }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
         run: |
           command -v 7z > /dev/null || { sudo apt-get update -qq && sudo apt-get install -y -qq 7zip; }
-          7z a -t7z -mhe=on -p"$ESCAPEROOM_KEYSTORE_PASSWORD" albertsmaheert-google-play.7z albertsmaheert.aab > /dev/null
+          7z a -t7z -mhe=on -p"$ANDROID_KEYSTORE_PASSWORD" albertsmaheert-google-play.7z albertsmaheert.aab > /dev/null
           rm albertsmaheert.aab
 
       - name: Bewaar de bundel voor Google Play (met wachtwoord)
@@ -109,6 +109,8 @@ jobs:
     name: Linux-app (snap)
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    env:
+      HAS_STORE: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS != '' }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -130,6 +132,16 @@ jobs:
           name: escaperoom-linux
           path: albertsmaheert.snap
           retention-days: 30
+
+      # De Snap Store: alleen met een login (het secret SNAPCRAFT_STORE_CREDENTIALS) én pas na goedkeuring
+      # (ESCAPEROOM_RELEASE=true). Naar het kanaal "edge" (of de variabele SNAP_CHANNEL); naar "stable" zet je hem zelf.
+      - name: Zet de snap in de Snap Store
+        if: env.HAS_STORE == 'true' && vars.ESCAPEROOM_RELEASE == 'true' && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
+        run: |
+          sudo snap install snapcraft --classic
+          snapcraft upload --release="${{ vars.SNAP_CHANNEL || 'edge' }}" albertsmaheert.snap
 
   chrome:
     name: Chrome-extensie

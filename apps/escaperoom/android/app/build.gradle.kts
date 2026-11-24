@@ -2,12 +2,12 @@ plugins {
     id("com.android.application")
 }
 
-// Optioneel een vaste sleutel (repository-secrets ESCAPEROOM_KEYSTORE_BASE64 + ESCAPEROOM_KEYSTORE_PASSWORD), zodat een
+// Optioneel een vaste sleutel (repository-secrets ANDROID_KEYSTORE_BASE64 + ANDROID_KEYSTORE_PASSWORD), zodat een
 // nieuwe versie over de oude heen geïnstalleerd kan worden. Zonder die sleutel ondertekent GitHub met een wisselende
 // debugsleutel: dan eerst de oude app verwijderen. Zie docs/escaperoom-apps.md.
 val keystoreFile = rootProject.file("keystore.jks")
-val keystorePassword: String? = System.getenv("ESCAPEROOM_KEYSTORE_PASSWORD")?.takeIf { it.isNotEmpty() }
-val keyAliasName: String = System.getenv("ESCAPEROOM_KEY_ALIAS")?.takeIf { it.isNotBlank() } ?: "albertsmaheert"
+val keystorePassword: String? = System.getenv("ANDROID_KEYSTORE_PASSWORD")?.takeIf { it.isNotEmpty() }
+val keyAliasName: String = System.getenv("ANDROID_KEY_ALIAS")?.takeIf { it.isNotBlank() } ?: "albertsmaheert"
 // Het versienummer volgt het spel: GAME_VERSION 63 wordt 1.63 (de workflow geeft het door).
 val gameVersion: Int = (System.getenv("GAME_VERSION") ?: "1").toInt()
 

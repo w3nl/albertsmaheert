@@ -90,25 +90,18 @@ start hij schermvullend als app, en werkt hij ook offline. Een PlayStation- of X
 
 ## Naar de winkels (later)
 
-Nodig zodra de escaperoom openbaar mag:
+Nodig zodra de escaperoom openbaar mag. Stap voor stap, met de commando's om de secrets te maken en in GitHub te zetten:
+[escaperoom-sleutels.md](escaperoom-sleutels.md).
 
-- **Google Play** (telefoon, tablet, Google TV, Chromebook): een ontwikkelaarsaccount, en een vaste sleutel zodat
-  updates over de oude app heen installeren. Maak die één keer, en bewaar hem goed (kwijt = nooit meer een update):
+| Secret / variabele | Waarvoor |
+|---|---|
+| `ANDROID_KEYSTORE_BASE64` + `ANDROID_KEYSTORE_PASSWORD` | vaste Android-sleutel: updates installeren over de oude app heen, en de bundel (`.aab`) voor Google Play |
+| `ANDROID_KEY_ALIAS` (variabele, optioneel) | alleen als je sleutel een andere alias heeft dan `albertsmaheert` |
+| `SNAPCRAFT_STORE_CREDENTIALS` | de snap uploaden naar de Snap Store |
+| `SNAP_CHANNEL` (variabele, optioneel) | `stable` in plaats van `edge` |
+| `ESCAPEROOM_RELEASE` (variabele) | `true`: release met de apps, en uploaden naar de Snap Store |
 
-  ```bash
-  keytool -genkeypair -v -keystore albertsmaheert.jks -alias albertsmaheert -keyalg RSA -keysize 4096 -validity 10000
-  ```
-
-  ```bash
-  base64 -w0 albertsmaheert.jks
-  ```
-
-  Zet de uitvoer in het repository-secret `ESCAPEROOM_KEYSTORE_BASE64` en het wachtwoord in
-  `ESCAPEROOM_KEYSTORE_PASSWORD`. Dan maakt de workflow ook de bundel voor Google Play (`.aab`), als
-  `escaperoom-google-play` in een 7z-bestand met dat wachtwoord (nooit in de release). Voor Google TV vraagt Google
-  Play schermafbeeldingen in 1920×1080 en de banner (`res/drawable-xhdpi/banner.png`).
-- **Chrome Web Store:** een ontwikkelaarsaccount; upload `albertsmaheert-chrome.zip`.
-- **Snap Store:** een Ubuntu One-account, `snapcraft register albertsmaheert`, en dan `snapcraft upload` van de snap.
+De Chrome Web Store heeft geen secret nodig: daar upload je `albertsmaheert-chrome.zip` zelf.
 
 ## Valkuilen
 
