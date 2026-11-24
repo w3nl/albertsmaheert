@@ -1,0 +1,64 @@
+{
+  "name": "albertsmaheert",
+  "productName": "Albertsmaheert",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Het Geheim van de Albertsmaheert: een escaperoom op B&B Albertsmaheert aan de Wolddijk, van de Paardenstal tot het feest in de zaal.",
+  "homepage": "https://albertsmaheert.nl/",
+  "license": "UNLICENSED",
+  "author": {
+    "name": "B&B Albertsmaheert",
+    "url": "https://albertsmaheert.nl/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/w3nl/albertsmaheert.git"
+  },
+  "desktopName": "albertsmaheert.desktop",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "snap": "electron-builder --linux snap --publish never"
+  },
+  "devDependencies": {
+    "electron": "45.4.1",
+    "electron-builder": "26.18.0"
+  },
+  "build": {
+    "appId": "nl.albertsmaheert.escaperoom",
+    "productName": "Albertsmaheert",
+    "files": [
+      "main.js",
+      "game/**"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "linux": {
+      "target": [
+        "snap"
+      ],
+      "category": "Game",
+      "executableName": "albertsmaheert",
+      "icon": "game/icons/icon-512.png",
+      "synopsis": "Een escaperoom op de boerderij en B&B Albertsmaheert",
+      "desktop": {
+        "entry": {
+          "Name": "Het Geheim van de Albertsmaheert",
+          "Comment": "Escaperoom op B&B Albertsmaheert aan de Wolddijk",
+          "Keywords": "spel;escaperoom;puzzel;boerderij;game;"
+        }
+      },
+      "syncDesktopName": true
+    },
+    "snap": {
+      "summary": "Een escaperoom op de boerderij en B&B Albertsmaheert",
+      "grade": "stable",
+      "confinement": "strict",
+      "plugs": [
+        "default",
+        "joystick"
+      ]
+    }
+  }
+}

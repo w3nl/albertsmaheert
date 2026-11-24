@@ -42,4 +42,4 @@ npm run start:escaperoom   # http://127.0.0.1:4174/escaperoom/
 npm run test:escaperoom    # speelt alle hoofdstukken uit (eerst: npx playwright install chromium)
 ```
 
-Hoe het in elkaar zit, en de oplossingen van alle puzzels: [docs/escaperoom.md](docs/escaperoom.md).
+Hoe het in elkaar zit, en de oplossingen van alle puzzels: [docs/escaperoom.md](docs/escaperoom.md). Speelbaar met muis, aanraken, toetsenbord, afstandsbediening en controller; apps voor Android, Google TV, Chromebook, Linux en Chrome: [docs/escaperoom-apps.md](docs/escaperoom-apps.md).

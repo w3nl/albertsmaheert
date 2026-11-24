@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Albertsmaheert</string>
+    <string name="no_browser">Open %1$s op je telefoon of computer.</string>
+</resources>

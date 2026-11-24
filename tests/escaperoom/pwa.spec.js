@@ -45,6 +45,17 @@ test('elk bestand in de offline-lijst bestaat, en elk spelbestand staat erin', a
   for (const f of core) expect(fs.existsSync(path.join(root, f)), f).toBe(true);
   for (const dir of ['js', 'css', 'scenes', 'portraits'])
     for (const f of fs.readdirSync(path.join(root, dir))) expect(core, `${dir}/${f} staat niet in sw.js`).toContain(`${dir}/${f}`);
+  for (const f of fs.readdirSync(path.join(root, 'fonts')).filter(f => f.endsWith('.woff2'))) expect(core, `fonts/${f} staat niet in sw.js`).toContain(`fonts/${f}`);
+});
+
+test('het spel laadt niets van andere websites (nodig voor offline en de apps)', async ({ page }) => {
+  const outside = [];
+  page.on('request', r => { if (!r.url().startsWith('http://127.0.0.1')) outside.push(r.url()); });
+  await page.goto('./');
+  await expect(page.locator('#title')).not.toHaveClass(/loading/);
+  await page.evaluate(() => document.fonts.ready);
+  expect(outside).toEqual([]);
+  expect(await page.evaluate(() => document.fonts.check('16px Fredoka'))).toBe(true);
 });
 
 test('het titelscherm toont de versie, en een nieuwere versie biedt herladen aan', async ({ page }) => {
