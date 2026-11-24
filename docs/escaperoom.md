@@ -9,7 +9,7 @@ Aantekeningen voor iedereen (en elke AI-agent) die aan de escaperoom werkt. Het 
 Een point-and-click escaperoom in de browser, over en op de echte boerderij: B&B Albertsmaheert, Wolddijk 60, Noordwolde. Voor families en gasten, en tegelijk een uitnodiging om te komen logeren: elk eindscherm, de titel en de folder linken naar de site en naar reserveren.
 
 - **Het verhaal:** je komt op vrijdagavond als gast aan. In de Paardenstal vind je een brief van **Harm**, knecht op de boerderij in 1921 (verzonnen). Hij verstopte de schat uit het kistje van borg Thedema. Je zoekt op de hooizolder, in het museum en op het platte dak, en op zaterdagavond vind je op het feest in de zaal, onder de oude grup, een foto van de boerderij in 1921 en Harms boodschap: het mooiste van een boerderij zijn de mensen aan tafel.
-- 4 hoofdstukken, 9 kamers, 22 puzzels. Gewone HTML, CSS, JavaScript en SVG: **geen build, geen framework**. Alleen Google Fonts.
+- 4 hoofdstukken, 9 kamers, 22 puzzels. Gewone HTML, CSS, JavaScript en SVG: **geen build, geen framework**. De lettertypen staan in `fonts/` (OFL), zodat het spel niets van andere websites laadt.
 - **Alleen Nederlands** (net als het Sinterklaas-spel). `tx(tekst, { naam })` vult alleen `{naam}` in.
 - Installeerbaar als app en offline speelbaar (service worker met bereik `/escaperoom/`). Als de verbinding terugkomt of je terugkeert naar de tab, controleert de service worker op een nieuwere versie en cachet die; de updatebalk vraagt daarna om herladen. **Moet via http(s)** draaien.
 
@@ -17,7 +17,16 @@ Een point-and-click escaperoom in de browser, over en op de echte boerderij: B&B
 
 - Alles van het spel staat in `src/escaperoom/`. `eleventy.config.cjs` **negeert** die map als template en **kopieert** hem ongewijzigd naar `_site/escaperoom/` (anders zou Nunjucks de HTML aanraken). De CI-workflow controleert met `diff` dat de kopie gelijk is.
 - De homepage (`src/index.html`, en `src/en/index.html` in het Engels) heeft een blok dat naar het spel linkt. **Dat blok is nog verborgen** (`hidden`), en het spel heeft `noindex`, tot Ditty en Roelof akkoord zijn. Haal dan `hidden` uit beide homepages en de `robots`-regel uit `src/escaperoom/index.html`. Dat blok staat in de HTML, niet in `homepage.json` (die tekst is van de CMS).
-- `tests/escaperoom/` (Playwright), `playwright.config.cjs`, `tools/escaperoom/personages.py` en dit bestand worden niet gepubliceerd.
+- `tests/escaperoom/` (Playwright), `playwright.config.cjs`, `tools/escaperoom/`, `apps/escaperoom/` en dit bestand worden niet gepubliceerd.
+- **Apps:** Android (telefoon, tablet, Google TV, Chromebook), Linux (snap) en een Chrome-extensie, met het spel erin: zie [escaperoom-apps.md](escaperoom-apps.md).
+
+## Besturing
+
+Muis, aanraken, toetsenbord, afstandsbediening en controller. `js/gamepad.js` (na `app.js` geladen):
+- **Pijltjes / stick / d-pad** springen naar het dichtstbijzijnde klikvlak in die richting (`.hit.pad-focus`, met het label in `#tip`); in een close-up, het menu of het eindscherm naar de knoppen en velden. Een keuzelijst verandert met links/rechts.
+- **Enter / OK / A** klikt (of klikt het gesprek verder), **Terug / Backspace / B** gaat een stap terug (close-up dicht → ding uit de hand → gesprek verder → menu), **X** hint, **Y** of Select: toon alle klikvlakken, **LB/RB** kiest een ding uit de rugzak, **Start** menu.
+- De Android-app geeft de controller door als `window.__nativePad` (knoppen, `presses`-tellers, assen) en vraagt bij Terug `window.tvBack()`; `false` sluit de app. Anders de Gamepad API van de browser.
+- Een nieuw soort knop of veld in een close-up werkt vanzelf (alles met `button`, `select`, `input`, `a[href]` of `onclick`); een klikvlak moet `.hit` met `data-label` zijn. `tests/escaperoom/besturing.spec.js` test het.
 
 ```bash
 npm ci
@@ -129,6 +138,7 @@ Alles uit de blueprint en het Sinterklaas-spel geldt. Vooral:
 - **Verhoog `CACHE` in `sw.js` (`amh-vN`) en `GAME_VERSION` in `js/boot.js` samen** bij elke wijziging; de test controleert het. De service worker wist alleen zijn eigen oude caches (`amh-`).
 - Elke puzzel heeft twee hints in `HINTS`: een duwtje en het antwoord. Elk fout antwoord krijgt een grapje én een duwtje.
 - **Puzzels die niet op elkaar wachten, kun je in elke volgorde doen.** Laat de tekst na een puzzel dus niet uitgaan van de volgorde in de tabel hierboven: in hoofdstuk 2 is Roelof pas boven na de katrol (Thedema en Folkerda kunnen eerder), en het kastje gaat pas open met alle drie de tekens; in hoofdstuk 4 kun je de dopsleutel en de koevoet vóór de lampjes en de tafel vinden (`gereedschap()`). `tests/escaperoom/volgorde.spec.js` speelt die hoofdstukken andersom.
+- **Niets van andere websites laden** (lettertypen, scripts): de apps werken zonder internet; `pwa.spec.js` controleert het. Een nieuw lettertype hoort in `fonts/` en in `CORE`.
 - Geen `alert/confirm/prompt`; knoppen hebben `type="button"`; close-ups passen op 412×915 en 915×412 (`phone.spec.js`).
 
 ## Ideeën

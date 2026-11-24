@@ -1,7 +1,7 @@
 // Service worker: maakt het spel installeerbaar en offline speelbaar.
 // Verhoog CACHE bij elke wijziging, zodat telefoons de nieuwe versie krijgen, en houd GAME_VERSION in js/boot.js
 // hetzelfde getal (tests/pwa.spec.js controleert dat). De pagina toont dat getal en biedt herladen aan bij een nieuwere versie.
-const CACHE = 'amh-v62';
+const CACHE = 'amh-v63';
 const CORE = [
   './',
   './index.html',
@@ -10,6 +10,7 @@ const CORE = [
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/apple-touch-icon.png',
+  './css/fonts.css',
   './css/base.css',
   './css/chapter1.css',
   './css/chapter2.css',
@@ -43,7 +44,14 @@ const CORE = [
   './portraits/harm.svg',
   './portraits/paardje.svg',
   './portraits/roelof.svg',
-  './portraits/you.svg'
+  './portraits/you.svg',
+  './fonts/fredoka-latin-400-normal.woff2',
+  './fonts/fredoka-latin-600-normal.woff2',
+  './fonts/fredoka-latin-700-normal.woff2',
+  './fonts/caveat-latin-500-normal.woff2',
+  './fonts/caveat-latin-700-normal.woff2',
+  './fonts/ibm-plex-mono-latin-400-normal.woff2',
+  './fonts/ibm-plex-mono-latin-600-normal.woff2'
 ];
 self.addEventListener('install', event => {
   // cache: 'reload' skips the browser's HTTP cache, so the offline copy is the new version, not a 10-minute-old one
@@ -78,14 +86,5 @@ self.addEventListener('fetch', event => {
   if (url.origin === location.origin) {
     event.respondWith(fetch(req, { cache: 'no-cache' }).then(res => { if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)); } return res; })
       .catch(() => caches.match(req)));
-    return;
-  }
-
-  // Google Fonts: cache first, then fetch and keep a copy.
-  if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') {
-    event.respondWith(caches.match(req).then(hit => hit || fetch(req).then(res => {
-      if (res.ok || res.type === 'opaque') { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)); }
-      return res;
-    })));
   }
 });

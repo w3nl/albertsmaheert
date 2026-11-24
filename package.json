@@ -5,7 +5,9 @@
     "build": "eleventy",
     "validate": "npm run build",
     "start:escaperoom": "node tests/escaperoom/serve.js",
-    "test:escaperoom": "playwright test -c playwright.config.cjs"
+    "test:escaperoom": "playwright test -c playwright.config.cjs",
+    "icons:escaperoom": "node tools/escaperoom/app-icons.js",
+    "build:escaperoom-chrome": "node tools/escaperoom/build-apps.js chrome"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",

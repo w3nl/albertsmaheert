@@ -1,0 +1,9 @@
+/* De lettertypen staan in het spel zelf (fonts/, SIL Open Font License), zodat het ook zonder internet werkt:
+   offline, in de Android-app, de Linux-app en de Chrome-extensie. Alleen de Latijnse tekens (genoeg voor het Nederlands). */
+@font-face{font-family:"Fredoka";font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/fredoka-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Fredoka";font-style:normal;font-weight:600;font-display:swap;src:url(../fonts/fredoka-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Fredoka";font-style:normal;font-weight:700;font-display:swap;src:url(../fonts/fredoka-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Caveat";font-style:normal;font-weight:500;font-display:swap;src:url(../fonts/caveat-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Caveat";font-style:normal;font-weight:700;font-display:swap;src:url(../fonts/caveat-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:600;font-display:swap;src:url(../fonts/ibm-plex-mono-latin-600-normal.woff2) format("woff2")}
