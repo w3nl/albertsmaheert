@@ -261,3 +261,9 @@ label.opt{display:flex;flex-direction:column;gap:2px;cursor:default}
 .eyes{transform-box:fill-box;transform-origin:50% 50%;animation:eyeBlink 7s infinite}
 @keyframes idleBreath{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5px)}}
 .idle{animation:idleBreath 4.5s ease-in-out infinite}
+
+/* Spelen met controller, afstandsbediening of toetsenbord (js/gamepad.js): een duidelijk kader om wat je kiest. */
+.hit.pad-focus{stroke:#ffd27a;stroke-width:5;stroke-dasharray:14 8;fill:rgba(255,210,122,.14);outline:none}
+#modal .pad-focus,.overlay .pad-focus,.slot.pad-focus{outline:3px solid var(--amber);outline-offset:3px;box-shadow:0 0 0 6px rgba(232,176,74,.25)}
+#modal g.pad-focus{outline:none;filter:drop-shadow(0 0 4px #ffd27a) drop-shadow(0 0 2px #ffd27a)}
+.gp-status{font-family:var(--f-mono);font-size:12px;color:var(--phosphor);max-width:62ch;padding:6px 10px;border:1px solid var(--line);border-radius:4px;background:rgba(10,10,8,.55)}
