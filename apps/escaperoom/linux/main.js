@@ -1,5 +1,5 @@
 // Het Geheim van de Albertsmaheert voor Linux (een snap voor de Snap Store en het App Center van Ubuntu). Eén venster
-// met het spel erin, net als de Android-app: dezelfde bestanden als op de website (de workflow "Escaperoom-apps" zet
+// met het spel erin, net als de Android-app: dezelfde bestanden als op de website (de workflow "Escaperoom: Linux-app" zet
 // src/escaperoom in game/, zie docs/escaperoom-apps.md). Geladen vanaf app://albertsmaheert/, zodat het opgeslagen spel
 // een vaste plek heeft. Links naar albertsmaheert.nl openen in de gewone browser.
 const { app, BrowserWindow, Menu, net, protocol, shell } = require('electron');

@@ -33,8 +33,17 @@ Het titelscherm laat zien welke controller verbonden is. Uitleg voor ontwikkelaa
 
 ## Hoe de apps gemaakt worden
 
-De workflow **Escaperoom-apps** (`.github/workflows/escaperoom-apps.yml`) draait bij elke wijziging aan het spel of de
-apps, en bewaart de apps een maand als artefact: *Actions → Escaperoom-apps → een run → Artifacts*.
+Drie workflows, elk bij een wijziging aan het spel of aan die app, en ook met de hand te starten (*Actions* → de
+workflow → **Run workflow**). Ze bewaren de app een maand als artefact (*een run → Artifacts*):
+
+| Workflow | Bestand | Artefact |
+|---|---|---|
+| **Escaperoom: Android-app** | `.github/workflows/escaperoom-android.yml` | `escaperoom-android` (`albertsmaheert.apk`); met een vaste sleutel ook `escaperoom-google-play` (de `.aab`, versleuteld) |
+| **Escaperoom: Linux-app** | `.github/workflows/escaperoom-linux.yml` | `escaperoom-linux` (`albertsmaheert.snap`); met een login ook naar de Snap Store |
+| **Escaperoom: Chrome-extensie** | `.github/workflows/escaperoom-chrome.yml` | `escaperoom-chrome` (`albertsmaheert-chrome.zip`) |
+
+Met `ESCAPEROOM_RELEASE=true` krijgt elke spelversie per app een release: `escaperoom-android-v1.63.0`,
+`escaperoom-linux-v1.63.0` en `escaperoom-chrome-v1.63.0`.
 
 | Map | Wat |
 |---|---|
@@ -42,23 +51,39 @@ apps, en bewaart de apps een maand als artefact: *Actions → Escaperoom-apps �
 | `apps/escaperoom/linux/` | Linux-app (Electron, als snap): één venster met het spel vanaf `app://albertsmaheert/`. |
 | `apps/escaperoom/chrome/` | Chrome-extensie (Manifest V3): de knop in de werkbalk opent het spel in een tabblad. |
 | `tools/escaperoom/build-apps.js` | Zet het spel in een app (`android`, `linux`) of maakt de extensie (`chrome`). Laat `sw.js` weg: in een app zit alles er al in. |
-| `tools/escaperoom/app-icons.js` | Maakt de pictogrammen en de Google TV-banner uit `src/escaperoom/icons/icon.svg` (`npm run icons:escaperoom`). |
+| `tools/escaperoom/gh-build.js` | Laat GitHub een app bouwen en haalt hem op (`build:escaperoom-apk`, `-aab`, `-snap`). |
+| `tools/escaperoom/app-icons.js` | Maakt de pictogrammen en de Google TV-banner uit `src/escaperoom/icons/icon.svg`. |
+| `tools/escaperoom/store.js` | Maakt de winkelplaatjes in `docs/escaperoom-store/` uit het spel zelf. |
 
 Het versienummer volgt het spel: `GAME_VERSION` 63 wordt app-versie **1.63.0**. De pakketnaam van Android en de snap is
-`nl.albertsmaheert.escaperoom`; die is blijvend zodra de app in een winkel staat.
+`nl.albertsmaheert.escaperoom` (de snap heet `albertsmaheert`); die is blijvend zodra de app in een winkel staat.
 
-Zelf bouwen:
+### Commando's
 
-```bash
-npm run build:escaperoom-chrome   # dist/albertsmaheert-chrome.zip en dist/escaperoom-chrome/
-```
+| Commando | Wat |
+|---|---|
+| `npm run build:escaperoom-chrome` | De Chrome-extensie, op je eigen computer: `dist/albertsmaheert-chrome.zip` (en uitgepakt in `dist/escaperoom-chrome/`, voor *Uitgepakte extensie laden*). |
+| `npm run build:escaperoom-apk` | Laat GitHub de Android-app bouwen en haalt `albertsmaheert.apk` op naar `dist/escaperoom-apk-<run>/`. |
+| `npm run build:escaperoom-aab` | Hetzelfde, maar de bundel voor Google Play: vraagt je sleutelwachtwoord en zet `albertsmaheert.aab` in `dist/escaperoom-aab-<run>/`. Nodig: 7-Zip (`7z`) en de sleutel-secrets. |
+| `npm run build:escaperoom-snap` | Laat GitHub de snap bouwen en haalt `albertsmaheert.snap` op naar `dist/escaperoom-snap-<run>/`. |
+| `npm run build:escaperoom-linux` | De snap op je eigen Linux-computer (`apps/escaperoom/linux/dist/`). |
+| `npm run start:escaperoom-linux` | De Linux-app starten zonder te installeren (Linux, Mac of Windows). |
+| `npm run build:escaperoom-android` | Het spel in de Android-app zetten; daarna `apps/escaperoom/android` openen in Android Studio. |
+| `npm run icons:escaperoom` | De pictogrammen en de banner opnieuw maken (na een nieuw `icon.svg`). |
+| `npm run store:escaperoom` | De winkelplaatjes opnieuw maken (na veranderingen aan de kamers). |
 
-```bash
-node tools/escaperoom/build-apps.js linux && cd apps/escaperoom/linux && npm ci && npm start
-```
+De `build:escaperoom-apk/-aab/-snap`-commando's gebruiken de GitHub CLI (`gh auth login`) en starten de workflow op
+`main`; een andere tak: `npm run build:escaperoom-apk -- --ref <tak>`.
 
-Voor Android is de Android SDK nodig (Android Studio): `node tools/escaperoom/build-apps.js android` en daarna de map
-`apps/escaperoom/android` openen in Android Studio.
+### Winkelplaatjes
+
+`npm run store:escaperoom` maakt ze uit het spel zelf, in `docs/escaperoom-store/`:
+
+| Map | Voor | Wat |
+|---|---|---|
+| `play/` | Google Play (en de Snap Store) | `feature-graphic.png` (1024×500), `tv-banner.png` (1280×720), `screenshot-*.png` (1920×1080, voor telefoon, tablet en tv) |
+| `chrome/` | Chrome Web Store | `store-icon.png` (128×128), `screenshot-*.jpg` (1280×800), `small-promo-tile.jpg` (440×280), `marquee-promo-tile.jpg` (1400×560) |
+| `snap/` | Snap Store | `featured-banner.png` (720×240); als schermafbeeldingen die uit `play/` |
 
 ## Installeren
 
