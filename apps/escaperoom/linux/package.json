@@ -21,7 +21,7 @@
     "snap": "electron-builder --linux snap --publish never"
   },
   "devDependencies": {
-    "electron": "45.4.1",
+    "electron": "45.5.0",
     "electron-builder": "26.18.0"
   },
   "build": {
