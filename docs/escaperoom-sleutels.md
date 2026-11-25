@@ -1,7 +1,7 @@
 # Escaperoom-apps: de secrets maken
 
-De workflow **Escaperoom-apps** werkt zonder secrets: hij bouwt dan de `.apk`, de snap en de Chrome-extensie als
-artefact. Met deze secrets kan hij meer. Dezelfde namen als in w3nl/tripscouts, dus de commando's zijn bijna gelijk.
+De workflows **Escaperoom: Android-app**, **Linux-app** en **Chrome-extensie** werken zonder secrets: ze bouwen dan de
+`.apk`, de snap en de Chrome-extensie als artefact. Met deze secrets kan hij meer. Dezelfde namen als in w3nl/tripscouts, dus de commando's zijn bijna gelijk.
 
 Secrets zet je één keer; niemand kan ze teruglezen (ook jij niet), en ze komen nooit in de logs.
 
@@ -74,10 +74,17 @@ gh variable set ANDROID_KEY_ALIAS --body cabinweek --repo w3nl/albertsmaheert
 
 Een eigen sleutel per app is netter: lekt er één, dan geldt dat maar voor één app.
 
-**Klopt het?** Draai de workflow (Actions → *Escaperoom-apps* → Run workflow). Bij de stap *Vaste sleutel* staat een
-fout als het wachtwoord, de alias of de tekst niet klopt. Daarna staat onder Artifacts ook `escaperoom-google-play`:
+**Klopt het?** Draai de workflow (Actions → *Escaperoom: Android-app* → Run workflow). De stap *Vaste sleutel* zegt
+wat er mis is: geen geldige base64, een wachtwoord dat niet past, of een alias die niet in het bestand zit (hij noemt
+dan de aliassen die er wél in zitten). Daarna staat onder Artifacts ook `escaperoom-google-play`:
 een 7z-bestand met de `.aab`, op slot met je sleutelwachtwoord (`7z x albertsmaheert-google-play.7z`). Die `.aab` upload je
 in de [Play Console](https://play.google.com/console); de eerste upload legt je uploadsleutel vast bij Google.
+
+Of in één keer vanaf je eigen computer (start de workflow, wacht, downloadt en pakt uit met je wachtwoord):
+
+```bash
+npm run build:escaperoom-aab
+```
 
 ---
 
@@ -110,6 +117,24 @@ Waarvoor: de workflow zet elke nieuwe versie op `main` in de Snap Store (kanaal 
    gh variable set SNAP_CHANNEL --body stable --repo w3nl/albertsmaheert
    ```
 
+**Gaat het mis?** Bij *Credentials could not be parsed* staat er iets anders dan de login in het secret, bijvoorbeeld
+een foutmelding omdat `snapcraft login` of `snapcraft register` nog niet gedaan was (dan schrijft `export-login` niets
+naar de pijp). Zet hem dan via een bestand, zodat je eerst ziet of het gelukt is:
+
+```bash
+snapcraft export-login --snaps=albertsmaheert --channels=edge,stable albertsmaheert-snap.login
+```
+
+```bash
+gh secret set SNAPCRAFT_STORE_CREDENTIALS --repo w3nl/albertsmaheert < albertsmaheert-snap.login
+```
+
+```bash
+rm albertsmaheert-snap.login
+```
+
+Een login van TripScouts werkt niet: die mag alleen de snap `tripscouts` uploaden.
+
 ---
 
 ## 3. Pas na goedkeuring: `ESCAPEROOM_RELEASE`
@@ -120,6 +145,19 @@ Zolang de escaperoom verborgen is, maakt de workflow geen release en uploadt hij
 gh variable set ESCAPEROOM_RELEASE --body true --repo w3nl/albertsmaheert
 ```
 
-Vanaf dan krijgt elke nieuwe spelversie op `main` een release `escaperoom-v1.<versie>.0` met de `.apk`, de snap en de
-Chrome-zip, en gaat de snap naar de Snap Store (als dat secret er is). Haal ook `hidden` weg uit het blok op de
+Vanaf dan krijgt elke nieuwe spelversie op `main` per app een release (`escaperoom-android-v1.<versie>.0`,
+`escaperoom-linux-…` en `escaperoom-chrome-…`), en gaat de snap naar de Snap Store (als dat secret er is). Haal ook `hidden` weg uit het blok op de
 homepage en de `robots`-regel uit het spel (zie [escaperoom.md](escaperoom.md)).
+
+---
+
+## Iets mis?
+
+| Melding in de workflow | Wat te doen |
+|---|---|
+| `ANDROID_KEYSTORE_BASE64 is geen geldige base64-tekst` | Het secret bevat iets anders dan de sleuteltekst. Zet hem opnieuw met het `base64 … \| gh secret set`-commando. |
+| `De sleutel gaat niet open` + `password was incorrect` | `ANDROID_KEYSTORE_PASSWORD` past niet bij dit sleutelbestand. Controleer met `keytool -list -keystore <bestand>` en zet het wachtwoord opnieuw. |
+| `heeft geen sleutel met de alias …` | De melding noemt de aliassen in het bestand: zet `ANDROID_KEY_ALIAS` op die naam (de sleutel van TripScouts: `cabinweek`). |
+| `SNAPCRAFT_STORE_CREDENTIALS is niet de uitvoer van 'snapcraft export-login'` | Zie *Gaat het mis?* bij de Snap Store hierboven. |
+| Geen artefact `escaperoom-google-play` | De sleutel-secrets ontbreken, of het artefact is na 7 dagen verlopen: draai de workflow opnieuw. |
+

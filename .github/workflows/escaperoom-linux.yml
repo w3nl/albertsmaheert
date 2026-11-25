@@ -1,0 +1,95 @@
+# Bouwt de Linux-app van de escaperoom (een snap) met het spel erin; met SNAPCRAFT_STORE_CREDENTIALS en na goedkeuring
+# ook naar de Snap Store.
+# Elke build bewaart de app als artefact (Actions → deze run → Artifacts); ook met de hand te starten (Run workflow)
+# of vanaf je eigen computer: npm run build:escaperoom-snap. Een release komt er pas als de repository-variabele ESCAPEROOM_RELEASE op
+# "true" staat: de escaperoom is nog verborgen tot hij is goedgekeurd. Zie docs/escaperoom-apps.md.
+name: "Escaperoom: Linux-app"
+
+on:
+  push:
+    branches: [main]
+    paths: ['src/escaperoom/**', 'apps/escaperoom/linux/**', 'tools/escaperoom/build-apps.js', '.github/workflows/escaperoom-linux.yml']
+  pull_request:
+    paths: ['src/escaperoom/**', 'apps/escaperoom/linux/**', 'tools/escaperoom/build-apps.js', '.github/workflows/escaperoom-linux.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: escaperoom-linux-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  linux:
+    name: Linux-app (snap)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      HAS_STORE: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS != '' }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - name: Zet het spel in de app
+        run: node tools/escaperoom/build-apps.js linux
+      - name: Installeer de hulpmiddelen
+        working-directory: apps/escaperoom/linux
+        run: npm ci --no-audit --no-fund
+      - name: Bouw de snap
+        working-directory: apps/escaperoom/linux
+        run: |
+          npx electron-builder --linux snap --publish never
+          cp dist/*.snap ../../../albertsmaheert.snap
+      - name: Bewaar de snap
+        uses: actions/upload-artifact@v7
+        with:
+          name: escaperoom-linux
+          path: albertsmaheert.snap
+          retention-days: 30
+
+      # De Snap Store: alleen met een login (het secret SNAPCRAFT_STORE_CREDENTIALS) én pas na goedkeuring
+      # (ESCAPEROOM_RELEASE=true). Naar het kanaal "edge" (of de variabele SNAP_CHANNEL); naar "stable" zet je hem zelf.
+      - name: Zet de snap in de Snap Store
+        if: env.HAS_STORE == 'true' && vars.ESCAPEROOM_RELEASE == 'true' && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
+        run: |
+          # snapcraft wil de base64-tekst van "snapcraft export-login": zonder spaties of regeleinden.
+          SNAPCRAFT_STORE_CREDENTIALS=$(printf '%s' "$SNAPCRAFT_STORE_CREDENTIALS" | tr -d ' \r\n\t')
+          if ! printf '%s' "$SNAPCRAFT_STORE_CREDENTIALS" | base64 -d 2> /dev/null | grep -q '{'; then
+            echo "Het secret heeft ${#SNAPCRAFT_STORE_CREDENTIALS} tekens (een login is meestal enkele honderden tot duizenden tekens base64)."
+            echo "::error::SNAPCRAFT_STORE_CREDENTIALS is niet de uitvoer van 'snapcraft export-login'. Maak hem opnieuw (eerst snapcraft login en snapcraft register albertsmaheert), zie docs/escaperoom-sleutels.md."
+            exit 1
+          fi
+          export SNAPCRAFT_STORE_CREDENTIALS
+          sudo snap install snapcraft --classic
+          snapcraft upload --release="${{ vars.SNAP_CHANNEL || 'edge' }}" albertsmaheert.snap
+
+  # Pas na goedkeuring (ESCAPEROOM_RELEASE=true): elke spelversie krijgt één release "escaperoom-linux-v1.<GAME_VERSION>.0".
+  # Een versie die al een release heeft, blijft zoals hij is.
+  release:
+    name: Release
+    needs: [linux]
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.ESCAPEROOM_RELEASE == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: escaperoom-linux
+      - name: Maak de release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          V=$(grep -oP 'GAME_VERSION = \K[0-9]+' src/escaperoom/js/boot.js)
+          TAG="escaperoom-linux-v1.$V.0"
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            echo "::notice::De release $TAG bestaat al; bouw een nieuwe spelversie voor een nieuwe release."
+            exit 0
+          fi
+          gh release create "$TAG" albertsmaheert.snap --target "$GITHUB_SHA" --latest=false --title "Escaperoom Linux-app 1.$V.0" \
+            --notes "Het Geheim van de Albertsmaheert voor Linux, als snap: sudo snap install --dangerous ./albertsmaheert.snap Installeren: zie docs/escaperoom-apps.md."

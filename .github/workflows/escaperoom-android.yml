@@ -1,0 +1,154 @@
+# Bouwt de Android-app van de escaperoom (telefoon, tablet, Google TV, Chromebook) met het spel erin: een .apk, en
+# met een vaste sleutel (docs/escaperoom-sleutels.md) ook de bundel (.aab) voor Google Play, versleuteld.
+# Elke build bewaart de app als artefact (Actions → deze run → Artifacts); ook met de hand te starten (Run workflow)
+# of vanaf je eigen computer: npm run build:escaperoom-apk of npm run build:escaperoom-aab. Een release komt er pas als de repository-variabele ESCAPEROOM_RELEASE op
+# "true" staat: de escaperoom is nog verborgen tot hij is goedgekeurd. Zie docs/escaperoom-apps.md.
+name: "Escaperoom: Android-app"
+
+on:
+  push:
+    branches: [main]
+    paths: ['src/escaperoom/**', 'apps/escaperoom/android/**', 'tools/escaperoom/build-apps.js', '.github/workflows/escaperoom-android.yml']
+  pull_request:
+    paths: ['src/escaperoom/**', 'apps/escaperoom/android/**', 'tools/escaperoom/build-apps.js', '.github/workflows/escaperoom-android.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: escaperoom-android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  android:
+    name: Android-app (telefoon, tablet, Google TV)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      HAS_KEY: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' }}
+      ANDROID_KEY_ALIAS: ${{ vars.ANDROID_KEY_ALIAS || 'albertsmaheert' }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+      - uses: gradle/actions/setup-gradle@v6
+        with:
+          gradle-version: '9.9.2'
+
+      - name: Zet het spel in de app
+        run: |
+          # de Android SDK staat al op de runner van GitHub
+          echo "sdk.dir=$ANDROID_HOME" > apps/escaperoom/android/local.properties
+          node tools/escaperoom/build-apps.js android
+          echo "GAME_VERSION=$(grep -oP 'GAME_VERSION = \K[0-9]+' src/escaperoom/js/boot.js)" >> "$GITHUB_ENV"
+
+      - name: Vaste sleutel (optioneel, zodat een nieuwe versie over de oude heen installeert)
+        if: env.HAS_KEY == 'true'
+        env:
+          KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          # Verdraagt regeleinden (ook van Windows), spaties, de kop- en voetregels van certutil en URL-veilige base64.
+          CLEAN=$(printf '%s' "$KEYSTORE" | grep -v -- '-----' | tr -d ' \r\n\t' | tr '_-' '/+')
+          # De '=' of '==' aan het eind raakt vaak kwijt bij het kopiëren: zet ze terug.
+          while [ $(( ${#CLEAN} % 4 )) -eq 2 ] || [ $(( ${#CLEAN} % 4 )) -eq 3 ]; do CLEAN="$CLEAN="; done
+          if ! printf '%s' "$CLEAN" | python3 -c 'import base64,sys; sys.stdout.buffer.write(base64.b64decode(sys.stdin.read()))' > apps/escaperoom/android/keystore.jks 2> /dev/null; then
+            BAD=$(printf '%s' "$CLEAN" | tr -d 'A-Za-z0-9+/=' | wc -c)
+            echo "Het secret heeft ${#CLEAN} tekens, waarvan $BAD niet in base64 horen."
+            if [ "${#CLEAN}" -lt 1000 ]; then echo "Dat is te kort voor een sleutelbestand (meestal 2500 tot 4000 tekens): staat er de bestandsnaam, een pad of het wachtwoord in?"; fi
+            echo "::error::ANDROID_KEYSTORE_BASE64 is geen geldige base64-tekst van de sleutel. Zet hem opnieuw met gh (docs/escaperoom-sleutels.md)."
+            exit 1
+          fi
+          echo "Sleutelbestand: $(wc -c < apps/escaperoom/android/keystore.jks) bytes (meestal 2000 tot 4000)."
+          if [ -z "$ANDROID_KEYSTORE_PASSWORD" ]; then
+            echo "::error::ANDROID_KEYSTORE_PASSWORD ontbreekt of is leeg."
+            exit 1
+          fi
+          if ! KT=$(keytool -list -keystore apps/escaperoom/android/keystore.jks -storepass "$ANDROID_KEYSTORE_PASSWORD" 2>&1); then
+            echo "keytool zegt: $(printf '%s' "$KT" | grep -v JAVA_TOOL_OPTIONS | tail -1)"
+            echo "::error::De sleutel gaat niet open. Bij 'password was incorrect': ANDROID_KEYSTORE_PASSWORD klopt niet bij dit sleutelbestand. Anders is de tekst in ANDROID_KEYSTORE_BASE64 niet compleet. Zie docs/escaperoom-sleutels.md."
+            exit 1
+          fi
+          # Welke aliassen er in het bestand zitten (namen zijn geen geheim), om een verkeerde ANDROID_KEY_ALIAS te zien.
+          ALIASES=$(printf '%s\n' "$KT" | grep -i 'PrivateKeyEntry' | cut -d, -f1 | tr '\n' ' ')
+          echo "Sleutels in het bestand: ${ALIASES:-geen}"
+          if ! printf '%s\n' "$KT" | grep -i 'PrivateKeyEntry' | cut -d, -f1 | grep -qix "$ANDROID_KEY_ALIAS"; then
+            echo "::error::Het bestand gaat open, maar heeft geen sleutel met de alias '$ANDROID_KEY_ALIAS' (wel: ${ALIASES:-geen}). Zet de variabele ANDROID_KEY_ALIAS op de goede naam: gh variable set ANDROID_KEY_ALIAS --body <naam> --repo w3nl/albertsmaheert"
+            exit 1
+          fi
+          echo "De sleutel is in orde."
+
+      - name: Bouw de app
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          gradle -p apps/escaperoom/android assembleDebug --no-daemon
+          cp apps/escaperoom/android/app/build/outputs/apk/debug/app-debug.apk albertsmaheert.apk
+
+      # Voor Google Play: een ondertekende bundel (.aab). Zonder sleutel bouwen we hem wel (zodat fouten meteen opvallen),
+      # maar bewaren we hem niet: Google Play neemt geen onondertekende bundel aan.
+      - name: Bouw de bundel voor Google Play (.aab)
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          gradle -p apps/escaperoom/android bundleRelease --no-daemon
+          if [ "$HAS_KEY" = "true" ]; then cp apps/escaperoom/android/app/build/outputs/bundle/release/app-release.aab albertsmaheert.aab; fi
+
+      - name: Bewaar de app
+        uses: actions/upload-artifact@v7
+        with:
+          name: escaperoom-android
+          path: albertsmaheert.apk
+          retention-days: 30
+
+      # De bundel is niet openbaar (iedereen met een GitHub-account kan artefacten van een openbare repository downloaden):
+      # alleen in een 7z-bestand met het wachtwoord van de sleutel, en nooit in de release.
+      - name: Versleutel de bundel voor Google Play
+        if: env.HAS_KEY == 'true'
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          command -v 7z > /dev/null || { sudo apt-get update -qq && sudo apt-get install -y -qq 7zip; }
+          7z a -t7z -mhe=on -p"$ANDROID_KEYSTORE_PASSWORD" albertsmaheert-google-play.7z albertsmaheert.aab > /dev/null
+          rm albertsmaheert.aab
+
+      - name: Bewaar de bundel voor Google Play (met wachtwoord)
+        if: env.HAS_KEY == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: escaperoom-google-play
+          path: albertsmaheert-google-play.7z
+          retention-days: 7
+
+  # Pas na goedkeuring (ESCAPEROOM_RELEASE=true): elke spelversie krijgt één release "escaperoom-android-v1.<GAME_VERSION>.0".
+  # Een versie die al een release heeft, blijft zoals hij is.
+  release:
+    name: Release
+    needs: [android]
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.ESCAPEROOM_RELEASE == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: escaperoom-android
+      - name: Maak de release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          V=$(grep -oP 'GAME_VERSION = \K[0-9]+' src/escaperoom/js/boot.js)
+          TAG="escaperoom-android-v1.$V.0"
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            echo "::notice::De release $TAG bestaat al; bouw een nieuwe spelversie voor een nieuwe release."
+            exit 0
+          fi
+          gh release create "$TAG" albertsmaheert.apk --target "$GITHUB_SHA" --latest=false --title "Escaperoom Android-app 1.$V.0" \
+            --notes "Het Geheim van de Albertsmaheert voor Android: telefoon, tablet, Google TV en Chromebook. Installeren: zie docs/escaperoom-apps.md."

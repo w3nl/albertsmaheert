@@ -1,0 +1,66 @@
+# Maakt de Chrome-extensie van de escaperoom (.zip voor de Chrome Web Store en Chromebooks) met het spel erin.
+# Elke build bewaart de app als artefact (Actions → deze run → Artifacts); ook met de hand te starten (Run workflow)
+# of vanaf je eigen computer: npm run build:escaperoom-chrome (lokaal, zonder GitHub). Een release komt er pas als de repository-variabele ESCAPEROOM_RELEASE op
+# "true" staat: de escaperoom is nog verborgen tot hij is goedgekeurd. Zie docs/escaperoom-apps.md.
+name: "Escaperoom: Chrome-extensie"
+
+on:
+  push:
+    branches: [main]
+    paths: ['src/escaperoom/**', 'apps/escaperoom/chrome/**', 'tools/escaperoom/build-apps.js', '.github/workflows/escaperoom-chrome.yml']
+  pull_request:
+    paths: ['src/escaperoom/**', 'apps/escaperoom/chrome/**', 'tools/escaperoom/build-apps.js', '.github/workflows/escaperoom-chrome.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: escaperoom-chrome-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  chrome:
+    name: Chrome-extensie
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - name: Maak de extensie
+        run: node tools/escaperoom/build-apps.js chrome
+      - name: Bewaar de extensie
+        uses: actions/upload-artifact@v7
+        with:
+          name: escaperoom-chrome
+          path: dist/albertsmaheert-chrome.zip
+          retention-days: 30
+
+  # Pas na goedkeuring (ESCAPEROOM_RELEASE=true): elke spelversie krijgt één release "escaperoom-chrome-v1.<GAME_VERSION>.0".
+  # Een versie die al een release heeft, blijft zoals hij is.
+  release:
+    name: Release
+    needs: [chrome]
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.ESCAPEROOM_RELEASE == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: escaperoom-chrome
+      - name: Maak de release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          V=$(grep -oP 'GAME_VERSION = \K[0-9]+' src/escaperoom/js/boot.js)
+          TAG="escaperoom-chrome-v1.$V.0"
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            echo "::notice::De release $TAG bestaat al; bouw een nieuwe spelversie voor een nieuwe release."
+            exit 0
+          fi
+          gh release create "$TAG" albertsmaheert-chrome.zip --target "$GITHUB_SHA" --latest=false --title "Escaperoom Chrome-extensie 1.$V.0" \
+            --notes "Het Geheim van de Albertsmaheert als Chrome-extensie (ook voor Chromebooks). Installeren: zie docs/escaperoom-apps.md."

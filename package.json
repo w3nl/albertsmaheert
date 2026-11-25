@@ -7,7 +7,14 @@
     "start:escaperoom": "node tests/escaperoom/serve.js",
     "test:escaperoom": "playwright test -c playwright.config.cjs",
     "icons:escaperoom": "node tools/escaperoom/app-icons.js",
-    "build:escaperoom-chrome": "node tools/escaperoom/build-apps.js chrome"
+    "build:escaperoom-chrome": "node tools/escaperoom/build-apps.js chrome",
+    "build:escaperoom-apk": "node tools/escaperoom/gh-build.js apk",
+    "build:escaperoom-aab": "node tools/escaperoom/gh-build.js aab",
+    "build:escaperoom-snap": "node tools/escaperoom/gh-build.js snap",
+    "build:escaperoom-linux": "node tools/escaperoom/build-apps.js linux && npm --prefix apps/escaperoom/linux ci --no-audit --no-fund && npm --prefix apps/escaperoom/linux run snap",
+    "start:escaperoom-linux": "node tools/escaperoom/build-apps.js linux && npm --prefix apps/escaperoom/linux ci --no-audit --no-fund && npm --prefix apps/escaperoom/linux start",
+    "build:escaperoom-android": "node tools/escaperoom/build-apps.js android",
+    "store:escaperoom": "node tools/escaperoom/store.js"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
