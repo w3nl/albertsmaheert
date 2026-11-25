@@ -21,6 +21,8 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  # deploy-pages looks up the github-pages artifact of this run through the Actions API
+  actions: read
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -29,11 +31,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  # Build and deploy are separate jobs, as in GitHub's own Pages template: the deploy job only starts once the
+  # artifact upload of the build job has fully finished. In one job, deploy-pages sometimes looked for the artifact
+  # right after the upload and found none ("No artifacts named github-pages"), when several workflows ran at once.
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -53,6 +54,14 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           path: './_site'
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
