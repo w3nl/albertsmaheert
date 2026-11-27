@@ -169,6 +169,14 @@
     </g>
   </g>
 
+  <!-- een kaartje op tafel: zelf logeren in deze kamer (opent Logeren bij de Albertsmaheert, app.js) -->
+  <g id="km-kaart">
+    <path d="M418 520 L432 478 H486 L500 520Z" fill="#fbf6ea" stroke="#c9a24a" stroke-width="2" />
+    <path d="M432 478 L425 520" stroke="#e6dcc6" stroke-width="2" />
+    <text x="461" y="497" text-anchor="middle" font-family="Caveat, cursive" font-size="13" fill="#7a3a28">Welkom!</text>
+    <text x="461" y="512" text-anchor="middle" font-family="Caveat, cursive" font-size="10" fill="#5a4a38">kom logeren</text>
+  </g>
+
   <!-- het gebint: de stijl, de korbeel en de ankerbalk, honderden jaren oud -->
   <g id="km-gebint">
     <rect x="590" y="0" width="54" height="640" fill="url(#kmOak)" />
@@ -252,6 +260,7 @@
   <g class="hits">
     <rect class="hit" data-hs="kamerdeur" data-label="De deur naar de overloop" x="44" y="300" width="144" height="340" fill="transparent" />
     <rect class="hit" data-hs="kmtafel" data-label="De tafel van steigerhout" x="176" y="440" width="390" height="180" fill="transparent" />
+    <rect class="hit" data-hs="kmkaart" data-label="Een kaartje op tafel: zelf logeren?" x="410" y="470" width="100" height="56" fill="transparent" />
     <rect class="hit" data-hs="stijl" data-label="De eiken stijl van het gebint" x="590" y="160" width="54" height="480" fill="transparent" />
     <rect class="hit" data-hs="korbeel" data-label="Een schuine balk: een korbeel" x="660" y="150" width="200" height="140" fill="transparent" />
     <rect class="hit" data-hs="prent" data-label="Een oude prent" x="690" y="210" width="190" height="150" fill="transparent" />

@@ -307,3 +307,17 @@ dl.contact a{color:var(--amber)}
 .book{border:2px solid var(--amber);border-radius:6px;overflow:hidden;background:#fff}
 .book-label{background:var(--amber);color:#24120a;font-family:var(--f-mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px}
 .book iframe{display:block;width:100%;height:min(70vh,1100px);border:0;background:#fff}
+/* in het gesprek met Ditty of Roelof: echt komen logeren (core.js next, app.js openBnB) */
+.d-stay{margin-left:auto;margin-right:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:none;padding:3px 9px;border-radius:12px;border:1px solid var(--amber);background:rgba(232,176,74,.15);color:var(--amber)}
+.d-stay:hover,.d-stay:focus-visible{background:var(--amber);color:#24120a}
+/* een kamer (app.js openRoom) en de klikbare kamers in De B&B */
+button.room{padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer}
+button.room:hover,button.room:focus-visible{border-color:var(--amber)}
+.room em{flex-basis:100%;font-style:normal;font-family:var(--f-mono);font-size:11px;color:var(--amber);margin-top:4px}
+.roominfo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:14px;align-items:start;margin-bottom:12px}
+.roominfo img{width:100%;height:auto;border-radius:6px;display:block}
+.roominfo p{margin:0 0 8px}
+.facs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:4px 16px;margin-bottom:12px}
+.facs h4,.folder h4{margin:6px 0 4px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+.facs ul{margin:0;padding-left:18px;font-size:13px;color:var(--muted);display:grid;gap:2px}
+@media (max-width:620px){.roominfo{grid-template-columns:1fr}}

@@ -85,6 +85,8 @@ function next(){
     if(fe.getAttribute('src') !== face){ fe.src = face; fe.classList.remove('face-in'); void fe.offsetWidth; fe.classList.add('face-in'); } }
   else fe.hidden = true;
   $('#d-who').textContent = who === 'sys' ? (NARRATOR[S.ch] || 'Verteller') : (WHO[who] || who);
+  // bij Ditty en Roelof: een knopje om echt te komen logeren (app.js openBnB)
+  const stay = $('#d-stay'); if(stay) stay.hidden = !(who === 'ditty' || who === 'roelof');
   $('#d-more').textContent = matchMedia('(hover: none)').matches ? (queue.length ? 'tik ▸' : 'tik ✕') : (queue.length ? 'klik ▸' : 'klik ✕');
   full = text; let i = 0;
   const el = $('#d-txt'); el.textContent = '';

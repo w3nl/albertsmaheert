@@ -73,7 +73,7 @@ Object.assign(H, {
     openModal('Het gastenboek', 'Op de bar · vol met tekeningen en bedankjes', `
       <div class="note-paper" style="font-size:19px"><i>"Heerlijk geslapen in de Paardenstal, en de reeën gezien bij het ontbijt!"</i><br><br><i>"De fietstochten langs de wierden waren prachtig. Tot volgend jaar!"</i><br><br><i>"Thedema is onze favoriete kamer. Die balken!"</i></div>
       <p style="margin-top:10px">Op de site van de Albertsmaheert staat het echte gastenboek. Schrijf jij er ook iets in, als je er geweest bent?</p>
-      <div class="row" style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn" href="${SITE}gastenboek/" target="_blank" rel="noopener">Het echte gastenboek</a><a class="btn ghost" href="${SITE}reserveer/" target="_blank" rel="noopener">Reserveren</a></div>`);
+      <div class="row" style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn" href="${SITE}gastenboek/" target="_blank" rel="noopener">Het echte gastenboek</a><a class="btn ghost" href="${SITE}reserveer/" target="_blank" rel="noopener" data-bnb="reserveren">Zelf komen logeren</a></div>`);
   },
   pool(){ if(S.ch !== 4) return H3.pool(); if(S.f.pool) return say("De pooltafel. De ballen liggen klaar voor een nieuw potje."); openPool(); },
   grup(){

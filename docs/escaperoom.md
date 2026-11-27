@@ -22,15 +22,29 @@ Een point-and-click escaperoom in de browser, over en op de echte boerderij: B&B
 
 ## Logeren bij de Albertsmaheert (de B&B in het spel)
 
-`openBnB(tab)` in `js/app.js` (de folder van de B&B, en de links *Kom logeren*, *Bekijk de B&B*, *Reserveren* en
-*contact* met `data-bnb`) opent een venster met drie tabbladen, zodat je niet uit het spel of de app hoeft:
+`openBnB(tab)` in `js/app.js` opent een venster met vier tabbladen, zodat je niet uit het spel of de app hoeft:
 
 - **De B&B:** de folder met de vier kamers (foto's in `img/kamer-*.jpg`, verkleind van de site, in `CORE` voor offline).
+  Een kamer aanklikken opent `openRoom(kamer)`: wat op de kamerpagina van de site staat (beschrijving, kamer, badkamer,
+  voorwaarden, voor alle gasten; `ROOM_INFO`) met **Reserveer deze kamer**.
+- **Omgeving:** wat op albertsmaheert.nl/de-omgeving staat: uitstapjes in de buurt en wat verder weg.
 - **Reserveren:** bovenaan een duidelijke melding **dat dit echt is en geen spel** (een echte overnachting, bevestiging
   per e-mail, betalen; het spel verandert er niet door), daaronder het formulier van bedandbreakfast.nl in een iframe
   (`BOOK_URL`, dezelfde als op albertsmaheert.nl/reserveer), met het label *Echte boeking*. Zonder internet staat er
   uitleg. Er is altijd een link naar het formulier op de website, voor als het in een app niet laadt.
 - **Contact:** e-mail, telefoon, adres, route, gastenboek en de omgeving.
+
+**Waar je het in het spel vindt** (overal te bereiken):
+
+| Plek | Wat het opent |
+|---|---|
+| Titelscherm *Kom logeren*, eindscherm *Bekijk de B&B* en *Reserveren*, voetregel *contact* en *reserveren* (`data-bnb`) | het tabblad dat erbij hoort |
+| In elk gesprek met **Ditty** of **Roelof**: het knopje *🛏️ Echt komen logeren?* (`#d-stay`, ook met de controller te kiezen) | Reserveren |
+| Erf: de brievenbus (de folder) en het **bord van de B&B** | De B&B |
+| Erf: het **fietsknooppunt**; dak: de **verrekijker** | Omgeving |
+| Kamer (Thedema, Alma, Folkerda): het **kaartje op tafel** (`kmkaart`) | die kamer (`openRoom`) |
+| Paardenstal: het **kaartje op het bed**, knop *De echte Paardenstal* (`data-room`) | de Paardenstal (`openRoom`) |
+| Zaal: het **gastenboek**, knop *Zelf komen logeren* | Reserveren |
 
 Het formulier laadt pas als je het tabblad Reserveren opent; verder laadt het spel niets van andere sites
 (`tests/escaperoom/logeren.spec.js`). In de Android-app blijft het iframe in de app (`isForMainFrame`), en in de
