@@ -18,7 +18,8 @@
   /* ook rechtop alles in één scherm: de kamer (om door te vegen) krijgt de hoogte die over is; onder de kamer een vaste
      strook voor het gesprek, zodat de kamer niet verspringt als een gesprek opent of sluit */
   .wrap{height:100vh;height:100dvh;box-sizing:border-box;padding-block:8px;gap:8px}
-  .chip{padding:5px 8px;font-size:11px}
+  .chip{padding:4px 7px;font-size:11px;letter-spacing:.02em}
+  .tools{gap:5px} .top{gap:6px} .brand small{display:none}
   .fit{flex:1 1 0;min-height:0;display:flex;flex-direction:column}
   .frame{width:auto;margin-inline:0;flex:1 1 0;min-height:0;display:flex;flex-direction:column;padding-bottom:var(--dlg-h,150px);box-sizing:border-box}
   .pan{flex:1 1 0;min-height:0;container-type:size;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;border-radius:6px}

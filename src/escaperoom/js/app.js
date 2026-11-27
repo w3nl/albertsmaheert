@@ -293,9 +293,61 @@ function swVersion(cache){
 }
 $('#btn-update').onclick = () => { save(); location.reload(); };
 $('#version').textContent = 'v' + GAME_VERSION;
+/* ---------- Installeren: de web-app en de apps, alleen wat past bij dit apparaat ----------
+   De knop Installeren opent een close-up met de keuzes (zoals de installeerbalk van TripScouts en Ardennen):
+   - Web-app: als de browser installeren aanbiedt (Chrome, Edge, Android), of uitleg op iPhone/iPad en Safari op een Mac
+   - Chrome-extensie: in Chrome op een computer of Chromebook (Chrome Web Store)
+   - Android-app: op Android en Chromebooks (Google Play; ook Google TV)
+   - Linux-app: op een Linux-computer (Snap Store)
+   In een app zelf (Android, Linux, de extensie, of de geïnstalleerde web-app) is er niets te installeren: dan geen knop. */
+const APP_LINKS = {
+  play: 'https://play.google.com/store/apps/details?id=nl.albertsmaheert.escaperoom',
+  chrome: 'https://chromewebstore.google.com/detail/het-geheim-van-de-alberts/menijigcnfkinaebpnbciflmhehijjnp',
+  snap: 'https://snapcraft.io/albertsmaheert',
+};
+const UA = navigator.userAgent;
+const IS_IOS = /iPad|iPhone|iPod/.test(UA) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const IS_ANDROID = /Android/i.test(UA);
+const IS_CHROMEOS = /\bCrOS\b/.test(UA);
+const IS_MAC_SAFARI = /Macintosh/.test(UA) && /Version\/\d+.*Safari\//.test(UA) && !IS_IOS;
+const IS_LINUX = /Linux/.test(UA) && !IS_ANDROID && !IS_CHROMEOS;
+const IS_CHROME = /(?:Chrome|Chromium)\//.test(UA) && !/(?:Android|Edg\/|OPR\/|CriOS\/|SamsungBrowser)/.test(UA);
+const IN_APP = () => location.hostname === 'appassets.androidplatform.net' || /^(app|chrome-extension):$/.test(location.protocol)
+  || matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches || navigator.standalone === true;
 let installEvt = null;
-window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; $('#btn-install').hidden = false; });
-window.addEventListener('appinstalled', () => { installEvt = null; $('#btn-install').hidden = true; say([['ditty', "Geïnstalleerd! Nu staat de boerderij gewoon op je apparaat. Maar in het echt is het koffie lekkerder, hoor."]]); });
-$('#btn-install').onclick = async () => { if(!installEvt) return; installEvt.prompt(); try{ await installEvt.userChoice; }catch(e){} installEvt = null; $('#btn-install').hidden = true; };
+/** De keuzes voor dit apparaat, in volgorde: [soort, titel, uitleg, knop] (knop: een link of 'web'). */
+function installOptions(){
+  const o = [];
+  if(installEvt) o.push(['web', 'Web-app', 'Op je ' + (IS_ANDROID ? 'startscherm' : 'computer') + ', ook zonder internet. Klein en snel.', 'web']);
+  else if(IS_IOS) o.push(['web', 'Web-app', 'Tik in Safari op Deel (□↑) en dan op Zet op beginscherm. Dan start hij als app, ook zonder internet.', null]);
+  else if(IS_ANDROID) o.push(['web', 'Web-app', 'Open het menu van je browser (⋮) en kies Toevoegen aan startscherm.', null]);
+  else if(IS_MAC_SAFARI) o.push(['web', 'Web-app', 'Kies in Safari Archief → Voeg toe aan Dock. Dan start hij als app, ook zonder internet.', null]);
+  if(IS_CHROME && !IS_ANDROID) o.push(['chrome', 'Chrome-extensie', 'Uit de Chrome Web Store: met één klik vanuit de werkbalk van Chrome, ook zonder internet.', APP_LINKS.chrome]);
+  if(IS_ANDROID || IS_CHROMEOS) o.push(['android', 'Android-app', 'Uit Google Play, voor telefoon, tablet' + (IS_CHROMEOS ? ', Chromebook' : '') + ' en Google TV. Speel ook met een controller.', APP_LINKS.play]);
+  if(IS_LINUX) o.push(['linux', 'Linux-app', 'Uit de Snap Store (of het App Center van Ubuntu). Speel ook met een controller.', APP_LINKS.snap]);
+  return o;
+}
+function installButton(){ $('#btn-install').hidden = IN_APP() || !installOptions().length; }
+function openInstall(){
+  const rows = installOptions().map(([kind, title, text, act]) => `<div class="inst inst-${kind}"><div><b>${title}</b><span>${text}</span></div>${
+    act === 'web' ? '<button class="btn" type="button" data-install>Installeren</button>'
+    : act ? `<a class="btn" href="${act}" target="_blank" rel="noopener">${kind === 'android' ? 'Google Play' : kind === 'linux' ? 'Snap Store' : 'Chrome Web Store'}</a>` : ''}</div>`).join('');
+  openModal('Speel als app', 'Kies wat bij je apparaat past', `<div class="insts">${rows}</div><div class="feedback" id="inst-fb"></div>`, body => {
+    const b = body.querySelector('[data-install]');
+    if(b) b.onclick = async () => {
+      if(!installEvt) return;
+      installEvt.prompt();
+      let ok = false;
+      try{ ok = (await installEvt.userChoice).outcome === 'accepted'; }catch(e){}
+      installEvt = null;
+      if(ok) closeModal(); else { b.remove(); fb('#inst-fb', 'Later kan het ook via het menu van je browser.', ''); }
+      installButton();
+    };
+  });
+}
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; installButton(); });
+window.addEventListener('appinstalled', () => { installEvt = null; installButton(); say([['ditty', "Geïnstalleerd! Nu staat de boerderij gewoon op je apparaat. Maar in het echt is het koffie lekkerder, hoor."]]); });
+$('#btn-install').onclick = openInstall;
+installButton();
 
 start();
