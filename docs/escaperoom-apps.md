@@ -17,6 +17,26 @@
 > bouwt de apps wel bij elke wijziging (als artefact), maar maakt pas een release als de repository-variabele
 > `ESCAPEROOM_RELEASE` op `true` staat (*Settings → Secrets and variables → Actions → Variables*).
 
+## Installeren vanuit het spel
+
+De knop **Installeren** bovenin opent *Speel als app*, met alleen de keuzes die bij het apparaat passen
+(`openInstall()` in `js/app.js`, getest in `tests/escaperoom/installeren.spec.js`):
+
+| Apparaat | Keuzes |
+|---|---|
+| Chrome op Windows of Mac | Web-app, Chrome-extensie |
+| Chrome op Linux | Web-app, Chrome-extensie, Linux-app |
+| Firefox op Linux | Linux-app |
+| Chromebook | Web-app, Chrome-extensie, Android-app |
+| Android | Web-app, Android-app |
+| iPhone en iPad | Web-app (uitleg: Deel → Zet op beginscherm) |
+| Safari op een Mac | Web-app (uitleg: Archief → Voeg toe aan Dock) |
+
+In een app zelf (Android, Linux, de Chrome-extensie of de geïnstalleerde web-app) is de knop er niet. De links naar de
+winkels staan bovenaan in `APP_LINKS`: [Google Play](https://play.google.com/store/apps/details?id=nl.albertsmaheert.escaperoom),
+[Chrome Web Store](https://chromewebstore.google.com/detail/het-geheim-van-de-alberts/menijigcnfkinaebpnbciflmhehijjnp)
+en de [Snap Store](https://snapcraft.io/albertsmaheert).
+
 ## Besturing
 
 | | Toetsenbord | Afstandsbediening | Controller |
