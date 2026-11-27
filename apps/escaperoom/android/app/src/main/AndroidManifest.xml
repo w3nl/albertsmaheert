@@ -2,6 +2,9 @@
 <!-- Eén Android-app voor telefoons, tablets, Google TV en Chromebooks. Geen internet nodig: het spel zit in de app. -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Alleen voor het echte reserveringsformulier (bedandbreakfast.nl) in Logeren; het spel zelf zit in de app. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.software.leanback" android:required="false" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
     <uses-feature android:name="android.hardware.gamepad" android:required="false" />

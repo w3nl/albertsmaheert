@@ -39,8 +39,7 @@ selecteer `dist/escaperoom-chrome/`.
    - **Kleine promotegel:** `small-promo-tile.jpg` (440×280)
    - **Marquee-promotegel** (optioneel): `marquee-promo-tile.jpg` (1400×560)
 4. **Privacy:** één doel: "een escaperoom om in een tabblad te spelen"; geen rechten om uit te leggen; geen gegevens
-   verzameld. Privacybeleid: `https://albertsmaheert.nl/privacyverklaring/` (zie de opmerking daarover in
-   [escaperoom-android.md](escaperoom-android.md)).
+   verzameld. Privacybeleid: `https://albertsmaheert.nl/escaperoom/privacy.html`.
 5. **Distributie:** openbaar (pas na het akkoord van Ditty en Roelof) of eerst **verborgen** of **privé** voor testers;
    alle regio's. Verzenden voor beoordeling.
 

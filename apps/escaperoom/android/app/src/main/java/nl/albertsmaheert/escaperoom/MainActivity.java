@@ -142,7 +142,10 @@ public class MainActivity extends Activity {
             if (!down && e.getRepeatCount() == 0) {
                 web.evaluateJavascript("window.tvBack ? window.tvBack() : false", value -> {
                     if ("true".equals(value)) return;
-                    finish();
+                    // op de privacypagina (privacy.html in de app): Terug gaat naar het spel, niet uit de app
+                    String url = web.getUrl();
+                    if (url != null && !url.endsWith("/index.html") && web.canGoBack()) web.goBack();
+                    else finish();
                 });
             }
             return true;

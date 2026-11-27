@@ -332,7 +332,8 @@ function bnbTab(tab){
     </dl>
     <div class="row"><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Wolddijk+60+9784+TE+Noordwolde" target="_blank" rel="noopener">Route</a>
       <a class="btn ghost" href="${SITE}gastenboek/" target="_blank" rel="noopener">Gastenboek</a>
-      <button class="btn ghost" type="button" data-tab="omgeving">De omgeving</button></div>`;
+      <button class="btn ghost" type="button" data-tab="omgeving">De omgeving</button></div>
+    <p class="muted">Het spel verzamelt niets: zie het <a href="privacy.html">privacybeleid</a>.</p>`;
   return `
     <div class="folder">
       <p>Een boerderij waar al meer dan een eeuw de familie Wigboldus woont. Op de oude hooizolder zijn drie kamers gemaakt, genoemd naar de borgen die hier vroeger in de buurt stonden: <b>Thedema</b>, <b>Alma</b> en <b>Folkerda</b>. Beneden, in de oude paardenstal, is kamer <b>Paardenstal</b>: handig als traplopen lastig is.</p>
