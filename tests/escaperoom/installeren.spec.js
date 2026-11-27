@@ -62,12 +62,21 @@ test.describe('Safari op een Mac', () => {
 
 test.describe('Firefox op Windows', () => {
   test.use({ userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0' });
+  test('de web-app, met uitleg (taakbalk)', async ({ page }) => {
+    await seed(page);
+    await page.locator('#btn-install').click();
+    expect(await options(page)).toEqual(['Web-app']);
+    await expect(page.locator('#modal .inst')).toContainText('taakbalk');
+  });
+});
+
+test.describe('een oude Firefox op Windows', () => {
+  test.use({ userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0' });
   test('niets te installeren: geen knop', async ({ page }) => {
     await seed(page);
     await expect(page.locator('#btn-install')).toBeHidden();
   });
 });
-
 test.describe('de web-app installeren', () => {
   test.use({ userAgent: UA.windowsChrome });
   test('de knop vraagt de browser om te installeren en sluit dan', async ({ page }) => {

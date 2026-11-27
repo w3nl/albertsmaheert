@@ -26,11 +26,12 @@ De knop **Installeren** bovenin opent *Speel als app*, met alleen de keuzes die 
 |---|---|
 | Chrome op Windows of Mac | Web-app, Chrome-extensie |
 | Chrome op Linux | Web-app, Chrome-extensie, Linux-app |
-| Firefox op Linux | Linux-app |
+| Firefox op Linux | Linux-app (de web-apps van Firefox staan op Linux nog niet standaard aan) |
 | Chromebook | Web-app, Chrome-extensie, Android-app |
 | Android | Web-app, Android-app |
 | iPhone en iPad | Web-app (uitleg: Deel → Zet op beginscherm) |
 | Safari op een Mac | Web-app (uitleg: Archief → Voeg toe aan Dock) |
+| Firefox op Windows (143+) | Web-app (uitleg: pictogram in de adresbalk → taakbalk) |
 
 In een app zelf (Android, Linux, de Chrome-extensie of de geïnstalleerde web-app) is de knop er niet. De links naar de
 winkels staan bovenaan in `APP_LINKS`: [Google Play](https://play.google.com/store/apps/details?id=nl.albertsmaheert.escaperoom),
