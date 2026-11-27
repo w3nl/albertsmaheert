@@ -130,14 +130,14 @@ const H = {
     if(S.f.moi >= 2 && !S.ach.moi){ S.ach.moi = true; save(); return say(["Je zegt hardop: \"Moi!\"", "Een zwaluw scheert langs. Je bent nu officieel een beetje Gronings."]); }
     say(["Het welkomsbord op de wagen. Met krijt: Albertsmaheert. B&B, zaal, museum. Moi!", "Moi is Gronings voor hallo. En voor dag. Je zegt het de hele dag, bij komen én gaan."]);
   },
-  bnbbord(){ say(["Het bord van de B&B aan de weg: een dakje van zwarte pannen, foto's van de kamers, en een bak vol rode geraniums.", "Ernaast wappert de Groninger vlag: rood, blauw, en een groen kruis met wit. Hier ben je echt in Groningen."]); },
+  bnbbord(){ say(["Het bord van de B&B aan de weg: een dakje van zwarte pannen, foto's van de kamers, en een bak vol rode geraniums.", "Ernaast wappert de Groninger vlag: rood, blauw, en een groen kruis met wit. Hier ben je echt in Groningen.", "Onder de foto's staat: Kamer vrij? Kom logeren!"], () => openBnB('bnb')); },
   geiten(){ gag('#ef-geiten', 'mek', 1400); beep(420, .25, 'sawtooth', .03); setTimeout(() => beep(380, .3, 'sawtooth', .03), 260);
     say(["Mèèèh! Drie geitjes in het veld voor de boerderij. Een witte, een bruine en een zwarte.", ['roelof', "Vroeger hadden we koeien en schapen. De laatste jaren houden de geitjes het gras kort. En ze eten alles, ook de bloemen van Ditty."]]); },
   ballon(){ gag('#ef-balloons', 'bob', 1200); beep(700, .05, 'sine', .04); say(S.ch === 4 ? "Rode ballonnen aan de wagen. Het feest in de zaal is begonnen!" : S.ch > 1 ? "Rode ballonnen aan de wagen. Vanavond is er feest in de zaal." : "Rode ballonnen aan de wagen. Morgen is er feest in de zaal."); },
   wiel(){ gag('#ef-wheel', 'spin', 2200); beep(200, .1, 'triangle', .04); say(["Je geeft het wagenwiel een zetje. Het draait knarsend een rondje.", "Een houten wiel met een ijzeren band eromheen. Die band zette de smid er gloeiend heet om: als hij afkoelt, krimpt hij, en dan zit alles muurvast."]); },
   hoef(){ S.f.hoefTaken = true; give('hoefijzer'); applyVisuals(); say(["In het gras onder de wagen glimt iets. Een oud hoefijzer!", "Roestig, met nog een paar nagelgaatjes. Dat bewaar je."]); },
   fiets(){ say(["Jouw fiets, met fietstassen. Je bent hier langs de knooppunten naartoe gefietst, over de dijkjes en langs de weilanden.", "De laatste kilometers ging het vanzelf. Het is hier zo plat als een pannenkoek."]); },
-  knoop(){ say(["Een groen-wit bordje van de fietsknooppunten. Je fietst van nummer naar nummer, zonder kaart.", "Vanaf hier rijd je zo naar oude kerkjes, wierden, molens en de scheve toren van Bedum."]); },
+  knoop(){ say(["Een groen-wit bordje van de fietsknooppunten. Je fietst van nummer naar nummer, zonder kaart.", "Vanaf hier rijd je zo naar oude kerkjes, wierden, molens en de scheve toren van Bedum."], () => openBnB('omgeving')); },
   martini(){ S.ach.martini = true; save(); say(["Ver weg aan de horizon steekt een torentje boven de bomen uit.", "Dat is de Martinitoren, in de stad Groningen: hemelsbreed 7,5 kilometer hiervandaan. Die zie je zo ver omdat het land zo plat is."]); },
   ree(h){
     if(!gag('#ef-ree', 'flee', 5200)) return;
@@ -189,7 +189,7 @@ const H = {
         Ontbijt is morgen in de eetzaal, vanaf half negen. Er is wifi, en in de recreatiezaal staan een pooltafel, een voetbaltafel en een tafeltennistafel.<br><br>
         Morgenavond is er feest in de zaal. Je bent van harte welkom!
         <div class="sig">Slaap lekker, Ditty</div></div>
-      <div class="row" style="margin-top:12px"><a class="btn ghost" href="${SITE}accommodation/paardenstal/" target="_blank" rel="noopener">De echte Paardenstal</a></div>`);
+      <div class="row" style="margin-top:12px"><button class="btn ghost" type="button" data-room="paardenstal">De echte Paardenstal</button></div>`);
   },
   wekker(){
     beep(523, .1); setTimeout(() => beep(659, .1), 150); setTimeout(() => beep(784, .14), 300);
@@ -418,8 +418,8 @@ Object.assign(H, {
     openExit('Jouw fiets', 'Met fietstassen · langs de knooppunten hierheen gefietst',
       "Tring tring! Je bent hier over de dijkjes en langs de weilanden naartoe gefietst. Het is hier zo plat als een pannenkoek. Fiets je weer naar huis?",
       [['Naar huis fietsen', 'Terug naar het beginscherm', toMenu]]); },
-  knoop(){ poke('#ef-knoop', 'g-wiggle', null, 500); say(["Een groen-wit bordje van de fietsknooppunten. Je fietst van nummer naar nummer, zonder kaart.", "Vanaf hier rijd je zo naar oude kerkjes, wierden, molens en de scheve toren van Bedum."]); },
-  bnbbord(){ poke('#ef-bnbbord', 'g-wiggle', null, 500); say(["Het bord van de B&B aan de weg: een dakje van zwarte pannen, foto's van de kamers, en een bak vol rode geraniums.", "Ernaast wappert de Groninger vlag: rood, blauw, en een groen kruis met wit. Hier ben je echt in Groningen."]); },
+  knoop(){ poke('#ef-knoop', 'g-wiggle', null, 500); say(["Een groen-wit bordje van de fietsknooppunten. Je fietst van nummer naar nummer, zonder kaart.", "Vanaf hier rijd je zo naar oude kerkjes, wierden, molens en de scheve toren van Bedum."], () => openBnB('omgeving')); },
+  bnbbord(){ poke('#ef-bnbbord', 'g-wiggle', null, 500); say(["Het bord van de B&B aan de weg: een dakje van zwarte pannen, foto's van de kamers, en een bak vol rode geraniums.", "Ernaast wappert de Groninger vlag: rood, blauw, en een groen kruis met wit. Hier ben je echt in Groningen.", "Onder de foto's staat: Kamer vrij? Kom logeren!"], () => openBnB('bnb')); },
   martini(){ S.ach.martini = true; save(); poke('#ef-martini', 'g-glow', "d'Olle Grieze"); say(["Ver weg aan de horizon steekt een toren boven de bomen uit: de Martinitoren, in de stad Groningen.", "Hemelsbreed 7,5 kilometer hiervandaan. De Groningers noemen hem d'Olle Grieze: de oude grijze."]); },
   deeldeur(){ gagText($('#sc-erf [data-hs="deeldeur"]'), 'Kraaak'); beep(140, .4, 'sawtooth', .02); enterRoom('museum'); },
   bomen(){ poke('#ef-bomen', 'g-shake', 'Ritsel', 400); beep(2600, .05); setTimeout(() => beep(3000, .05), 80);

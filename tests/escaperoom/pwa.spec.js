@@ -43,7 +43,7 @@ test('elk bestand in de offline-lijst bestaat, en elk spelbestand staat erin', a
   const sw = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
   const core = [...sw.match(/const CORE = \[([\s\S]*?)\];/)[1].matchAll(/'\.\/([^']*)'/g)].map(m => m[1]).filter(Boolean);
   for (const f of core) expect(fs.existsSync(path.join(root, f)), f).toBe(true);
-  for (const dir of ['js', 'css', 'scenes', 'portraits'])
+  for (const dir of ['js', 'css', 'scenes', 'portraits', 'img'])
     for (const f of fs.readdirSync(path.join(root, dir))) expect(core, `${dir}/${f} staat niet in sw.js`).toContain(`${dir}/${f}`);
   for (const f of fs.readdirSync(path.join(root, 'fonts')).filter(f => f.endsWith('.woff2'))) expect(core, `fonts/${f} staat niet in sw.js`).toContain(`fonts/${f}`);
 });

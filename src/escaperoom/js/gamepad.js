@@ -37,7 +37,7 @@ function padItems(){
   } else if(ctx === 'title' || ctx === 'win'){
     list = [...$('#' + ctx).querySelectorAll('button, a[href]')];
   } else {
-    list = [...document.querySelectorAll('.scene.on .hit'), ...document.querySelectorAll('#slots .slot.filled')];
+    list = [...document.querySelectorAll('.scene.on .hit'), ...document.querySelectorAll('#slots .slot.filled'), ...document.querySelectorAll('#d-stay:not([hidden])')];
   }
   return list.filter(el => !el.disabled && shown(el));
 }
@@ -113,7 +113,7 @@ function padMove(dir){
 function padPress(){
   const ctx = padContext();
   // in de kamer leest A eerst het gesprek verder, zoals een klik op de tekst
-  if(ctx.startsWith('room') && !$('#dialog').hidden){ $('#dialog').dispatchEvent(new MouseEvent('click', { bubbles: true })); return; }
+  if(ctx.startsWith('room') && !$('#dialog').hidden && padCurrent() !== $('#d-stay')){ $('#dialog').dispatchEvent(new MouseEvent('click', { bubbles: true })); return; }
   const list = padItems(), cur = padCurrent();
   if(!cur) return padFocus(padDefault(list));
   if(cur.tagName === 'SELECT'){ return padMove('right'); }

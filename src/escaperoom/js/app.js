@@ -236,9 +236,104 @@ $('#btn-motion').onclick = () => {
 };
 matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change', applyMotion);
 
-/* De folder van de B&B: in elk hoofdstuk ergens te vinden (H.folder). */
-function openFolder(){
-  openModal('B&B Albertsmaheert', 'Wolddijk 60 · 9784 TE Noordwolde · bij Bedum en Groningen', `
+/* ---------- Logeren bij de Albertsmaheert: de B&B in het spel ----------
+   De folder van de B&B (in elk hoofdstuk ergens te vinden, H.folder) en de links Kom logeren, Reserveren en contact
+   openen dit venster, zodat je niet uit het spel (of de app) hoeft. Drie tabbladen: De B&B (met de kamers), Reserveren
+   en Contact. Reserveren is ECHT: het tabblad toont bovenaan een duidelijke melding en daaronder het formulier van
+   bedandbreakfast.nl (dezelfde iframe als op albertsmaheert.nl/reserveer), met internet. Het laadt pas als je dat tabblad
+   opent; verder laadt het spel niets van andere sites. */
+const BOOK_URL = 'https://www.bedandbreakfast.nl/ibook/v2/66793/nl/black/transparent';
+const BNB_ROOMS = [
+  ['thedema', 'Thedema', '28 m²', 'Op de oude hooizolder, met een schitterend uitzicht: in de verte de Martinitoren van Groningen. Albertsmaheert hoorde vroeger bij borg Thedema.'],
+  ['alma', 'Alma', '26 m²', 'Op de zuidkant van de boerderij, met de oorspronkelijke gebinten en ook uitzicht op de Martinitoren.'],
+  ['folkerda', 'Folkerda', '27 m²', 'Uitzicht op de tuin, met in de verte de stad Groningen. Ook hier zie je de oude gebinten.'],
+  ['paardenstal', 'Paardenstal', '20 m²', 'Beneden, in de oude paardenstal: fijn als traplopen lastig is. De ramen zitten op het oosten, dus lekker koel in de zomer.'],
+];
+/* Wat op de kamerpagina's van de site staat (albertsmaheert.nl/accommodation/<kamer>/). */
+const ROOM_INFO = {
+  thedema: { text: ['Kamer Thedema ligt, net als Alma en Folkerda, op de voormalige hooizolder. Het uitzicht is schitterend: je ziet in de verte de Martinitoren van de stad Groningen.', 'De kamers zijn genoemd naar borgen die vroeger in de buurt stonden. Albertsmaheert hoorde bij borg Thedema.'], bath: ['Douche', 'Bad', 'Toilet', 'Wastafel'] },
+  alma: { text: ['Kamer Alma ligt, net als de andere kamers, op de zuidkant van de boerderij. De oorspronkelijke gebinten komen hier goed naar voren.', 'Het uitzicht is schitterend: je ziet in de verte de Martinitoren van de stad Groningen.'], bath: ['Douche', 'Toilet', 'Wastafel'] },
+  folkerda: { text: ['Kamer Folkerda kijkt uit op de tuin, met in de verte de stad Groningen.', 'Ook hier zijn de oude gebinten zichtbaar gelaten.'], bath: ['Douche', 'Toilet', 'Wastafel'] },
+  paardenstal: { text: ['De Paardenstal is een nieuwe kamer beneden, in de oude paardenstal: heel geschikt voor mensen die traplopen lastig vinden.', 'De ramen zitten aan de oostkant, dus het is er lekker koel in de zomer.'], bath: ['Douche', 'Toilet', 'Wastafel'] },
+};
+const ROOM_ALL = ['Privé badkamer', 'Gebruik van het gezamenlijke terras en gazon op het zuiden, met onder meer een trampoline en schommels', 'Gebruik van de gezamenlijke recreatiezaal, met onder meer een koffieapparaat, waterkoker, koelkast, tafeltennistafel en pooltafel'];
+const ROOM_RULES = ['Inclusief ontbijt', 'Niet roken', 'Huisdieren niet toegestaan', 'Minimaal 2 nachten'];
+const ROOM_FEAT = ['TV', 'Zitje', 'Eethoek', 'Verwarming', 'Internet'];
+/* Een kamer, zoals op de site: foto, beschrijving, faciliteiten en voorwaarden, en meteen reserveren. */
+function openRoom(slug){
+  const r = BNB_ROOMS.find(x => x[0] === slug) || BNB_ROOMS[0], [id, name, size] = r, info = ROOM_INFO[id];
+  const list = items => `<ul>${items.map(i => `<li>${i}</li>`).join('')}</ul>`;
+  openModal('Kamer ' + name, `${size} · 2 personen · B&B Albertsmaheert`, `
+    <div class="roominfo">
+      <img src="img/kamer-${id}.jpg" alt="Kamer ${name}" width="480" height="329">
+      <div>${info.text.map(t => `<p>${t}</p>`).join('')}</div>
+    </div>
+    <div class="facs">
+      <div><h4>Kamer</h4>${list(['Kamergrootte ' + size, ...ROOM_FEAT])}</div>
+      <div><h4>Badkamer</h4>${list(info.bath)}</div>
+      <div><h4>Voorwaarden</h4>${list(ROOM_RULES)}</div>
+      <div><h4>Voor alle gasten</h4>${list(ROOM_ALL)}</div>
+    </div>
+    <div class="row"><button class="btn" type="button" data-tab="reserveren">Reserveer deze kamer</button>
+      <button class="btn ghost" type="button" data-tab="bnb">Alle kamers</button>
+      <a class="btn ghost" href="${SITE}accommodation/${id}/" target="_blank" rel="noopener">Meer foto's</a></div>`,
+    body => { body.onclick = e => { const t = e.target.closest('[data-tab]'); if(t) openBnB(t.dataset.tab); }; });
+}
+function bnbTab(tab){
+  if(tab === 'reserveren') return `
+    <div class="real" role="note"><b>Let op: dit is echt, geen spel</b>
+      <p>Hier boek je een <b>echte overnachting</b> bij B&B Albertsmaheert in Noordwolde. Het reserveringsformulier is van
+      bedandbreakfast.nl: je aanvraag gaat naar Ditty en Roelof, je krijgt een bevestiging per e-mail, en je betaalt voor je
+      verblijf. In het spel verandert er niets door, en je krijgt er geen punten voor.</p></div>
+    <div id="book-area">${navigator.onLine === false
+      ? '<p class="muted">Je bent nu niet online. Reserveren kan zodra je weer internet hebt, of bel of mail Ditty en Roelof (Contact).</p>'
+      : `<div class="book"><div class="book-label">Echte boeking · formulier van bedandbreakfast.nl</div>
+        <iframe src="${BOOK_URL}" title="Reserveringsformulier van B&B Albertsmaheert (echte boeking)"></iframe></div>`}
+      <p class="muted">Zie je geen formulier? <a href="${SITE}reserveer/" target="_blank" rel="noopener">Reserveer dan op de website</a>, of mail of bel Ditty en Roelof (<button class="linkbtn" type="button" data-tab="contact">Contact</button>).</p>
+    </div>`;
+  if(tab === 'omgeving') return `
+    <div class="folder">
+      <p>De omgeving van de Albertsmaheert heeft veel te bieden voor de stille genieter: het fraaie landschap met zijn
+      vergezichten, de dijken en de wierden. De boerderij ligt aan een knooppuntenroute en is een mooie uitvalsbasis voor
+      fietstochten langs oude waterlopen, hoogholtjes, molens en dijken, over fietspaden dwars door de weilanden. Het
+      centrum van Groningen is ongeveer 8 km verderop.</p>
+      <h4>Uitstapjes in de buurt</h4>
+      <ul>
+        <li>Shoppen in de stad Groningen (binnen 10 km sta je in het centrum)</li>
+        <li>Tuincentrum Eldorado in Zuidwolde</li>
+        <li>De scheefste toren van Europa: de Walfriduskerk in Bedum</li>
+        <li>Kanoën over het Boterdiep, het Winsumerdiep of de Oude Ae</li>
+        <li>IJs- en zorgboerderij De Golden Raand</li>
+      </ul>
+      <h4>Wat verder weg</h4>
+      <ul>
+        <li>Openluchtmuseum Het Hogeland in Warffum</li>
+        <li>Museum Het Behouden Blik</li>
+        <li>Landgoed De Fraeylemaborg in Slochteren</li>
+        <li>Landgoed De Menkemaborg in Uithuizen</li>
+        <li>Museum Wierdenland in Ezinge</li>
+        <li>Blik-, Trommel- en Oudhedenmuseum in Niezijl</li>
+        <li>Schilder Henk Helmantel in Westeremden</li>
+        <li>Botanische tuin Domies Toen in Pieterburen</li>
+        <li>Abraham's Mosterdmakerij in Eenrum</li>
+        <li>Kaarsenmakerij Wilhelmina in Eenrum</li>
+        <li>Avonturenpark Waddenfun in Wehe-den Hoorn</li>
+      </ul>
+      <div class="row"><button class="btn" type="button" data-tab="reserveren">Kom logeren</button>
+        <a class="btn ghost" href="${SITE}de-omgeving/" target="_blank" rel="noopener">Op de website</a></div>
+    </div>`;
+  if(tab === 'contact') return `
+    <p>Vragen over een kamer, een feest in de zaal, of de weg? Ditty en Roelof helpen je graag.</p>
+    <dl class="contact">
+      <dt>E-mail</dt><dd><a href="mailto:ditty@albertsmaheert.nl">ditty@albertsmaheert.nl</a></dd>
+      <dt>Telefoon</dt><dd><a href="tel:+31612212622">06 12212622</a></dd>
+      <dt>Gastheer en -vrouw</dt><dd>Roelof en Ditty Wigboldus</dd>
+      <dt>Adres</dt><dd>Wolddijk 60, 9784 TE Noordwolde (gemeente Het Hogeland), bij Bedum en Groningen</dd>
+    </dl>
+    <div class="row"><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Wolddijk+60+9784+TE+Noordwolde" target="_blank" rel="noopener">Route</a>
+      <a class="btn ghost" href="${SITE}gastenboek/" target="_blank" rel="noopener">Gastenboek</a>
+      <button class="btn ghost" type="button" data-tab="omgeving">De omgeving</button></div>`;
+  return `
     <div class="folder">
       <p>Een boerderij waar al meer dan een eeuw de familie Wigboldus woont. Op de oude hooizolder zijn drie kamers gemaakt, genoemd naar de borgen die hier vroeger in de buurt stonden: <b>Thedema</b>, <b>Alma</b> en <b>Folkerda</b>. Beneden, in de oude paardenstal, is kamer <b>Paardenstal</b>: handig als traplopen lastig is.</p>
       <ul>
@@ -248,14 +343,47 @@ function openFolder(){
         <li>Aan een knooppuntenroute, ongeveer 8 km van het centrum van Groningen</li>
         <li>De zaal (de vroegere koestal) kun je ook huren voor een feest</li>
       </ul>
+      <div class="rooms">${BNB_ROOMS.map(([slug, name, size, text]) => `<button class="room" type="button" data-room="${slug}">
+        <img src="img/kamer-${slug}.jpg" alt="Kamer ${name}" loading="lazy" width="480" height="329">
+        <div><b>${name}</b> <small>${size} · 2 personen</small><span>${text}</span><em>Meer over ${name} ▸</em></div></button>`).join('')}</div>
       <p>Ditty en Roelof zien je komst met veel plezier tegemoet.</p>
-      <div class="row">
-        <a class="btn" href="${SITE}reserveer/" target="_blank" rel="noopener">Reserveren</a>
-        <a class="btn ghost" href="${SITE}bnb/" target="_blank" rel="noopener">De kamers</a>
-        <a class="btn ghost" href="${SITE}de-omgeving/" target="_blank" rel="noopener">De omgeving</a>
-      </div>
-    </div>`);
+      <div class="row"><button class="btn" type="button" data-tab="reserveren">Kom logeren</button>
+        <a class="btn ghost" href="${SITE}bnb/" target="_blank" rel="noopener">Meer foto's</a></div>
+    </div>`;
 }
+function openBnB(tab = 'bnb'){
+  const tabs = [['bnb', 'De B&B'], ['omgeving', 'Omgeving'], ['reserveren', 'Reserveren'], ['contact', 'Contact']];
+  openModal('Logeren bij de Albertsmaheert', 'Wolddijk 60 · 9784 TE Noordwolde · bij Bedum en Groningen', `
+    <div class="tabs" role="tablist">${tabs.map(([k, l]) => `<button class="tab${k === tab ? ' on' : ''}" type="button" role="tab" aria-selected="${k === tab}" data-tab="${k}">${l}</button>`).join('')}</div>
+    <div class="tab-body" id="bnb-body">${bnbTab(tab)}</div>`, body => {
+    // onclick (niet addEventListener): #m-body blijft hetzelfde element als je van tabblad wisselt
+    body.onclick = e => {
+      const t = e.target.closest('[data-tab]');
+      if(t) openBnB(t.dataset.tab);
+    };
+  });
+}
+/* Plekken in het spel die naar Logeren leiden (naast de folder, de titel, het eindscherm en de voetregel):
+   het bord van de B&B op het erf, het gastenboek in de zaal, het kaartje op de tafel in de kamer en het kaartje op het
+   bed van de Paardenstal (de kamer zelf, openRoom), het fietsknooppunt op het erf en de verrekijker op het dak (de
+   omgeving), en het knopje "Echt komen logeren?" in het gesprek als Ditty of Roelof praat. */
+H.kmkaart = () => {
+  poke('#km-kaart', 'g-wiggle', null, 500);
+  const k = ['thedema', 'alma', 'folkerda'].includes(S.kamer) ? S.kamer : 'thedema';
+  say([`Een kaartje op tafel, in het handschrift van Ditty: "Welkom in ${k[0].toUpperCase() + k.slice(1)}! Hier lees je alles over deze kamer."`], () => openRoom(k));
+};
+$('#d-stay').onclick = e => { e.stopPropagation(); openBnB('reserveren'); };
+/* De oude naam: de folder in de hoofdstukken (H.folder) opent het tabblad De B&B. */
+function openFolder(){ openBnB('bnb'); }
+/* Links in het spel met data-bnb (Kom logeren, Reserveren, contact) openen het venster in plaats van de website. */
+document.addEventListener('click', e => {
+  const r = e.target.closest('[data-room]');
+  if(r){ e.preventDefault(); openRoom(r.dataset.room); return; }
+  const a = e.target.closest('[data-bnb]');
+  if(!a) return;
+  e.preventDefault();
+  openBnB(a.dataset.bnb);
+});
 
 function start(data){
   setupRotate();

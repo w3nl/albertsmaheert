@@ -12,7 +12,8 @@ protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { standard: t
 // één venster: de app nog eens starten haalt het open venster naar voren
 if (!app.requestSingleInstanceLock()) app.quit();
 
-const external = url => { if (/^https?:\/\//.test(url)) shell.openExternal(url); };
+// websites in de browser; mailto: en tel: (contact in het spel) in het mailprogramma of de telefoon-app
+const external = url => { if (/^(https?:\/\/|mailto:|tel:)/.test(url)) shell.openExternal(url); };
 
 function open() {
   const win = new BrowserWindow({

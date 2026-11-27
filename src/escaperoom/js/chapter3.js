@@ -70,7 +70,7 @@ Object.assign(H, {
   scheef(){ S.ach.scheef = true; save(); say(["Een scheve kerktoren, net boven de bomen uit. Dat is de toren van de Walfriduskerk in Bedum.", "Volgens de folder van de B&B de scheefste toren van Europa. Toch staat hij er al eeuwen."]); },
   molen(){ gag('#dk-molen', 'fast', 3000); say("Een molen in de verte. De wieken draaien rustig in de wind."); },
   dkree(){ S.ach.ree = true; save(); say("Twee reeën in de wei, vlak bij de akkers. Ze grazen gewoon door."); },
-  kijker(){ S.ach.martini = true; save(); say(["Je kijkt door de verrekijker van Roelof. Zuid: de Martinitoren. Noord: de scheve toren van Bedum. Overal: koeien, schapen en weilanden.", "Op het platte dak zie je kilometers ver. Daarom heet dit het Hogeland, al is het helemaal niet hoog."]); },
+  kijker(){ S.ach.martini = true; save(); say(["Je kijkt door de verrekijker van Roelof. Zuid: de Martinitoren. Noord: de scheve toren van Bedum. Overal: koeien, schapen en weilanden.", "Op het platte dak zie je kilometers ver. Daarom heet dit het Hogeland, al is het helemaal niet hoog."], () => openBnB('omgeving')); },
   dakpannen(){ say("Rode dakpannen op het dak van de schuur met de zaal. Onder dit dak stonden vroeger de koeien."); },
   riet(){ say("Het rieten dak van het museum. Riet houdt het in de zomer koel en in de winter warm."); },
   leeuwerik(){ beep(3600, .05); setTimeout(() => beep(4000, .05), 90); setTimeout(() => beep(3800, .05), 180); say("Een leeuwerik, hoog in de lucht. Hij zingt en zingt en houdt maar niet op."); }
@@ -247,7 +247,7 @@ Object.assign(H, {
   bussen(){ poke('#mu-melk', 'g-shake', 'Klang!', 300); say(["Melkbussen, met nummers erop. Ze klinken hol als je ertegen tikt. Elke boer had zijn eigen nummer.", "De melkrijder haalde de bussen op en bracht ze naar de zuivelfabriek. Lege bussen kwamen terug."]); },
   balen(){ poke('#mu-balen', 'g-jump', 'Pfff'); say("Balen stro, met touw eromheen. Een stofwolkje kriebelt in je neus."); },
   scheef(){ S.ach.scheef = true; save(); poke('#dk-scheefw', 'g-wiggle', 'Oei!'); say(["De scheve toren van Bedum, net boven de bomen uit. Even leek het of hij omviel!", "Het is de toren van de Walfriduskerk, volgens de folder de scheefste toren van Europa. Toch staat hij er al eeuwen."]); },
-  kijker(){ S.ach.martini = true; save(); poke('#dk-kijker', 'g-tilt'); say(["Je kijkt door de verrekijker van Roelof. Zuid: de Martinitoren, 7,5 kilometer weg. Noord: de scheve toren van Bedum. Overal: weilanden, sloten en een paar reeën.", "Op het platte dak zie je kilometers ver. Daarom heet dit het Hogeland, al is het helemaal niet hoog."]); },
+  kijker(){ S.ach.martini = true; save(); poke('#dk-kijker', 'g-tilt'); say(["Je kijkt door de verrekijker van Roelof. Zuid: de Martinitoren, 7,5 kilometer weg. Noord: de scheve toren van Bedum. Overal: weilanden, sloten en een paar reeën.", "Op het platte dak zie je kilometers ver. Daarom heet dit het Hogeland, al is het helemaal niet hoog."], () => openBnB('omgeving')); },
   dkree(){ S.ach.ree = true; save(); poke('#dk-ree', 'g-jump', null, 900); say("Een ree in de wei, vlak bij de akkers. Hij springt even op, en graast dan gewoon verder."); },
   dkree2(){ S.ach.ree = true; save(); say("Een tweede ree loopt over de rand van het land, langs de sloot. Rustig, alsof de hele wei van hem is."); },
   wolk(){

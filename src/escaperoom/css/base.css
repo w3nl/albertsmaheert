@@ -284,3 +284,40 @@ ol.how .ico{width:18px;height:18px;vertical-align:-3px;color:var(--amber)}
 .linkish{background:none;border:0;padding:0 0 0 6px;color:var(--amber);font:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .linkish:hover{color:var(--paper)}
 .linkish::before{content:'· ';display:inline-block;white-space:pre;color:var(--muted)}
+/* Logeren bij de Albertsmaheert (app.js openBnB): tabbladen, kamers, contact en het echte reserveringsformulier */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:-4px 0 14px;border-bottom:1px solid var(--line)}
+.tab{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:none;border:0;border-bottom:3px solid transparent;padding:8px 10px;color:var(--muted)}
+.tab.on{color:var(--amber);border-bottom-color:var(--amber)}
+.tab:hover{color:var(--paper)}
+.rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:0 0 12px}
+.room{border:1px solid var(--line);border-radius:6px;overflow:hidden;background:rgba(10,10,8,.35)}
+.room img{display:block;width:100%;height:auto;aspect-ratio:480/329;object-fit:cover}
+.room div{padding:8px 10px 10px;display:flex;flex-wrap:wrap;gap:2px 8px;align-items:baseline}
+.room small{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.room span{flex-basis:100%;font-size:13px;color:var(--muted)}
+.real{border:2px solid var(--amber);border-radius:6px;padding:12px 14px;margin:0 0 14px;background:rgba(232,176,74,.1)}
+.real > b{display:block;font-size:17px;color:var(--amber);margin-bottom:4px}
+.real p{margin:0}
+.muted{font-size:13px;color:var(--muted);margin:10px 0 0}
+.linkbtn{background:none;border:0;padding:0;color:var(--amber);text-decoration:underline;text-underline-offset:3px;font:inherit}
+dl.contact{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0 0 14px}
+dl.contact dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+dl.contact dd{margin:0}
+dl.contact a{color:var(--amber)}
+.book{border:2px solid var(--amber);border-radius:6px;overflow:hidden;background:#fff}
+.book-label{background:var(--amber);color:#24120a;font-family:var(--f-mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px}
+.book iframe{display:block;width:100%;height:min(70vh,1100px);border:0;background:#fff}
+/* in het gesprek met Ditty of Roelof: echt komen logeren (core.js next, app.js openBnB) */
+.d-stay{margin-left:auto;margin-right:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:none;padding:3px 9px;border-radius:12px;border:1px solid var(--amber);background:rgba(232,176,74,.15);color:var(--amber)}
+.d-stay:hover,.d-stay:focus-visible{background:var(--amber);color:#24120a}
+/* een kamer (app.js openRoom) en de klikbare kamers in De B&B */
+button.room{padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer}
+button.room:hover,button.room:focus-visible{border-color:var(--amber)}
+.room em{flex-basis:100%;font-style:normal;font-family:var(--f-mono);font-size:11px;color:var(--amber);margin-top:4px}
+.roominfo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:14px;align-items:start;margin-bottom:12px}
+.roominfo img{width:100%;height:auto;border-radius:6px;display:block}
+.roominfo p{margin:0 0 8px}
+.facs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:4px 16px;margin-bottom:12px}
+.facs h4,.folder h4{margin:6px 0 4px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+.facs ul{margin:0;padding-left:18px;font-size:13px;color:var(--muted);display:grid;gap:2px}
+@media (max-width:620px){.roominfo{grid-template-columns:1fr}}

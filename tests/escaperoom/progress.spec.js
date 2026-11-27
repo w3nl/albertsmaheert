@@ -85,14 +85,16 @@ test('scores bewaren het beste resultaat, en hoofdstukken blijven vrijgespeeld',
   await expect(page.locator('.scores tbody tr').first()).toContainText('1');
 });
 
-test('de folder in de brievenbus linkt naar de echte B&B', async ({ page }) => {
+test('de folder in de brievenbus opent de B&B in het spel, met links naar de echte site', async ({ page }) => {
   await seed(page, { f: { introDone: true } });
   await page.locator('#btn-cont').click();
   await skip(page);
   await hs(page, 'brievenbus');
   await skip(page);
   await expect(page.locator('.folder')).toContainText('Thedema');
-  await expect(page.locator('.folder a.btn').first()).toHaveAttribute('href', 'https://albertsmaheert.nl/reserveer/');
+  // de folder opent Logeren bij de Albertsmaheert in het spel; Kom logeren gaat naar het tabblad Reserveren
+  await page.locator('.folder [data-tab="reserveren"]').click();
+  await expect(page.locator('#modal .real')).toContainText('dit is echt');
   // elke link naar de echte site opent in een nieuw tabblad, met een pijltje erachter
   const links = await page.evaluate(() => [...document.querySelectorAll('a[href^="https://albertsmaheert.nl"]')]
     .map(a => [a.textContent.trim(), a.target, getComputedStyle(a, '::after').maskImage || getComputedStyle(a, '::after').webkitMaskImage]));
