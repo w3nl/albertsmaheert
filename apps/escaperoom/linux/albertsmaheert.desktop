@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Het Geheim van de Albertsmaheert
+Comment=Escaperoom op B&B Albertsmaheert aan de Wolddijk
+Exec=albertsmaheert
+Icon=${SNAP}/meta/gui/albertsmaheert.png
+Terminal=false
+Type=Application
+Categories=Game;
+Keywords=spel;escaperoom;puzzel;boerderij;game;
+StartupWMClass=Albertsmaheert

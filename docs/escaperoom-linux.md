@@ -68,6 +68,29 @@ De snap staat dan in `apps/escaperoom/linux/dist/`. Alleen proberen, zonder snap
 npm run start:escaperoom-linux
 ```
 
+### Snapcraft en de Builds-service van de Snap Store
+
+`snap/snapcraft.yaml` laat Snapcraft en de **Builds**-service van de Snap Store de snap rechtstreeks uit deze
+repository bouwen. Zonder dat bestand zegt snapcraft.io *Missing snapcraft.yaml*. Het is een tweede weg naast de
+workflow (electron-builder); die blijft zoals hij is.
+
+Het recept bouwt voor **amd64** op `core22`, met de GNOME-extensie voor de bureaubladbibliotheken. Het installeert
+Node 26, zet het spel met `tools/escaperoom/build-apps.js linux` in de app, verpakt de Electron-app met electron-builder
+(`--linux dir`) en neemt `apps/escaperoom/linux/albertsmaheert.desktop` en het pictogram mee. Het versienummer volgt
+dezelfde regel: `1.<GAME_VERSION>.0`. Toetsenbord, geluid, netwerk en joystick blijven werken; Electron draait in de
+strikt afgeschermde snap met `--no-sandbox`, zoals gebruikelijk bij Electron-snaps.
+
+Zelf bouwen, met een ingestelde LXD:
+
+```bash
+snapcraft pack --use-lxd
+```
+
+**In de store:** koppel `w3nl/albertsmaheert` in **My snaps → albertsmaheert → Builds** en kies de tak met het recept
+(normaal `main`). Bouw voor amd64. Kies het kanaal bewust, en publiceer niet dezelfde versie via de store-builds én via
+de workflow (`SNAPCRAFT_STORE_CREDENTIALS`): dan krijg je dubbele revisies. Kies één van de twee: de Builds-service, of
+de workflow met het secret.
+
 ## De snap uit de release installeren (zonder de store)
 
 ```bash

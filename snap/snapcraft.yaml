@@ -1,0 +1,57 @@
+# De Linux-app van de escaperoom, voor de Builds-service van de Snap Store (snapcraft.io → My snaps → albertsmaheert →
+# Builds) en voor `snapcraft pack`. Een tweede weg naast de workflow "Escaperoom: Linux-app" (electron-builder), die
+# blijft zoals hij is. Bouwt hetzelfde: het spel (src/escaperoom) in het Electron-jasje van apps/escaperoom/linux.
+# Zie docs/escaperoom-linux.md.
+name: albertsmaheert
+base: core22
+adopt-info: albertsmaheert
+title: Het Geheim van de Albertsmaheert
+summary: Een escaperoom op de boerderij en B&B Albertsmaheert
+description: |
+  Je komt op vrijdagavond met de fiets aan bij B&B Albertsmaheert aan de Wolddijk.
+  Ditty en Roelof heten je welkom, maar in de oude paardenstal ligt al honderd jaar
+  een brief van knecht Harm. Zoek zijn schat: van de Paardenstal en de hooizolder tot
+  het boerenmuseum van Roelof, het platte dak en het feest in de zaal. Vier hoofdstukken
+  vol puzzels, grapjes en dieren op het erf. Speel met muis, toetsenbord of controller,
+  ook zonder internet. Geen reclame, niets te kopen, niets verzameld.
+grade: stable
+confinement: strict
+license: GPL-3.0
+website: https://albertsmaheert.nl/
+source-code: https://github.com/w3nl/albertsmaheert
+issues: https://github.com/w3nl/albertsmaheert/issues
+architectures:
+  - build-on: amd64
+    build-for: amd64
+
+apps:
+  albertsmaheert:
+    command: albertsmaheert/albertsmaheert --no-sandbox
+    extensions: [gnome]
+    desktop: meta/gui/albertsmaheert.desktop
+    plugs: [browser-support, network, audio-playback, joystick]
+
+parts:
+  albertsmaheert:
+    plugin: nil
+    source: .
+    build-snaps: [node/26/stable]
+    build-packages: [git, unzip]
+    stage-packages: [libnss3, libnspr4, libasound2, libxss1, libxtst6, libnotify4]
+    override-build: |
+      set -eu
+      V=$(sed -nE 's/^const GAME_VERSION = ([0-9]+);.*$/\1/p' src/escaperoom/js/boot.js)
+      if [ -z "$V" ]; then
+        echo "GAME_VERSION niet gevonden in src/escaperoom/js/boot.js" >&2
+        exit 1
+      fi
+      craftctl set version="1.$V.0"
+      # het spel in de app (zonder sw.js) en het versienummer in package.json, net als de workflow
+      node tools/escaperoom/build-apps.js linux
+      cd apps/escaperoom/linux
+      npm ci --no-audit --no-fund
+      npx electron-builder --linux dir --x64 --publish never
+      mkdir -p "$CRAFT_PART_INSTALL/albertsmaheert"
+      cp -a dist/linux-unpacked/. "$CRAFT_PART_INSTALL/albertsmaheert/"
+      install -Dm644 albertsmaheert.desktop "$CRAFT_PART_INSTALL/meta/gui/albertsmaheert.desktop"
+      install -Dm644 game/icons/icon-512.png "$CRAFT_PART_INSTALL/meta/gui/albertsmaheert.png"
