@@ -1,21 +1,37 @@
 /* Telefoons: rechtop vegen door de kamer, lage schermen in de breedte, en de melding om je telefoon te draaien. */
 /* ---------- phones ---------- */
-.frame{width:min(100%, calc((100svh - 150px) * 16 / 9));margin-inline:auto;min-width:0;max-width:100%}
+.frame{position:relative;margin-inline:auto;min-width:0;max-width:100%}
+/* Alles in één scherm, zonder scrollen: de pagina is precies zo hoog als het scherm, en het speelveld (16:9) krijgt de
+   ruimte die over is na de kop, de rugzak en de voetregel. .fit is die ruimte (een container), en het speelveld is zo
+   breed als past: de volle breedte, of minder als de hoogte op is. Rechtop op een telefoon (hieronder) blijft het vegen. */
+@media not ((orientation:portrait) and (max-width:700px)){
+  .wrap{height:100vh;height:100dvh;box-sizing:border-box;padding-block:12px;max-width:1920px}
+  .fit{flex:1 1 0;min-height:0;container-type:size;display:flex;justify-content:center;align-items:flex-start}
+  .frame{width:min(100cqw, 100cqh * 16 / 9);flex:none}
+  /* het gesprek ligt altijd over het speelveld (op brede schermen deed het dat al) */
+  .dialog{position:absolute;left:3%;right:3%;bottom:3.5%;z-index:4;backdrop-filter:blur(3px)}
+}
 .pan{position:relative;max-width:100%;min-width:0}
 .swipe{display:none;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:center;margin-top:6px}
 .hit:focus:not(:focus-visible){outline:none}
 @media (orientation:portrait) and (max-width:700px){
-  .frame{width:auto}
-  .pan{overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;border-radius:6px}
-  .pan .stage{width:calc(min(56svh, 480px) * 16 / 9);max-width:none}
+  /* ook rechtop alles in één scherm: de kamer (om door te vegen) krijgt de hoogte die over is; onder de kamer een vaste
+     strook voor het gesprek, zodat de kamer niet verspringt als een gesprek opent of sluit */
+  .wrap{height:100vh;height:100dvh;box-sizing:border-box;padding-block:8px;gap:8px}
+  .chip{padding:5px 8px;font-size:11px}
+  .fit{flex:1 1 0;min-height:0;display:flex;flex-direction:column}
+  .frame{width:auto;margin-inline:0;flex:1 1 0;min-height:0;display:flex;flex-direction:column;padding-bottom:var(--dlg-h,150px);box-sizing:border-box}
+  .pan{flex:1 1 0;min-height:0;container-type:size;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;border-radius:6px}
+  .pan .stage{height:100cqh;width:calc(100cqh * 16 / 9);max-width:none}
+  .dialog{position:absolute;left:0;right:0;top:calc(100% - var(--dlg-h,150px) + 8px);max-height:calc(var(--dlg-h,150px) - 8px);overflow-y:auto;box-sizing:border-box}
+  .tray{gap:8px} .slot{width:52px;height:52px} .slot svg{width:38px;height:38px} .tray-hint{font-size:12px;flex-basis:100%}
   .swipe{display:block}
   .overlay{padding:16px calc(100% - min(100vw - 32px, 380px) + 16px) 16px 16px}
 }
-@media (orientation:landscape) and (max-height:520px){
+@media (orientation:landscape) and (max-height:620px){
   .wrap{padding-block:6px 10px;gap:6px}
   .brand h1{font-size:18px} .brand small{display:none}
   .chip{padding:4px 8px;font-size:11px}
-  .frame{width:min(100%, calc((100svh - 104px) * 16 / 9))}
   .dialog{padding:8px 12px 10px;min-height:0}
   .dialog .txt{font-size:14px}
   .tray{gap:8px} .slot{width:44px;height:44px} .slot svg{width:32px;height:32px} .tray-hint{font-size:12px}

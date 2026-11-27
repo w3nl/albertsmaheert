@@ -139,6 +139,7 @@ Alles uit de blueprint en het Sinterklaas-spel geldt. Vooral:
 - Elke puzzel heeft twee hints in `HINTS`: een duwtje en het antwoord. Elk fout antwoord krijgt een grapje én een duwtje.
 - **Puzzels die niet op elkaar wachten, kun je in elke volgorde doen.** Laat de tekst na een puzzel dus niet uitgaan van de volgorde in de tabel hierboven: in hoofdstuk 2 is Roelof pas boven na de katrol (Thedema en Folkerda kunnen eerder), en het kastje gaat pas open met alle drie de tekens; in hoofdstuk 4 kun je de dopsleutel en de koevoet vóór de lampjes en de tafel vinden (`gereedschap()`). `tests/escaperoom/volgorde.spec.js` speelt die hoofdstukken andersom.
 - **Niets van andere websites laden** (lettertypen, scripts): de apps werken zonder internet; `pwa.spec.js` controleert het. Een nieuw lettertype hoort in `fonts/` en in `CORE`.
+- **Alles past in één scherm, zonder scrollen** (`css/phone.css`): de pagina is precies zo hoog als het scherm (`.wrap`, `100dvh`), en `.fit` is de ruimte die overblijft na de kop, de rugzak en de voetregel. Het speelveld is zo groot als in die ruimte past (container-query: `min(100cqw, 100cqh * 16 / 9)`), en het gesprek ligt over het speelveld. Rechtop op een telefoon krijgt de kamer (om door te vegen) de hoogte die over is, met een vaste strook voor het gesprek eronder (`--dlg-h`). Zet dus geen vaste hoogtes op de kop of de rugzak; `tests/escaperoom/scherm.spec.js` controleert veertien schermmaten.
 - Geen `alert/confirm/prompt`; knoppen hebben `type="button"`; close-ups passen op 412×915 en 915×412 (`phone.spec.js`).
 
 ## Ideeën
