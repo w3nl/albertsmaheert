@@ -90,6 +90,8 @@ npm run build:escaperoom-aab
 
 ## 2. De Snap Store: `SNAPCRAFT_STORE_CREDENTIALS`
 
+De hele weg naar de Snap Store (ook de winkelpagina): [escaperoom-linux.md](escaperoom-linux.md).
+
 Waarvoor: de workflow zet elke nieuwe versie op `main` in de Snap Store (kanaal `edge`), zodra ook
 `ESCAPEROOM_RELEASE` op `true` staat. Dit gaat op een Linux-computer (of in een Ubuntu-VM / WSL op Windows).
 
