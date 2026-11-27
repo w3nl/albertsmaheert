@@ -5,7 +5,7 @@
   "private": true,
   "description": "Het Geheim van de Albertsmaheert: een escaperoom op B&B Albertsmaheert aan de Wolddijk, van de Paardenstal tot het feest in de zaal.",
   "homepage": "https://albertsmaheert.nl/",
-  "license": "UNLICENSED",
+  "license": "GPL-3.0",
   "author": {
     "name": "B&B Albertsmaheert",
     "url": "https://albertsmaheert.nl/"
