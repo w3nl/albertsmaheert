@@ -294,12 +294,17 @@ function swVersion(cache){
 $('#btn-update').onclick = () => { save(); location.reload(); };
 $('#version').textContent = 'v' + GAME_VERSION;
 /* ---------- Installeren: de web-app en de apps, alleen wat past bij dit apparaat ----------
-   De knop Installeren opent een close-up met de keuzes (zoals de installeerbalk van TripScouts en Ardennen):
-   - Web-app: als de browser installeren aanbiedt (Chrome, Edge, Android), of uitleg op iPhone/iPad, Safari op een Mac en Firefox op Windows
+   De knop Installeren (en de link Speel als app op het titelscherm) opent een close-up met de keuzes, zoals de
+   installeerbalk van TripScouts en Ardennen:
+   - Web-app: een knop als de browser installeren aanbiedt; anders uitleg: Chrome en Edge op de computer en Chromebook
+     (het menu ⋮ of …), Android (Toevoegen aan startscherm), Safari op een Mac (Voeg toe aan Dock), Firefox op Windows
+     (de taakbalk), en op iPhone/iPad de knop Zo doe je het met de stappen voor dat toestel en die browser
    - Chrome-extensie: in Chrome op een computer of Chromebook (Chrome Web Store)
    - Android-app: op Android en Chromebooks (Google Play; ook Google TV)
    - Linux-app: op een Linux-computer (Snap Store)
-   In een app zelf (Android, Linux, de extensie, of de geïnstalleerde web-app) is er niets te installeren: dan geen knop. */
+   In een app zelf (Android, Linux, de extensie, of de geïnstalleerde web-app) is er niets te installeren: dan geen knop.
+   Met een controller of afstandsbediening is de klik nagebootst; dan weigert de browser zijn installeervraag, en leggen
+   we het menu van de browser uit. */
 const APP_LINKS = {
   play: 'https://play.google.com/store/apps/details?id=nl.albertsmaheert.escaperoom',
   chrome: 'https://chromewebstore.google.com/detail/het-geheim-van-de-alberts/menijigcnfkinaebpnbciflmhehijjnp',
@@ -307,41 +312,86 @@ const APP_LINKS = {
 };
 const UA = navigator.userAgent;
 const IS_IOS = /iPad|iPhone|iPod/.test(UA) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const IS_IPHONE = /iPhone|iPod/.test(UA);
+/** Op iPhone/iPad: in welke browser. "inapp" is een browser in een andere app (WhatsApp, Instagram, Gmail): die kan niets op het beginscherm zetten. */
+const IOS_BROWSER = !IS_IOS ? '' : /CriOS\//.test(UA) ? 'chrome' : /FxiOS\/|EdgiOS\/|OPiOS\//.test(UA) ? 'other' : /Safari\//.test(UA) ? 'safari' : 'inapp';
 const IS_ANDROID = /Android/i.test(UA);
 const IS_CHROMEOS = /\bCrOS\b/.test(UA);
-const IS_MAC_SAFARI = /Macintosh/.test(UA) && /Version\/\d+.*Safari\//.test(UA) && !IS_IOS;
+const IS_MAC_SAFARI = /Macintosh/.test(UA) && /Version\/\d+.*Safari\//.test(UA) && !IS_IOS && !/(?:Chrome|Chromium)\//.test(UA);
 // Firefox op Windows kan sinds versie 143 een site als web-app aan de taakbalk zetten (op Linux nog niet standaard)
 const IS_FIREFOX_WIN = /Windows/.test(UA) && +((UA.match(/Firefox\/(\d+)/) || [])[1] || 0) >= 143;
 const IS_LINUX = /Linux/.test(UA) && !IS_ANDROID && !IS_CHROMEOS;
-const IS_CHROME = /(?:Chrome|Chromium)\//.test(UA) && !/(?:Android|Edg\/|OPR\/|CriOS\/|SamsungBrowser)/.test(UA);
+/** Chrome, Edge en andere Chromium-browsers op de computer of Chromebook: die kunnen een web-app installeren. */
+const IS_CHROMIUM = /(?:Chrome|Chromium)\//.test(UA) && !IS_ANDROID && !IS_IOS;
+/** Alleen Chrome zelf (voor de Chrome Web Store). */
+const IS_CHROME = IS_CHROMIUM && !/(?:Edg\/|OPR\/|SamsungBrowser)/.test(UA);
 const IN_APP = () => location.hostname === 'appassets.androidplatform.net' || /^(app|chrome-extension):$/.test(location.protocol)
   || matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches || navigator.standalone === true;
+const MENU_HOW = 'Open het menu van de browser (⋮ of …) en kies Installeren (of Toevoegen aan startscherm). Staat hij er al op, dan kies je daar Openen in app.';
 let installEvt = null;
-/** De keuzes voor dit apparaat, in volgorde: [soort, titel, uitleg, knop] (knop: een link of 'web'). */
+/** De keuzes voor dit apparaat, in volgorde: [soort, titel, uitleg, knop] (knop: een link, 'web' of 'how'). */
 function installOptions(){
   const o = [];
-  if(installEvt) o.push(['web', 'Web-app', 'Op je ' + (IS_ANDROID ? 'startscherm' : 'computer') + ', ook zonder internet. Klein en snel.', 'web']);
-  else if(IS_IOS) o.push(['web', 'Web-app', 'Tik in Safari op Deel (□↑) en dan op Zet op beginscherm. Dan start hij als app, ook zonder internet.', null]);
-  else if(IS_ANDROID) o.push(['web', 'Web-app', 'Open het menu van je browser (⋮) en kies Toevoegen aan startscherm.', null]);
+  if(installEvt) o.push(['web', 'Web-app', 'Op je ' + (IS_ANDROID ? 'startscherm' : IS_CHROMEOS ? 'Chromebook' : 'computer') + ', met een eigen icoon en ook zonder internet. Klein en snel.', 'web']);
+  else if(IS_IOS) o.push(['web', 'Web-app', IOS_BROWSER === 'inapp' ? 'Open het spel eerst in Safari; dan zet je het op je beginscherm, met een eigen icoon en ook zonder internet.'
+    : 'Op je beginscherm, met een eigen icoon, op volledig scherm en ook zonder internet. Geen App Store nodig.', 'how']);
+  else if(IS_ANDROID) o.push(['web', 'Web-app', 'Open het menu van je browser (⋮) en kies Toevoegen aan startscherm of App installeren.', null]);
+  else if(IS_CHROMIUM) o.push(['web', 'Web-app', MENU_HOW, null]);
   else if(IS_FIREFOX_WIN) o.push(['web', 'Web-app', 'Klik in de adresbalk van Firefox op het pictogram om de site aan je taakbalk toe te voegen. Dan start hij als eigen app.', null]);
   else if(IS_MAC_SAFARI) o.push(['web', 'Web-app', 'Kies in Safari Archief → Voeg toe aan Dock. Dan start hij als app, ook zonder internet.', null]);
-  if(IS_CHROME && !IS_ANDROID) o.push(['chrome', 'Chrome-extensie', 'Uit de Chrome Web Store: met één klik vanuit de werkbalk van Chrome, ook zonder internet.', APP_LINKS.chrome]);
+  if(IS_CHROME) o.push(['chrome', 'Chrome-extensie', 'Uit de Chrome Web Store: met één klik vanuit de werkbalk van Chrome, ook zonder internet.', APP_LINKS.chrome]);
   if(IS_ANDROID || IS_CHROMEOS) o.push(['android', 'Android-app', 'Uit Google Play, voor telefoon, tablet' + (IS_CHROMEOS ? ', Chromebook' : '') + ' en Google TV. Speel ook met een controller.', APP_LINKS.play]);
   if(IS_LINUX) o.push(['linux', 'Linux-app', 'Uit de Snap Store (of het App Center van Ubuntu). Speel ook met een controller.', APP_LINKS.snap]);
   return o;
 }
-function installButton(){ $('#btn-install').hidden = IN_APP() || !installOptions().length; }
+function installButton(){
+  const can = !IN_APP() && installOptions().length > 0;
+  $('#btn-install').hidden = !can;
+  const t = $('#title-install'); if(t) t.hidden = !can;
+}
+/* iPhone en iPad: de stappen, passend bij het toestel en de browser (naar Ardennen Avontuur) */
+const ICO_SHARE = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9H6a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1h-2"/><path d="M12 15V3M8 7l4-4 4 4"/></svg>';
+const ICO_ADD = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></svg>';
+function installHowSteps(phone = IS_IPHONE, browser = IOS_BROWSER){
+  const where = phone ? 'onderin het scherm. Zie je hem niet? Tik dan eerst op <b>⋯</b> rechtsonder, of veeg een beetje omhoog'
+    : 'rechtsboven, naast de adresbalk. Zie je hem niet? Tik dan eerst op <b>⋯</b> naast de adresbalk';
+  const share = browser === 'chrome' ? `Tik op <b>Deel</b> ${ICO_SHARE} rechts in de adresbalk.`
+    : browser === 'other' ? `Open het menu van je browser en tik op <b>Deel</b> ${ICO_SHARE}. Lukt dat niet? Open <b>albertsmaheert.nl/escaperoom</b> dan in <b>Safari</b>.`
+    : `Tik op <b>Deel</b> ${ICO_SHARE}. Die zit ${where}.`;
+  const steps = browser === 'inapp' ? [
+    `Je hebt het spel geopend vanuit een andere app (zoals WhatsApp). Tik daar op <b>⋯</b> of het kompasje ${phone ? '(bovenin of onderin)' : '(bovenin)'} en kies <b>Open in Safari</b>.`,
+    `Tik in Safari op <b>Deel</b> ${ICO_SHARE}. Die zit ${where}.`,
+  ] : [share];
+  steps.push(
+    `Scrol omlaag in het lijstje en tik op <b>Zet op beginscherm</b> ${ICO_ADD}. Staat het er niet? Tik dan eerst op <b>Meer</b> of <b>Bewerk acties</b>.`,
+    `Zie je een schakelaar <b>Open als webapp</b>? Laat die aan. Tik dan rechtsboven op <b>Voeg toe</b>.`,
+    `Klaar! Open het spel voortaan met het icoon <b>Albertsmaheert</b> op je beginscherm.`);
+  return `<ol class="how">${steps.map(s => `<li>${s}</li>`).join('')}</ol>`;
+}
+function openInstallHow(){
+  const dev = IS_IPHONE ? 'iPhone' : 'iPad';
+  openModal('Op je beginscherm', dev + ' · één keer doen', `${installHowSteps()}
+    <p class="how-tip">Tip: wat je in Safari speelde, staat niet altijd in de app op je beginscherm. Speel na het installeren dus via het icoon.</p>
+    <div class="row"><button class="btn ghost" type="button" data-back>Terug</button></div>`,
+    body => { body.querySelector('[data-back]').onclick = openInstall; });
+}
 function openInstall(){
+  const label = { android: 'Google Play', linux: 'Snap Store', chrome: 'Chrome Web Store' };
   const rows = installOptions().map(([kind, title, text, act]) => `<div class="inst inst-${kind}"><div><b>${title}</b><span>${text}</span></div>${
     act === 'web' ? '<button class="btn" type="button" data-install>Installeren</button>'
-    : act ? `<a class="btn" href="${act}" target="_blank" rel="noopener">${kind === 'android' ? 'Google Play' : kind === 'linux' ? 'Snap Store' : 'Chrome Web Store'}</a>` : ''}</div>`).join('');
+    : act === 'how' ? '<button class="btn" type="button" data-how>Zo doe je het</button>'
+    : act ? `<a class="btn" href="${act}" target="_blank" rel="noopener">${label[kind]}</a>` : ''}</div>`).join('');
   openModal('Speel als app', 'Kies wat bij je apparaat past', `<div class="insts">${rows}</div><div class="feedback" id="inst-fb"></div>`, body => {
+    const how = body.querySelector('[data-how]');
+    if(how) how.onclick = openInstallHow;
     const b = body.querySelector('[data-install]');
-    if(b) b.onclick = async () => {
+    if(b) b.onclick = async e => {
       if(!installEvt) return;
+      // met een controller of afstandsbediening weigert de browser zijn installeervraag: leg het menu uit
+      if(!e.isTrusted){ fb('#inst-fb', MENU_HOW, ''); return; }
       installEvt.prompt();
       let ok = false;
-      try{ ok = (await installEvt.userChoice).outcome === 'accepted'; }catch(e){}
+      try{ ok = (await installEvt.userChoice).outcome === 'accepted'; }catch(err){}
       installEvt = null;
       if(ok) closeModal(); else { b.remove(); fb('#inst-fb', 'Later kan het ook via het menu van je browser.', ''); }
       installButton();
@@ -351,6 +401,7 @@ function openInstall(){
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; installButton(); });
 window.addEventListener('appinstalled', () => { installEvt = null; installButton(); say([['ditty', "Geïnstalleerd! Nu staat de boerderij gewoon op je apparaat. Maar in het echt is het koffie lekkerder, hoor."]]); });
 $('#btn-install').onclick = openInstall;
+if($('#title-install')) $('#title-install').onclick = openInstall;
 installButton();
 
 start();

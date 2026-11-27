@@ -9,6 +9,10 @@ const UA = {
   chromebook: 'Mozilla/5.0 (X11; CrOS x86_64 16181.61.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36',
   android: 'Mozilla/5.0 (Linux; Android 15; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36',
   iphone: 'Mozilla/5.0 (iPhone; CPU iPhone OS 19_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/19.0 Mobile/15E148 Safari/604.1',
+  edge: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0',
+  ipad: 'Mozilla/5.0 (iPad; CPU OS 19_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/19.0 Mobile/15E148 Safari/604.1',
+  iphoneChrome: 'Mozilla/5.0 (iPhone; CPU iPhone OS 19_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/142.0.0.0 Mobile/15E148 Safari/604.1',
+  iphoneWhatsApp: 'Mozilla/5.0 (iPhone; CPU iPhone OS 19_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
   macSafari: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/19.0 Safari/605.1.15',
 };
 
@@ -87,4 +91,71 @@ test.describe('de web-app installeren', () => {
     await expect(page.locator('#modal')).toBeHidden();
     expect(await page.evaluate(() => window.__prompted)).toBe(true);
   });
+});
+
+test.describe('Chrome zonder installeervraag (bijv. al geïnstalleerd)', () => {
+  test.use({ userAgent: UA.windowsChrome });
+  test('de web-app met uitleg via het menu', async ({ page }) => {
+    await seed(page);
+    await page.locator('#btn-install').click();
+    expect(await options(page)).toEqual(['Web-app', 'Chrome-extensie']);
+    await expect(page.locator('#modal .inst-web')).toContainText('Openen in app');
+  });
+});
+
+test.describe('Edge op Windows', () => {
+  test.use({ userAgent: UA.edge });
+  test('alleen de web-app (de Chrome Web Store is voor Chrome)', async ({ page }) => {
+    await seed(page);
+    await page.locator('#btn-install').click();
+    expect(await options(page)).toEqual(['Web-app']);
+  });
+});
+
+test.describe('met een controller', () => {
+  test.use({ userAgent: UA.windowsChrome });
+  test('een nagebootste klik legt het menu van de browser uit', async ({ page }) => {
+    await seed(page);
+    await offerWebApp(page);
+    await page.locator('#btn-install').click();
+    await page.evaluate(() => document.querySelector('#modal [data-install]').click());
+    await expect(page.locator('#inst-fb')).toContainText('menu van de browser');
+    expect(await page.evaluate(() => window.__prompted)).toBeFalsy();
+  });
+});
+
+for (const [name, ua, check] of [
+  ['iPhone met Safari', 'iphone', 'onderin het scherm'],
+  ['iPad met Safari', 'ipad', 'rechtsboven'],
+  ['iPhone met Chrome', 'iphoneChrome', 'rechts in de adresbalk'],
+  ['iPhone vanuit WhatsApp', 'iphoneWhatsApp', 'Open in Safari'],
+]) {
+  test.describe(name, () => {
+    test.use({ userAgent: UA[ua] });
+    test('Zo doe je het toont de stappen voor dit toestel en deze browser', async ({ page }) => {
+      await seed(page);
+      await page.locator('#btn-install').click();
+      await page.locator('#modal [data-how]').click();
+      await expect(page.locator('#modal ol.how')).toContainText(check);
+      await expect(page.locator('#modal ol.how')).toContainText('Zet op beginscherm');
+      await page.locator('#modal [data-back]').click();
+      await expect(page.locator('#modal .inst')).toHaveCount(1);
+    });
+  });
+}
+
+test.describe('het titelscherm', () => {
+  test.use({ userAgent: UA.android });
+  test('de link Speel als app opent de keuzes', async ({ page }) => {
+    await seed(page);
+    await page.locator('#title-install').click();
+    expect(await options(page)).toEqual(['Web-app', 'Android-app']);
+  });
+});
+
+test('in de Linux-app of de extensie: geen knop en geen link', async ({ page }) => {
+  await seed(page);
+  await page.evaluate(() => { window.matchMedia = () => ({ matches: true }); installButton(); });
+  await expect(page.locator('#btn-install')).toBeHidden();
+  await expect(page.locator('#title-install')).toBeHidden();
 });
