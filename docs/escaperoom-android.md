@@ -57,15 +57,16 @@ goed: kwijt = geen updates meer.
 3. **Google TV:** **Testen en releasen → Geavanceerde instellingen → Apparaattypen → Apparaattype toevoegen →
    Android TV**. Zonder dit staat de app niet in de Play Store op de tv.
 4. **App-content** (**Beleid → App-content**), allemaal invullen:
-   - **Privacybeleid:** `https://albertsmaheert.nl/privacyverklaring/`. Zet daar een zin bij over de escaperoom: het
-     spel verzamelt niets, slaat alleen de voortgang op het toestel zelf op en heeft geen account, reclame of
-     aankopen.
+   - **Privacybeleid:** `https://albertsmaheert.nl/escaperoom/privacy.html` (`src/escaperoom/privacy.html`). Google
+     eist een beleid dat specifiek over de app gaat, op een openbare https-pagina, en een link ernaartoe in de app
+     zelf (het titelscherm, de voetregel en Logeren → Contact).
    - **Toegang tot de app:** alles is zonder inloggen te gebruiken.
    - **Advertenties:** nee.
    - **Contentclassificatie:** vragenlijst invullen (een puzzelspel zonder geweld, chat of aankopen).
    - **Doelgroep:** kies de leeftijden die je wilt (bijvoorbeeld vanaf 9 jaar). Kies je ook kinderen onder 13, dan
      gelden de Families-regels; de app voldoet daaraan (geen reclame, niets verzameld).
-   - **Gegevensveiligheid:** er worden geen gegevens verzameld of gedeeld.
+   - **Gegevensveiligheid:** er worden geen gegevens verzameld of gedeeld. De app vraagt alleen internet, voor het
+     reserveringsformulier van bedandbreakfast.nl (dat valt onder hun beleid).
    - Overheid, financiële functies, gezondheid: nee.
 5. **Winkelvermelding** (**Groeien → Winkelvermelding**):
    - **Korte beschrijving** (80 tekens): *Een escaperoom op de boerderij: zoek de schat van knecht Harm.*
