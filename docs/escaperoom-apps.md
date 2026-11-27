@@ -3,15 +3,17 @@
 *Het Geheim van de Albertsmaheert* draait overal waar een browser is, en ook als app. In elke app zit het spel zelf
 (`src/escaperoom`), dus spelen kan zonder internet. Alleen de links naar albertsmaheert.nl openen de browser.
 
-| Waar | Hoe | Besturing |
-|---|---|---|
-| Computer (Windows, Mac, Linux) | browser, of installeren als web-app (installeer-knop in de adresbalk) | muis, toetsenbord, controller |
-| Linux | snap (`albertsmaheert.snap`) | muis, toetsenbord, controller |
-| Chromebook | Chrome-extensie, of de Android-app uit Google Play | muis, touchpad, aanraken, controller |
-| Android-telefoon en -tablet | Android-app (`albertsmaheert.apk`), of de web-app via Chrome → *Toevoegen aan startscherm* | aanraken, controller |
-| Google TV / Android TV | Android-app | afstandsbediening, controller |
-| iPhone en iPad | web-app: Safari → Deel → *Zet op beginscherm* | aanraken, controller |
-| Andere smart-tv's | de browser van de tv | afstandsbediening (pijltjes + OK) |
+| Waar | Hoe | Besturing | Handleiding |
+|---|---|---|---|
+| Computer (Windows, Mac) | browser, of de web-app; in Chrome ook de Chrome-extensie | muis, toetsenbord, controller | [Chrome Web Store](escaperoom-chrome-web-store.md) |
+| Linux | de snap uit de Snap Store, of de web-app | muis, toetsenbord, controller | [Linux](escaperoom-linux.md) |
+| Chromebook | web-app, Chrome-extensie, of de Android-app uit Google Play | muis, touchpad, aanraken, controller | [Chromebook](escaperoom-chromebook.md) |
+| Android-telefoon en -tablet | Android-app uit Google Play, of de web-app | aanraken, controller | [Android](escaperoom-android.md) |
+| Google TV / Android TV | Android-app (Google Play of Downloader) | afstandsbediening, controller | [Google TV](escaperoom-google-tv.md) |
+| iPhone en iPad | web-app: Safari → Deel → *Zet op beginscherm* | aanraken, controller | [iPhone en iPad](escaperoom-iphone-ipad.md) |
+| Andere smart-tv's | de browser van de tv | afstandsbediening (pijltjes + OK) | |
+
+Secrets en sleutels voor de winkels: [escaperoom-sleutels.md](escaperoom-sleutels.md).
 
 > **Nog niet openbaar.** Net als op de site blijft de escaperoom verborgen tot Ditty en Roelof akkoord zijn. De workflow
 > bouwt de apps wel bij elke wijziging (als artefact), maar maakt pas een release als de repository-variabele
@@ -19,21 +21,27 @@
 
 ## Installeren vanuit het spel
 
-De knop **Installeren** bovenin opent *Speel als app*, met alleen de keuzes die bij het apparaat passen
-(`openInstall()` in `js/app.js`, getest in `tests/escaperoom/installeren.spec.js`):
+De knop **Installeren** bovenin (en de link **📲 Speel als app** op het titelscherm) opent *Speel als app*, met alleen
+de keuzes die bij het apparaat passen (`openInstall()` in `js/app.js`, getest in `tests/escaperoom/installeren.spec.js`,
+naar de installeerbalk van Ardennen en TripScouts):
 
 | Apparaat | Keuzes |
 |---|---|
 | Chrome op Windows of Mac | Web-app, Chrome-extensie |
+| Edge op Windows of Mac | Web-app |
 | Chrome op Linux | Web-app, Chrome-extensie, Linux-app |
 | Firefox op Linux | Linux-app (de web-apps van Firefox staan op Linux nog niet standaard aan) |
 | Chromebook | Web-app, Chrome-extensie, Android-app |
 | Android | Web-app, Android-app |
-| iPhone en iPad | Web-app (uitleg: Deel → Zet op beginscherm) |
+| iPhone en iPad | Web-app, met **Zo doe je het**: de stappen voor dat toestel (Deel onderin of rechtsboven) en die browser (Safari, Chrome, of eerst *Open in Safari* vanuit WhatsApp) |
 | Safari op een Mac | Web-app (uitleg: Archief → Voeg toe aan Dock) |
 | Firefox op Windows (143+) | Web-app (uitleg: pictogram in de adresbalk → taakbalk) |
 
-In een app zelf (Android, Linux, de Chrome-extensie of de geïnstalleerde web-app) is de knop er niet. De links naar de
+De web-app heeft een knop **Installeren** als de browser installeren aanbiedt. Anders (bijvoorbeeld als hij er al op
+staat) staat er uitleg via het menu van de browser. Met een controller of afstandsbediening weigert de browser zijn
+installeervraag (de klik is nagebootst, `e.isTrusted` is `false`); dan legt het venster het menu uit.
+
+In een app zelf (Android, Linux, de Chrome-extensie of de geïnstalleerde web-app) zijn de knop en de link er niet. De links naar de
 winkels staan bovenaan in `APP_LINKS`: [Google Play](https://play.google.com/store/apps/details?id=nl.albertsmaheert.escaperoom),
 [Chrome Web Store](https://chromewebstore.google.com/detail/het-geheim-van-de-alberts/menijigcnfkinaebpnbciflmhehijjnp)
 en de [Snap Store](https://snapcraft.io/albertsmaheert).

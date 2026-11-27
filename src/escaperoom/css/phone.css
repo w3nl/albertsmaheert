@@ -26,8 +26,11 @@
   .pan .stage{height:100cqh;width:calc(100cqh * 16 / 9);max-width:none}
   .dialog{position:absolute;left:0;right:0;top:calc(100% - var(--dlg-h,150px) + 8px);max-height:calc(var(--dlg-h,150px) - 8px);overflow-y:auto;box-sizing:border-box}
   .tray{gap:8px} .slot{width:52px;height:52px} .slot svg{width:38px;height:38px} .tray-hint{font-size:12px;flex-basis:100%}
+  /* het titel- en eindscherm krijgen ook de strook van het gesprek (dan is er geen gesprek), zodat alles past */
+  .frame:has(.overlay:not([hidden])){padding-bottom:0}
   .swipe{display:block}
   .overlay{padding:16px calc(100% - min(100vw - 32px, 380px) + 16px) 16px 16px}
+  @media (max-height:600px){ #title p.keep{display:none} }
 }
 @media (orientation:landscape) and (max-height:620px){
   .wrap{padding-block:6px 10px;gap:6px}
