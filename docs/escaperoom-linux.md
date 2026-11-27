@@ -126,7 +126,7 @@ komen updates vanzelf.
    rm albertsmaheert-snap.login
    ```
    Zo'n login verloopt na een jaar; doe dan deze stap opnieuw.
-4. **De eerste upload:** zet `ESCAPEROOM_RELEASE` op `true` (pas als de escaperoom openbaar mag) en draai de workflow
+4. **De eerste upload:** zet `ESCAPEROOM_RELEASE` op `true` en draai de workflow
    *Escaperoom: Linux-app* op `main` (Actions → Run workflow). De snap gaat naar het kanaal *edge*. Probeer hem:
    ```bash
    sudo snap install albertsmaheert --edge
