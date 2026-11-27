@@ -20,6 +20,23 @@ Een point-and-click escaperoom in de browser, over en op de echte boerderij: B&B
 - `tests/escaperoom/` (Playwright), `playwright.config.cjs`, `tools/escaperoom/`, `apps/escaperoom/` en dit bestand worden niet gepubliceerd.
 - **Apps:** Android (telefoon, tablet, Google TV, Chromebook), Linux (snap) en een Chrome-extensie, met het spel erin: zie [escaperoom-apps.md](escaperoom-apps.md).
 
+## Logeren bij de Albertsmaheert (de B&B in het spel)
+
+`openBnB(tab)` in `js/app.js` (de folder van de B&B, en de links *Kom logeren*, *Bekijk de B&B*, *Reserveren* en
+*contact* met `data-bnb`) opent een venster met drie tabbladen, zodat je niet uit het spel of de app hoeft:
+
+- **De B&B:** de folder met de vier kamers (foto's in `img/kamer-*.jpg`, verkleind van de site, in `CORE` voor offline).
+- **Reserveren:** bovenaan een duidelijke melding **dat dit echt is en geen spel** (een echte overnachting, bevestiging
+  per e-mail, betalen; het spel verandert er niet door), daaronder het formulier van bedandbreakfast.nl in een iframe
+  (`BOOK_URL`, dezelfde als op albertsmaheert.nl/reserveer), met het label *Echte boeking*. Zonder internet staat er
+  uitleg. Er is altijd een link naar het formulier op de website, voor als het in een app niet laadt.
+- **Contact:** e-mail, telefoon, adres, route, gastenboek en de omgeving.
+
+Het formulier laadt pas als je het tabblad Reserveren opent; verder laadt het spel niets van andere sites
+(`tests/escaperoom/logeren.spec.js`). In de Android-app blijft het iframe in de app (`isForMainFrame`), en in de
+Linux-app openen `mailto:` en `tel:` het mailprogramma. Een controller kan niet in het formulier zelf (een andere site);
+gebruik daar aanraken, muis of toetsenbord.
+
 ## Besturing
 
 Muis, aanraken, toetsenbord, afstandsbediening en controller. `js/gamepad.js` (na `app.js` geladen):

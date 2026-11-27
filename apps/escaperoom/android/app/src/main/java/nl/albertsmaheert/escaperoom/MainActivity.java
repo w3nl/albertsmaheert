@@ -66,7 +66,8 @@ public class MainActivity extends Activity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 Uri url = request.getUrl();
-                if (HOST.equals(url.getHost())) return false;
+                // het reserveringsformulier in het spel is een iframe: dat blijft gewoon in de app
+                if (!request.isForMainFrame() || HOST.equals(url.getHost())) return false;
                 openOutside(url);
                 return true;
             }

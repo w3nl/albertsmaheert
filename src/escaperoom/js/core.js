@@ -276,7 +276,7 @@ function setLabel(sel, label){ document.querySelectorAll(sel).forEach(h => { h.d
 let modalClose = null;
 function openModal(title, sub, html, onOpen, onClose){
   $('#m-title').textContent = title; $('#m-sub').textContent = sub || '';
-  $('#m-body').innerHTML = html; $('#modal').hidden = false; tip.hidden = true;
+  $('#m-body').innerHTML = html; $('#m-body').onclick = null; $('#modal').hidden = false; tip.hidden = true;
   modalClose = onClose || null;
   onOpen && onOpen($('#m-body'));
 }
