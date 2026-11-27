@@ -295,7 +295,7 @@ $('#btn-update').onclick = () => { save(); location.reload(); };
 $('#version').textContent = 'v' + GAME_VERSION;
 /* ---------- Installeren: de web-app en de apps, alleen wat past bij dit apparaat ----------
    De knop Installeren opent een close-up met de keuzes (zoals de installeerbalk van TripScouts en Ardennen):
-   - Web-app: als de browser installeren aanbiedt (Chrome, Edge, Android), of uitleg op iPhone/iPad en Safari op een Mac
+   - Web-app: als de browser installeren aanbiedt (Chrome, Edge, Android), of uitleg op iPhone/iPad, Safari op een Mac en Firefox op Windows
    - Chrome-extensie: in Chrome op een computer of Chromebook (Chrome Web Store)
    - Android-app: op Android en Chromebooks (Google Play; ook Google TV)
    - Linux-app: op een Linux-computer (Snap Store)
@@ -310,6 +310,8 @@ const IS_IOS = /iPad|iPhone|iPod/.test(UA) || (navigator.platform === 'MacIntel'
 const IS_ANDROID = /Android/i.test(UA);
 const IS_CHROMEOS = /\bCrOS\b/.test(UA);
 const IS_MAC_SAFARI = /Macintosh/.test(UA) && /Version\/\d+.*Safari\//.test(UA) && !IS_IOS;
+// Firefox op Windows kan sinds versie 143 een site als web-app aan de taakbalk zetten (op Linux nog niet standaard)
+const IS_FIREFOX_WIN = /Windows/.test(UA) && +((UA.match(/Firefox\/(\d+)/) || [])[1] || 0) >= 143;
 const IS_LINUX = /Linux/.test(UA) && !IS_ANDROID && !IS_CHROMEOS;
 const IS_CHROME = /(?:Chrome|Chromium)\//.test(UA) && !/(?:Android|Edg\/|OPR\/|CriOS\/|SamsungBrowser)/.test(UA);
 const IN_APP = () => location.hostname === 'appassets.androidplatform.net' || /^(app|chrome-extension):$/.test(location.protocol)
@@ -321,6 +323,7 @@ function installOptions(){
   if(installEvt) o.push(['web', 'Web-app', 'Op je ' + (IS_ANDROID ? 'startscherm' : 'computer') + ', ook zonder internet. Klein en snel.', 'web']);
   else if(IS_IOS) o.push(['web', 'Web-app', 'Tik in Safari op Deel (□↑) en dan op Zet op beginscherm. Dan start hij als app, ook zonder internet.', null]);
   else if(IS_ANDROID) o.push(['web', 'Web-app', 'Open het menu van je browser (⋮) en kies Toevoegen aan startscherm.', null]);
+  else if(IS_FIREFOX_WIN) o.push(['web', 'Web-app', 'Klik in de adresbalk van Firefox op het pictogram om de site aan je taakbalk toe te voegen. Dan start hij als eigen app.', null]);
   else if(IS_MAC_SAFARI) o.push(['web', 'Web-app', 'Kies in Safari Archief → Voeg toe aan Dock. Dan start hij als app, ook zonder internet.', null]);
   if(IS_CHROME && !IS_ANDROID) o.push(['chrome', 'Chrome-extensie', 'Uit de Chrome Web Store: met één klik vanuit de werkbalk van Chrome, ook zonder internet.', APP_LINKS.chrome]);
   if(IS_ANDROID || IS_CHROMEOS) o.push(['android', 'Android-app', 'Uit Google Play, voor telefoon, tablet' + (IS_CHROMEOS ? ', Chromebook' : '') + ' en Google TV. Speel ook met een controller.', APP_LINKS.play]);
