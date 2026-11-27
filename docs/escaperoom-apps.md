@@ -125,10 +125,11 @@ Download `albertsmaheert.apk` (artefact of release) op het toestel, open hem en 
 - Of de **Android-app** (Chromebooks met Google Play), of de web-app via de installeerknop in de adresbalk.
 
 ### Linux
+Uit de [Snap Store](https://snapcraft.io/albertsmaheert) (of het App Center van Ubuntu):
 ```bash
-sudo snap install --dangerous ./albertsmaheert.snap
+sudo snap install albertsmaheert
 ```
-`--dangerous` omdat de snap niet uit de Snap Store komt. Een controller werkt na `sudo snap connect albertsmaheert:joystick`.
+Alles over de Linux-app, zelf bouwen en publiceren in de Snap Store: [escaperoom-linux.md](escaperoom-linux.md).
 
 ### iPhone en iPad
 Apple staat geen app buiten de App Store toe. Open de escaperoom in Safari en kies Deel → *Zet op beginscherm*: dan
