@@ -138,3 +138,43 @@ test.describe('op een telefoon', () => {
     await expect(page.locator('#modal .qr')).toBeHidden();
   });
 });
+
+test.describe('reserveren op een telefoon (en in de Android-app)', () => {
+  test.use({ viewport: { width: 740, height: 360 }, hasTouch: true, isMobile: true });
+  test('een grote knop opent het formulier over het hele scherm; Terug gaat terug naar het spel', async ({ page }) => {
+    await page.route(/bedandbreakfast\.nl/, route => route.fulfill({ contentType: 'text/html', body: '<p>formulier</p>' }));
+    await seed(page);
+    await page.evaluate(() => openBnB('reserveren'));
+    await expect(page.locator('#modal .real')).toContainText('dit is echt');
+    await expect(page.locator('#modal iframe')).toHaveCount(0);
+    await page.locator('#modal [data-booking]').click();
+    const booking = page.locator('#booking');
+    await expect(booking).toBeVisible();
+    await expect(booking.locator('.booking-bar')).toContainText('Echte boeking');
+    const box = await booking.locator('iframe').boundingBox();
+    expect(box.width).toBeGreaterThanOrEqual(739);
+    expect(box.height).toBeGreaterThan(360 * .75);
+    // de Terug-knop van Android (en een controller) sluit het formulier, het venster blijft
+    expect(await page.evaluate(() => window.tvBack())).toBe(true);
+    await expect(booking).toHaveCount(0);
+    await expect(page.locator('#modal')).toBeVisible();
+    // ook Escape en de knop
+    await page.locator('#modal [data-booking]').click();
+    await page.keyboard.press('Escape');
+    await expect(page.locator('#booking')).toHaveCount(0);
+    await page.locator('#modal [data-booking]').click();
+    await page.locator('#booking-close').click();
+    await expect(page.locator('#booking')).toHaveCount(0);
+  });
+});
+
+test('op de computer: het formulier in het venster, en ook groot te openen', async ({ page }) => {
+  await page.route(/bedandbreakfast\.nl/, route => route.fulfill({ contentType: 'text/html', body: '<p>formulier</p>' }));
+  await seed(page);
+  await page.evaluate(() => openBnB('reserveren'));
+  await expect(page.locator('#modal .book iframe')).toHaveCount(1);
+  await page.locator('#modal .book-big').click();
+  await expect(page.locator('#booking iframe')).toBeVisible();
+  await page.locator('#booking-close').click();
+  await expect(page.locator('#booking')).toHaveCount(0);
+});

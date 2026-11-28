@@ -32,6 +32,10 @@ Een point-and-click escaperoom in de browser, over en op de echte boerderij: B&B
   per e-mail, betalen; het spel verandert er niet door), daaronder het formulier van bedandbreakfast.nl in een iframe
   (`BOOK_URL`, dezelfde als op albertsmaheert.nl/reserveer), met het label *Echte boeking*. Zonder internet staat er
   uitleg. Er is altijd een link naar het formulier op de website, voor als het in een app niet laadt.
+  Op kleine schermen (smaller dan 700 of lager dan 600 px: telefoons, de Android-app) staat er in plaats van het
+  formulier één grote knop **Open het reserveringsformulier**: `openBooking()` legt het formulier over het hele scherm,
+  met bovenin *Echte boeking* en **Terug naar het spel** (ook Escape, de Terug-knop van Android en ○/B; in `gamepad.js`
+  heet dat `booking`). Op grote schermen staat het formulier in het venster, met **⤢ Groot scherm**.
   Tussen de melding en het formulier staat een **QR-code** naar `albertsmaheert.nl/reserveer` (`img/qr-reserveren.svg`),
   om op de telefoon verder te reserveren: handig op de tv, met een controller, of zonder internet. Op telefoons is hij
   verborgen. Het adres verandert niet, dus het plaatje is één keer gemaakt; opnieuw maken (alleen als het adres
