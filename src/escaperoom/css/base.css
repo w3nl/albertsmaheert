@@ -321,3 +321,10 @@ button.room:hover,button.room:focus-visible{border-color:var(--amber)}
 .facs h4,.folder h4{margin:6px 0 4px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
 .facs ul{margin:0;padding-left:18px;font-size:13px;color:var(--muted);display:grid;gap:2px}
 @media (max-width:620px){.roominfo{grid-template-columns:1fr}}
+/* Reserveren: een QR-code naar albertsmaheert.nl/reserveer, om op de telefoon verder te gaan (handig op de tv).
+   img/qr-reserveren.svg is één keer gemaakt met het npm-pakket qrcode (zie docs/escaperoom.md). Niet op telefoons. */
+.qr{display:flex;gap:14px;align-items:center;margin:0 0 14px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:rgba(10,10,8,.35)}
+.qr img{flex:none;width:132px;height:132px;border-radius:4px;background:#fff;image-rendering:pixelated}
+.qr div{display:flex;flex-direction:column;gap:4px;min-width:0}
+.qr span{font-size:13px;color:var(--muted)}
+@media (pointer:coarse) and (max-width:700px), (pointer:coarse) and (max-height:500px){ .qr{display:none} }
