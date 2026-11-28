@@ -535,6 +535,19 @@ function openInstall(){
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; installButton(); });
 window.addEventListener('appinstalled', () => { installEvt = null; installButton(); say([['ditty', "Geïnstalleerd! Nu staat de boerderij gewoon op je apparaat. Maar in het echt is het koffie lekkerder, hoor."]]); });
 $('#btn-install').onclick = openInstall;
+/* Volledig scherm (de adresbalk van de browser weg): handig liggend op een telefoon. Alleen als de browser het kan
+   (niet op de iPhone) en niet in een app, die al het hele scherm heeft. */
+const fullBtn = $('#btn-full');
+function fullLabel(){ fullBtn.textContent = document.fullscreenElement ? 'Scherm verkleinen' : 'Volledig scherm'; }
+fullBtn.hidden = !(document.fullscreenEnabled && matchMedia('(pointer: coarse)').matches) || IN_APP();
+fullBtn.onclick = async () => {
+  try{
+    if(document.fullscreenElement) await document.exitFullscreen();
+    else{ await document.documentElement.requestFullscreen({ navigationUI: 'hide' }); try{ await screen.orientation.lock('landscape'); }catch(e){} }
+  }catch(e){}
+  fullLabel();
+};
+document.addEventListener('fullscreenchange', fullLabel);
 if($('#title-install')) $('#title-install').onclick = openInstall;
 installButton();
 
