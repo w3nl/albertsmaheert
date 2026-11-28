@@ -23,6 +23,7 @@ const shown = el => { if(!el || !el.isConnected) return false; const r = el.getB
   for(let e = el; e && e !== document.body; e = e.parentElement || e.parentNode){ if(e.hidden || (e.style && e.style.display === 'none')) return false; }
   return getComputedStyle(el).visibility !== 'hidden'; };
 function padContext(){
+  if($('#booking')) return 'booking';   // het reserveringsformulier over het hele scherm (app.js openBooking)
   if(!$('#modal').hidden) return 'modal';
   if(!$('#title').hidden) return 'title';
   if(!$('#win').hidden) return 'win';
@@ -31,7 +32,8 @@ function padContext(){
 function padItems(){
   const ctx = padContext();
   let list;
-  if(ctx === 'modal'){
+  if(ctx === 'booking') list = [$('#booking-close')];
+  else if(ctx === 'modal'){
     // knoppen, keuzelijsten, links, en wat een close-up zelf klikbaar maakt (onclick), zoals de lampjes van de slinger
     list = [...$('#modal').querySelectorAll('*')].filter(el => el.matches('button, select, input, a[href]') || typeof el.onclick === 'function');
   } else if(ctx === 'title' || ctx === 'win'){
@@ -126,6 +128,7 @@ function padPress(){
 /* Een stap terug. Geeft false als er niets meer terug te gaan is (dan sluit de Android-app). */
 function padBack(){
   const ctx = padContext();
+  if(ctx === 'booking') return closeBooking();
   if(ctx === 'modal'){ closeModal(); return true; }
   if(sel){ sel = null; renderInv(); const c = padCurrent(); if(c && c.classList.contains('hit')) padTip(c); return true; }
   if(ctx.startsWith('room')){
