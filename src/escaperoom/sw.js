@@ -50,6 +50,7 @@ const CORE = [
   './img/kamer-alma.jpg',
   './img/kamer-folkerda.jpg',
   './img/kamer-paardenstal.jpg',
+  './img/qr-reserveren.svg',
   './fonts/fredoka-latin-400-normal.woff2',
   './fonts/fredoka-latin-600-normal.woff2',
   './fonts/fredoka-latin-700-normal.woff2',

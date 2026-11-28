@@ -285,8 +285,13 @@ function bnbTab(tab){
       <p>Hier boek je een <b>echte overnachting</b> bij B&B Albertsmaheert in Noordwolde. Het reserveringsformulier is van
       bedandbreakfast.nl: je aanvraag gaat naar Ditty en Roelof, je krijgt een bevestiging per e-mail, en je betaalt voor je
       verblijf. In het spel verandert er niets door, en je krijgt er geen punten voor.</p></div>
+    <div class="qr">
+      <img src="img/qr-reserveren.svg" alt="QR-code naar albertsmaheert.nl/reserveer" width="132" height="132">
+      <div><b>Liever op je telefoon?</b><span>Scan de code met de camera van je telefoon en reserveer daar verder op
+      <b>albertsmaheert.nl/reserveer</b>. Handig op de tv, of als je hier met een controller speelt.</span></div>
+    </div>
     <div id="book-area">${navigator.onLine === false
-      ? '<p class="muted">Je bent nu niet online. Reserveren kan zodra je weer internet hebt, of bel of mail Ditty en Roelof (Contact).</p>'
+      ? '<p class="muted">Je bent nu niet online. Scan de code hierboven met je telefoon, of bel of mail Ditty en Roelof (Contact).</p>'
       : `<div class="book"><div class="book-label">Echte boeking · formulier van bedandbreakfast.nl</div>
         <iframe src="${BOOK_URL}" title="Reserveringsformulier van B&B Albertsmaheert (echte boeking)"></iframe></div>`}
       <p class="muted">Zie je geen formulier? <a href="${SITE}reserveer/" target="_blank" rel="noopener">Reserveer dan op de website</a>, of mail of bel Ditty en Roelof (<button class="linkbtn" type="button" data-tab="contact">Contact</button>).</p>
