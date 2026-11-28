@@ -292,7 +292,10 @@ function bnbTab(tab){
     </div>
     <div id="book-area">${navigator.onLine === false
       ? '<p class="muted">Je bent nu niet online. Scan de code hierboven met je telefoon, of bel of mail Ditty en Roelof (Contact).</p>'
-      : `<div class="book"><div class="book-label">Echte boeking · formulier van bedandbreakfast.nl</div>
+      : BOOK_SMALL()
+      ? `<button class="btn book-open" type="button" data-booking>Open het reserveringsformulier</button>`
+      : `<div class="book"><div class="book-label"><span>Echte boeking · formulier van bedandbreakfast.nl</span>
+          <button class="book-big" type="button" data-booking>⤢ Groot scherm</button></div>
         <iframe src="${BOOK_URL}" title="Reserveringsformulier van B&B Albertsmaheert (echte boeking)"></iframe></div>`}
       <p class="muted">Zie je geen formulier? <a href="${SITE}reserveer/" target="_blank" rel="noopener">Reserveer dan op de website</a>, of mail of bel Ditty en Roelof (<button class="linkbtn" type="button" data-tab="contact">Contact</button>).</p>
     </div>`;
@@ -366,6 +369,7 @@ function openBnB(tab = 'bnb'){
     body.onclick = e => {
       const t = e.target.closest('[data-tab]');
       if(t) openBnB(t.dataset.tab);
+      if(e.target.closest('[data-booking]')) openBooking();
     };
   });
 }
@@ -379,6 +383,28 @@ H.kmkaart = () => {
   say([`Een kaartje op tafel, in het handschrift van Ditty: "Welkom in ${k[0].toUpperCase() + k.slice(1)}! Hier lees je alles over deze kamer."`], () => openRoom(k));
 };
 $('#d-stay').onclick = e => { e.stopPropagation(); openBnB('reserveren'); };
+/* Het formulier over het hele scherm: op een telefoon (en in de Android-app) is het venster te klein om fijn te
+   reserveren. Bovenin blijft staan dat het een echte boeking is, met Terug naar het spel (ook Escape en de Terug-knop). */
+const BOOK_SMALL = () => matchMedia('(max-width: 700px), (max-height: 600px)').matches;
+function openBooking(){
+  if($('#booking')) return;
+  const el = document.createElement('div');
+  el.id = 'booking'; el.className = 'booking';
+  el.setAttribute('role', 'dialog'); el.setAttribute('aria-label', 'Reserveringsformulier (echte boeking)');
+  el.innerHTML = `<div class="booking-bar"><b>Echte boeking · B&B Albertsmaheert</b><span>formulier van bedandbreakfast.nl</span>
+    <button class="btn" type="button" id="booking-close">← Terug naar het spel</button></div>
+    <iframe src="${BOOK_URL}" title="Reserveringsformulier van B&B Albertsmaheert (echte boeking)"></iframe>`;
+  document.body.appendChild(el);
+  el.querySelector('#booking-close').onclick = closeBooking;
+  el.querySelector('#booking-close').focus();
+}
+function closeBooking(){
+  const el = $('#booking'); if(!el) return false;
+  el.remove();
+  const b = document.querySelector('#modal [data-booking]'); if(b) b.focus();
+  return true;
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape' && $('#booking')){ e.preventDefault(); e.stopImmediatePropagation(); closeBooking(); } }, true);
 /* De oude naam: de folder in de hoofdstukken (H.folder) opent het tabblad De B&B. */
 function openFolder(){ openBnB('bnb'); }
 /* Links in het spel met data-bnb (Kom logeren, Reserveren, contact) openen het venster in plaats van de website. */
