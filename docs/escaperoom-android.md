@@ -108,4 +108,4 @@ opnieuw gedraaid is (*Re-run* houdt hetzelfde runnummer). Maak dan een nieuwe ru
 
 Werkt de test, promoveer de release dan naar **Productie** (of eerst een **gesloten test** met meer mensen; voor een
 nieuw persoonlijk ontwikkelaarsaccount vraagt Google eerst een gesloten test met een aantal testers gedurende een paar
-weken). Doe dit pas als Ditty en Roelof akkoord zijn, net als `ESCAPEROOM_RELEASE`.
+weken). De escaperoom staat ook op de site, dus productie mag.

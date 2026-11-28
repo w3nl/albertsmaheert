@@ -16,9 +16,9 @@
 Secrets en sleutels voor de winkels: [escaperoom-sleutels.md](escaperoom-sleutels.md). Drukwerk met een QR-code voor
 gasten in de B&B (poster en kaartjes): [escaperoom-print/](escaperoom-print/README.md).
 
-> **Nog niet openbaar.** Net als op de site blijft de escaperoom verborgen tot Ditty en Roelof akkoord zijn. De workflow
-> bouwt de apps wel bij elke wijziging (als artefact), maar maakt pas een release als de repository-variabele
-> `ESCAPEROOM_RELEASE` op `true` staat (*Settings → Secrets and variables → Actions → Variables*).
+> **Openbaar.** De escaperoom staat op de site (een blok op de homepage) en in de winkels. De workflows bouwen de apps bij
+> elke wijziging (als artefact), en maken een release als de repository-variabele `ESCAPEROOM_RELEASE` op `true` staat
+> (*Settings → Secrets and variables → Actions → Variables*).
 
 ## Installeren vanuit het spel
 

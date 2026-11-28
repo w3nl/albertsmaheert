@@ -16,7 +16,7 @@ Een point-and-click escaperoom in de browser, over en op de echte boerderij: B&B
 ## Hoe het in de site zit
 
 - Alles van het spel staat in `src/escaperoom/`. `eleventy.config.cjs` **negeert** die map als template en **kopieert** hem ongewijzigd naar `_site/escaperoom/` (anders zou Nunjucks de HTML aanraken). De CI-workflow controleert met `diff` dat de kopie gelijk is.
-- De homepage (`src/index.html`, en `src/en/index.html` in het Engels) heeft een blok dat naar het spel linkt. **Dat blok is nog verborgen** (`hidden`), en het spel heeft `noindex`, tot Ditty en Roelof akkoord zijn. Haal dan `hidden` uit beide homepages en de `robots`-regel uit `src/escaperoom/index.html`. Dat blok staat in de HTML, niet in `homepage.json` (die tekst is van de CMS).
+- De homepage (`src/index.html`, en `src/en/index.html` in het Engels) heeft een blok dat naar het spel linkt (`.escaperoom-promo`), en zoekmachines mogen het spel vinden. Weer verbergen: zet `hidden` op dat blok in beide homepages en `<meta name="robots" content="noindex">` in `src/escaperoom/index.html` en `privacy.html`. Dat blok staat in de HTML, niet in `homepage.json` (die tekst is van de CMS).
 - `tests/escaperoom/` (Playwright), `playwright.config.cjs`, `tools/escaperoom/`, `apps/escaperoom/` en dit bestand worden niet gepubliceerd.
 - **Apps:** Android (telefoon, tablet, Google TV, Chromebook), Linux (snap) en een Chrome-extensie, met het spel erin: zie [escaperoom-apps.md](escaperoom-apps.md).
 

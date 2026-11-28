@@ -139,17 +139,16 @@ Een login van TripScouts werkt niet: die mag alleen de snap `tripscouts` uploade
 
 ---
 
-## 3. Pas na goedkeuring: `ESCAPEROOM_RELEASE`
+## 3. Releases: `ESCAPEROOM_RELEASE`
 
-Zolang de escaperoom verborgen is, maakt de workflow geen release en uploadt hij niets. Als Ditty en Roelof akkoord zijn:
+Zonder deze variabele maakt de workflow geen release en uploadt hij niets. Aanzetten:
 
 ```bash
 gh variable set ESCAPEROOM_RELEASE --body true --repo w3nl/albertsmaheert
 ```
 
 Vanaf dan krijgt elke nieuwe spelversie op `main` per app een release (`escaperoom-android-v1.<versie>.0`,
-`escaperoom-linux-…` en `escaperoom-chrome-…`), en gaat de snap naar de Snap Store (als dat secret er is). Haal ook `hidden` weg uit het blok op de
-homepage en de `robots`-regel uit het spel (zie [escaperoom.md](escaperoom.md)).
+`escaperoom-linux-…` en `escaperoom-chrome-…`), en gaat de snap naar de Snap Store (als dat secret er is).
 
 ---
 
