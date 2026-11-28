@@ -13,7 +13,8 @@
 | iPhone en iPad | web-app: Safari → Deel → *Zet op beginscherm* | aanraken, controller | [iPhone en iPad](escaperoom-iphone-ipad.md) |
 | Andere smart-tv's | de browser van de tv | afstandsbediening (pijltjes + OK) | |
 
-Secrets en sleutels voor de winkels: [escaperoom-sleutels.md](escaperoom-sleutels.md).
+Secrets en sleutels voor de winkels: [escaperoom-sleutels.md](escaperoom-sleutels.md). Drukwerk met een QR-code voor
+gasten in de B&B (poster en kaartjes): [escaperoom-print/](escaperoom-print/README.md).
 
 > **Openbaar.** De escaperoom staat op de site (een blok op de homepage) en in de winkels. De workflows bouwen de apps bij
 > elke wijziging (als artefact), en maken een release als de repository-variabele `ESCAPEROOM_RELEASE` op `true` staat

@@ -44,6 +44,25 @@
   .overlay{gap:6px;padding-block:10px} .overlay p:not(.keep){display:none} .overlay h2{font-size:clamp(28px,9vh,44px)} .overlay p.keep{font-size:13px}
 }
 
+/* Liggend op een telefoon (laag scherm): de knoppen en de rugzak in een smalle kolom rechts, zodat het speelveld de
+   volle hoogte krijgt en dus veel breder wordt (op een Fairphone 6 in de browser: van 46% naar zo'n 70% van de breedte).
+   De voetregel kan weg: die links staan ook in het spel (Logeren, het titelscherm). */
+@media (orientation:landscape) and (max-height:500px){
+  .wrap{display:grid;grid-template-columns:minmax(0,1fr) 132px;grid-template-rows:auto minmax(0,1fr);
+    grid-template-areas:"fit top" "fit tray";gap:6px 8px;padding-block:6px}
+  .fit{grid-area:fit}
+  .top{grid-area:top;flex-direction:column;align-items:stretch;gap:4px}
+  .brand{display:none}
+  .tools{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+  .tools .chip{justify-content:center;padding:4px 2px;font-size:10px;letter-spacing:0;white-space:nowrap;overflow:hidden;min-width:0}
+  .tools #btn-motion,.tools #btn-voice,.tools #btn-install,.tools #btn-full{grid-column:span 2}
+  .tray{grid-area:tray;flex-direction:column;align-items:stretch;gap:4px;align-self:start}
+  .tray-label,.tray-hint{display:none}
+  .slots{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+  .slot{width:auto;height:auto;aspect-ratio:1} .slot svg{width:70%;height:70%}
+  .site-foot,.rotate{display:none}
+}
+
 /* ---------- rotate-your-phone banner ---------- */
 .rotate{display:none;grid-template-columns:auto 1fr;align-items:center;gap:6px 12px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--phosphor);border-radius:4px;padding:10px 12px}
 .rotate .rot-ico{width:40px;height:40px;grid-row:span 2;color:var(--phosphor);animation:tilt 2.6s ease-in-out infinite}
