@@ -111,3 +111,30 @@ test('buiten op het dak: de verrekijker toont de omgeving', async ({ page }) => 
   await expect(page.locator('#modal .tab.on')).toHaveText('Omgeving');
   expect(errors).toEqual([]);
 });
+
+test('Reserveren: een QR-code om op de telefoon verder te gaan (ook zonder internet)', async ({ page, context }) => {
+  await page.route(/bedandbreakfast\.nl/, route => route.fulfill({ contentType: 'text/html', body: '<p>formulier</p>' }));
+  await seed(page);
+  await page.evaluate(() => openBnB('reserveren'));
+  const img = page.locator('#modal .qr img');
+  await expect(img).toBeVisible();
+  await expect(img).toHaveAttribute('src', 'img/qr-reserveren.svg');
+  await expect.poll(() => img.evaluate(i => i.complete && i.naturalWidth > 0)).toBe(true);
+  await expect(page.locator('#modal .qr')).toContainText('albertsmaheert.nl/reserveer');
+  await context.setOffline(true);
+  await page.evaluate(() => openBnB('reserveren'));
+  await expect(page.locator('#modal .qr img')).toBeVisible();
+  await expect(page.locator('#modal')).toContainText('Scan de code');
+  await context.setOffline(false);
+});
+
+test.describe('op een telefoon', () => {
+  test.use({ viewport: { width: 412, height: 915 }, hasTouch: true, isMobile: true });
+  test('geen QR-code (je bent al op je telefoon)', async ({ page }) => {
+    await page.route(/bedandbreakfast\.nl/, route => route.fulfill({ contentType: 'text/html', body: '<p>formulier</p>' }));
+    await seed(page);
+    await page.evaluate(() => openBnB('reserveren'));
+    await expect(page.locator('#modal .real')).toBeVisible();
+    await expect(page.locator('#modal .qr')).toBeHidden();
+  });
+});
